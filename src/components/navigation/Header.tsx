@@ -169,10 +169,10 @@ export const Header: React.FC = () => {
           </nav>
 
           {/* Brand Logo - Centered Brand Lock */}
-          <Link href="/" className="flex flex-col items-center justify-self-center group">
-            <div className="flex items-center gap-2">
+          <Link href="/" className="flex min-w-0 flex-col items-center justify-self-center group">
+            <div className="flex min-w-0 items-center gap-1.5 md:gap-2">
               <KnotGlyph size="sm" className="text-[var(--shukla-terracotta)] group-hover:rotate-45 transition-transform duration-500" />
-              <span className="font-display text-xl md:text-2xl tracking-[0.25em] font-semibold text-[var(--shukla-charcoal)] uppercase">
+              <span className="whitespace-nowrap font-display text-base md:text-xl tracking-[0.16em] md:tracking-[0.25em] font-semibold text-[var(--shukla-charcoal)] uppercase">
                 SUKLA RUGS
               </span>
               <KnotGlyph size="sm" className="text-[var(--shukla-terracotta)] group-hover:-rotate-45 transition-transform duration-500" />
@@ -183,7 +183,7 @@ export const Header: React.FC = () => {
           </Link>
 
           {/* Right Action Icons */}
-          <div className="flex items-center justify-self-end space-x-5 text-[var(--shukla-charcoal)]">
+          <div className="flex items-center justify-self-end space-x-2.5 sm:space-x-5 text-[var(--shukla-charcoal)]">
             <Link
               href="/trade"
               className="hidden xl:inline-block text-[11px] font-sans tracking-[0.15em] uppercase hover:text-[var(--shukla-terracotta)] transition-colors border-b border-transparent hover:border-[var(--shukla-terracotta)] pb-0.5"
