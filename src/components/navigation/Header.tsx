@@ -44,7 +44,7 @@ export const Header: React.FC = () => {
       {/* Top Announcement Bar */}
       <div className="bg-[var(--shukla-charcoal)] text-[var(--shukla-ivory)] py-2 px-4 text-center text-[11px] font-sans uppercase tracking-[0.2em] border-b border-white/10 relative z-40">
         <div className="editorial-container flex justify-between items-center">
-          <span className="hidden md:inline text-[var(--shukla-taupe)]">EST. BHADOHI, INDIA</span>
+          <span className="hidden md:inline text-[var(--shukla-taupe)]">10% cashback on first purchase</span>
           <span>Complimentary Global White-Glove Delivery on orders over $2,500</span>
           <span className="hidden md:inline text-[var(--shukla-taupe)]">AUTHENTIC HANDCRAFTED LUXURY</span>
         </div>
