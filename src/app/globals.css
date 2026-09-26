@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Ibarra+Real+Nova:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap');
+@import "../styles/tokens.css";
+@import "tailwindcss";
+
+@layer base {
+  *, ::before, ::after {
+    box-sizing: border-box;
+    border-color: var(--shukla-muted-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--shukla-ivory);
+    color: var(--shukla-charcoal);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--shukla-ivory);
+    color: var(--shukla-charcoal);
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: var(--font-display);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  .font-serif {
+    font-family: var(--font-serif);
+  }
+
+  .font-sans {
+    font-family: var(--font-sans);
+  }
+
+  /* Custom scrollbar for ultra luxury look */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--shukla-ivory);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--shukla-taupe);
+    border-radius: 0px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--shukla-terracotta);
+  }
+}
+
+/* Custom Utilities for Luxury Micro-Interactions */
+.editorial-container {
+  width: 100%;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .editorial-container {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .editorial-container {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
+.bg-shukla-ivory { background-color: var(--shukla-ivory); }
+.bg-shukla-cream { background-color: var(--shukla-cream); }
+.bg-shukla-sand { background-color: var(--shukla-sand); }
+.bg-shukla-charcoal { background-color: var(--shukla-charcoal); }
+.bg-shukla-black { background-color: var(--shukla-black); }
+.bg-shukla-taupe { background-color: var(--shukla-taupe); }
+.bg-shukla-terracotta { background-color: var(--shukla-terracotta); }
+
+.text-shukla-ivory { color: var(--shukla-ivory); }
+.text-shukla-cream { color: var(--shukla-cream); }
+.text-shukla-sand { color: var(--shukla-sand); }
+.text-shukla-charcoal { color: var(--shukla-charcoal); }
+.text-shukla-taupe { color: var(--shukla-taupe); }
+.text-shukla-terracotta { color: var(--shukla-terracotta); }
+
+.border-shukla-border { border-color: var(--shukla-muted-border); }
+.border-shukla-taupe { border-color: var(--shukla-taupe); }
+.border-shukla-charcoal { border-color: var(--shukla-charcoal); }
+
+.hover-underline-animation {
+  position: relative;
+}
+.hover-underline-animation::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: currentColor;
+  transform-origin: bottom right;
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.hover-underline-animation:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Image Grain / Texture effect for craftsmanship warmth */
+.craft-texture {
+  background-image: radial-gradient(rgba(33, 29, 27, 0.05) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+.hero-text-backdrop {
+  display: inline;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.72), 0 1px 3px rgba(0, 0, 0, 0.6);
+}

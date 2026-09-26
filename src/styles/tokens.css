@@ -1,0 +1,46 @@
+/* SUKLA RUGS - Ultra-Premium Design System Tokens */
+
+:root {
+  /* Core Brand Colors */
+  --shukla-ivory: #F3ECE4;
+  --shukla-cream: #FAF7F2;
+  --shukla-sand: #E6DDD4;
+  --shukla-charcoal: #211D1B;
+  --shukla-black: #141110;
+  --shukla-taupe: #A8917E;
+  --shukla-taupe-light: #C9BAAB;
+  --shukla-terracotta: #BC8A5A;
+  --shukla-terracotta-dark: #96673A;
+  --shukla-muted-border: rgba(33, 29, 27, 0.12);
+  --shukla-subtle-bg: rgba(33, 29, 27, 0.03);
+
+  /* Collection Accent Palette */
+  --accent-oushak: #9E3324;
+  --accent-persian: #3C4149;
+  --accent-modern: #45461D;
+  --accent-woven: #A48C94;
+  --accent-loop: #49201B;
+  --accent-jute: #3F9196;
+
+  /* Typography */
+  --font-display: 'Cinzel', 'Cormorant Garamond', Georgia, serif;
+  --font-serif: 'Ibarra Real Nova', 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Elevational Radii & Shadows - Restrained for Luxury */
+  --radius-none: 0px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --shadow-subtle: 0 4px 20px rgba(33, 29, 27, 0.04);
+  --shadow-hover: 0 12px 32px rgba(33, 29, 27, 0.08);
+  --shadow-modal: 0 24px 48px rgba(33, 29, 27, 0.16);
+
+  /* Spacing System */
+  --space-container: min(100% - 3rem, 1440px);
+}
+
+/* Dark mode subtle adjustments if requested */
+@media (prefers-color-scheme: dark) {
+  /* We maintain our editorial light luxury palette as default, but define dark overrides if required */
+}
