@@ -5,13 +5,12 @@ import { Footer } from '@/components/layout/Footer';
 import { Hero } from '@/components/hero/Hero';
 import { BrandStatement } from '@/components/editorial/BrandStatement';
 import { ShopByRoom } from '@/components/editorial/ShopByRoom';
-import { CollectionGrid } from '@/components/collection/CollectionGrid';
 import { ProductCard } from '@/components/product/ProductCard';
 import { BhadohiStorySection } from '@/components/craft/BhadohiStorySection';
 import { DesignConsultationBanner } from '@/components/services/DesignConsultationBanner';
 import { ReviewsSection } from '@/components/editorial/ReviewsSection';
 import { JournalPreview } from '@/components/journal/JournalPreview';
-import { getCollections, getProducts } from '@/lib/shopify/client';
+import { getProducts } from '@/lib/shopify/client';
 import { Button } from '@/components/ui/Button';
 import { KnotGlyph } from '@/components/ui/KnotGlyph';
 
@@ -27,7 +26,6 @@ export const metadata = {
 };
 
 export default async function HomePage() {
-  const collections = await getCollections();
   const signatureProducts = await getProducts({ limit: 6 });
 
   return (
@@ -38,14 +36,8 @@ export default async function HomePage() {
         {/* Cinematic Hero */}
         <Hero />
 
-        {/* Brand Ethos Statement */}
-        <BrandStatement />
-
         {/* Shop by Room Architectural Layout */}
         <ShopByRoom />
-
-        {/* Shop by Collection Taxonomy */}
-        <CollectionGrid collections={collections} />
 
         {/* Signature Rugs Section */}
         <section className="py-20 md:py-28 bg-[var(--shukla-ivory)] border-t border-[var(--shukla-muted-border)]">
@@ -74,6 +66,9 @@ export default async function HomePage() {
 
         {/* Bhadohi Story & 7 Craft Stages */}
         <BhadohiStorySection />
+
+        {/* Brand Ethos Statement */}
+        <BrandStatement />
 
         {/* Design Consultation & Concierge Banner */}
         <DesignConsultationBanner />

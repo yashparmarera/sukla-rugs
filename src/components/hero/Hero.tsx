@@ -1,22 +1,55 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { ArrowRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 
+const heroImages = [
+  { src: '/images/hero-image1.webp', alt: 'Sukla Rugs handcrafted rug in a sunlit interior' },
+  { src: '/images/2-hero.webp', alt: 'Sukla Rugs handcrafted rug in a refined living space' },
+  { src: '/images/3-hero.webp', alt: 'Sukla Rugs handcrafted rug styled in a contemporary room' },
+  { src: '/images/4-hero.webp', alt: 'Sukla Rugs handcrafted rug in an elegant interior' }
+];
+
 export const Hero: React.FC = () => {
+  const [activeImage, setActiveImage] = useState(0);
+
+  const moveSlide = (direction: number) => {
+    setActiveImage((current) => (current + direction + heroImages.length) % heroImages.length);
+  };
+
+  useEffect(() => {
+    const slideshow = window.setInterval(() => {
+      setActiveImage((current) => (current + 1) % heroImages.length);
+    }, 4500);
+
+    return () => window.clearInterval(slideshow);
+  }, []);
+
   return (
-    <section className="relative w-full min-h-[85vh] flex items-center justify-center overflow-hidden bg-[var(--shukla-charcoal)] text-[var(--shukla-ivory)]">
+    <section
+      className="relative w-full min-h-[85vh] flex items-center justify-center overflow-hidden bg-[var(--shukla-charcoal)] text-[var(--shukla-ivory)]"
+      aria-roledescription="carousel"
+      aria-label="Sukla Rugs featured interiors"
+    >
       <div className="absolute inset-0 z-0">
-        <Image
-          src="/images/hero-image1.webp"
-          alt="Sukla Rugs Handcrafted Oushak Rug in sunlit interior"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover scale-105"
-        />
+        {heroImages.map((image, index) => (
+          <div
+            key={image.src}
+            className={`absolute inset-0 transition-opacity duration-1000 ${index === activeImage ? 'opacity-100' : 'opacity-0'}`}
+            aria-hidden={index !== activeImage}
+          >
+            <Image
+              src={image.src}
+              alt={index === activeImage ? image.alt : ''}
+              fill
+              priority={index === 0}
+              sizes="100vw"
+              className="object-cover scale-105"
+            />
+          </div>
+        ))}
       </div>
 
       <div className="relative z-10 editorial-container py-20 text-center max-w-4xl mx-auto">
@@ -40,6 +73,27 @@ export const Hero: React.FC = () => {
               <span>Explore Collections</span>
               <ArrowRight size={17} strokeWidth={1.7} className="ml-3" />
             </Button>
+          </div>
+
+          <div className="mt-5 flex justify-center gap-3" aria-label="Control hero slideshow">
+            <button
+              type="button"
+              onClick={() => moveSlide(-1)}
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/75 bg-black/15 text-white backdrop-blur-sm transition-colors hover:bg-white hover:text-[var(--shukla-charcoal)]"
+              aria-label="Previous hero image"
+              title="Previous hero image"
+            >
+              <ArrowLeft size={18} strokeWidth={1.6} />
+            </button>
+            <button
+              type="button"
+              onClick={() => moveSlide(1)}
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/75 bg-black/15 text-white backdrop-blur-sm transition-colors hover:bg-white hover:text-[var(--shukla-charcoal)]"
+              aria-label="Next hero image"
+              title="Next hero image"
+            >
+              <ArrowRight size={18} strokeWidth={1.6} />
+            </button>
           </div>
         </div>
       </div>

@@ -55,7 +55,7 @@ export const Header: React.FC = () => {
             : 'bg-[var(--shukla-ivory)] border-b border-[var(--shukla-muted-border)]/60 py-6'
         }`}
       >
-        <div className="editorial-container flex items-center justify-between">
+        <div className="editorial-container grid grid-cols-[1fr_auto_1fr] items-center">
           
           {/* Mobile Menu Toggle */}
           <button
@@ -166,7 +166,7 @@ export const Header: React.FC = () => {
           </nav>
 
           {/* Brand Logo - Centered Brand Lock */}
-          <Link href="/" className="flex flex-col items-center group">
+          <Link href="/" className="flex flex-col items-center justify-self-center group">
             <div className="flex items-center gap-2">
               <KnotGlyph size="sm" className="text-[var(--shukla-terracotta)] group-hover:rotate-45 transition-transform duration-500" />
               <span className="font-display text-xl md:text-2xl tracking-[0.25em] font-semibold text-[var(--shukla-charcoal)] uppercase">
@@ -180,7 +180,7 @@ export const Header: React.FC = () => {
           </Link>
 
           {/* Right Action Icons */}
-          <div className="flex items-center space-x-5 text-[var(--shukla-charcoal)]">
+          <div className="flex items-center justify-self-end space-x-5 text-[var(--shukla-charcoal)]">
             <Link
               href="/trade"
               className="hidden xl:inline-block text-[11px] font-sans tracking-[0.15em] uppercase hover:text-[var(--shukla-terracotta)] transition-colors border-b border-transparent hover:border-[var(--shukla-terracotta)] pb-0.5"
