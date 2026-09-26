@@ -8,28 +8,24 @@ const ROOMS = [
     title: 'Living Room',
     subtitle: 'Grounding anchors for grand & intimate seating areas',
     image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=85',
-    query: 'living-room',
     recommendation: "Suggested: 8' x 10' or 9' x 12' Hand-Knotted Oushak"
   },
   {
     title: 'Bedroom',
     subtitle: 'Soft plush piles providing morning warmth barefoot',
     image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=85',
-    query: 'bedroom',
     recommendation: "Suggested: 8' x 10' High-Low Artisan Loop"
   },
   {
     title: 'Dining Room',
     subtitle: 'Low-profile weaves for smooth chair movement & stain resistance',
     image: 'https://images.unsplash.com/photo-1579656381226-5fc0f0100c3b?auto=format&fit=crop&w=800&q=85',
-    query: 'dining-room',
     recommendation: "Suggested: 8' x 10' Reversible Flatweave"
   },
   {
     title: 'Entryway & Hallways',
     subtitle: 'Resilient high-traffic runners & organic natural jute textures',
     image: 'https://images.unsplash.com/photo-1567016432779-094069958ea5?auto=format&fit=crop&w=800&q=85',
-    query: 'entryway',
     recommendation: "Suggested: 3' x 10' Organic Jute Runner"
   }
 ];
@@ -49,7 +45,7 @@ export const ShopByRoom: React.FC = () => {
             </h2>
           </div>
           <Link
-            href="/guides/rug-size"
+            href="/shop"
             className="text-xs font-sans uppercase tracking-[0.18em] text-[var(--shukla-charcoal)] hover:text-[var(--shukla-terracotta)] hover-underline-animation flex items-center gap-2 font-semibold"
           >
             Explore Interactive Size Guide <ArrowRight className="w-3.5 h-3.5" />
@@ -60,7 +56,7 @@ export const ShopByRoom: React.FC = () => {
           {ROOMS.map((room) => (
             <Link
               key={room.title}
-              href={`/shop?room=${room.query}`}
+              href="/shop"
               className="group relative flex flex-col bg-[var(--shukla-ivory)] border border-[var(--shukla-muted-border)] overflow-hidden"
             >
               <div className="relative aspect-[4/5] w-full overflow-hidden bg-[var(--shukla-sand)]">

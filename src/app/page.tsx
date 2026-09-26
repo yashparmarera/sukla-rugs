@@ -5,6 +5,7 @@ import { Footer } from '@/components/layout/Footer';
 import { Hero } from '@/components/hero/Hero';
 import { BrandStatement } from '@/components/editorial/BrandStatement';
 import { ShopByRoom } from '@/components/editorial/ShopByRoom';
+import { ShopByCategory } from '@/components/editorial/ShopByCategory';
 import { ProductCard } from '@/components/product/ProductCard';
 import { BhadohiStorySection } from '@/components/craft/BhadohiStorySection';
 import { DesignConsultationBanner } from '@/components/services/DesignConsultationBanner';
@@ -63,6 +64,9 @@ export default async function HomePage() {
             </div>
           </div>
         </section>
+
+        {/* Shop by Rug Category */}
+        <ShopByCategory />
 
         {/* Bhadohi Story & 7 Craft Stages */}
         <BhadohiStorySection />

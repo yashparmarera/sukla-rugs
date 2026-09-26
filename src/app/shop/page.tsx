@@ -22,6 +22,8 @@ export const metadata = {
   description: 'Browse our complete catalogue of handcrafted Indian rugs. Filter by collection, material, color family, room, and size. White-glove delivery worldwide.'
 };
 
+export const dynamic = 'force-dynamic';
+
 export default async function ShopPage({ searchParams }: ShopPageProps) {
   const params = await searchParams;
 
