@@ -30,6 +30,9 @@ export const Header: React.FC = () => {
 
     const handleCartUpdate = (e: CustomEvent) => {
       setCartCount(e.detail.totalQuantity || 0);
+      if (e.detail.totalQuantity > 0) {
+        setCartOpen(true);
+      }
     };
 
     window.addEventListener('shukla:cart-updated', handleCartUpdate as EventListener);
