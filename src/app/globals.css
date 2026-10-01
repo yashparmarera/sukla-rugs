@@ -131,3 +131,256 @@
   display: inline;
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.72), 0 1px 3px rgba(0, 0, 0, 0.6);
 }
+
+.brand-entrance {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  overflow: hidden;
+  background: var(--shukla-charcoal);
+  color: var(--shukla-cream);
+  isolation: isolate;
+  animation: brand-entrance-in 700ms ease both;
+}
+
+.brand-entrance--leaving {
+  pointer-events: none;
+  animation: brand-entrance-out 850ms cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+
+.brand-entrance__image-stage,
+.brand-entrance__image,
+.brand-entrance__veil {
+  position: absolute;
+  inset: 0;
+}
+
+.brand-entrance__image {
+  opacity: 0;
+  transform: scale(1.025);
+  transition: opacity 850ms cubic-bezier(0.22, 1, 0.36, 1), transform 1800ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.brand-entrance__image--active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.brand-entrance__veil {
+  background: linear-gradient(90deg, rgba(20, 17, 16, 0.66), rgba(20, 17, 16, 0.2) 62%, rgba(20, 17, 16, 0.38));
+}
+
+.brand-entrance__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-height: 100dvh;
+  width: min(100% - 3rem, 1440px);
+  margin: 0 auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 5rem 0;
+}
+
+.brand-entrance__eyebrow,
+.brand-entrance__wordmark,
+.brand-entrance__skip,
+.brand-entrance__cta {
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+}
+
+.brand-entrance__eyebrow {
+  max-width: 30rem;
+  font-size: 0.65rem;
+  line-height: 1.7;
+  color: rgba(250, 247, 242, 0.82);
+}
+
+.brand-entrance__rule {
+  width: 4rem;
+  height: 1px;
+  margin: 1.6rem 0 1.5rem;
+  background: var(--shukla-terracotta);
+}
+
+.brand-entrance__wordmark {
+  font-family: var(--font-display);
+  font-size: clamp(0.75rem, 1.2vw, 1rem);
+  color: var(--shukla-cream);
+}
+
+.brand-entrance h1 {
+  max-width: 45rem;
+  margin: 1.35rem 0 0;
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 7vw, 7.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.025em;
+  text-transform: none;
+  color: var(--shukla-cream);
+}
+
+.brand-entrance__description {
+  margin-top: 1.75rem;
+  font-family: var(--font-serif);
+  font-size: clamp(1.05rem, 1.7vw, 1.4rem);
+  font-style: italic;
+  color: rgba(250, 247, 242, 0.84);
+}
+
+.brand-entrance__cta {
+  display: inline-flex;
+  min-height: 3.25rem;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2.25rem;
+  padding: 0.9rem 1.35rem 0.9rem 1.5rem;
+  border: 1px solid rgba(250, 247, 242, 0.75);
+  background: var(--shukla-cream);
+  color: var(--shukla-charcoal);
+  font-size: 0.65rem;
+  cursor: pointer;
+  transition: background-color 250ms ease, color 250ms ease, border-color 250ms ease;
+}
+
+.brand-entrance__cta:hover,
+.brand-entrance__cta:focus-visible {
+  border-color: var(--shukla-cream);
+  background: transparent;
+  color: var(--shukla-cream);
+}
+
+.brand-entrance__cta:focus-visible,
+.brand-entrance__skip:focus-visible {
+  outline: 2px solid var(--shukla-cream);
+  outline-offset: 4px;
+}
+
+.brand-entrance__disclaimer {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 1rem 0 0 0.15rem;
+  padding: 0.55rem 0.8rem;
+  border-left: 2px solid var(--shukla-terracotta);
+  background: rgba(250, 247, 242, 0.12);
+  color: var(--shukla-cream);
+  font-family: var(--font-serif);
+  font-size: 0.86rem;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.brand-entrance__disclaimer span {
+  color: #e2b27f;
+  font-size: 0.72rem;
+  font-style: normal;
+}
+
+.brand-entrance__skip {
+  position: absolute;
+  z-index: 2;
+  top: 2.25rem;
+  right: 3rem;
+  min-height: 2.75rem;
+  padding: 0.75rem 0;
+  border: 0;
+  background: transparent;
+  color: rgba(250, 247, 242, 0.85);
+  font-size: 0.62rem;
+  cursor: pointer;
+}
+
+.brand-entrance__skip span {
+  display: inline-block;
+  margin-left: 0.7rem;
+  letter-spacing: 0;
+  transition: transform 250ms ease;
+}
+
+.brand-entrance__skip:hover span {
+  transform: translateX(0.25rem);
+}
+
+.brand-entrance__progress {
+  position: absolute;
+  z-index: 2;
+  right: 3rem;
+  bottom: 2.5rem;
+  display: flex;
+  gap: 0.45rem;
+}
+
+.brand-entrance__progress span {
+  display: block;
+  width: 2.25rem;
+  height: 1px;
+  background: rgba(250, 247, 242, 0.45);
+  transition: background-color 400ms ease;
+}
+
+.brand-entrance__progress .brand-entrance__progress-item--active {
+  background: var(--shukla-cream);
+}
+
+@keyframes brand-entrance-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes brand-entrance-out {
+  from { opacity: 1; clip-path: inset(0); }
+  to { opacity: 0; clip-path: inset(0 0 0 100%); }
+}
+
+@media (max-width: 767px) {
+  .brand-entrance__content {
+    width: min(100% - 2.5rem, 38rem);
+    justify-content: flex-end;
+    padding-bottom: 7.5rem;
+  }
+
+  .brand-entrance__veil {
+    background: linear-gradient(180deg, rgba(20, 17, 16, 0.2), rgba(20, 17, 16, 0.74) 65%, rgba(20, 17, 16, 0.9));
+  }
+
+  .brand-entrance__eyebrow {
+    max-width: 15rem;
+  }
+
+  .brand-entrance h1 {
+    max-width: 22rem;
+    font-size: clamp(2.8rem, 14vw, 5rem);
+  }
+
+  .brand-entrance__description {
+    max-width: 17rem;
+    line-height: 1.35;
+  }
+
+  .brand-entrance__skip {
+    top: 1.35rem;
+    right: 1.25rem;
+  }
+
+  .brand-entrance__progress {
+    right: auto;
+    bottom: 2.25rem;
+    left: 1.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-entrance,
+  .brand-entrance--leaving,
+  .brand-entrance__image,
+  .brand-entrance__cta,
+  .brand-entrance__progress span {
+    animation: none;
+    transition-duration: 1ms;
+  }
+}
