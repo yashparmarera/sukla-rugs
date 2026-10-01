@@ -306,13 +306,46 @@
   transform: translateX(0.25rem);
 }
 
-.brand-entrance__progress {
+.brand-entrance__controls {
   position: absolute;
   z-index: 2;
   right: 3rem;
   bottom: 2.5rem;
   display: flex;
+  align-items: center;
   gap: 0.45rem;
+}
+
+.brand-entrance__arrow {
+  display: flex;
+  width: 2.75rem;
+  height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(250, 247, 242, 0.45);
+  border-radius: 50%;
+  background: rgba(20, 17, 16, 0.18);
+  color: var(--shukla-cream);
+  cursor: pointer;
+  transition: background-color 250ms ease, border-color 250ms ease, color 250ms ease;
+}
+
+.brand-entrance__arrow:hover,
+.brand-entrance__arrow:focus-visible {
+  border-color: var(--shukla-cream);
+  background: var(--shukla-cream);
+  color: var(--shukla-charcoal);
+}
+
+.brand-entrance__arrow:focus-visible {
+  outline: 2px solid var(--shukla-cream);
+  outline-offset: 3px;
+}
+
+.brand-entrance__progress {
+  display: flex;
+  gap: 0.45rem;
+  margin: 0 0.25rem;
 }
 
 .brand-entrance__progress span {
@@ -367,10 +400,14 @@
     right: 1.25rem;
   }
 
-  .brand-entrance__progress {
+  .brand-entrance__controls {
     right: auto;
     bottom: 2.25rem;
     left: 1.25rem;
+  }
+
+  .brand-entrance__progress span {
+    width: 1.7rem;
   }
 }
 

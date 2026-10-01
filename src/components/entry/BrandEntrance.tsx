@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
 import React, { useEffect, useState, useSyncExternalStore } from 'react';
 import { heroImages } from '@/components/hero/hero-images';
 
@@ -22,6 +22,10 @@ export const BrandEntrance: React.FC<BrandEntranceProps> = ({ children }) => {
     () => false
   );
   const isVisible = !hasBeenSeen && !isDismissed;
+
+  const moveSlide = (direction: number) => {
+    setActiveImage((current) => (current + direction + heroImages.length) % heroImages.length);
+  };
 
   useEffect(() => {
     if (!isVisible || isLeaving || activeImage === heroImages.length - 1) {
@@ -109,10 +113,18 @@ export const BrandEntrance: React.FC<BrandEntranceProps> = ({ children }) => {
             Skip <span aria-hidden="true">→</span>
           </button>
 
-          <div className="brand-entrance__progress" aria-label={`Image ${activeImage + 1} of ${heroImages.length}`}>
+          <div className="brand-entrance__controls" aria-label={`Image ${activeImage + 1} of ${heroImages.length}`}>
+            <button type="button" className="brand-entrance__arrow" onClick={() => moveSlide(-1)} aria-label="Previous entrance image">
+              <ArrowLeft aria-hidden="true" size={16} strokeWidth={1.5} />
+            </button>
+            <div className="brand-entrance__progress">
             {heroImages.map((image, index) => (
               <span key={image.src} className={index <= activeImage ? 'brand-entrance__progress-item--active' : ''} />
             ))}
+            </div>
+            <button type="button" className="brand-entrance__arrow" onClick={() => moveSlide(1)} aria-label="Next entrance image">
+              <ArrowRight aria-hidden="true" size={16} strokeWidth={1.5} />
+            </button>
           </div>
         </section>
       )}
