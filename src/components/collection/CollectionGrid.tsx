@@ -17,7 +17,7 @@ export const CollectionGrid: React.FC<CollectionGridProps> = ({ collections }) =
           <span className="text-xs uppercase tracking-[0.25em] text-[var(--shukla-terracotta)] font-sans">
             Taxonomy & Construction
           </span>
-          <h2 className="font-display text-3xl md:text-4xl text-[var(--shukla-charcoal)] uppercase">
+          <h2 className="display-lg text-3xl md:text-4xl text-[var(--shukla-charcoal)]">
             Shop by Collection
           </h2>
           <p className="font-serif italic text-base text-[var(--shukla-charcoal)]/80">
@@ -60,7 +60,7 @@ export const CollectionGrid: React.FC<CollectionGridProps> = ({ collections }) =
               {/* Text Info */}
               <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
                 <div>
-                  <h3 className="font-display text-xl uppercase tracking-wide text-[var(--shukla-charcoal)] group-hover:text-[var(--shukla-terracotta)] transition-colors">
+                  <h3 className="heading text-xl text-[var(--shukla-charcoal)] group-hover:text-[var(--shukla-terracotta)] transition-colors">
                     {col.title}
                   </h3>
                   <p className="text-xs font-sans text-[var(--shukla-charcoal)]/80 leading-relaxed mt-2">

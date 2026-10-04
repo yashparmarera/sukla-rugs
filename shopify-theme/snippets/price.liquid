@@ -1,0 +1,5 @@
+{% if product.price_varies %}
+  <span class="price">{{ 'products.from' | t }} {{ product.price_min | money }}</span>
+{% else %}
+  <span class="price">{{ product.price | money }}</span>
+{% endif %}

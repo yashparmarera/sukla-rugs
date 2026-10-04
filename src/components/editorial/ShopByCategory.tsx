@@ -26,7 +26,7 @@ export const ShopByCategory: React.FC = () => {
     <section className="bg-[var(--shukla-ivory)] py-16 md:py-20">
       <div className="editorial-container">
         <div className="mb-8 flex items-center justify-between">
-          <h2 className="font-display text-2xl md:text-3xl text-[var(--shukla-charcoal)] normal-case tracking-normal">
+          <h2 className="heading text-2xl md:text-3xl text-[var(--shukla-charcoal)]">
             Shop rugs by category
           </h2>
           <Link

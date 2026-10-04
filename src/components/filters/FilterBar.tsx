@@ -52,7 +52,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({ totalCount }) => {
           
           {/* Active Filter Selectors */}
           <div className="hidden lg:flex items-center space-x-6 text-xs font-sans">
-            <span className="flex items-center gap-2 font-display uppercase tracking-widest text-[var(--shukla-charcoal)] font-semibold">
+            <span className="eyebrow flex items-center gap-2 text-[var(--shukla-charcoal)]">
               <SlidersHorizontal className="w-3.5 h-3.5 text-[var(--shukla-terracotta)]" /> Filter:
             </span>
 
@@ -133,8 +133,8 @@ export const FilterBar: React.FC<FilterBarProps> = ({ totalCount }) => {
 
           {/* Total Count & Sorting */}
           <div className="flex items-center justify-between lg:justify-end gap-6 w-full lg:w-auto text-xs font-sans">
-            <span className="text-[var(--shukla-taupe)] uppercase tracking-wider text-[11px]">
-              Showing <strong className="text-[var(--shukla-charcoal)]">{totalCount}</strong> Rugs
+            <span className="text-[var(--shukla-taupe)] uppercase tracking-[0.1em] text-[11px]">
+              Showing <strong className="nums text-[var(--shukla-charcoal)]">{totalCount}</strong> Rugs
             </span>
 
             <div className="flex items-center gap-2">
@@ -162,7 +162,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({ totalCount }) => {
         <div className="fixed inset-0 z-50 lg:hidden flex flex-col justify-end bg-black/60 backdrop-blur-xs">
           <div className="bg-[var(--shukla-ivory)] w-full max-h-[85vh] rounded-t-2xl p-6 overflow-y-auto space-y-6">
             <div className="flex justify-between items-center pb-4 border-b border-[var(--shukla-muted-border)]">
-              <h3 className="font-display text-sm uppercase tracking-wider">Refine Catalogue</h3>
+              <h3 className="heading text-base">Refine Catalogue</h3>
               <button onClick={() => setMobileFilterOpen(false)}>
                 <X className="w-5 h-5 text-[var(--shukla-charcoal)]" />
               </button>
@@ -226,9 +226,9 @@ export const FilterBar: React.FC<FilterBarProps> = ({ totalCount }) => {
             <div className="pt-4 border-t border-[var(--shukla-muted-border)] flex gap-4">
               <button
                 onClick={() => setMobileFilterOpen(false)}
-                className="w-full py-3.5 bg-[var(--shukla-charcoal)] text-white text-xs uppercase tracking-widest font-semibold"
+                className="w-full py-3.5 bg-[var(--shukla-charcoal)] text-white text-xs uppercase tracking-[0.1em] font-semibold"
               >
-                Apply Filters ({totalCount})
+                Apply Filters (<span className="nums">{totalCount}</span>)
               </button>
             </div>
           </div>

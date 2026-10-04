@@ -17,13 +17,13 @@ import { KnotGlyph } from '@/components/ui/KnotGlyph';
 import { BrandEntrance } from '@/components/entry/BrandEntrance';
 
 export const metadata = {
-  title: 'SUKLA RUGS | Ultra-Premium Handcrafted Indian Rugs | Bhadohi',
+  title: 'SHUKLA RUGS | Ultra-Premium Handcrafted Indian Rugs | Bhadohi',
   description: 'Contemporary Indian luxury rooted in craftsmanship. Explore hand-knotted Oushak, Persian hand-tufted, modern flatweaves, and organic jute rugs handcrafted in Bhadohi, UP.',
   openGraph: {
-    title: 'SUKLA RUGS | Ultra-Premium Handcrafted Indian Rugs',
+    title: 'SHUKLA RUGS | Ultra-Premium Handcrafted Indian Rugs',
     description: 'Every rug tells a story. Contemporary Indian luxury handcrafted in Bhadohi, Uttar Pradesh.',
     url: 'https://shuklarugsv1.vercel.app',
-    siteName: 'SUKLA RUGS'
+    siteName: 'SHUKLA RUGS'
   }
 };
 
@@ -50,7 +50,7 @@ export default async function HomePage() {
                 <span className="block text-xs uppercase tracking-[0.25em] text-[var(--shukla-terracotta)] font-sans mb-2">
                   Signature Curations
                 </span>
-                <h2 className="font-display text-2xl md:text-3xl lg:text-4xl text-[var(--shukla-charcoal)] uppercase">
+                <h2 className="display-lg text-2xl md:text-3xl lg:text-4xl text-[var(--shukla-charcoal)]">
                   Featured Loom Releases
                 </h2>
               </div>
@@ -89,11 +89,11 @@ export default async function HomePage() {
         <section className="py-24 bg-[var(--shukla-cream)] border-t border-[var(--shukla-muted-border)] text-center">
           <div className="editorial-container max-w-3xl mx-auto space-y-6">
             <KnotGlyph size="md" className="text-[var(--shukla-terracotta)]" />
-            <h2 className="font-display text-3xl md:text-5xl uppercase tracking-wide text-[var(--shukla-charcoal)]">
+            <h2 className="display-lg text-3xl md:text-5xl text-[var(--shukla-charcoal)]">
               Transform Your Architecture
             </h2>
             <p className="font-serif italic text-lg text-[var(--shukla-charcoal)]/80">
-              Discover why top interior architects specify SUKLA RUGS for luxury residences worldwide.
+              Discover why top interior architects specify SHUKLA RUGS for luxury residences worldwide.
             </p>
             <div className="pt-4 flex justify-center gap-4">
               <Button href="/shop" variant="primary" size="lg">

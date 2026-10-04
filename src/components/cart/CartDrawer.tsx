@@ -18,6 +18,7 @@ const FREE_SHIPPING_THRESHOLD = 2500;
 
 export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
   const [cart, setCart] = useState<Cart | null>(null);
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
 
   useEffect(() => {
     setCart(getLocalCart());
@@ -60,12 +61,33 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
     trackEvent('remove_from_cart', { lineId });
   };
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
+    if (!cart?.lines.length || isCheckingOut) return;
+
     trackEvent('begin_checkout', { subtotal, quantity: cart?.totalQuantity });
-    if (cart?.checkoutUrl && cart.checkoutUrl !== 'https://checkout.shopify.com') {
-      window.location.href = cart.checkoutUrl;
-    } else {
-      alert('Redirecting to Shopify Secure Checkout... (Live Storefront endpoint active upon setting credentials)');
+
+    setIsCheckingOut(true);
+    try {
+      const response = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          lines: cart.lines.map((line) => ({
+            merchandiseId: line.merchandise.id,
+            quantity: line.quantity
+          }))
+        })
+      });
+      const result = (await response.json()) as { checkoutUrl?: string; error?: string };
+
+      if (!response.ok || !result.checkoutUrl) {
+        throw new Error(result.error || 'Unable to start checkout.');
+      }
+
+      window.location.assign(result.checkoutUrl);
+    } catch (error) {
+      alert(error instanceof Error ? error.message : 'Unable to start checkout. Please try again.');
+      setIsCheckingOut(false);
     }
   };
 
@@ -85,8 +107,8 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
           <div className="p-6 border-b border-[var(--shukla-muted-border)] flex items-center justify-between">
             <div className="flex items-center gap-3">
               <ShoppingBag className="w-5 h-5 text-[var(--shukla-taupe)]" />
-              <h2 className="font-display text-lg tracking-wider uppercase">Your Selection</h2>
-              <span className="text-xs font-sans bg-[var(--shukla-sand)] px-2 py-0.5 rounded-full font-medium">
+              <h2 className="heading text-lg">Your Selection</h2>
+              <span className="nums text-xs bg-[var(--shukla-sand)] px-2 py-0.5 rounded-full font-medium">
                 {cart?.totalQuantity || 0}
               </span>
             </div>
@@ -104,9 +126,17 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
             <div className="flex items-center justify-between text-xs font-sans mb-1.5">
               <span className="flex items-center gap-1.5 text-[var(--shukla-charcoal)] font-medium">
                 <Truck className="w-4 h-4 text-[var(--shukla-terracotta)]" />
-                {remainingForFreeShipping > 0
-                  ? `Add $${remainingForFreeShipping.toLocaleString('en-US', { minimumFractionDigits: 2 })} for complimentary global shipping`
-                  : 'Complimentary White-Glove Global Shipping Unlocked'}
+                {remainingForFreeShipping > 0 ? (
+                  <span>
+                    Add{' '}
+                    <span className="nums">
+                      ${remainingForFreeShipping.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                    </span>{' '}
+                    for complimentary global shipping
+                  </span>
+                ) : (
+                  'Complimentary White-Glove Global Shipping Unlocked'
+                )}
               </span>
             </div>
             <div className="w-full h-1 bg-[var(--shukla-sand)] rounded-full overflow-hidden">
@@ -161,7 +191,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                           <Link
                             href={`/products/${line.merchandise.product.handle}`}
                             onClick={onClose}
-                            className="font-display text-sm tracking-wide hover:text-[var(--shukla-terracotta)] transition-colors"
+                            className="heading text-sm hover:text-[var(--shukla-terracotta)] transition-colors"
                           >
                             {line.merchandise.product.title}
                           </Link>
@@ -189,7 +219,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                         >
                           <Minus className="w-3 h-3" />
                         </button>
-                        <span className="px-3 text-xs font-sans font-medium">{line.quantity}</span>
+                        <span className="nums px-3 text-xs font-medium">{line.quantity}</span>
                         <button
                           onClick={() => handleUpdateQty(line.id, line.quantity, 1)}
                           className="px-2.5 py-1 text-[var(--shukla-charcoal)] hover:bg-[var(--shukla-sand)] transition-colors"
@@ -199,7 +229,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                         </button>
                       </div>
 
-                      <span className="font-display text-sm font-medium">
+                      <span className="nums text-sm font-medium">
                         ${(parseFloat(line.merchandise.price.amount) * line.quantity).toLocaleString('en-US', {
                           minimumFractionDigits: 2
                         })}
@@ -217,22 +247,22 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
               <div className="space-y-1.5">
                 <div className="flex justify-between text-xs font-sans text-[var(--shukla-taupe)]">
                   <span>Subtotal</span>
-                  <span className="font-mono text-[var(--shukla-charcoal)] font-medium">
+                  <span className="nums text-[var(--shukla-charcoal)] font-medium">
                     ${subtotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                   </span>
                 </div>
                 <div className="flex justify-between text-xs font-sans text-[var(--shukla-taupe)]">
-                  <span>Taxes & Duties</span>
+                  <span>Taxes &amp; Duties</span>
                   <span>Calculated at checkout</span>
                 </div>
-                <div className="flex justify-between text-sm font-display uppercase tracking-wider text-[var(--shukla-charcoal)] font-semibold pt-2 border-t border-[var(--shukla-muted-border)]">
-                  <span>Total</span>
-                  <span>${subtotal.toLocaleString('en-US', { minimumFractionDigits: 2 })} USD</span>
+                <div className="flex justify-between items-baseline text-sm font-sans text-[var(--shukla-charcoal)] font-semibold pt-2 border-t border-[var(--shukla-muted-border)]">
+                  <span className="eyebrow text-[11px]">Total</span>
+                  <span className="nums text-base">${subtotal.toLocaleString('en-US', { minimumFractionDigits: 2 })} USD</span>
                 </div>
               </div>
 
-              <Button variant="primary" fullWidth onClick={handleCheckout} className="group">
-                <span>Proceed to Checkout</span>
+              <Button variant="primary" fullWidth onClick={handleCheckout} disabled={isCheckingOut} className="group">
+                <span>{isCheckingOut ? 'Connecting to secure checkout...' : 'Proceed to Checkout'}</span>
                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
 

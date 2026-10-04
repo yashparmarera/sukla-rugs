@@ -1,0 +1,39 @@
+<section class="home-category page-width">
+  <header class="home-section-header"><div><p class="eyebrow">{{ section.settings.eyebrow | escape }}</p><h2>{{ section.settings.heading | escape }}</h2></div><a href="{{ section.settings.link_url | default: routes.all_products_collection_url }}">{{ section.settings.link_label | escape }} →</a></header>
+  <div class="category-grid">
+    {% for block in section.blocks %}
+      <a class="category-card" href="{{ block.settings.link | default: routes.all_products_collection_url }}" {{ block.shopify_attributes }}>
+        <div class="category-card__image">
+          {% if block.settings.image != blank %}
+            {{ block.settings.image | image_url: width: 1200 | image_tag: widths: '400, 700, 1000, 1200', sizes: '(min-width: 990px) 25vw, 50vw', loading: 'lazy', alt: block.settings.image.alt | default: block.settings.title }}
+          {% elsif block.settings.image_url != blank %}
+            <img src="{{ block.settings.image_url | escape }}" alt="{{ block.settings.title | escape }}" width="900" height="1200" loading="lazy">
+          {% endif %}
+        </div>
+        <h3>{{ block.settings.title | escape }}</h3>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shop by category",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Explore the collection" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Shop rugs by category" },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "View all rugs" },
+    { "type": "url", "id": "link_url", "label": "Link" }
+  ],
+  "blocks": [
+    { "type": "category", "name": "Category", "settings": [
+      { "type": "text", "id": "title", "label": "Title", "default": "Natural fibre rugs" },
+      { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "text", "id": "image_url", "label": "Legacy image URL" },
+      { "type": "url", "id": "link", "label": "Link" }
+    ] }
+  ],
+  "presets": [{ "name": "Shop by category", "blocks": [{ "type": "category", "settings": { "title": "Natural fibre rugs" } }, { "type": "category", "settings": { "title": "Shaggy rugs" } }, { "type": "category", "settings": { "title": "Washable rugs" } }, { "type": "category", "settings": { "title": "Viscose rugs" } }] }]
+}
+{% endschema %}

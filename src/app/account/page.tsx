@@ -30,14 +30,14 @@ export default function AccountPage() {
             <span className="text-xs uppercase tracking-[0.25em] text-[var(--shukla-taupe)] font-sans block">
               Shopify Customer Account
             </span>
-            <h1 className="font-display text-3xl sm:text-4xl uppercase tracking-wide text-[var(--shukla-charcoal)]">
+            <h1 className="display-lg text-3xl sm:text-4xl text-[var(--shukla-charcoal)]">
               Client Portal
             </h1>
           </div>
 
           {!isLoggedIn ? (
             <div className="bg-[var(--shukla-cream)] border border-[var(--shukla-muted-border)] p-8 sm:p-12 max-w-md mx-auto space-y-6 shadow-subtle">
-              <h2 className="font-display text-lg uppercase text-center">Sign In to Your Account</h2>
+              <h2 className="heading text-lg text-center">Sign In to Your Account</h2>
               <p className="text-xs font-sans text-[var(--shukla-charcoal)]/80 text-center">
                 Enter your email address to access your order history, delivery tracking, and saved address book.
               </p>
@@ -59,7 +59,7 @@ export default function AccountPage() {
             <div className="space-y-8 bg-[var(--shukla-cream)] border border-[var(--shukla-muted-border)] p-8 shadow-subtle">
               <div className="flex justify-between items-center pb-4 border-b border-[var(--shukla-muted-border)]">
                 <div>
-                  <h2 className="font-display text-lg uppercase">Welcome back</h2>
+                  <h2 className="heading text-lg">Welcome back</h2>
                   <span className="text-xs font-sans text-[var(--shukla-taupe)]">{email}</span>
                 </div>
                 <button
@@ -71,7 +71,7 @@ export default function AccountPage() {
               </div>
 
               <div className="space-y-4">
-                <div className="flex items-center gap-2 font-display text-sm uppercase text-[var(--shukla-charcoal)]">
+                <div className="eyebrow flex items-center gap-2 text-sm text-[var(--shukla-charcoal)]">
                   <Package className="w-4 h-4 text-[var(--shukla-terracotta)]" /> Order History
                 </div>
                 <div className="p-6 bg-[var(--shukla-ivory)] border border-[var(--shukla-muted-border)] text-center text-xs font-sans text-[var(--shukla-taupe)]">

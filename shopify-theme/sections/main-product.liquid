@@ -1,0 +1,110 @@
+<section class="product-page page-width" data-product-section data-analytics-product-view data-product-id="{{ product.id }}" data-product-handle="{{ product.handle }}">
+  {% if section.settings.show_breadcrumbs %}
+    <nav class="breadcrumbs" aria-label="Breadcrumbs">
+      <a href="{{ routes.root_url }}">Home</a><span aria-hidden="true">/</span>
+      <a href="{{ routes.all_products_collection_url }}">Shop</a><span aria-hidden="true">/</span>
+      <span aria-current="page">{{ product.title | escape }}</span>
+    </nav>
+  {% endif %}
+
+  <div class="product-page__grid">
+    <div class="product-gallery">
+      <div class="product-gallery__primary">
+        {% if product.featured_image != blank %}
+          {% for media in product.media %}
+            <div class="product-gallery__image{% if forloop.first %} is-active{% endif %}" data-product-media data-index="{{ forloop.index0 }}" aria-hidden="{% unless forloop.first %}true{% else %}false{% endunless %}">
+              {% case media.media_type %}
+                {% when 'image' %}
+                  {% if forloop.first %}
+                    {{ media.preview_image | image_url: width: 1800 | image_tag: widths: '600, 900, 1200, 1500, 1800', sizes: '(min-width: 990px) 58vw, 100vw', loading: 'eager', alt: media.alt | default: product.title }}
+                  {% else %}
+                    {{ media.preview_image | image_url: width: 1800 | image_tag: widths: '600, 900, 1200, 1500, 1800', sizes: '(min-width: 990px) 58vw, 100vw', loading: 'lazy', alt: media.alt | default: product.title }}
+                  {% endif %}
+              {% endcase %}
+            </div>
+          {% endfor %}
+        {% else %}
+          <div class="product-gallery__empty">{{ product.title | escape }}</div>
+        {% endif %}
+        <button class="product-gallery__zoom" type="button" data-product-zoom aria-label="Open product image fullscreen">+</button>
+      </div>
+
+      {% if product.media.size > 1 %}
+        <div class="product-gallery__thumbs" aria-label="Product images">
+          {% for media in product.media %}
+            {% if media.media_type == 'image' %}
+              <button type="button" data-product-thumbnail data-index="{{ forloop.index0 }}"{% if forloop.first %} class="is-active"{% endif %} aria-label="View product image {{ forloop.index }}">
+                {{ media.preview_image | image_url: width: 240 | image_tag: widths: '120, 180, 240', sizes: '120px', alt: media.alt | default: product.title }}
+              </button>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="product-information">
+      <p class="eyebrow">{{ product.vendor | default: shop.name | escape }}</p>
+      <h1>{{ product.title | escape }}</h1>
+      {% if product.description != blank %}<div class="product-information__intro rte">{{ product.description }}</div>{% endif %}
+
+      <div class="product-information__price" data-product-price>
+        {{ product.selected_or_first_available_variant.price | money }}
+      </div>
+
+      {% assign product_form_id = 'product-form-' | append: section.id %}
+      {% form 'product', product, id: product_form_id, class: 'product-form', data-product-form: '' %}
+        {% unless product.has_only_default_variant %}
+          <label for="ProductVariant-{{ section.id }}">Select variant</label>
+          <select id="ProductVariant-{{ section.id }}" name="id" data-product-variant>
+            {% for variant in product.variants %}
+              <option value="{{ variant.id }}" data-price="{{ variant.price | money }}"{% if variant == product.selected_or_first_available_variant %} selected{% endif %}{% unless variant.available %} disabled{% endunless %}>
+                {{ variant.title }}{% unless variant.available %} - Sold out{% endunless %}
+              </option>
+            {% endfor %}
+          </select>
+        {% else %}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        {% endunless %}
+
+        <button class="button button--primary product-form__submit" type="submit" name="add"{% unless product.selected_or_first_available_variant.available %} disabled{% endunless %}>
+          {% if product.selected_or_first_available_variant.available %}{{ 'products.add_to_cart' | t }}{% else %}{{ 'products.sold_out' | t }}{% endif %}
+        </button>
+      {% endform %}
+
+      <div class="product-information__details">
+        {% if product.metafields.shukla.product_story != blank %}
+          <details open>
+            <summary>Product story</summary>
+            <div class="rte">{{ product.metafields.shukla.product_story.value }}</div>
+          </details>
+        {% endif %}
+        {% if product.metafields.shukla.technique != blank or product.metafields.shukla.material != blank or product.metafields.shukla.origin_region != blank or product.metafields.shukla.craft_duration != blank %}
+          <details>
+            <summary>Craft details</summary>
+            <dl>
+              {% if product.metafields.shukla.technique != blank %}<div><dt>Technique</dt><dd>{{ product.metafields.shukla.technique.value }}</dd></div>{% endif %}
+              {% if product.metafields.shukla.material != blank %}<div><dt>Material</dt><dd>{{ product.metafields.shukla.material.value }}</dd></div>{% endif %}
+              {% if product.metafields.shukla.origin_region != blank %}<div><dt>Origin</dt><dd>{{ product.metafields.shukla.origin_region.value }}</dd></div>{% endif %}
+              {% if product.metafields.shukla.craft_duration != blank %}<div><dt>Craft duration</dt><dd>{{ product.metafields.shukla.craft_duration.value }}</dd></div>{% endif %}
+            </dl>
+          </details>
+        {% endif %}
+        {% if product.metafields.shukla.care_instructions != blank %}
+          <details>
+            <summary>Care</summary>
+            <div class="rte">{{ product.metafields.shukla.care_instructions.value }}</div>
+          </details>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main product",
+  "settings": [
+    { "type": "checkbox", "id": "show_breadcrumbs", "label": "Show breadcrumbs", "default": true }
+  ]
+}
+{% endschema %}

@@ -27,8 +27,8 @@ export const Footer: React.FC = () => {
           <div className="lg:col-span-6 space-y-6">
             <div className="flex items-center gap-3">
               <KnotGlyph size="md" className="text-[var(--shukla-terracotta)]" />
-              <span className="font-display text-2xl tracking-[0.25em] uppercase font-semibold">
-                SUKLA RUGS
+              <span className="font-display text-2xl tracking-[0.22em] uppercase font-medium">
+                SHUKLA RUGS
               </span>
             </div>
             <p className="font-serif italic text-lg text-[var(--shukla-taupe-light)] max-w-md">
@@ -41,8 +41,8 @@ export const Footer: React.FC = () => {
           </div>
 
           <div className="lg:col-span-6 space-y-4 lg:pl-12">
-            <h4 className="font-display text-xs uppercase tracking-[0.2em] text-[var(--shukla-terracotta)]">
-              The Sukla Journal & Private Inquiries
+            <h4 className="eyebrow text-xs text-[var(--shukla-terracotta)]">
+              The Shukla Journal &amp; Private Inquiries
             </h4>
             <p className="text-xs font-sans text-[var(--shukla-ivory)]/70 leading-relaxed">
               Subscribe to receive private previews of new loom releases, artisan narratives, and bespoke design guides.
@@ -51,7 +51,7 @@ export const Footer: React.FC = () => {
             {subscribed ? (
               <div className="p-4 bg-white/5 border border-[var(--shukla-terracotta)] text-xs font-sans text-white flex items-center gap-3">
                 <Check className="w-4 h-4 text-[var(--shukla-terracotta)]" />
-                <span>Thank you. You have been added to the SUKLA RUGS private registry.</span>
+                <span>Thank you. You have been added to the SHUKLA RUGS private registry.</span>
               </div>
             ) : (
               <form onSubmit={handleSubscribe} className="flex gap-2 max-w-md">
@@ -77,7 +77,7 @@ export const Footer: React.FC = () => {
           
           {/* Col 1: Shop */}
           <div className="space-y-4">
-            <h5 className="font-display uppercase tracking-[0.2em] text-[var(--shukla-terracotta)] text-[11px]">
+            <h5 className="eyebrow text-[var(--shukla-terracotta)] text-[11px]">
               Shop Collections
             </h5>
             <ul className="space-y-2.5 text-white/70">
@@ -93,8 +93,8 @@ export const Footer: React.FC = () => {
 
           {/* Col 2: Discover */}
           <div className="space-y-4">
-            <h5 className="font-display uppercase tracking-[0.2em] text-[var(--shukla-terracotta)] text-[11px]">
-              Discover & Heritage
+            <h5 className="eyebrow text-[var(--shukla-terracotta)] text-[11px]">
+              Discover &amp; Heritage
             </h5>
             <ul className="space-y-2.5 text-white/70">
               <li><Link href="/story" className="hover:text-white transition-colors">Our Story</Link></li>
@@ -107,8 +107,8 @@ export const Footer: React.FC = () => {
 
           {/* Col 3: Services & Guides */}
           <div className="space-y-4">
-            <h5 className="font-display uppercase tracking-[0.2em] text-[var(--shukla-terracotta)] text-[11px]">
-              Services & Guides
+            <h5 className="eyebrow text-[var(--shukla-terracotta)] text-[11px]">
+              Services &amp; Guides
             </h5>
             <ul className="space-y-2.5 text-white/70">
               <li><Link href="/find-your-rug" className="hover:text-white transition-colors font-medium text-white">Find Your Rug Quiz</Link></li>
@@ -122,13 +122,13 @@ export const Footer: React.FC = () => {
 
           {/* Col 4: International Markets & Guarantees */}
           <div className="space-y-4">
-            <h5 className="font-display uppercase tracking-[0.2em] text-[var(--shukla-terracotta)] text-[11px]">
+            <h5 className="eyebrow text-[var(--shukla-terracotta)] text-[11px]">
               Global Markets
             </h5>
             <p className="text-white/70 leading-relaxed">
               Servicing interior designers, private residences, and architecture firms across United States, Canada, United Kingdom, European Union, Australia, and UAE.
             </p>
-            <div className="pt-2 flex flex-wrap gap-2 text-[10px] font-mono text-white/50">
+            <div className="pt-2 flex flex-wrap gap-2 text-[10px] nums text-white/50">
               <span className="px-2 py-1 bg-white/5 border border-white/10">USD ($)</span>
               <span className="px-2 py-1 bg-white/5 border border-white/10">EUR (€)</span>
               <span className="px-2 py-1 bg-white/5 border border-white/10">GBP (£)</span>
@@ -141,7 +141,7 @@ export const Footer: React.FC = () => {
 
         {/* Bottom Bar & Legal */}
         <div className="pt-8 flex flex-col md:flex-row justify-between items-center text-[11px] font-sans text-white/50 space-y-4 md:space-y-0">
-          <p>© {new Date().getFullYear()} SUKLA RUGS. All rights reserved. Handcrafted in Bhadohi, India.</p>
+          <p><span className="nums">© {new Date().getFullYear()}</span> SHUKLA RUGS. All rights reserved. Handcrafted in Bhadohi, India.</p>
           <div className="flex space-x-6">
             <span>Shopify Headless Commerce</span>
             <span>WCAG 2.1 AA Accessible</span>

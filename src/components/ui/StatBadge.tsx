@@ -18,7 +18,7 @@ export const StatBadge: React.FC<StatBadgeProps> = ({
       <span className="block text-xs uppercase tracking-widest text-[var(--shukla-taupe)] font-sans mb-2">
         {label}
       </span>
-      <span className="block font-display text-2xl md:text-3xl font-normal text-[var(--shukla-charcoal)] mb-1">
+      <span className="nums block text-2xl md:text-3xl font-light text-[var(--shukla-charcoal)] mb-1 tracking-tight">
         {value}
       </span>
       {sublabel && (

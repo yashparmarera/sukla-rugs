@@ -14,8 +14,8 @@ export const ReviewsSection: React.FC = () => {
           <span className="block text-xs uppercase tracking-[0.25em] text-[var(--shukla-taupe)] font-sans">
             Client Testimonials & Patrons
           </span>
-          <h2 className="font-display text-3xl md:text-4xl text-[var(--shukla-charcoal)] uppercase">
-            Acclaimed by Designers & Homeowners
+          <h2 className="display-lg text-3xl md:text-4xl text-[var(--shukla-charcoal)]">
+            Acclaimed by Designers &amp; Homeowners
           </h2>
         </div>
 
@@ -39,7 +39,7 @@ export const ReviewsSection: React.FC = () => {
                   )}
                 </div>
 
-                <h3 className="font-display text-base tracking-wide text-[var(--shukla-charcoal)]">
+                <h3 className="heading text-base text-[var(--shukla-charcoal)]">
                   &quot;{review.title}&quot;
                 </h3>
 

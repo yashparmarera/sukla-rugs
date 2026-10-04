@@ -5,7 +5,7 @@ import { Footer } from '@/components/layout/Footer';
 import { KnotGlyph } from '@/components/ui/KnotGlyph';
 
 export const metadata = {
-  title: 'Artisans of Bhadohi | SUKLA RUGS',
+  title: 'Artisans of Bhadohi | SHUKLA RUGS',
   description: 'Meet the master weaver collective of Bhadohi, Uttar Pradesh. Generations of human skill behind every hand-knotted and hand-tufted rug.'
 };
 
@@ -21,17 +21,17 @@ export default function ArtisansPage() {
             <span className="text-xs uppercase tracking-[0.25em] text-[var(--shukla-taupe)] font-sans block">
               The Hands Behind The Loom
             </span>
-            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl uppercase tracking-wide text-[var(--shukla-charcoal)]">
+            <h1 className="display-lg text-3xl sm:text-4xl md:text-5xl text-[var(--shukla-charcoal)]">
               Artisans of Bhadohi
             </h1>
             <p className="font-serif italic text-base md:text-lg text-[var(--shukla-charcoal)]/80 max-w-2xl mx-auto">
-              Behind every SUKLA RUG are the hands of master weavers whose craft knowledge has been refined across generations.
+              Behind every SHUKLA RUG are the hands of master weavers whose craft knowledge has been refined across generations.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center bg-[var(--shukla-cream)] border border-[var(--shukla-muted-border)] p-8">
             <div className="space-y-4">
-              <h2 className="font-display text-xl uppercase tracking-wider">A Tradition of Mastery</h2>
+              <h2 className="heading text-xl">A Tradition of Mastery</h2>
               <p className="font-serif italic text-sm text-[var(--shukla-charcoal)]/80">
                 &quot;Weaving is a language of rhythm. Every knot tied is a continuation of our ancestors&apos; memory.&quot;
               </p>

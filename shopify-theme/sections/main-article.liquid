@@ -1,0 +1,31 @@
+<article class="article-page page-width">
+  <header class="article-page__header">
+    <p class="eyebrow">{{ section.settings.eyebrow | escape }}{% if article.author != blank %} · {{ article.author | escape }}{% endif %}</p>
+    <h1>{{ article.title | escape }}</h1>
+    <p class="article-page__date">{{ article.published_at | date: '%B %d, %Y' }}</p>
+  </header>
+
+  {% if article.image != blank %}
+    <div class="article-page__image">
+      {{ article.image | image_url: width: 1800 | image_tag: widths: '700, 1100, 1500, 1800', sizes: '100vw', loading: 'eager', alt: article.image.alt | default: article.title }}
+    </div>
+  {% endif %}
+
+  <div class="article-page__content rte">
+    {% if article.excerpt != blank %}<p class="article-page__excerpt">{{ article.excerpt }}</p>{% endif %}
+    {{ article.content }}
+  </div>
+
+  <footer class="article-page__footer">
+    <a href="{{ blog.url }}">← Back to {{ blog.title | escape }}</a>
+  </footer>
+</article>
+
+{% schema %}
+{
+  "name": "Main article",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Shukla Journal" }
+  ]
+}
+{% endschema %}

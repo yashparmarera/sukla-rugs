@@ -40,8 +40,8 @@ export const ShopByRoom: React.FC = () => {
             <span className="block text-xs uppercase tracking-[0.25em] text-[var(--shukla-terracotta)] font-sans mb-2">
               Architectural Placement
             </span>
-            <h2 className="font-display text-2xl md:text-3xl lg:text-4xl text-[var(--shukla-charcoal)] uppercase">
-              Shop by Space & Scale
+            <h2 className="display-lg text-2xl md:text-3xl lg:text-4xl text-[var(--shukla-charcoal)]">
+              Shop by Space &amp; Scale
             </h2>
           </div>
           <Link
@@ -70,7 +70,7 @@ export const ShopByRoom: React.FC = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-[var(--shukla-charcoal)]/80 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
                 
                 <div className="absolute bottom-4 left-4 right-4 text-white">
-                  <h3 className="font-display text-lg uppercase tracking-wider mb-1 group-hover:text-[var(--shukla-terracotta)] transition-colors">
+                  <h3 className="heading text-lg mb-1 group-hover:text-[var(--shukla-terracotta)] transition-colors">
                     {room.title}
                   </h3>
                   <p className="text-xs font-sans text-white/80 line-clamp-2">

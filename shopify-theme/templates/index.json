@@ -1,0 +1,75 @@
+{
+  "sections": {
+    "brandentrance": {
+      "type": "brand-entrance",
+      "settings": {}
+    },
+    "hero": {
+      "type": "hero",
+      "settings": {}
+    },
+    "featuredproducts": {
+      "type": "featured-products",
+      "settings": {}
+    },
+    "shopbyroom": {
+      "type": "shop-by-room",
+      "settings": {},
+      "blocks": {
+        "livingroom": { "type": "room", "settings": { "title": "Living Room" } },
+        "bedroom": { "type": "room", "settings": { "title": "Bedroom", "subtitle": "Soft plush piles providing morning warmth barefoot" } },
+        "diningroom": { "type": "room", "settings": { "title": "Dining Room", "subtitle": "Low-profile weaves for smooth chair movement" } },
+        "entryway": { "type": "room", "settings": { "title": "Entryway & Hallways", "subtitle": "Resilient runners and organic jute textures" } }
+      },
+      "block_order": ["livingroom", "bedroom", "diningroom", "entryway"]
+    },
+    "shopbycategory": {
+      "type": "shop-by-category",
+      "settings": {},
+      "blocks": {
+        "naturalfiber": { "type": "category", "settings": { "title": "Natural fibre rugs" } },
+        "shaggy": { "type": "category", "settings": { "title": "Shaggy rugs" } },
+        "washable": { "type": "category", "settings": { "title": "Washable rugs" } },
+        "viscose": { "type": "category", "settings": { "title": "Viscose rugs" } }
+      },
+      "block_order": ["naturalfiber", "shaggy", "washable", "viscose"]
+    },
+    "bhadohistory": {
+      "type": "bhadohi-story",
+      "settings": { "primary_link": "/pages/process", "secondary_link": "/pages/story" }
+    },
+    "brandstatement": {
+      "type": "brand-statement",
+      "settings": {}
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {}
+    },
+    "consultationbanner": {
+      "type": "consultation-banner",
+      "settings": { "primary_link": "/pages/design-consultation", "secondary_link": "/pages/find-your-rug" }
+    },
+    "journalpreview": {
+      "type": "journal-preview",
+      "settings": {}
+    },
+    "finalcta": {
+      "type": "final-cta",
+      "settings": { "secondary_link": "/pages/find-your-rug" }
+    }
+  },
+  "order": [
+    "brandentrance",
+    "hero",
+    "featuredproducts",
+    "shopbyroom",
+    "shopbycategory",
+    "bhadohistory",
+    "brandstatement",
+    "testimonials",
+    "consultationbanner",
+    "journalpreview",
+    "finalcta"
+  ]
+}

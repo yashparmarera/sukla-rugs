@@ -1,0 +1,85 @@
+{% assign hero_image_1 = section.settings.image_1 %}
+{% assign hero_image_2 = section.settings.image_2 %}
+{% assign hero_image_3 = section.settings.image_3 %}
+{% assign hero_image_4 = section.settings.image_4 %}
+
+<section class="hero" data-hero-carousel aria-roledescription="carousel" aria-label="{{ section.settings.aria_label | escape }}">
+  <div class="hero__stage">
+    <div class="hero__layer is-active" data-hero-image data-index="0" aria-hidden="false">
+      {% if hero_image_1 != blank %}
+        {{ hero_image_1 | image_url: width: 2400 | image_tag: loading: 'eager', widths: '800, 1200, 1600, 2000, 2400', sizes: '100vw', alt: section.settings.image_1_alt }}
+      {% else %}
+        <img src="{{ 'hero-image1.webp' | asset_url }}" alt="{{ section.settings.image_1_alt | escape }}" width="2400" height="1600" loading="eager">
+      {% endif %}
+    </div>
+    <div class="hero__layer" data-hero-image data-index="1" aria-hidden="true">
+      {% if hero_image_2 != blank %}
+        {{ hero_image_2 | image_url: width: 2400 | image_tag: loading: 'lazy', widths: '800, 1200, 1600, 2000, 2400', sizes: '100vw', alt: section.settings.image_2_alt }}
+      {% else %}
+        <img src="{{ '2-hero.webp' | asset_url }}" alt="{{ section.settings.image_2_alt | escape }}" width="2400" height="1600" loading="lazy">
+      {% endif %}
+    </div>
+    <div class="hero__layer" data-hero-image data-index="2" aria-hidden="true">
+      {% if hero_image_3 != blank %}
+        {{ hero_image_3 | image_url: width: 2400 | image_tag: loading: 'lazy', widths: '800, 1200, 1600, 2000, 2400', sizes: '100vw', alt: section.settings.image_3_alt }}
+      {% else %}
+        <img src="{{ '3-hero.webp' | asset_url }}" alt="{{ section.settings.image_3_alt | escape }}" width="2400" height="1600" loading="lazy">
+      {% endif %}
+    </div>
+    <div class="hero__layer" data-hero-image data-index="3" aria-hidden="true">
+      {% if hero_image_4 != blank %}
+        {{ hero_image_4 | image_url: width: 2400 | image_tag: loading: 'lazy', widths: '800, 1200, 1600, 2000, 2400', sizes: '100vw', alt: section.settings.image_4_alt }}
+      {% else %}
+        <img src="{{ '4-hero.webp' | asset_url }}" alt="{{ section.settings.image_4_alt | escape }}" width="2400" height="1600" loading="lazy">
+      {% endif %}
+    </div>
+    <div class="hero__veil"></div>
+  </div>
+
+  <div class="hero__content page-width">
+    <div class="hero__copy">
+      <p class="hero__eyebrow"><span class="hero-text-backdrop">{{ section.settings.eyebrow | escape }}</span></p>
+      <h1><span class="hero-text-backdrop">{{ section.settings.heading_line_1 | escape }}<br>{{ section.settings.heading_line_2 | escape }}</span></h1>
+      <div class="hero__rule"></div>
+      <p class="hero__description"><span class="hero-text-backdrop">{{ section.settings.description | escape }}</span></p>
+      {% if section.settings.cta_label != blank %}
+        <a class="button button--light hero__cta" href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}">
+          {{ section.settings.cta_label | escape }} <span aria-hidden="true">→</span>
+        </a>
+      {% endif %}
+      {% if section.settings.show_controls %}
+        <div class="hero__controls" aria-label="Hero slideshow controls">
+          <button class="hero__arrow" type="button" data-hero-previous aria-label="Previous hero image">←</button>
+          <button class="hero__arrow" type="button" data-hero-next aria-label="Next hero image">→</button>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    { "type": "text", "id": "aria_label", "label": "Accessibility label", "default": "Shukla Rugs featured interiors" },
+    { "type": "image_picker", "id": "image_1", "label": "Image 1" },
+    { "type": "image_picker", "id": "image_2", "label": "Image 2" },
+    { "type": "image_picker", "id": "image_3", "label": "Image 3" },
+    { "type": "image_picker", "id": "image_4", "label": "Image 4" },
+    { "type": "text", "id": "image_1_alt", "label": "Image 1 alt text", "default": "Shukla Rugs handcrafted rug in a sunlit interior" },
+    { "type": "text", "id": "image_2_alt", "label": "Image 2 alt text", "default": "Shukla Rugs handcrafted rug in a refined living space" },
+    { "type": "text", "id": "image_3_alt", "label": "Image 3 alt text", "default": "Shukla Rugs handcrafted rug styled in a contemporary room" },
+    { "type": "text", "id": "image_4_alt", "label": "Image 4 alt text", "default": "Shukla Rugs handcrafted rug in an elegant interior" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Handcrafted Rugs" },
+    { "type": "text", "id": "heading_line_1", "label": "Heading line 1", "default": "Rugs for" },
+    { "type": "text", "id": "heading_line_2", "label": "Heading line 2", "default": "Every Space" },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "From serene corners to everyday journeys, our handcrafted rugs bring warmth, texture and character to every space." },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Explore Collections" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" },
+    { "type": "checkbox", "id": "show_controls", "label": "Show slideshow controls", "default": true }
+  ],
+  "presets": [
+    { "name": "Hero" }
+  ]
+}
+{% endschema %}

@@ -63,13 +63,13 @@ function reshapeImage(imageNode: any): ProductImage {
     return {
       id: 'placeholder-img',
       url: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=85',
-      altText: 'SUKLA RUGS Handcrafted Textile'
+      altText: 'SHUKLA RUGS Handcrafted Textile'
     };
   }
   return {
     id: imageNode.id || 'img-' + Math.random().toString(36).substring(2),
     url: imageNode.url,
-    altText: imageNode.altText || 'SUKLA RUGS Handcrafted Textile',
+    altText: imageNode.altText || 'SHUKLA RUGS Handcrafted Textile',
     width: imageNode.width,
     height: imageNode.height
   };

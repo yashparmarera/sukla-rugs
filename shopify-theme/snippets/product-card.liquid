@@ -1,0 +1,15 @@
+<article class="product-card" data-product-card data-product-id="{{ product.id }}" data-product-handle="{{ product.handle }}">
+  <a class="product-card__media" href="{{ product.url }}" data-analytics-product-link>
+    {% if product.featured_image != blank %}
+      {{ product.featured_image | image_url: width: 900 | image_tag: widths: '360, 540, 720, 900', sizes: '(min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw', loading: loading | default: 'lazy', alt: product.featured_image.alt | default: product.title }}
+    {% else %}
+      <div class="product-card__empty" aria-hidden="true"></div>
+    {% endif %}
+    {% unless product.available %}<span class="product-card__badge">{{ 'products.sold_out' | t }}</span>{% endunless %}
+  </a>
+  <div class="product-card__details">
+    <p class="product-card__eyebrow">{{ product.vendor | default: settings.brand_name | default: shop.name | escape }}</p>
+    <h2><a href="{{ product.url }}" data-analytics-product-link>{{ product.title | escape }}</a></h2>
+    {% render 'price', product: product %}
+  </div>
+</article>

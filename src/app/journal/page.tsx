@@ -8,7 +8,7 @@ import { MOCK_JOURNAL_ARTICLES } from '@/lib/shopify/mock-data';
 import { ArrowRight } from 'lucide-react';
 
 export const metadata = {
-  title: 'The Journal | Craft, Materiality & Interiors | SUKLA RUGS',
+  title: 'The Journal | Craft, Materiality & Interiors | SHUKLA RUGS',
   description: 'Editorial perspectives on Indian rug weaving heritage, material science, and interior architecture.'
 };
 
@@ -25,8 +25,8 @@ export default function JournalPage() {
             <span className="text-xs uppercase tracking-[0.25em] text-[var(--shukla-taupe)] font-sans block">
               Editorial Publications
             </span>
-            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl uppercase tracking-wide text-[var(--shukla-charcoal)]">
-              The Sukla Journal
+            <h1 className="display-xl text-4xl sm:text-5xl md:text-6xl text-[var(--shukla-charcoal)]">
+              The Shukla Journal
             </h1>
             <p className="font-serif italic text-base md:text-lg text-[var(--shukla-charcoal)]/80">
               In-depth essays on Bhadohi craft heritage, material analysis, and luxury interior curation.
@@ -60,7 +60,7 @@ export default function JournalPage() {
                       <span>•</span>
                       <span>{article.readTime}</span>
                     </div>
-                    <h2 className="font-display text-lg uppercase tracking-wide text-[var(--shukla-charcoal)] group-hover:text-[var(--shukla-terracotta)] transition-colors leading-snug">
+                    <h2 className="heading text-lg text-[var(--shukla-charcoal)] group-hover:text-[var(--shukla-terracotta)] transition-colors leading-snug">
                       {article.title}
                     </h2>
                     <p className="text-xs font-serif italic text-[var(--shukla-charcoal)]/75 mt-2 line-clamp-3">

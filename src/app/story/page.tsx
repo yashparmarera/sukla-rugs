@@ -6,8 +6,8 @@ import { KnotGlyph } from '@/components/ui/KnotGlyph';
 import { StatBadge } from '@/components/ui/StatBadge';
 
 export const metadata = {
-  title: 'Our Story & Bhadohi Heritage | SUKLA RUGS',
-  description: 'Discover the heritage of SUKLA RUGS: from the historic loom houses of Bhadohi, Uttar Pradesh, India to refined architectural spaces worldwide.'
+  title: 'Our Story & Bhadohi Heritage | SHUKLA RUGS',
+  description: 'Discover the heritage of SHUKLA RUGS: from the historic loom houses of Bhadohi, Uttar Pradesh, India to refined architectural spaces worldwide.'
 };
 
 export default function StoryPage() {
@@ -23,7 +23,7 @@ export default function StoryPage() {
             <span className="text-xs uppercase tracking-[0.3em] text-[var(--shukla-taupe-light)] font-sans block">
               Heritage Narrative
             </span>
-            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl uppercase tracking-wide font-light">
+            <h1 className="display-xl text-4xl sm:text-5xl md:text-6xl">
               Contemporary Indian Luxury Rooted in Craftsmanship
             </h1>
             <p className="font-serif italic text-lg sm:text-xl text-[var(--shukla-ivory)]/90 font-normal">
@@ -39,14 +39,14 @@ export default function StoryPage() {
               <span className="text-xs uppercase tracking-[0.2em] text-[var(--shukla-terracotta)] font-sans block font-semibold">
                 The Origin
               </span>
-              <h2 className="font-display text-2xl md:text-3xl uppercase text-[var(--shukla-charcoal)]">
+              <h2 className="display-lg text-2xl md:text-3xl text-[var(--shukla-charcoal)]">
                 Bhadohi, Uttar Pradesh
               </h2>
               <p className="font-serif italic text-base text-[var(--shukla-charcoal)]/80">
                 Known globally as India’s carpet hub, Bhadohi’s weaving history spans centuries along the Ganges River.
               </p>
               <p className="text-xs font-sans text-[var(--shukla-charcoal)]/85 leading-relaxed">
-                SUKLA RUGS was established to bridge this deep regional heritage with contemporary global interior architecture. We work directly with master weaver families in Bhadohi, upholding fair wages, organic material sourcing, and uncompromising quality standards.
+                SHUKLA RUGS was established to bridge this deep regional heritage with contemporary global interior architecture. We work directly with master weaver families in Bhadohi, upholding fair wages, organic material sourcing, and uncompromising quality standards.
               </p>
             </div>
 

@@ -18,10 +18,10 @@ export async function generateMetadata({ params }: ArticlePageProps) {
   const { slug } = await params;
   const article = MOCK_JOURNAL_ARTICLES.find((a) => a.slug === slug);
 
-  if (!article) return { title: 'Article Not Found | SUKLA RUGS' };
+  if (!article) return { title: 'Article Not Found | SHUKLA RUGS' };
 
   return {
-    title: `${article.title} | SUKLA RUGS Journal`,
+    title: `${article.title} | SHUKLA RUGS Journal`,
     description: article.excerpt
   };
 }
@@ -52,7 +52,7 @@ export default async function JournalArticlePage({ params }: ArticlePageProps) {
             <span className="text-xs uppercase tracking-[0.25em] text-[var(--shukla-terracotta)] font-sans block font-semibold">
               {article.category} • {article.readTime}
             </span>
-            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl uppercase tracking-wide text-[var(--shukla-charcoal)] leading-tight">
+            <h1 className="display-lg text-3xl sm:text-4xl md:text-5xl text-[var(--shukla-charcoal)] leading-tight">
               {article.title}
             </h1>
             <div className="flex items-center gap-3 text-xs font-sans text-[var(--shukla-taupe)] pt-2 border-t border-[var(--shukla-muted-border)]">

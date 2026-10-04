@@ -83,7 +83,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
             {product.metafields.technique || 'Handcrafted'} • {product.metafields.material || 'Wool'}
           </span>
           <Link href={`/products/${product.handle}`}>
-            <h3 className="font-display text-base tracking-wide text-[var(--shukla-charcoal)] group-hover:text-[var(--shukla-terracotta)] transition-colors mt-1">
+            <h3 className="heading text-base text-[var(--shukla-charcoal)] group-hover:text-[var(--shukla-terracotta)] transition-colors mt-1">
               {product.title}
             </h3>
           </Link>
@@ -95,7 +95,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
         </div>
 
         <div className="pt-3 border-t border-[var(--shukla-muted-border)]/60 flex items-center justify-between">
-          <span className="font-display text-sm font-medium text-[var(--shukla-charcoal)]">
+          <span className="nums text-sm font-medium text-[var(--shukla-charcoal)]">
             ${formattedPrice} <span className="text-[10px] font-sans text-[var(--shukla-taupe)] font-normal">USD</span>
           </span>
           <Link

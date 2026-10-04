@@ -57,7 +57,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
         <div className="relative w-full max-w-3xl bg-[var(--shukla-ivory)] border border-[var(--shukla-muted-border)] shadow-2xl p-6 md:p-10">
           {/* Header */}
           <div className="flex items-center justify-between pb-6 border-b border-[var(--shukla-muted-border)]">
-            <h2 className="font-display text-lg uppercase tracking-wider text-[var(--shukla-charcoal)]">Search Catalogue</h2>
+            <h2 className="heading text-lg text-[var(--shukla-charcoal)]">Search Catalogue</h2>
             <button
               onClick={onClose}
               className="p-2 text-[var(--shukla-charcoal)] hover:text-[var(--shukla-terracotta)] transition-colors"
@@ -129,7 +129,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
           {!loading && results.length > 0 && (
             <div className="mt-6 space-y-4 max-h-[50vh] overflow-y-auto pr-2">
               <span className="block text-[10px] uppercase tracking-widest text-[var(--shukla-taupe)] font-sans">
-                {results.length} Result{results.length > 1 ? 's' : ''} Found
+                <span className="nums">{results.length}</span> Result{results.length > 1 ? 's' : ''} Found
               </span>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {results.map((product) => (
@@ -154,11 +154,11 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
                       <span className="block text-[10px] uppercase tracking-widest text-[var(--shukla-taupe)] truncate">
                         {product.collection.title}
                       </span>
-                      <h4 className="font-display text-sm tracking-wide text-[var(--shukla-charcoal)] group-hover:text-[var(--shukla-terracotta)] transition-colors truncate">
+                      <h4 className="heading text-sm text-[var(--shukla-charcoal)] group-hover:text-[var(--shukla-terracotta)] transition-colors truncate">
                         {product.title}
                       </h4>
-                      <span className="block font-sans text-xs text-[var(--shukla-charcoal)]/80 mt-1 font-medium">
-                        From ${parseFloat(product.priceRange.minVariantPrice.amount).toLocaleString('en-US')}
+                      <span className="block text-xs text-[var(--shukla-charcoal)]/80 mt-1 font-medium">
+                        From <span className="nums">${parseFloat(product.priceRange.minVariantPrice.amount).toLocaleString('en-US')}</span>
                       </span>
                     </div>
                     <ArrowRight className="w-4 h-4 text-[var(--shukla-taupe)] group-hover:translate-x-1 group-hover:text-[var(--shukla-charcoal)] transition-all shrink-0 mr-2" />

@@ -1,0 +1,72 @@
+<header class="site-header" data-site-header>
+  <div class="page-width site-header__inner">
+    <details class="mobile-menu">
+      <summary class="icon-button" aria-label="{{ 'general.menu' | t }}">
+        {% render 'icon', name: 'menu' %}
+        <span class="visually-hidden">{{ 'general.menu' | t }}</span>
+      </summary>
+      <div class="mobile-menu__panel">
+        {% if section.settings.menu != blank %}
+          <nav aria-label="Mobile navigation">
+            <ul class="mobile-menu__list" role="list">
+              {% for link in section.settings.menu.links %}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {% endfor %}
+            </ul>
+          </nav>
+        {% endif %}
+      </div>
+    </details>
+
+    <nav class="site-nav site-nav--left" aria-label="Primary navigation">
+      {% if section.settings.menu != blank %}
+        {% for link in section.settings.menu.links limit: 4 %}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {% endfor %}
+      {% endif %}
+    </nav>
+
+    {% assign theme_brand_name = settings.brand_name | default: shop.name %}
+    <a class="site-header__logo" href="{{ routes.root_url }}" aria-label="{{ theme_brand_name }} home">
+      {% if settings.logo != blank %}
+        {{ settings.logo | image_url: width: 360 | image_tag: widths: '180, 240, 360', loading: 'eager', alt: shop.name }}
+      {% else %}
+        <span class="site-header__wordmark">{{ theme_brand_name }}</span>
+      {% endif %}
+      <span class="site-header__location">{{ section.settings.location_label | escape }}</span>
+    </a>
+
+    <div class="site-header__actions">
+      <a class="icon-button" href="{{ routes.search_url }}" aria-label="{{ 'general.search' | t }}">
+        {% render 'icon', name: 'search' %}
+      </a>
+      <a class="icon-button" href="{{ routes.account_url }}" aria-label="{{ 'general.account' | t }}">
+        {% render 'icon', name: 'account' %}
+      </a>
+      <a class="icon-button site-header__cart" href="{{ routes.cart_url }}" aria-label="{{ 'general.cart' | t }}" data-cart-toggle>
+        {% render 'icon', name: 'bag' %}
+        <span class="cart-count" data-cart-count>{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Navigation menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "text",
+      "id": "location_label",
+      "label": "Location label",
+      "default": "Bhadohi · India"
+    }
+  ]
+}
+{% endschema %}

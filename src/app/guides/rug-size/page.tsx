@@ -85,7 +85,7 @@ export default function RugSizeGuidePage() {
             <span className="text-xs uppercase tracking-[0.25em] text-[var(--shukla-taupe)] font-sans block">
               Architectural Dimensioning
             </span>
-            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl uppercase tracking-wide text-[var(--shukla-charcoal)]">
+            <h1 className="display-lg text-3xl sm:text-4xl md:text-5xl text-[var(--shukla-charcoal)]">
               Interactive Rug Size Guide
             </h1>
             <p className="font-serif italic text-base md:text-lg text-[var(--shukla-charcoal)]/80 max-w-2xl mx-auto">
@@ -130,7 +130,7 @@ export default function RugSizeGuidePage() {
           {/* Tab Content Display */}
           <div className="space-y-8 bg-[var(--shukla-cream)] border border-[var(--shukla-muted-border)] p-8 sm:p-12 shadow-subtle">
             <div className="space-y-2">
-              <h2 className="font-display text-2xl uppercase tracking-wide text-[var(--shukla-charcoal)]">
+              <h2 className="display-lg text-2xl text-[var(--shukla-charcoal)]">
                 {activeGuide.title}
               </h2>
               <p className="font-serif italic text-sm text-[var(--shukla-charcoal)]/80">
@@ -141,7 +141,7 @@ export default function RugSizeGuidePage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
               {activeGuide.options.map((opt) => (
                 <div key={opt.size} className="p-6 bg-[var(--shukla-ivory)] border border-[var(--shukla-muted-border)] space-y-3">
-                  <span className="block font-display text-xl font-bold text-[var(--shukla-charcoal)]">
+                  <span className="nums block text-xl font-semibold text-[var(--shukla-charcoal)]">
                     {opt.size}
                   </span>
                   <span className="block text-xs uppercase tracking-wider text-[var(--shukla-terracotta)] font-sans font-semibold">

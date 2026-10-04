@@ -1,0 +1,13 @@
+<section class="home-brand-statement page-width"><p class="eyebrow">{{ section.settings.eyebrow | escape }}</p><h2>{{ section.settings.heading | escape }}</h2><p>{{ section.settings.body | escape }}</p><div class="home-brand-statement__rule"></div></section>
+
+{% schema %}
+{
+  "name": "Brand statement",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Shukla Rugs ethos" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Every rug tells a story." },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "In the historic looms of Bhadohi, rug making is an enduring discipline of patience. Individually tied knots, hand-dyed yarns, and generations of inherited mastery yield textiles of quiet luxury and permanent resonance." }
+  ],
+  "presets": [{ "name": "Brand statement" }]
+}
+{% endschema %}

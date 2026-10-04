@@ -1,0 +1,48 @@
+<section class="journal-page page-width">
+  <header class="journal-page__header">
+    <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+    <h1>{{ blog.title | escape }}</h1>
+    {% if blog.description != blank %}<div class="rte">{{ blog.description }}</div>{% endif %}
+  </header>
+
+  {% paginate blog.articles by section.settings.articles_per_page %}
+    {% if blog.articles_count > 0 %}
+      <div class="journal-grid">
+        {% for article in blog.articles %}
+          <article class="journal-card">
+            <a class="journal-card__image" href="{{ article.url }}">
+              {% if article.image != blank %}
+                {{ article.image | image_url: width: 1000 | image_tag: widths: '400, 700, 1000', sizes: '(min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw', loading: 'lazy', alt: article.image.alt | default: article.title }}
+              {% endif %}
+            </a>
+            <div class="journal-card__content">
+              <p class="journal-card__meta">{{ article.published_at | date: '%B %d, %Y' }}{% if article.author != blank %} · {{ article.author | escape }}{% endif %}</p>
+              <h2><a href="{{ article.url }}">{{ article.title | escape }}</a></h2>
+              <p>{{ article.excerpt_or_content | strip_html | truncatewords: 28 }}</p>
+              <a class="journal-card__link" href="{{ article.url }}">Read article →</a>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+      {% if paginate.pages > 1 %}
+        <nav class="pagination" aria-label="Journal pagination">
+          {% if paginate.previous %}<a href="{{ paginate.previous.url }}" rel="prev">Previous</a>{% endif %}
+          <span>Page {{ paginate.current_page }} of {{ paginate.pages }}</span>
+          {% if paginate.next %}<a href="{{ paginate.next.url }}" rel="next">Next</a>{% endif %}
+        </nav>
+      {% endif %}
+    {% else %}
+      <div class="collection-empty"><h2>No journal articles yet</h2><p>Publish an article in this blog to begin the journal.</p></div>
+    {% endif %}
+  {% endpaginate %}
+</section>
+
+{% schema %}
+{
+  "name": "Main blog",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Editorial publications" },
+    { "type": "range", "id": "articles_per_page", "label": "Articles per page", "min": 3, "max": 24, "step": 3, "default": 9 }
+  ]
+}
+{% endschema %}

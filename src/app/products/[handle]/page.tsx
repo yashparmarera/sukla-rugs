@@ -15,13 +15,13 @@ export async function generateMetadata({ params }: ProductPageProps) {
   const { handle } = await params;
   const product = await getProductByHandle(handle);
 
-  if (!product) return { title: 'Product Not Found | SUKLA RUGS' };
+  if (!product) return { title: 'Product Not Found | SHUKLA RUGS' };
 
   return {
-    title: `${product.title} | SUKLA RUGS`,
+    title: `${product.title} | SHUKLA RUGS`,
     description: product.description,
     openGraph: {
-      title: `${product.title} | SUKLA RUGS`,
+      title: `${product.title} | SHUKLA RUGS`,
       description: product.description,
       images: [{ url: product.featuredImage.url }]
     }
@@ -51,7 +51,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
     sku: product.variants[0]?.id || product.id,
     brand: {
       '@type': 'Brand',
-      name: 'SUKLA RUGS'
+      name: 'SHUKLA RUGS'
     },
     offers: {
       '@type': 'Offer',

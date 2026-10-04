@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+    <meta property="og:type" content="{% if template.name == 'product' %}product{% elsif template.name == 'article' %}article{% else %}website{% endif %}">
+    <meta property="og:title" content="{{ page_title | escape }}">
+    <meta property="og:description" content="{{ page_description | default: shop.description | escape }}">
+    <meta property="og:url" content="{{ canonical_url }}">
+    {% if page_image %}<meta property="og:image" content="https:{{ page_image | image_url: width: 1200 }}">{% endif %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ page_title | escape }}">
+    <meta name="twitter:description" content="{{ page_description | default: shop.description | escape }}">
+
+    {% assign theme_brand_name = settings.brand_name | default: shop.name %}
+    <title>
+      {{ page_title }}{% unless page_title contains theme_brand_name %} | {{ theme_brand_name }}{% endunless %}
+    </title>
+
+    {% if settings.favicon != blank %}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 64 }}">
+    {% endif %}
+
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+    <style>
+      {{ settings.font_display | font_face }}
+      {{ settings.font_body | font_face }}
+
+      :root {
+        --shukla-charcoal: {{ settings.color_charcoal | default: '#211D1B' }};
+        --shukla-ivory: {{ settings.color_ivory | default: '#F3ECE4' }};
+        --shukla-cream: {{ settings.color_cream | default: '#FAF7F2' }};
+        --shukla-terracotta: {{ settings.color_terracotta | default: '#BC8A5A' }};
+        --font-display: {{ settings.font_display.family | default: 'Cormorant Garamond' | json }}, 'Cormorant Garamond', Georgia, serif;
+        --font-body: {{ settings.font_body.family | default: 'Inter' | json }}, Inter, system-ui, sans-serif;
+        --shukla-page-width: {{ settings.page_width | default: 1440 }}px;
+        --radius-button: {% if settings.button_style == 'soft' %}4px{% else %}0{% endif %};
+      }
+    </style>
+    {{ content_for_header }}
+    {% if template.name == 'product' and product != blank %}
+      <script type="application/ld+json">
+        {{ product | structured_data }}
+      </script>
+    {% elsif template.name == 'article' and article != blank %}
+      <script type="application/ld+json">
+        {{ article | structured_data }}
+      </script>
+    {% endif %}
+  </head>
+
+  <body class="template-{{ template.name | handle }}">
+    <a class="skip-link" href="#MainContent">Skip to content</a>
+
+    {% sections 'header-group' %}
+
+    <main id="MainContent" role="main" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+
+    {% sections 'footer-group' %}
+
+    <script src="{{ 'theme.js' | asset_url }}" defer></script>
+    <script src="{{ 'brand-entrance.js' | asset_url }}" defer></script>
+    <script src="{{ 'hero.js' | asset_url }}" defer></script>
+    <script src="{{ 'product.js' | asset_url }}" defer></script>
+    <script src="{{ 'cart.js' | asset_url }}" defer></script>
+    <script src="{{ 'search.js' | asset_url }}" defer></script>
+  </body>
+</html>

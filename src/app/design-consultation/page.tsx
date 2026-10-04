@@ -39,7 +39,7 @@ export default function DesignConsultationPage() {
             <span className="text-xs uppercase tracking-[0.25em] text-[var(--shukla-taupe)] font-sans block">
               Complimentary Concierge
             </span>
-            <h1 className="font-display text-3xl sm:text-4xl uppercase tracking-wide text-[var(--shukla-charcoal)]">
+            <h1 className="display-lg text-3xl sm:text-4xl text-[var(--shukla-charcoal)]">
               Bespoke Design Consultation
             </h1>
             <p className="font-serif italic text-base text-[var(--shukla-charcoal)]/80">
@@ -52,11 +52,11 @@ export default function DesignConsultationPage() {
               <div className="w-12 h-12 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto">
                 <Check className="w-6 h-6" />
               </div>
-              <h2 className="font-display text-2xl uppercase tracking-wider text-[var(--shukla-charcoal)]">
+              <h2 className="display-lg text-2xl text-[var(--shukla-charcoal)]">
                 Consultation Request Received
               </h2>
               <p className="font-serif italic text-base text-[var(--shukla-charcoal)]/80">
-                Thank you, {formData.name}. A senior SUKLA RUGS design concierge will review your architectural requirements and contact you within 24 business hours.
+                Thank you, {formData.name}. A senior SHUKLA RUGS design concierge will review your architectural requirements and contact you within 24 business hours.
               </p>
             </div>
           ) : (

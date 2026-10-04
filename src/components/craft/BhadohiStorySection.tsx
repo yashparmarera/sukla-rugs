@@ -24,11 +24,11 @@ export const BhadohiStorySection: React.FC = () => {
             {/* Overlapping Badge Card */}
             <div className="absolute -bottom-6 -right-6 hidden sm:block p-6 bg-[var(--shukla-cream)] text-[var(--shukla-charcoal)] border border-white/20 max-w-xs shadow-2xl">
               <KnotGlyph size="sm" className="text-[var(--shukla-terracotta)] mb-2" />
-              <span className="block font-display text-sm uppercase tracking-wider font-semibold">
+              <span className="block heading text-sm font-medium">
                 Bhadohi Guild Standard
               </span>
               <p className="text-xs font-serif italic text-[var(--shukla-charcoal)]/80 mt-1">
-                Up to 1,200,000 individually tied knots per rug over 16 weeks of dedicated hand weaving.
+                Up to <span className="nums">1,200,000</span> individually tied knots per rug over <span className="nums">16</span> weeks of dedicated hand weaving.
               </p>
             </div>
           </div>
@@ -40,7 +40,7 @@ export const BhadohiStorySection: React.FC = () => {
               <span>Artisan Heritage • Uttar Pradesh, India</span>
             </div>
 
-            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl uppercase tracking-wide font-light leading-tight">
+            <h2 className="display-lg text-3xl sm:text-4xl md:text-5xl leading-tight">
               Bhadohi: The Heart of Indian Rug Weaving
             </h2>
 
@@ -49,7 +49,7 @@ export const BhadohiStorySection: React.FC = () => {
             </p>
 
             <p className="text-xs font-sans text-[var(--shukla-ivory)]/80 leading-relaxed space-y-3">
-              Every SUKLA RUG begins with natural raw materials—high-grade New Zealand wool, Bikaner long-staple fibers, and organic jute. Through our 7-stage craft process, raw fibers undergo hand-carding, natural vat-dyeing, precision warping, meticulous knotting, and sun washing.
+              Every SHUKLA RUG begins with natural raw materials—high-grade New Zealand wool, Bikaner long-staple fibers, and organic jute. Through our 7-stage craft process, raw fibers undergo hand-carding, natural vat-dyeing, precision warping, meticulous knotting, and sun washing.
             </p>
 
             <div className="pt-4 flex flex-wrap items-center gap-4">

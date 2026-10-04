@@ -30,8 +30,8 @@ export default function TradePage() {
             <span className="text-xs uppercase tracking-[0.25em] text-[var(--shukla-taupe)] font-sans block">
               Architects & Interior Designers
             </span>
-            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl uppercase tracking-wide text-[var(--shukla-charcoal)]">
-              SUKLA Trade Program
+            <h1 className="display-lg text-3xl sm:text-4xl md:text-5xl text-[var(--shukla-charcoal)]">
+              SHUKLA Trade Program
             </h1>
             <p className="font-serif italic text-base md:text-lg text-[var(--shukla-charcoal)]/80">
               Exclusive net pricing, custom strike-off swatches, and dedicated project management for accredited interior designers.
@@ -40,22 +40,22 @@ export default function TradePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="p-6 bg-[var(--shukla-cream)] border border-[var(--shukla-muted-border)] space-y-2">
-              <span className="block font-display text-lg uppercase">Exclusive Trade Net Pricing</span>
+              <span className="block heading text-lg">Exclusive Trade Net Pricing</span>
               <p className="text-xs font-sans text-[var(--shukla-charcoal)]/80">Tiered net pricing across all standard collections and custom orders.</p>
             </div>
             <div className="p-6 bg-[var(--shukla-cream)] border border-[var(--shukla-muted-border)] space-y-2">
-              <span className="block font-display text-lg uppercase">Complimentary Strike-Off Swatches</span>
+              <span className="block heading text-lg">Complimentary Strike-Off Swatches</span>
               <p className="text-xs font-sans text-[var(--shukla-charcoal)]/80">12x12 inch hand-woven strike-off memos delivered within 10 days for client approval.</p>
             </div>
             <div className="p-6 bg-[var(--shukla-cream)] border border-[var(--shukla-muted-border)] space-y-2">
-              <span className="block font-display text-lg uppercase">Dedicated Loom Concierge</span>
+              <span className="block heading text-lg">Dedicated Loom Concierge</span>
               <p className="text-xs font-sans text-[var(--shukla-charcoal)]/80">Direct communication with our Bhadohi loom manager for progress updates.</p>
             </div>
           </div>
 
           {/* Trade Application Form */}
           <div className="bg-[var(--shukla-cream)] border border-[var(--shukla-muted-border)] p-8 sm:p-12 shadow-subtle space-y-6">
-            <h2 className="font-display text-2xl uppercase tracking-wide text-[var(--shukla-charcoal)]">
+            <h2 className="display-lg text-2xl text-[var(--shukla-charcoal)]">
               Apply for Trade Membership
             </h2>
 

@@ -42,10 +42,10 @@ export const Header: React.FC = () => {
   return (
     <>
       {/* Top Announcement Bar */}
-      <div className="bg-[var(--shukla-charcoal)] text-[var(--shukla-ivory)] py-2 px-4 text-center text-[11px] font-sans uppercase tracking-[0.2em] border-b border-white/10 relative z-40">
+      <div className="bg-[var(--shukla-charcoal)] text-[var(--shukla-ivory)] py-2 px-4 text-center text-[11px] font-sans uppercase tracking-[0.1em] border-b border-white/10 relative z-40">
         <div className="editorial-container flex justify-between items-center">
-          <span className="hidden md:inline text-[var(--shukla-taupe)]">10% cashback on first purchase</span>
-          <span>Complimentary Global White-Glove Delivery on orders over $2,500</span>
+          <span className="hidden md:inline text-[var(--shukla-taupe)]"><span className="nums">10%</span> cashback on first purchase</span>
+          <span>Complimentary Global White-Glove Delivery on orders over <span className="nums">$2,500</span></span>
           <span className="hidden md:inline text-[var(--shukla-taupe)]">AUTHENTIC HANDCRAFTED LUXURY</span>
         </div>
       </div>
@@ -70,7 +70,7 @@ export const Header: React.FC = () => {
           </button>
 
           {/* Left Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8 text-xs font-sans tracking-[0.18em] uppercase text-[var(--shukla-charcoal)]">
+          <nav className="hidden lg:flex items-center space-x-8 text-sm font-sans tracking-[0.01em] text-[var(--shukla-charcoal)]">
             
             {/* SHOP Dropdown */}
             <div
@@ -84,7 +84,7 @@ export const Header: React.FC = () => {
               {activeDropdown === 'shop' && (
                 <div className="absolute top-full left-0 w-72 bg-[var(--shukla-ivory)] border border-[var(--shukla-muted-border)] shadow-xl p-6 space-y-3 z-50">
                   <div className="border-b border-[var(--shukla-muted-border)] pb-2 mb-3">
-                    <span className="text-[10px] text-[var(--shukla-taupe)] tracking-widest block">Collections</span>
+                    <span className="eyebrow text-[10px] text-[var(--shukla-taupe)] block">Collections</span>
                   </div>
                   <Link href="/shop" className="block text-xs hover:text-[var(--shukla-terracotta)] font-semibold">
                     All Rugs
@@ -172,8 +172,8 @@ export const Header: React.FC = () => {
           <Link href="/" className="flex min-w-0 flex-col items-center justify-self-center group">
             <div className="flex min-w-0 items-center gap-1.5 md:gap-2">
               <KnotGlyph size="sm" className="text-[var(--shukla-terracotta)] group-hover:rotate-45 transition-transform duration-500" />
-              <span className="whitespace-nowrap font-display text-base md:text-xl tracking-[0.16em] md:tracking-[0.25em] font-semibold text-[var(--shukla-charcoal)] uppercase">
-                SUKLA RUGS
+              <span className="whitespace-nowrap font-display text-base md:text-xl tracking-[0.16em] md:tracking-[0.22em] font-medium text-[var(--shukla-charcoal)] uppercase">
+                SHUKLA RUGS
               </span>
               <KnotGlyph size="sm" className="text-[var(--shukla-terracotta)] group-hover:-rotate-45 transition-transform duration-500" />
             </div>
@@ -186,7 +186,7 @@ export const Header: React.FC = () => {
           <div className="flex items-center justify-self-end space-x-2.5 sm:space-x-5 text-[var(--shukla-charcoal)]">
             <Link
               href="/trade"
-              className="hidden xl:inline-block text-[11px] font-sans tracking-[0.15em] uppercase hover:text-[var(--shukla-terracotta)] transition-colors border-b border-transparent hover:border-[var(--shukla-terracotta)] pb-0.5"
+              className="hidden xl:inline-block text-sm font-sans tracking-[0.01em] hover:text-[var(--shukla-terracotta)] transition-colors border-b border-transparent hover:border-[var(--shukla-terracotta)] pb-0.5"
             >
               Trade & Designers
             </Link>
@@ -214,7 +214,7 @@ export const Header: React.FC = () => {
             >
               <ShoppingBag className="w-5 h-5 stroke-[1.5]" />
               {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-[var(--shukla-terracotta)] text-white text-[9px] font-mono font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                <span className="nums absolute -top-1 -right-1 bg-[var(--shukla-terracotta)] text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                   {cartCount}
                 </span>
               )}
@@ -227,15 +227,15 @@ export const Header: React.FC = () => {
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-50 lg:hidden flex flex-col bg-[var(--shukla-ivory)] p-6 overflow-y-auto">
           <div className="flex justify-between items-center pb-6 border-b border-[var(--shukla-muted-border)]">
-            <span className="font-display tracking-widest text-sm">SUKLA RUGS</span>
+            <span className="font-display tracking-[0.22em] text-sm uppercase font-medium">SHUKLA RUGS</span>
             <button onClick={() => setMobileMenuOpen(false)} aria-label="Close menu">
               <X className="w-6 h-6 text-[var(--shukla-charcoal)]" />
             </button>
           </div>
 
-          <nav className="py-8 space-y-6 text-sm font-sans tracking-[0.18em] uppercase text-[var(--shukla-charcoal)]">
+          <nav className="py-8 space-y-6 text-sm font-sans tracking-[0.01em] text-[var(--shukla-charcoal)]">
             <div className="space-y-3">
-              <span className="block text-[10px] text-[var(--shukla-taupe)] tracking-widest">Collections</span>
+              <span className="eyebrow block text-[10px] text-[var(--shukla-taupe)]">Collections</span>
               <Link href="/shop" onClick={() => setMobileMenuOpen(false)} className="block font-semibold">
                 All Rugs
               </Link>
@@ -260,7 +260,7 @@ export const Header: React.FC = () => {
             </div>
 
             <div className="border-t border-[var(--shukla-muted-border)] pt-6 space-y-3">
-              <span className="block text-[10px] text-[var(--shukla-taupe)] tracking-widest">Discover & Craft</span>
+              <span className="eyebrow block text-[10px] text-[var(--shukla-taupe)]">Discover &amp; Craft</span>
               <Link href="/story" onClick={() => setMobileMenuOpen(false)} className="block text-xs">
                 Our Story
               </Link>
@@ -276,7 +276,7 @@ export const Header: React.FC = () => {
             </div>
 
             <div className="border-t border-[var(--shukla-muted-border)] pt-6 space-y-3">
-              <span className="block text-[10px] text-[var(--shukla-taupe)] tracking-widest">Client Services</span>
+              <span className="eyebrow block text-[10px] text-[var(--shukla-taupe)]">Client Services</span>
               <Link href="/find-your-rug" onClick={() => setMobileMenuOpen(false)} className="block text-xs text-[var(--shukla-terracotta)] font-bold">
                 Find Your Rug Quiz
               </Link>

@@ -1,4 +1,4 @@
-/* SUKLA RUGS - Ultra-Premium Design System Tokens */
+/* SHUKLA RUGS - Ultra-Premium Design System Tokens */
 
 :root {
   /* Core Brand Colors */
@@ -22,10 +22,14 @@
   --accent-loop: #49201B;
   --accent-jute: #3F9196;
 
-  /* Typography */
-  --font-display: 'Cinzel', 'Cormorant Garamond', Georgia, serif;
-  --font-serif: 'Ibarra Real Nova', 'Cormorant Garamond', Georgia, serif;
-  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  /* Typography
+     Three-family system, each loaded via next/font (see app/layout.tsx):
+     - display: Jost (modern geometric/architectural sans)
+     - serif:   Ibarra Real Nova (editorial storytelling + hero headline)
+     - sans:    Inter (UI, body, and all functional numbers) */
+  --font-display: var(--font-jost), 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: var(--font-ibarra), Georgia, 'Times New Roman', serif;
+  --font-sans: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 
   /* Elevational Radii & Shadows - Restrained for Luxury */
   --radius-none: 0px;

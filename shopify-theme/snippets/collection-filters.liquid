@@ -1,0 +1,35 @@
+{% assign filters_active = false %}
+{% for filter in collection.filters %}
+  {% if filter.active_values.size > 0 %}{% assign filters_active = true %}{% endif %}
+{% endfor %}
+
+<div class="collection-filters" data-collection-filters>
+  {% for filter in collection.filters %}
+    <details class="collection-filter"{% if filter.active_values.size > 0 %} open{% endif %}>
+      <summary>{{ filter.label | escape }}</summary>
+      <div class="collection-filter__options">
+        {% if filter.type == 'price_range' %}
+          <label>
+            <span>{{ filter.min_value.label }}</span>
+            <input name="{{ filter.min_value.param_name }}" type="number" min="0" max="{{ filter.range_max | money_without_currency | replace: ',', '' }}" placeholder="0">
+          </label>
+          <label>
+            <span>{{ filter.max_value.label }}</span>
+            <input name="{{ filter.max_value.param_name }}" type="number" min="0" max="{{ filter.range_max | money_without_currency | replace: ',', '' }}" placeholder="{{ filter.range_max | money_without_currency }}">
+          </label>
+        {% else %}
+          {% for value in filter.values %}
+            <a class="collection-filter__value{% if value.active %} is-active{% endif %}" href="{{ value.url_to_add }}">
+              <span>{{ value.label | escape }}</span>
+              <span>{{ value.count }}</span>
+            </a>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </details>
+  {% endfor %}
+
+  {% if filters_active %}
+    <a class="collection-filters__clear" href="{{ collection.url }}">Clear all filters</a>
+  {% endif %}
+</div>

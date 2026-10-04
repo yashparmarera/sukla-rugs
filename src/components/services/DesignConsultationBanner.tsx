@@ -15,7 +15,7 @@ export const DesignConsultationBanner: React.FC = () => {
               <span>Complimentary Concierge & Trade Services</span>
             </div>
 
-            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-[var(--shukla-charcoal)] uppercase">
+            <h2 className="display-lg text-2xl sm:text-3xl md:text-4xl text-[var(--shukla-charcoal)]">
               Need Assistance Specifying the Perfect Rug?
             </h2>
 

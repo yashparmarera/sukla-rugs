@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "main404": {
+      "type": "main-placeholder",
+      "settings": {
+        "eyebrow": "404",
+        "heading": "The page has moved",
+        "body": "<p>Return to the Shukla Rugs home page to continue exploring.</p>"
+      }
+    }
+  },
+  "order": [
+    "main404"
+  ]
+}

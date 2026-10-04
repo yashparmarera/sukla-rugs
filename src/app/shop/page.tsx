@@ -18,7 +18,7 @@ interface ShopPageProps {
 }
 
 export const metadata = {
-  title: 'Shop All Handcrafted Rugs | SUKLA RUGS',
+  title: 'Shop All Handcrafted Rugs | SHUKLA RUGS',
   description: 'Browse our complete catalogue of handcrafted Indian rugs. Filter by collection, material, color family, room, and size. White-glove delivery worldwide.'
 };
 
@@ -49,7 +49,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
               <KnotGlyph size="sm" />
               <span>Master Catalogue</span>
             </div>
-            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl uppercase tracking-wide text-[var(--shukla-charcoal)]">
+            <h1 className="display-lg text-3xl sm:text-4xl md:text-5xl text-[var(--shukla-charcoal)]">
               All Handcrafted Rugs
             </h1>
             <p className="font-serif italic text-base md:text-lg text-[var(--shukla-charcoal)]/80">
@@ -66,7 +66,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
           {products.length === 0 ? (
             <div className="py-24 text-center space-y-4 border border-[var(--shukla-muted-border)] bg-[var(--shukla-cream)] my-8">
               <KnotGlyph size="md" className="text-[var(--shukla-taupe)]" />
-              <h2 className="font-display text-xl uppercase tracking-wider text-[var(--shukla-charcoal)]">
+              <h2 className="heading text-xl text-[var(--shukla-charcoal)]">
                 No Rugs Match Your Filter Criteria
               </h2>
               <p className="font-serif italic text-sm text-[var(--shukla-charcoal)]/70 max-w-md mx-auto">

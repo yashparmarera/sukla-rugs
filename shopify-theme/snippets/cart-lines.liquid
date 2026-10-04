@@ -1,0 +1,27 @@
+{% for item in cart.items %}
+  <li class="cart-line" data-cart-line data-line-key="{{ item.key }}">
+    <a class="cart-line__image" href="{{ item.url }}">
+      {% if item.image != blank %}
+        {{ item.image | image_url: width: 220 | image_tag: widths: '110, 160, 220', sizes: '90px', alt: item.image.alt | default: item.product.title }}
+      {% endif %}
+    </a>
+    <div class="cart-line__content">
+      <div class="cart-line__topline">
+        <div>
+          <p class="cart-line__vendor">{{ item.product.vendor | default: shop.name | escape }}</p>
+          <h3><a href="{{ item.url }}">{{ item.product.title | escape }}</a></h3>
+          {% unless item.product.has_only_default_variant %}<p>{{ item.variant.title | escape }}</p>{% endunless %}
+        </div>
+        <button class="cart-line__remove" type="button" data-cart-remove data-line-key="{{ item.key }}" aria-label="Remove {{ item.product.title | escape }}">×</button>
+      </div>
+      <div class="cart-line__bottomline">
+        <div class="cart-line__quantity" aria-label="Quantity for {{ item.product.title | escape }}">
+          <button type="button" data-cart-decrease data-line-key="{{ item.key }}" aria-label="Decrease quantity">−</button>
+          <span data-cart-quantity>{{ item.quantity }}</span>
+          <button type="button" data-cart-increase data-line-key="{{ item.key }}" aria-label="Increase quantity">+</button>
+        </div>
+        <span class="cart-line__price">{{ item.final_line_price | money }}</span>
+      </div>
+    </div>
+  </li>
+{% endfor %}

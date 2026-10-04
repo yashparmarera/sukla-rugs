@@ -17,10 +17,10 @@ export async function generateMetadata({ params }: CollectionPageProps) {
   const { handle } = await params;
   const collection = await getCollectionByHandle(handle);
 
-  if (!collection) return { title: 'Collection Not Found | SUKLA RUGS' };
+  if (!collection) return { title: 'Collection Not Found | SHUKLA RUGS' };
 
   return {
-    title: `${collection.title} | SUKLA RUGS`,
+    title: `${collection.title} | SHUKLA RUGS`,
     description: collection.description
   };
 }
@@ -62,7 +62,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
             >
               Collection Taxonomy
             </span>
-            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl uppercase tracking-wide">
+            <h1 className="display-xl text-4xl sm:text-5xl md:text-6xl">
               {collection.title}
             </h1>
             <p className="font-serif italic text-lg md:text-xl text-[var(--shukla-ivory)]/90 leading-relaxed">
@@ -74,8 +74,8 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
         {/* Collection Products Grid */}
         <section className="py-16 editorial-container">
           <div className="flex justify-between items-center pb-6 border-b border-[var(--shukla-muted-border)] mb-8 text-xs font-sans">
-            <span className="uppercase tracking-widest text-[var(--shukla-taupe)]">
-              Displaying <strong className="text-[var(--shukla-charcoal)]">{products.length}</strong> Designs
+            <span className="uppercase tracking-[0.1em] text-[var(--shukla-taupe)]">
+              Displaying <strong className="nums text-[var(--shukla-charcoal)]">{products.length}</strong> Designs
             </span>
             <div className="flex items-center gap-2">
               <KnotGlyph size="sm" className="text-[var(--shukla-terracotta)]" />

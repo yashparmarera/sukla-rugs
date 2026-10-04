@@ -7,8 +7,8 @@ import { SectionRule } from '@/components/ui/SectionRule';
 import { Button } from '@/components/ui/Button';
 
 export const metadata = {
-  title: 'The 7 Craft Stages of Master Knotting | SUKLA RUGS',
-  description: 'Trace the 14-week journey of a Sukla rug from raw fiber sourcing and vat dyeing to master hand knotting, shearing, and sun washing in Bhadohi, UP.'
+  title: 'The 7 Craft Stages of Master Knotting | SHUKLA RUGS',
+  description: 'Trace the 14-week journey of a Shukla rug from raw fiber sourcing and vat dyeing to master hand knotting, shearing, and sun washing in Bhadohi, UP.'
 };
 
 const STAGES = [
@@ -58,7 +58,7 @@ const STAGES = [
     num: '07',
     title: 'Hand Shearing & Final Quality Check',
     subtitle: 'Precision Sculpting & Edge Binding',
-    description: 'Master shears sculpt the pile height to exact millimeter tolerances, carving design outlines for tactile definition. Every selvage edge is hand-bound before receiving the SUKLA RUGS stamp of authenticity.',
+    description: 'Master shears sculpt the pile height to exact millimeter tolerances, carving design outlines for tactile definition. Every selvage edge is hand-bound before receiving the SHUKLA RUGS stamp of authenticity.',
     image: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=85'
   }
 ];
@@ -77,7 +77,7 @@ export default function ProcessPage() {
               <KnotGlyph size="sm" />
               <span>Artisanal Alchemy</span>
             </div>
-            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl uppercase tracking-wide text-[var(--shukla-charcoal)]">
+            <h1 className="display-lg text-3xl sm:text-4xl md:text-5xl text-[var(--shukla-charcoal)]">
               The 7 Stages of Master Knotting
             </h1>
             <p className="font-serif italic text-base md:text-lg text-[var(--shukla-charcoal)]/80">
@@ -104,7 +104,7 @@ export default function ProcessPage() {
                       sizes="(max-width: 1024px) 100vw, 50vw"
                       className="object-cover"
                     />
-                    <span className="absolute top-4 left-4 font-display text-2xl font-bold px-3 py-1 bg-[var(--shukla-charcoal)] text-white">
+                    <span className="nums absolute top-4 left-4 text-2xl font-semibold px-3 py-1 bg-[var(--shukla-charcoal)] text-white">
                       {stage.num}
                     </span>
                   </div>
@@ -112,10 +112,10 @@ export default function ProcessPage() {
 
                 {/* Content */}
                 <div className={`lg:col-span-6 space-y-4 ${idx % 2 === 1 ? 'lg:order-1' : 'lg:order-2'}`}>
-                  <span className="block text-xs uppercase tracking-[0.2em] text-[var(--shukla-terracotta)] font-sans font-semibold">
-                    Stage {stage.num}
+                  <span className="eyebrow block text-xs text-[var(--shukla-terracotta)]">
+                    Stage <span className="nums">{stage.num}</span>
                   </span>
-                  <h2 className="font-display text-2xl md:text-3xl text-[var(--shukla-charcoal)] uppercase tracking-wide">
+                  <h2 className="display-lg text-2xl md:text-3xl text-[var(--shukla-charcoal)]">
                     {stage.title}
                   </h2>
                   <h3 className="font-serif italic text-base text-[var(--shukla-taupe)]">
@@ -133,7 +133,7 @@ export default function ProcessPage() {
 
           {/* Call to action */}
           <div className="text-center max-w-xl mx-auto space-y-6">
-            <h3 className="font-display text-2xl uppercase tracking-wider">Experience the Finished Masterpieces</h3>
+            <h3 className="display-lg text-2xl">Experience the Finished Masterpieces</h3>
             <p className="font-serif italic text-sm text-[var(--shukla-charcoal)]/80">
               Browse our collections to see how these 7 craft stages coalesce into enduring floor textiles.
             </p>

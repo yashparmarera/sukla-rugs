@@ -157,7 +157,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product, r
                 {product.metafields.technique || 'Handcrafted'} • {product.metafields.origin_region || 'Bhadohi, India'}
               </span>
 
-              <h1 className="font-display text-3xl sm:text-4xl text-[var(--shukla-charcoal)] uppercase tracking-wide font-normal">
+              <h1 className="display-lg text-3xl sm:text-4xl text-[var(--shukla-charcoal)]">
                 {product.title}
               </h1>
 
@@ -168,7 +168,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product, r
               )}
 
               <div className="pt-2 flex items-baseline justify-between">
-                <span className="font-display text-2xl md:text-3xl font-normal text-[var(--shukla-charcoal)]">
+                <span className="nums text-2xl md:text-3xl font-medium text-[var(--shukla-charcoal)]">
                   ${formattedPrice} <span className="text-xs font-sans font-normal text-[var(--shukla-taupe)]">USD</span>
                 </span>
                 <span className="text-xs font-sans text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 font-medium">
@@ -203,7 +203,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product, r
                     }`}
                   >
                     <span>{v.title}</span>
-                    <span className="font-mono text-[11px] text-[var(--shukla-taupe)]">
+                    <span className="nums text-[11px] text-[var(--shukla-taupe)]">
                       ${parseFloat(v.price.amount).toLocaleString()}
                     </span>
                   </button>
@@ -350,7 +350,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product, r
         {relatedProducts.length > 0 && (
           <section className="mt-24 pt-16 border-t border-[var(--shukla-muted-border)]">
             <div className="flex justify-between items-center mb-8">
-              <h2 className="font-display text-2xl uppercase tracking-wide text-[var(--shukla-charcoal)]">
+              <h2 className="display-lg text-2xl text-[var(--shukla-charcoal)]">
                 You May Also Appreciate
               </h2>
               <Link href="/shop" className="text-xs uppercase tracking-widest text-[var(--shukla-terracotta)] font-semibold hover:underline">
@@ -370,10 +370,10 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product, r
       {showStickyBar && (
         <div className="fixed bottom-0 inset-x-0 z-40 bg-[var(--shukla-ivory)] border-t border-[var(--shukla-muted-border)] p-4 shadow-2xl lg:hidden flex items-center justify-between">
           <div>
-            <span className="font-display text-sm font-semibold uppercase block truncate max-w-[160px]">
+            <span className="heading text-sm font-medium block truncate max-w-[160px]">
               {product.title}
             </span>
-            <span className="text-xs font-mono font-medium text-[var(--shukla-charcoal)]">
+            <span className="nums text-xs font-medium text-[var(--shukla-charcoal)]">
               ${formattedPrice}
             </span>
           </div>
@@ -408,7 +408,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product, r
         <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4">
           <div className="bg-[var(--shukla-ivory)] max-w-xl w-full p-8 border border-[var(--shukla-muted-border)] shadow-2xl relative space-y-4">
             <div className="flex justify-between items-center border-b border-[var(--shukla-muted-border)] pb-4">
-              <h3 className="font-display text-lg uppercase tracking-wider">Rug Placement & Size Guide</h3>
+              <h3 className="heading text-lg">Rug Placement &amp; Size Guide</h3>
               <button onClick={() => setSizeModalOpen(false)}>
                 <X className="w-5 h-5" />
               </button>

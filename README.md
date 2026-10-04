@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Shukla Rugs
 
-## Getting Started
+Shukla Rugs currently has two intentionally independent storefront implementations:
 
-First, run the development server:
+| Implementation | Location | Purpose |
+| --- | --- | --- |
+| Next.js storefront | [`src/`](./src) | Existing reference and rollback implementation |
+| Shopify theme | [`shopify-theme/`](./shopify-theme) | Online Store 2.0 migration target |
 
-```bash
+Do not treat the Shopify theme as a wrapper around the Next.js app. They have separate runtimes, deployment paths, and data contracts.
+
+## Start here
+
+Before changing the project, read:
+
+1. [`MIGRATION_STATUS.md`](./MIGRATION_STATUS.md) for the current verified state and next task.
+2. [`SHOPIFY_MIGRATION.md`](./SHOPIFY_MIGRATION.md) for architecture, boundaries, and data contracts.
+3. [`DEVELOPMENT.md`](./DEVELOPMENT.md) for local commands and environment setup.
+4. [`AGENTS.md`](./AGENTS.md) for repository operating rules.
+
+Kiro-specific steering files live in [`.kiro/steering/`](./.kiro/steering/).
+
+## Next.js development
+
+```powershell
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Other scripts:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```powershell
+npm run lint
+npm run build
+npm run start
+```
 
-## Learn More
+The Next.js storefront uses the environment variables documented in `.env.example`. Keep real credentials in `.env.local`; never commit them.
 
-To learn more about Next.js, take a look at the following resources:
+## Shopify theme development
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```powershell
+shopify theme dev --path .\shopify-theme --store vt0dch-hg.myshopify.com
+shopify theme check --path .\shopify-theme
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The Shopify theme must use Shopify-native products, collections, cart, checkout, search, pages, blogs, and articles. Do not add mock commerce data.
 
-## Deploy on Vercel
+## Repository rules
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Keep the Next.js implementation independently runnable.
+- Keep Shopify migration changes inside `shopify-theme/` unless a coordinated change is explicitly requested.
+- Update `MIGRATION_STATUS.md` after meaningful migration work.
+- Never commit secrets from `.env.local`.

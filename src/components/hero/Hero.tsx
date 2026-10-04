@@ -25,7 +25,7 @@ export const Hero: React.FC = () => {
     <section
       className="relative w-full min-h-[85vh] flex items-center justify-center overflow-hidden bg-[var(--shukla-charcoal)] text-[var(--shukla-ivory)]"
       aria-roledescription="carousel"
-      aria-label="Sukla Rugs featured interiors"
+      aria-label="Shukla Rugs featured interiors"
     >
       <div className="absolute inset-0 z-0">
         {heroImages.map((image, index) => (

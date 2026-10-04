@@ -1,0 +1,42 @@
+<aside id="CartDrawer" class="cart-drawer" data-cart-drawer aria-hidden="true">
+  <button class="cart-drawer__backdrop" type="button" data-cart-close aria-label="Close cart"></button>
+  <div class="cart-drawer__panel" role="dialog" aria-modal="true" aria-labelledby="CartDrawerHeading">
+    <div class="cart-drawer__header">
+      <h2 id="CartDrawerHeading">{{ section.settings.heading | escape }} <span data-cart-count>{{ cart.item_count }}</span></h2>
+      <button class="icon-button" type="button" data-cart-close aria-label="Close cart">×</button>
+    </div>
+
+    <div class="cart-drawer__body" data-cart-content>
+      <p class="visually-hidden" data-cart-status role="status" aria-live="polite"></p>
+      {% if cart.item_count > 0 %}
+        <ul class="cart-lines" role="list">
+          {% render 'cart-lines', cart: cart %}
+        </ul>
+      {% else %}
+        <div class="cart-empty">
+          <p class="eyebrow">Your selection</p>
+          <p>{{ section.settings.empty_message | escape }}</p>
+          <a class="button button--primary" href="{{ routes.all_products_collection_url }}" data-cart-close>Explore rugs</a>
+        </div>
+      {% endif %}
+    </div>
+
+    {% if cart.item_count > 0 %}
+      <div class="cart-drawer__footer" data-cart-footer>
+        <div class="cart-total"><span>Subtotal</span><strong data-cart-total>{{ cart.total_price | money }}</strong></div>
+        <a class="button button--primary cart-drawer__checkout" href="{{ routes.checkout_url }}">Proceed to checkout</a>
+        <p class="cart-drawer__note">Taxes and shipping calculated at checkout.</p>
+      </div>
+    {% endif %}
+  </div>
+</aside>
+
+{% schema %}
+{
+  "name": "Cart drawer",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Your selection" },
+    { "type": "textarea", "id": "empty_message", "label": "Empty message", "default": "Your cart is ready for something beautifully made." }
+  ]
+}
+{% endschema %}

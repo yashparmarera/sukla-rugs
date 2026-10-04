@@ -1,0 +1,31 @@
+{
+  "general": {
+    "skip_to_content": "Skip to content",
+    "search": "Search",
+    "close": "Close",
+    "menu": "Menu",
+    "account": "Account",
+    "cart": "Cart"
+  },
+  "accessibility": {
+    "close_menu": "Close menu",
+    "open_menu": "Open menu",
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "header": {
+    "announcement": "Complimentary global white-glove delivery on orders over $2,500"
+  },
+  "footer": {
+    "newsletter_heading": "The Shukla Journal",
+    "newsletter_text": "Private previews of new loom releases, artisan narratives, and design guides.",
+    "email_placeholder": "Enter your email address",
+    "newsletter_submit": "Join"
+  },
+  "products": {
+    "product": "Product",
+    "from": "From",
+    "sold_out": "Sold out",
+    "add_to_cart": "Add to cart"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "settings": {}
+    },
+    "cartdrawer": {
+      "type": "cart-drawer",
+      "settings": {}
+    }
+  },
+  "order": [
+    "footer",
+    "cartdrawer"
+  ]
+}

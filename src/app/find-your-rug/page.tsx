@@ -75,7 +75,7 @@ export default function FindYourRugPage() {
             <span className="text-xs uppercase tracking-[0.25em] text-[var(--shukla-taupe)] font-sans block">
               60-Second Recommendation Finder
             </span>
-            <h1 className="font-display text-3xl sm:text-4xl uppercase tracking-wide text-[var(--shukla-charcoal)]">
+            <h1 className="display-lg text-3xl sm:text-4xl text-[var(--shukla-charcoal)]">
               Find Your Ideal Rug
             </h1>
             <p className="font-serif italic text-base text-[var(--shukla-charcoal)]/80">
@@ -89,8 +89,8 @@ export default function FindYourRugPage() {
               
               {/* Progress Bar */}
               <div className="flex justify-between items-center text-xs font-sans text-[var(--shukla-taupe)]">
-                <span>Step {step} of 5</span>
-                <span className="font-mono">{step * 20}% Complete</span>
+                <span>Step <span className="nums">{step}</span> of <span className="nums">5</span></span>
+                <span className="nums">{step * 20}% Complete</span>
               </div>
               <div className="w-full h-1 bg-[var(--shukla-sand)] rounded-full overflow-hidden">
                 <div
@@ -102,8 +102,8 @@ export default function FindYourRugPage() {
               {/* Step 1: Room */}
               {step === 1 && (
                 <div className="space-y-6">
-                  <h2 className="font-display text-xl uppercase tracking-wider text-[var(--shukla-charcoal)]">
-                    1. Which room are you specifying for?
+                  <h2 className="heading text-xl text-[var(--shukla-charcoal)]">
+                    <span className="nums">1.</span> Which room are you specifying for?
                   </h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {['Living Room', 'Primary Bedroom', 'Dining Room', 'Entryway / Hallway'].map((rm) => (
@@ -122,8 +122,8 @@ export default function FindYourRugPage() {
               {/* Step 2: Style */}
               {step === 2 && (
                 <div className="space-y-6">
-                  <h2 className="font-display text-xl uppercase tracking-wider text-[var(--shukla-charcoal)]">
-                    2. What aesthetic direction best defines your space?
+                  <h2 className="heading text-xl text-[var(--shukla-charcoal)]">
+                    <span className="nums">2.</span> What aesthetic direction best defines your space?
                   </h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {[
@@ -147,8 +147,8 @@ export default function FindYourRugPage() {
               {/* Step 3: Color */}
               {step === 3 && (
                 <div className="space-y-6">
-                  <h2 className="font-display text-xl uppercase tracking-wider text-[var(--shukla-charcoal)]">
-                    3. What primary color palette do you prefer?
+                  <h2 className="heading text-xl text-[var(--shukla-charcoal)]">
+                    <span className="nums">3.</span> What primary color palette do you prefer?
                   </h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {['Terracotta & Warm Clay', 'Indigo & Slate Blue', 'Olive & Earthy Green', 'Neutral Sand & Off-White'].map((c) => (
@@ -167,8 +167,8 @@ export default function FindYourRugPage() {
               {/* Step 4: Size */}
               {step === 4 && (
                 <div className="space-y-6">
-                  <h2 className="font-display text-xl uppercase tracking-wider text-[var(--shukla-charcoal)]">
-                    4. What dimension fits your room footprint?
+                  <h2 className="heading text-xl text-[var(--shukla-charcoal)]">
+                    <span className="nums">4.</span> What dimension fits your room footprint?
                   </h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {["6' x 9'", "8' x 10'", "9' x 12'", "Runner / Custom"].map((sz) => (
@@ -187,8 +187,8 @@ export default function FindYourRugPage() {
               {/* Step 5: Material */}
               {step === 5 && (
                 <div className="space-y-6">
-                  <h2 className="font-display text-xl uppercase tracking-wider text-[var(--shukla-charcoal)]">
-                    5. What tactile materiality do you seek?
+                  <h2 className="heading text-xl text-[var(--shukla-charcoal)]">
+                    <span className="nums">5.</span> What tactile materiality do you seek?
                   </h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {['New Zealand Hand-Spun Wool', 'Wool & Silk Blend', 'High-Low Un-Cut Loop', 'Natural Organic Jute'].map((m) => (
@@ -211,7 +211,7 @@ export default function FindYourRugPage() {
               <div className="flex justify-between items-center border-b border-[var(--shukla-muted-border)] pb-4">
                 <div className="flex items-center gap-2">
                   <Sparkles className="w-5 h-5 text-[var(--shukla-terracotta)]" />
-                  <h2 className="font-display text-2xl uppercase tracking-wider text-[var(--shukla-charcoal)]">
+                  <h2 className="display-lg text-2xl text-[var(--shukla-charcoal)]">
                     Your Curated Matches
                   </h2>
                 </div>

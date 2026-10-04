@@ -1,0 +1,63 @@
+<section class="testimonials page-width" aria-labelledby="TestimonialsHeading-{{ section.id }}">
+  <header class="home-section-header testimonials__header">
+    <div>
+      <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      <h2 id="TestimonialsHeading-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+    </div>
+  </header>
+
+  {% if section.blocks.size > 0 %}
+    <div class="testimonials__grid">
+      {% for block in section.blocks %}
+        <article class="testimonial-card" {{ block.shopify_attributes }}>
+          <div class="testimonial-card__rating" aria-label="{{ block.settings.rating }} out of 5 stars">
+            {% for index in (1..5) %}
+              <span aria-hidden="true"{% if index > block.settings.rating %} class="is-empty"{% endif %}>★</span>
+            {% endfor %}
+          </div>
+          <blockquote>{{ block.settings.quote | escape }}</blockquote>
+          <footer>
+            <strong>{{ block.settings.author | escape }}</strong>
+            {% if block.settings.location != blank %}<span>{{ block.settings.location | escape }}</span>{% endif %}
+            {% if block.settings.verified %}<small>Verified client</small>{% endif %}
+          </footer>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="home-empty">Add testimonials in the Theme Editor or connect a review app.</p>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Client testimonials" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Acclaimed by designers & homeowners" }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        { "type": "textarea", "id": "quote", "label": "Quote", "default": "A piece of craft that changed the feeling of the room." },
+        { "type": "text", "id": "author", "label": "Author", "default": "Shukla Rugs client" },
+        { "type": "text", "id": "location", "label": "Location" },
+        { "type": "range", "id": "rating", "label": "Rating", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "checkbox", "id": "verified", "label": "Verified client", "default": true }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials",
+      "blocks": [
+        { "type": "testimonial", "settings": { "quote": "The quality, texture, and service were exceptional from first conversation to delivery.", "author": "Verified client", "location": "New York" } },
+        { "type": "testimonial", "settings": { "quote": "The rug gives the room a sense of history without feeling precious.", "author": "Interior designer", "location": "London" } },
+        { "type": "testimonial", "settings": { "quote": "Beautifully made and thoughtfully supported by the Shukla team.", "author": "Verified client", "location": "Mumbai" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
