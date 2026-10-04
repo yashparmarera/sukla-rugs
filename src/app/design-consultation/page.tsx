@@ -42,7 +42,7 @@ export default function DesignConsultationPage() {
             <h1 className="display-lg text-3xl sm:text-4xl text-[var(--shukla-charcoal)]">
               Bespoke Design Consultation
             </h1>
-            <p className="font-serif italic text-base text-[var(--shukla-charcoal)]/80">
+            <p className="font-sans text-base text-[var(--shukla-charcoal)]/75 leading-relaxed">
               Work directly with our Bhadohi textile specialists for spatial rendering, swatch ordering, and custom dimensioning.
             </p>
           </div>
@@ -55,8 +55,8 @@ export default function DesignConsultationPage() {
               <h2 className="display-lg text-2xl text-[var(--shukla-charcoal)]">
                 Consultation Request Received
               </h2>
-              <p className="font-serif italic text-base text-[var(--shukla-charcoal)]/80">
-                Thank you, {formData.name}. A senior SHUKLA RUGS design concierge will review your architectural requirements and contact you within 24 business hours.
+              <p className="font-sans text-base text-[var(--shukla-charcoal)]/75 leading-relaxed">
+                Thank you, {formData.name}. A senior SHUKLA RUGS design concierge will review your architectural requirements and contact you within <span className="nums">24</span> business hours.
               </p>
             </div>
           ) : (

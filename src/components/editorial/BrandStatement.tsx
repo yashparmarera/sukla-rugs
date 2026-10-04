@@ -17,7 +17,7 @@ export const BrandStatement: React.FC = () => {
           &quot;Every rug tells a story.&quot;
         </p>
 
-        <p className="font-serif italic text-lg md:text-xl text-[var(--shukla-charcoal)]/80 leading-relaxed max-w-2xl mx-auto font-normal">
+        <p className="font-sans text-base md:text-lg text-[var(--shukla-charcoal)]/75 leading-relaxed max-w-2xl mx-auto">
           In the historic looms of Bhadohi, Uttar Pradesh, rug making is an enduring discipline of patience. Thousands of individually tied knots, hand-dyed organic yarns, and generations of inherited mastery yield textiles of quiet luxury and permanent resonance.
         </p>
 

@@ -20,7 +20,7 @@ export const CollectionGrid: React.FC<CollectionGridProps> = ({ collections }) =
           <h2 className="display-lg text-3xl md:text-4xl text-[var(--shukla-charcoal)]">
             Shop by Collection
           </h2>
-          <p className="font-serif italic text-base text-[var(--shukla-charcoal)]/80">
+          <p className="font-sans text-base text-[var(--shukla-charcoal)]/75 leading-relaxed">
             Explore six distinct artisanal techniques crafted in our Bhadohi loom houses.
           </p>
         </div>

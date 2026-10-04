@@ -65,7 +65,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
             <h1 className="display-xl text-4xl sm:text-5xl md:text-6xl">
               {collection.title}
             </h1>
-            <p className="font-serif italic text-lg md:text-xl text-[var(--shukla-ivory)]/90 leading-relaxed">
+            <p className="font-sans text-base md:text-lg text-[var(--shukla-ivory)]/90 leading-relaxed">
               {collection.description}
             </p>
           </div>

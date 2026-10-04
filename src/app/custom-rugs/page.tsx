@@ -25,7 +25,7 @@ export default function CustomRugsPage() {
             <h1 className="display-lg text-3xl sm:text-4xl md:text-5xl text-[var(--shukla-charcoal)]">
               Custom &amp; Bespoke Rug Projects
             </h1>
-            <p className="font-serif italic text-base md:text-lg text-[var(--shukla-charcoal)]/80">
+            <p className="font-sans text-base md:text-lg text-[var(--shukla-charcoal)]/75 leading-relaxed">
               When standard catalog dimensions do not align with your room plans, our Bhadohi loom houses execute custom shapes, sizes up to 24’ x 36’, and precise Pantone dye matching.
             </p>
           </div>

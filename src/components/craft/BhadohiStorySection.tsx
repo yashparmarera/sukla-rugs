@@ -27,7 +27,7 @@ export const BhadohiStorySection: React.FC = () => {
               <span className="block heading text-sm font-medium">
                 Bhadohi Guild Standard
               </span>
-              <p className="text-xs font-serif italic text-[var(--shukla-charcoal)]/80 mt-1">
+              <p className="text-xs font-sans text-[var(--shukla-charcoal)]/75 mt-1 leading-relaxed">
                 Up to <span className="nums">1,200,000</span> individually tied knots per rug over <span className="nums">16</span> weeks of dedicated hand weaving.
               </p>
             </div>
@@ -44,7 +44,7 @@ export const BhadohiStorySection: React.FC = () => {
               Bhadohi: The Heart of Indian Rug Weaving
             </h2>
 
-            <p className="font-serif italic text-lg text-[var(--shukla-taupe-light)] leading-relaxed">
+            <p className="font-sans text-base md:text-lg text-[var(--shukla-taupe-light)] leading-relaxed">
               Centuries of craftsmanship flow through Bhadohi, where master weavers transform hand-spun wool and pure silk into enduring pieces of art.
             </p>
 

@@ -72,9 +72,9 @@ export default async function JournalArticlePage({ params }: ArticlePageProps) {
             />
           </div>
 
-          <div className="prose prose-stone max-w-none text-sm font-serif italic leading-relaxed text-[var(--shukla-charcoal)]/90 space-y-6 pt-4">
-            <p className="text-base font-normal">{article.excerpt}</p>
-            <p className="font-sans text-xs not-italic leading-relaxed">{article.content}</p>
+          <div className="prose prose-stone max-w-none text-sm font-sans leading-relaxed text-[var(--shukla-charcoal)]/90 space-y-6 pt-4">
+            <p className="text-base font-normal text-[var(--shukla-charcoal)]">{article.excerpt}</p>
+            <p className="font-sans text-sm leading-relaxed">{article.content}</p>
           </div>
 
         </article>

@@ -162,7 +162,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product, r
               </h1>
 
               {product.subtitle && (
-                <p className="font-serif italic text-base text-[var(--shukla-charcoal)]/80">
+                <p className="font-sans text-base text-[var(--shukla-charcoal)]/75 leading-relaxed">
                   {product.subtitle}
                 </p>
               )}
@@ -290,7 +290,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product, r
               <div className="py-4 text-xs font-sans leading-relaxed text-[var(--shukla-charcoal)]/85">
                 {activeTab === 'story' && (
                   <div className="space-y-3">
-                    <p className="font-serif italic text-sm text-[var(--shukla-charcoal)]">
+                    <p className="font-sans text-sm text-[var(--shukla-charcoal)] leading-relaxed">
                       {product.description}
                     </p>
                     <p>{product.metafields.product_story}</p>

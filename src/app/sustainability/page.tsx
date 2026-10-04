@@ -24,7 +24,7 @@ export default function SustainabilityPage() {
             <h1 className="display-lg text-3xl sm:text-4xl md:text-5xl text-[var(--shukla-charcoal)]">
               Sustainability &amp; Material Integrity
             </h1>
-            <p className="font-serif italic text-base md:text-lg text-[var(--shukla-charcoal)]/80 max-w-2xl mx-auto">
+            <p className="font-sans text-base md:text-lg text-[var(--shukla-charcoal)]/75 max-w-2xl mx-auto leading-relaxed">
               Heirloom rugs are inherently sustainable because they are crafted from renewable natural fibers designed to last generations rather than landfills.
             </p>
           </div>

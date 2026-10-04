@@ -88,7 +88,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
             </h3>
           </Link>
           {product.subtitle && (
-            <p className="text-xs font-serif italic text-[var(--shukla-charcoal)]/70 line-clamp-1 mt-0.5">
+            <p className="text-xs font-sans text-[var(--shukla-charcoal)]/65 line-clamp-1 mt-0.5">
               {product.subtitle}
             </p>
           )}

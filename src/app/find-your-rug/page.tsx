@@ -78,8 +78,8 @@ export default function FindYourRugPage() {
             <h1 className="display-lg text-3xl sm:text-4xl text-[var(--shukla-charcoal)]">
               Find Your Ideal Rug
             </h1>
-            <p className="font-serif italic text-base text-[var(--shukla-charcoal)]/80">
-              Answer 5 architectural questions to receive tailored recommendations from our Bhadohi inventory.
+            <p className="font-sans text-base text-[var(--shukla-charcoal)]/75 leading-relaxed">
+              Answer <span className="nums">5</span> architectural questions to receive tailored recommendations from our Bhadohi inventory.
             </p>
           </div>
 

@@ -19,7 +19,7 @@ export const DesignConsultationBanner: React.FC = () => {
               Need Assistance Specifying the Perfect Rug?
             </h2>
 
-            <p className="font-serif italic text-base sm:text-lg text-[var(--shukla-charcoal)]/80 max-w-2xl">
+            <p className="font-sans text-base sm:text-lg text-[var(--shukla-charcoal)]/75 max-w-2xl leading-relaxed">
               Whether you require custom dimensions, swatch samples, or room scale recommendations, our Bhadohi design specialists guide your selection step-by-step.
             </p>
           </div>

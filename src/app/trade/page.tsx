@@ -33,7 +33,7 @@ export default function TradePage() {
             <h1 className="display-lg text-3xl sm:text-4xl md:text-5xl text-[var(--shukla-charcoal)]">
               SHUKLA Trade Program
             </h1>
-            <p className="font-serif italic text-base md:text-lg text-[var(--shukla-charcoal)]/80">
+            <p className="font-sans text-base md:text-lg text-[var(--shukla-charcoal)]/75 leading-relaxed">
               Exclusive net pricing, custom strike-off swatches, and dedicated project management for accredited interior designers.
             </p>
           </div>

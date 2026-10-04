@@ -177,7 +177,7 @@ export const Header: React.FC = () => {
               </span>
               <KnotGlyph size="sm" className="text-[var(--shukla-terracotta)] group-hover:-rotate-45 transition-transform duration-500" />
             </div>
-            <span className="text-[9px] uppercase tracking-[0.35em] text-[var(--shukla-taupe)] font-serif italic -mt-1 hidden sm:block">
+            <span className="text-[9px] uppercase tracking-[0.3em] text-[var(--shukla-taupe)] font-sans -mt-1 hidden sm:block">
               Bhadohi • India
             </span>
           </Link>

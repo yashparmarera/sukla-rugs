@@ -52,7 +52,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
             <h1 className="display-lg text-3xl sm:text-4xl md:text-5xl text-[var(--shukla-charcoal)]">
               All Handcrafted Rugs
             </h1>
-            <p className="font-serif italic text-base md:text-lg text-[var(--shukla-charcoal)]/80">
+            <p className="font-sans text-base md:text-lg text-[var(--shukla-charcoal)]/75 leading-relaxed">
               Each piece is individually woven in Bhadohi, India using natural long-staple wool, organic jute, and silk.
             </p>
           </div>
@@ -69,7 +69,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
               <h2 className="heading text-xl text-[var(--shukla-charcoal)]">
                 No Rugs Match Your Filter Criteria
               </h2>
-              <p className="font-serif italic text-sm text-[var(--shukla-charcoal)]/70 max-w-md mx-auto">
+              <p className="font-sans text-sm text-[var(--shukla-charcoal)]/70 max-w-md mx-auto leading-relaxed">
                 Try selecting a broader material or color family, or clear your active filters.
               </p>
             </div>

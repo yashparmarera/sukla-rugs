@@ -42,7 +42,7 @@ export default function StoryPage() {
               <h2 className="display-lg text-2xl md:text-3xl text-[var(--shukla-charcoal)]">
                 Bhadohi, Uttar Pradesh
               </h2>
-              <p className="font-serif italic text-base text-[var(--shukla-charcoal)]/80">
+              <p className="font-sans text-base text-[var(--shukla-charcoal)]/75 leading-relaxed">
                 Known globally as India’s carpet hub, Bhadohi’s weaving history spans centuries along the Ganges River.
               </p>
               <p className="text-xs font-sans text-[var(--shukla-charcoal)]/85 leading-relaxed">

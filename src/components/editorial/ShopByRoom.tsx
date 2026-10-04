@@ -80,7 +80,7 @@ export const ShopByRoom: React.FC = () => {
               </div>
 
               <div className="p-4 bg-[var(--shukla-ivory)] border-t border-[var(--shukla-muted-border)] flex items-center justify-between text-xs font-sans text-[var(--shukla-charcoal)]">
-                <span className="font-serif italic text-[var(--shukla-taupe)] text-[11px] truncate">
+                <span className="font-sans text-[var(--shukla-taupe)] text-[11px] truncate">
                   {room.recommendation}
                 </span>
                 <ArrowRight className="w-4 h-4 text-[var(--shukla-charcoal)] group-hover:translate-x-1 transition-transform shrink-0 ml-2" />

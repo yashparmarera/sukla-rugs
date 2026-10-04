@@ -92,7 +92,7 @@ export default async function HomePage() {
             <h2 className="display-lg text-3xl md:text-5xl text-[var(--shukla-charcoal)]">
               Transform Your Architecture
             </h2>
-            <p className="font-serif italic text-lg text-[var(--shukla-charcoal)]/80">
+            <p className="font-sans text-base md:text-lg text-[var(--shukla-charcoal)]/75 leading-relaxed">
               Discover why top interior architects specify SHUKLA RUGS for luxury residences worldwide.
             </p>
             <div className="pt-4 flex justify-center gap-4">

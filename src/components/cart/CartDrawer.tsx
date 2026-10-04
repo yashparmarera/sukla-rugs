@@ -152,7 +152,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
             {!cart || cart.lines.length === 0 ? (
               <div className="text-center py-16 space-y-4">
                 <ShoppingBag className="w-12 h-12 stroke-1 text-[var(--shukla-taupe)] mx-auto" />
-                <p className="font-serif text-lg italic text-[var(--shukla-charcoal)]/80">
+                <p className="font-sans text-base text-[var(--shukla-charcoal)]/80">
                   Your cart is currently empty.
                 </p>
                 <p className="text-xs text-[var(--shukla-taupe)] font-sans max-w-xs mx-auto">

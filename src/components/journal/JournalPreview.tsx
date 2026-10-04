@@ -56,7 +56,7 @@ export const JournalPreview: React.FC = () => {
                   <h3 className="heading text-base text-[var(--shukla-charcoal)] group-hover:text-[var(--shukla-terracotta)] transition-colors leading-snug">
                     {article.title}
                   </h3>
-                  <p className="text-xs font-serif italic text-[var(--shukla-charcoal)]/75 mt-2 line-clamp-3">
+                  <p className="text-xs font-sans text-[var(--shukla-charcoal)]/70 mt-2 line-clamp-3 leading-relaxed">
                     {article.excerpt}
                   </p>
                 </div>

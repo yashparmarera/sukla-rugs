@@ -24,7 +24,7 @@ export default function ArtisansPage() {
             <h1 className="display-lg text-3xl sm:text-4xl md:text-5xl text-[var(--shukla-charcoal)]">
               Artisans of Bhadohi
             </h1>
-            <p className="font-serif italic text-base md:text-lg text-[var(--shukla-charcoal)]/80 max-w-2xl mx-auto">
+            <p className="font-sans text-base md:text-lg text-[var(--shukla-charcoal)]/75 max-w-2xl mx-auto leading-relaxed">
               Behind every SHUKLA RUG are the hands of master weavers whose craft knowledge has been refined across generations.
             </p>
           </div>

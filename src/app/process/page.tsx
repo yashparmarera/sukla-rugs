@@ -80,8 +80,8 @@ export default function ProcessPage() {
             <h1 className="display-lg text-3xl sm:text-4xl md:text-5xl text-[var(--shukla-charcoal)]">
               The 7 Stages of Master Knotting
             </h1>
-            <p className="font-serif italic text-base md:text-lg text-[var(--shukla-charcoal)]/80">
-              A 14-week journey of patience, discipline, and human touch in Bhadohi, Uttar Pradesh.
+            <p className="font-sans text-base md:text-lg text-[var(--shukla-charcoal)]/75 leading-relaxed">
+              A <span className="nums">14</span>-week journey of patience, discipline, and human touch in Bhadohi, Uttar Pradesh.
             </p>
           </div>
 
@@ -118,7 +118,7 @@ export default function ProcessPage() {
                   <h2 className="display-lg text-2xl md:text-3xl text-[var(--shukla-charcoal)]">
                     {stage.title}
                   </h2>
-                  <h3 className="font-serif italic text-base text-[var(--shukla-taupe)]">
+                  <h3 className="font-sans text-base text-[var(--shukla-taupe)]">
                     {stage.subtitle}
                   </h3>
                   <p className="text-xs font-sans text-[var(--shukla-charcoal)]/85 leading-relaxed">
@@ -134,8 +134,8 @@ export default function ProcessPage() {
           {/* Call to action */}
           <div className="text-center max-w-xl mx-auto space-y-6">
             <h3 className="display-lg text-2xl">Experience the Finished Masterpieces</h3>
-            <p className="font-serif italic text-sm text-[var(--shukla-charcoal)]/80">
-              Browse our collections to see how these 7 craft stages coalesce into enduring floor textiles.
+            <p className="font-sans text-sm text-[var(--shukla-charcoal)]/75 leading-relaxed">
+              Browse our collections to see how these <span className="nums">7</span> craft stages coalesce into enduring floor textiles.
             </p>
             <Button href="/shop" variant="primary" size="lg">
               Explore Rug Catalogue

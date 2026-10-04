@@ -28,7 +28,7 @@ export default function JournalPage() {
             <h1 className="display-xl text-4xl sm:text-5xl md:text-6xl text-[var(--shukla-charcoal)]">
               The Shukla Journal
             </h1>
-            <p className="font-serif italic text-base md:text-lg text-[var(--shukla-charcoal)]/80">
+            <p className="font-sans text-base md:text-lg text-[var(--shukla-charcoal)]/75 leading-relaxed">
               In-depth essays on Bhadohi craft heritage, material analysis, and luxury interior curation.
             </p>
           </div>
@@ -63,7 +63,7 @@ export default function JournalPage() {
                     <h2 className="heading text-lg text-[var(--shukla-charcoal)] group-hover:text-[var(--shukla-terracotta)] transition-colors leading-snug">
                       {article.title}
                     </h2>
-                    <p className="text-xs font-serif italic text-[var(--shukla-charcoal)]/75 mt-2 line-clamp-3">
+                    <p className="text-xs font-sans text-[var(--shukla-charcoal)]/70 mt-2 line-clamp-3 leading-relaxed">
                       {article.excerpt}
                     </p>
                   </div>

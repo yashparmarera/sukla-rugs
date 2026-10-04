@@ -88,7 +88,7 @@ export default function RugSizeGuidePage() {
             <h1 className="display-lg text-3xl sm:text-4xl md:text-5xl text-[var(--shukla-charcoal)]">
               Interactive Rug Size Guide
             </h1>
-            <p className="font-serif italic text-base md:text-lg text-[var(--shukla-charcoal)]/80 max-w-2xl mx-auto">
+            <p className="font-sans text-base md:text-lg text-[var(--shukla-charcoal)]/75 max-w-2xl mx-auto leading-relaxed">
               Selecting the ideal proportions is essential for spatial harmony. Follow our room placement standards below.
             </p>
           </div>
@@ -133,7 +133,7 @@ export default function RugSizeGuidePage() {
               <h2 className="display-lg text-2xl text-[var(--shukla-charcoal)]">
                 {activeGuide.title}
               </h2>
-              <p className="font-serif italic text-sm text-[var(--shukla-charcoal)]/80">
+              <p className="font-sans text-sm text-[var(--shukla-charcoal)]/75 leading-relaxed">
                 {activeGuide.description}
               </p>
             </div>

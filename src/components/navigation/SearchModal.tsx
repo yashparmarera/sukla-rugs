@@ -117,7 +117,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
 
           {!loading && query && results.length === 0 && (
             <div className="text-center py-12 space-y-2">
-              <p className="font-serif italic text-lg text-[var(--shukla-charcoal)]">
+              <p className="font-sans text-base text-[var(--shukla-charcoal)]">
                 No rugs found matching &quot;{query}&quot;
               </p>
               <p className="text-xs font-sans text-[var(--shukla-taupe)]">
