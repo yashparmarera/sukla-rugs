@@ -5,7 +5,7 @@ import { KnotGlyph } from '@/components/ui/KnotGlyph';
 import { ShieldAlert, Sparkles, RefreshCw, Sun } from 'lucide-react';
 
 export const metadata = {
-  title: 'Rug Care & Maintenance Guide | SHUKLA RUGS',
+  title: 'Rug Care & Maintenance Guide | SUKLA RUGS',
   description: 'Learn how to care for hand-knotted wool, silk, and jute rugs. Vacuuming, stain emergency steps, shedding, rotation, and professional cleaning.'
 };
 

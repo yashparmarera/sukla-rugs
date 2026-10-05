@@ -17,10 +17,10 @@ export async function generateMetadata({ params }: CollectionPageProps) {
   const { handle } = await params;
   const collection = await getCollectionByHandle(handle);
 
-  if (!collection) return { title: 'Collection Not Found | SHUKLA RUGS' };
+  if (!collection) return { title: 'Collection Not Found | SUKLA RUGS' };
 
   return {
-    title: `${collection.title} | SHUKLA RUGS`,
+    title: `${collection.title} | SUKLA RUGS`,
     description: collection.description
   };
 }

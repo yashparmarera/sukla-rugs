@@ -49,7 +49,7 @@ export const BhadohiStorySection: React.FC = () => {
             </p>
 
             <p className="text-xs font-sans text-[var(--shukla-ivory)]/80 leading-relaxed space-y-3">
-              Every SHUKLA RUG begins with natural raw materials—high-grade New Zealand wool, Bikaner long-staple fibers, and organic jute. Through our 7-stage craft process, raw fibers undergo hand-carding, natural vat-dyeing, precision warping, meticulous knotting, and sun washing.
+              Every SUKLA RUG begins with natural raw materials—high-grade New Zealand wool, Bikaner long-staple fibers, and organic jute. Through our 7-stage craft process, raw fibers undergo hand-carding, natural vat-dyeing, precision warping, meticulous knotting, and sun washing.
             </p>
 
             <div className="pt-4 flex flex-wrap items-center gap-4">

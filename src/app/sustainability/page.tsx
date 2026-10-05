@@ -5,7 +5,7 @@ import { KnotGlyph } from '@/components/ui/KnotGlyph';
 import { Leaf, ShieldCheck, Droplet, Recycle } from 'lucide-react';
 
 export const metadata = {
-  title: 'Sustainability & Ethical Craft | SHUKLA RUGS',
+  title: 'Sustainability & Ethical Craft | SUKLA RUGS',
   description: 'Our environmental pledge: 100% natural biodegradable wool and jute, non-toxic AZO-free dyes, and fair-wage artisan employment in Bhadohi.'
 };
 

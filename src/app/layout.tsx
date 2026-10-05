@@ -29,11 +29,11 @@ const jost = Jost({
 
 export const metadata: Metadata = {
   title: {
-    default: "SHUKLA RUGS | Handcrafted Luxury Rugs from Bhadohi, India",
-    template: "%s | SHUKLA RUGS",
+    default: "SUKLA RUGS | Handcrafted Luxury Rugs from Bhadohi, India",
+    template: "%s | SUKLA RUGS",
   },
   description:
-    "SHUKLA RUGS crafts contemporary Indian luxury rugs in Bhadohi, India — hand-knotted, hand-tufted, hand-woven, and hand-woven jute pieces designed for living spaces around the world.",
+    "SUKLA RUGS crafts contemporary Indian luxury rugs in Bhadohi, India — hand-knotted, hand-tufted, hand-woven, and hand-woven jute pieces designed for living spaces around the world.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

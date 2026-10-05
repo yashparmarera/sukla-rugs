@@ -15,7 +15,7 @@ export function trackEvent(event: AnalyticsEvent, payload?: Record<string, unkno
   if (typeof window === 'undefined') return;
 
   const timestamp = new Date().toISOString();
-  console.log(`[SHUKLA ANALYTICS] Event: "${event}" at ${timestamp}`, payload || {});
+  console.log(`[SUKLA ANALYTICS] Event: "${event}" at ${timestamp}`, payload || {});
 
   // Integration point for GA4 / Shopify Pixel / Segment
   if (Array.isArray((window as unknown as { dataLayer?: unknown[] }).dataLayer)) {

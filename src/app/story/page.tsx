@@ -6,8 +6,8 @@ import { KnotGlyph } from '@/components/ui/KnotGlyph';
 import { StatBadge } from '@/components/ui/StatBadge';
 
 export const metadata = {
-  title: 'Our Story & Bhadohi Heritage | SHUKLA RUGS',
-  description: 'Discover the heritage of SHUKLA RUGS: from the historic loom houses of Bhadohi, Uttar Pradesh, India to refined architectural spaces worldwide.'
+  title: 'Our Story & Bhadohi Heritage | SUKLA RUGS',
+  description: 'Discover the heritage of SUKLA RUGS: from the historic loom houses of Bhadohi, Uttar Pradesh, India to refined architectural spaces worldwide.'
 };
 
 export default function StoryPage() {
@@ -46,7 +46,7 @@ export default function StoryPage() {
                 Known globally as India’s carpet hub, Bhadohi’s weaving history spans centuries along the Ganges River.
               </p>
               <p className="text-xs font-sans text-[var(--shukla-charcoal)]/85 leading-relaxed">
-                SHUKLA RUGS was established to bridge this deep regional heritage with contemporary global interior architecture. We work directly with master weaver families in Bhadohi, upholding fair wages, organic material sourcing, and uncompromising quality standards.
+                SUKLA RUGS was established to bridge this deep regional heritage with contemporary global interior architecture. We work directly with master weaver families in Bhadohi, upholding fair wages, organic material sourcing, and uncompromising quality standards.
               </p>
             </div>
 

@@ -71,7 +71,7 @@ export const BrandEntrance: React.FC<BrandEntranceProps> = ({ children }) => {
       {isVisible && (
         <section
           className={`brand-entrance ${isLeaving ? 'brand-entrance--leaving' : ''}`}
-          aria-label="Shukla Rugs brand entrance"
+          aria-label="Sukla Rugs brand entrance"
           aria-live="polite"
         >
           <div className="brand-entrance__image-stage" aria-hidden="true">
@@ -97,20 +97,20 @@ export const BrandEntrance: React.FC<BrandEntranceProps> = ({ children }) => {
           <div className="brand-entrance__content">
             <p className="brand-entrance__eyebrow">Handcrafted in Bhadohi · Designed for the world</p>
             <div className="brand-entrance__rule" />
-            <p className="brand-entrance__wordmark">Shukla Rugs</p>
+            <p className="brand-entrance__wordmark">Sukla Rugs</p>
             <h1>We are crafting something special.</h1>
-            <p className="brand-entrance__description">Our new Shukla Rugs experience is coming soon.</p>
+            <p className="brand-entrance__description">Our new Sukla Rugs experience is coming soon.</p>
             <button type="button" className="brand-entrance__cta" onClick={enterWebsite} autoFocus>
               <span>Open full website</span>
               <ArrowUpRight aria-hidden="true" size={17} strokeWidth={1.5} />
             </button>
             <p className="brand-entrance__disclaimer">
-              <span aria-hidden="true">✦</span> Disclaimer: Website under maintenance
+              <span aria-hidden="true">âœ¦</span> Disclaimer: Website under maintenance
             </p>
           </div>
 
           <button type="button" className="brand-entrance__skip" onClick={enterWebsite}>
-            Skip <span aria-hidden="true">→</span>
+            Skip <span aria-hidden="true">â†’</span>
           </button>
 
           <div className="brand-entrance__controls" aria-label={`Image ${activeImage + 1} of ${heroImages.length}`}>

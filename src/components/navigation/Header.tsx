@@ -173,7 +173,7 @@ export const Header: React.FC = () => {
             <div className="flex min-w-0 items-center gap-1.5 md:gap-2">
               <KnotGlyph size="sm" className="text-[var(--shukla-terracotta)] group-hover:rotate-45 transition-transform duration-500" />
               <span className="whitespace-nowrap font-display text-base md:text-xl tracking-[0.16em] md:tracking-[0.22em] font-medium text-[var(--shukla-charcoal)] uppercase">
-                SHUKLA RUGS
+                SUKLA RUGS
               </span>
               <KnotGlyph size="sm" className="text-[var(--shukla-terracotta)] group-hover:-rotate-45 transition-transform duration-500" />
             </div>
@@ -227,7 +227,7 @@ export const Header: React.FC = () => {
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-50 lg:hidden flex flex-col bg-[var(--shukla-ivory)] p-6 overflow-y-auto">
           <div className="flex justify-between items-center pb-6 border-b border-[var(--shukla-muted-border)]">
-            <span className="font-display tracking-[0.22em] text-sm uppercase font-medium">SHUKLA RUGS</span>
+            <span className="font-display tracking-[0.22em] text-sm uppercase font-medium">SUKLA RUGS</span>
             <button onClick={() => setMobileMenuOpen(false)} aria-label="Close menu">
               <X className="w-6 h-6 text-[var(--shukla-charcoal)]" />
             </button>

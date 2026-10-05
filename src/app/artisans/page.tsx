@@ -5,7 +5,7 @@ import { Footer } from '@/components/layout/Footer';
 import { KnotGlyph } from '@/components/ui/KnotGlyph';
 
 export const metadata = {
-  title: 'Artisans of Bhadohi | SHUKLA RUGS',
+  title: 'Artisans of Bhadohi | SUKLA RUGS',
   description: 'Meet the master weaver collective of Bhadohi, Uttar Pradesh. Generations of human skill behind every hand-knotted and hand-tufted rug.'
 };
 
@@ -25,7 +25,7 @@ export default function ArtisansPage() {
               Artisans of Bhadohi
             </h1>
             <p className="font-sans text-base md:text-lg text-[var(--shukla-charcoal)]/75 max-w-2xl mx-auto leading-relaxed">
-              Behind every SHUKLA RUG are the hands of master weavers whose craft knowledge has been refined across generations.
+              Behind every SUKLA RUG are the hands of master weavers whose craft knowledge has been refined across generations.
             </p>
           </div>
 

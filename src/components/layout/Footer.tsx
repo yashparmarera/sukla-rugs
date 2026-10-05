@@ -28,7 +28,7 @@ export const Footer: React.FC = () => {
             <div className="flex items-center gap-3">
               <KnotGlyph size="md" className="text-[var(--shukla-terracotta)]" />
               <span className="font-display text-2xl tracking-[0.22em] uppercase font-medium">
-                SHUKLA RUGS
+                SUKLA RUGS
               </span>
             </div>
             <p className="font-serif italic text-lg text-[var(--shukla-taupe-light)] max-w-md">
@@ -42,7 +42,7 @@ export const Footer: React.FC = () => {
 
           <div className="lg:col-span-6 space-y-4 lg:pl-12">
             <h4 className="eyebrow text-xs text-[var(--shukla-terracotta)]">
-              The Shukla Journal &amp; Private Inquiries
+              The Sukla Journal &amp; Private Inquiries
             </h4>
             <p className="text-xs font-sans text-[var(--shukla-ivory)]/70 leading-relaxed">
               Subscribe to receive private previews of new loom releases, artisan narratives, and bespoke design guides.
@@ -51,7 +51,7 @@ export const Footer: React.FC = () => {
             {subscribed ? (
               <div className="p-4 bg-white/5 border border-[var(--shukla-terracotta)] text-xs font-sans text-white flex items-center gap-3">
                 <Check className="w-4 h-4 text-[var(--shukla-terracotta)]" />
-                <span>Thank you. You have been added to the SHUKLA RUGS private registry.</span>
+                <span>Thank you. You have been added to the SUKLA RUGS private registry.</span>
               </div>
             ) : (
               <form onSubmit={handleSubscribe} className="flex gap-2 max-w-md">
@@ -130,8 +130,8 @@ export const Footer: React.FC = () => {
             </p>
             <div className="pt-2 flex flex-wrap gap-2 text-[10px] nums text-white/50">
               <span className="px-2 py-1 bg-white/5 border border-white/10">USD ($)</span>
-              <span className="px-2 py-1 bg-white/5 border border-white/10">EUR (€)</span>
-              <span className="px-2 py-1 bg-white/5 border border-white/10">GBP (£)</span>
+              <span className="px-2 py-1 bg-white/5 border border-white/10">EUR (â‚¬)</span>
+              <span className="px-2 py-1 bg-white/5 border border-white/10">GBP (Â£)</span>
               <span className="px-2 py-1 bg-white/5 border border-white/10">CAD ($)</span>
               <span className="px-2 py-1 bg-white/5 border border-white/10">AED</span>
             </div>
@@ -141,7 +141,7 @@ export const Footer: React.FC = () => {
 
         {/* Bottom Bar & Legal */}
         <div className="pt-8 flex flex-col md:flex-row justify-between items-center text-[11px] font-sans text-white/50 space-y-4 md:space-y-0">
-          <p><span className="nums">© {new Date().getFullYear()}</span> SHUKLA RUGS. All rights reserved. Handcrafted in Bhadohi, India.</p>
+          <p><span className="nums">Â© {new Date().getFullYear()}</span> SUKLA RUGS. All rights reserved. Handcrafted in Bhadohi, India.</p>
           <div className="flex space-x-6">
             <span>Shopify Headless Commerce</span>
             <span>WCAG 2.1 AA Accessible</span>

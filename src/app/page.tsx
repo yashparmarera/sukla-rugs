@@ -17,13 +17,13 @@ import { KnotGlyph } from '@/components/ui/KnotGlyph';
 import { BrandEntrance } from '@/components/entry/BrandEntrance';
 
 export const metadata = {
-  title: 'SHUKLA RUGS | Ultra-Premium Handcrafted Indian Rugs | Bhadohi',
+  title: 'SUKLA RUGS | Ultra-Premium Handcrafted Indian Rugs | Bhadohi',
   description: 'Contemporary Indian luxury rooted in craftsmanship. Explore hand-knotted Oushak, Persian hand-tufted, modern flatweaves, and organic jute rugs handcrafted in Bhadohi, UP.',
   openGraph: {
-    title: 'SHUKLA RUGS | Ultra-Premium Handcrafted Indian Rugs',
+    title: 'SUKLA RUGS | Ultra-Premium Handcrafted Indian Rugs',
     description: 'Every rug tells a story. Contemporary Indian luxury handcrafted in Bhadohi, Uttar Pradesh.',
     url: 'https://shuklarugsv1.vercel.app',
-    siteName: 'SHUKLA RUGS'
+    siteName: 'SUKLA RUGS'
   }
 };
 
@@ -93,7 +93,7 @@ export default async function HomePage() {
               Transform Your Architecture
             </h2>
             <p className="font-sans text-base md:text-lg text-[var(--shukla-charcoal)]/75 leading-relaxed">
-              Discover why top interior architects specify SHUKLA RUGS for luxury residences worldwide.
+              Discover why top interior architects specify SUKLA RUGS for luxury residences worldwide.
             </p>
             <div className="pt-4 flex justify-center gap-4">
               <Button href="/shop" variant="primary" size="lg">

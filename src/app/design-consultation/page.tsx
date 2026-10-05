@@ -56,7 +56,7 @@ export default function DesignConsultationPage() {
                 Consultation Request Received
               </h2>
               <p className="font-sans text-base text-[var(--shukla-charcoal)]/75 leading-relaxed">
-                Thank you, {formData.name}. A senior SHUKLA RUGS design concierge will review your architectural requirements and contact you within <span className="nums">24</span> business hours.
+                Thank you, {formData.name}. A senior SUKLA RUGS design concierge will review your architectural requirements and contact you within <span className="nums">24</span> business hours.
               </p>
             </div>
           ) : (

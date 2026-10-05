@@ -6,7 +6,7 @@ import { KnotGlyph } from '@/components/ui/KnotGlyph';
 import { Button } from '@/components/ui/Button';
 
 export const metadata = {
-  title: 'Custom & Bespoke Rug Projects | SHUKLA RUGS',
+  title: 'Custom & Bespoke Rug Projects | SUKLA RUGS',
   description: 'Specify bespoke dimensions, custom yarn color dye matching, and original patterns handcrafted to your architectural drawings in Bhadohi.'
 };
 

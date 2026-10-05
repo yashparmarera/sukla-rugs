@@ -18,10 +18,10 @@ export async function generateMetadata({ params }: ArticlePageProps) {
   const { slug } = await params;
   const article = MOCK_JOURNAL_ARTICLES.find((a) => a.slug === slug);
 
-  if (!article) return { title: 'Article Not Found | SHUKLA RUGS' };
+  if (!article) return { title: 'Article Not Found | SUKLA RUGS' };
 
   return {
-    title: `${article.title} | SHUKLA RUGS Journal`,
+    title: `${article.title} | SUKLA RUGS Journal`,
     description: article.excerpt
   };
 }

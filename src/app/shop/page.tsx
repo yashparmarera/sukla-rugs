@@ -18,7 +18,7 @@ interface ShopPageProps {
 }
 
 export const metadata = {
-  title: 'Shop All Handcrafted Rugs | SHUKLA RUGS',
+  title: 'Shop All Handcrafted Rugs | SUKLA RUGS',
   description: 'Browse our complete catalogue of handcrafted Indian rugs. Filter by collection, material, color family, room, and size. White-glove delivery worldwide.'
 };
 

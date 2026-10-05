@@ -12,7 +12,7 @@ export const JournalPreview: React.FC = () => {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 space-y-4 md:space-y-0">
           <div>
             <span className="block text-xs uppercase tracking-[0.25em] text-[var(--shukla-terracotta)] font-sans mb-2">
-              The Shukla Journal
+              The Sukla Journal
             </span>
             <h2 className="display-lg text-2xl md:text-3xl lg:text-4xl text-[var(--shukla-charcoal)]">
               Stories on Craft & Materiality

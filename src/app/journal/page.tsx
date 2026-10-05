@@ -8,7 +8,7 @@ import { MOCK_JOURNAL_ARTICLES } from '@/lib/shopify/mock-data';
 import { ArrowRight } from 'lucide-react';
 
 export const metadata = {
-  title: 'The Journal | Craft, Materiality & Interiors | SHUKLA RUGS',
+  title: 'The Journal | Craft, Materiality & Interiors | SUKLA RUGS',
   description: 'Editorial perspectives on Indian rug weaving heritage, material science, and interior architecture.'
 };
 
@@ -26,7 +26,7 @@ export default function JournalPage() {
               Editorial Publications
             </span>
             <h1 className="display-xl text-4xl sm:text-5xl md:text-6xl text-[var(--shukla-charcoal)]">
-              The Shukla Journal
+              The Sukla Journal
             </h1>
             <p className="font-sans text-base md:text-lg text-[var(--shukla-charcoal)]/75 leading-relaxed">
               In-depth essays on Bhadohi craft heritage, material analysis, and luxury interior curation.
