@@ -7,6 +7,7 @@ import { heroImages } from '@/components/hero/hero-images';
 
 const SESSION_KEY = 'shukla-entry-seen';
 const SLIDE_DURATION = 2200;
+const ACCESS_PASSWORD = 'suklarugs20';
 
 interface BrandEntranceProps {
   children: React.ReactNode;
@@ -16,6 +17,9 @@ export const BrandEntrance: React.FC<BrandEntranceProps> = ({ children }) => {
   const [isLeaving, setIsLeaving] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
   const [activeImage, setActiveImage] = useState(0);
+  const [showPassword, setShowPassword] = useState(false);
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(false);
   const hasBeenSeen = useSyncExternalStore(
     () => () => undefined,
     () => window.sessionStorage.getItem(SESSION_KEY) === 'true',
@@ -48,21 +52,19 @@ export const BrandEntrance: React.FC<BrandEntranceProps> = ({ children }) => {
     }, 850);
   };
 
-  useEffect(() => {
-    if (!isVisible) {
-      return;
+  const revealPasswordField = () => {
+    setShowPassword(true);
+  };
+
+  const submitPassword = (event: React.FormEvent) => {
+    event.preventDefault();
+    if (password.trim().toLowerCase() === ACCESS_PASSWORD) {
+      setError(false);
+      enterWebsite();
+    } else {
+      setError(true);
     }
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' || event.key === 'Enter') {
-        event.preventDefault();
-        enterWebsite();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isVisible]);
+  };
 
   return (
     <>
@@ -98,20 +100,54 @@ export const BrandEntrance: React.FC<BrandEntranceProps> = ({ children }) => {
             <p className="brand-entrance__eyebrow">Handcrafted in Bhadohi · Designed for the world</p>
             <div className="brand-entrance__rule" />
             <p className="brand-entrance__wordmark">Sukla Rugs</p>
-            <h1>We are crafting something special.</h1>
-            <p className="brand-entrance__description">Our new Sukla Rugs experience is coming soon.</p>
-            <button type="button" className="brand-entrance__cta" onClick={enterWebsite} autoFocus>
-              <span>Open full website</span>
-              <ArrowUpRight aria-hidden="true" size={17} strokeWidth={1.5} />
-            </button>
+            <h1>Website Under Maintenance</h1>
+            <p className="brand-entrance__description">
+              This website is not live for the public yet. Enter the password to view the private demo.
+            </p>
+
+            {!showPassword ? (
+              <button type="button" className="brand-entrance__cta" onClick={revealPasswordField} autoFocus>
+                <span>Open full website</span>
+                <ArrowUpRight aria-hidden="true" size={17} strokeWidth={1.5} />
+              </button>
+            ) : (
+              <form className="brand-entrance__access" onSubmit={submitPassword}>
+                <label className="brand-entrance__access-label" htmlFor="brand-entrance-password">
+                  Enter access password
+                </label>
+                <div className="brand-entrance__access-row">
+                  <input
+                    id="brand-entrance-password"
+                    type="password"
+                    className="brand-entrance__access-input"
+                    value={password}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                      if (error) setError(false);
+                    }}
+                    placeholder="Password"
+                    autoFocus
+                    autoComplete="off"
+                    aria-invalid={error}
+                    aria-describedby={error ? 'brand-entrance-password-error' : undefined}
+                  />
+                  <button type="submit" className="brand-entrance__cta brand-entrance__cta--submit">
+                    <span>Enter</span>
+                    <ArrowUpRight aria-hidden="true" size={17} strokeWidth={1.5} />
+                  </button>
+                </div>
+                {error && (
+                  <p id="brand-entrance-password-error" className="brand-entrance__access-error" role="alert">
+                    Incorrect password. Please try again.
+                  </p>
+                )}
+              </form>
+            )}
+
             <p className="brand-entrance__disclaimer">
-              <span aria-hidden="true">âœ¦</span> Disclaimer: Website under maintenance
+              <span aria-hidden="true">✦</span> Going live for the public on 20 October.
             </p>
           </div>
-
-          <button type="button" className="brand-entrance__skip" onClick={enterWebsite}>
-            Skip <span aria-hidden="true">â†’</span>
-          </button>
 
           <div className="brand-entrance__controls" aria-label={`Image ${activeImage + 1} of ${heroImages.length}`}>
             <button type="button" className="brand-entrance__arrow" onClick={() => moveSlide(-1)} aria-label="Previous entrance image">

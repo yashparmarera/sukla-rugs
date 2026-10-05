@@ -310,6 +310,69 @@
   outline-offset: 4px;
 }
 
+.brand-entrance__access {
+  margin-top: 2.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 26rem;
+}
+
+.brand-entrance__access-label {
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.62rem;
+  color: rgba(250, 247, 242, 0.72);
+}
+
+.brand-entrance__access-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: stretch;
+}
+
+.brand-entrance__access-input {
+  flex: 1 1 12rem;
+  min-height: 3.25rem;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid rgba(250, 247, 242, 0.45);
+  background: rgba(20, 17, 16, 0.3);
+  color: var(--shukla-cream);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  transition: border-color 250ms ease, background-color 250ms ease;
+}
+
+.brand-entrance__access-input::placeholder {
+  color: rgba(250, 247, 242, 0.5);
+  letter-spacing: 0.02em;
+}
+
+.brand-entrance__access-input:focus {
+  outline: none;
+  border-color: var(--shukla-cream);
+  background: rgba(20, 17, 16, 0.45);
+}
+
+.brand-entrance__access-input[aria-invalid='true'] {
+  border-color: #e2b27f;
+}
+
+.brand-entrance__cta--submit {
+  margin-top: 0;
+  flex: 0 0 auto;
+}
+
+.brand-entrance__access-error {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: #e9b183;
+}
+
 .brand-entrance__disclaimer {
   display: flex;
   align-items: center;
