@@ -1,0 +1,29 @@
+{
+  "id": "FEAT-003",
+  "type": "feat",
+  "description": "Customize the product page (shopify-live-horizon/templates/product.json) to match the Next.js product detail design while preserving Horizon's native gallery, variant picker, quantity selector, add-to-cart, checkout handoff, and related products. Add product detail rows (material/construction/dimensions/care/origin/story + shipping/returns) that render ONLY when real product.metafields or store policies exist \u2014 never fabricate values. Independent of FEAT-001 and FEAT-002 (different template file).",
+  "status": "pending",
+  "steps": [
+    "Read context.json first, then read sections/product-information.liquid, blocks/disclosures.liquid, blocks/accordion.liquid, blocks/product-custom-property.liquid, blocks/product-description.liquid, blocks/variant-picker.liquid, blocks/buy-buttons.liquid, and src/components/product/ProductDetailView.tsx (READ ONLY) to confirm the target layout and native capabilities.",
+    "In templates/product.json, keep the `_product-media-gallery` static block with media_fit `contain` and aspect_ratio `adapt` so rug proportions are preserved (do NOT switch to a cropping ratio). Keep thumbnails/zoom as configured.",
+    "Keep the product title block as `<h1>{{ closest.product.title }}</h1>` and tune it to Jost display; keep the `price` block (native compare-at handling \u2014 compare-at shows only when genuinely set). Keep `variant-picker` (dynamic price/availability) and `buy-buttons` (quantity + add-to-cart + accelerated-checkout, sticky add-to-cart) intact \u2014 these preserve variant IDs, inventory, cart, and checkout handoff.",
+    "Replace or extend the existing `disclosures` block with accordion rows for Material, Construction, Dimensions, Care, Origin, and Story. Each row must render ONLY when the corresponding `product.metafields.<namespace>.<key>` is present (use `blocks/product-custom-property.liquid` which binds to a metafield, or a minimal `snippets/shukla-product-details.liquid` with `{% if product.metafields... != blank %}` guards). Do NOT hardcode metafield namespaces/values; expose the metafield reference as a merchant-editable block setting and omit rows whose data is absent. Record the chosen metafield reference approach in findings as 'needs verification during implementation'.",
+    "Add a shipping/returns disclosure row only if a real store policy / policy page exists (link to it); otherwise omit. No fabricated shipping promises.",
+    "Keep the `product-recommendations` section (related, native). Do not add recently-viewed unless Horizon already supports it trivially; if not, omit and note in findings.",
+    "If any metafield-guard logic cannot be expressed via existing block settings in JSON, create a single minimal snippet under snippets/ (e.g. snippets/shukla-product-details.liquid) referenced from a custom-liquid block \u2014 keep it reusable and merchant-safe."
+  ],
+  "acceptance_criteria": [
+    "templates/product.json keeps the native media gallery (contain/adapt), variant-picker, buy-buttons (quantity + add-to-cart + accelerated-checkout), product description, and product-recommendations sections intact.",
+    "Product detail rows (material/construction/dimensions/care/origin/story/shipping) each render only when real metafields/policies exist; no hardcoded or fabricated values appear in the template or any new snippet.",
+    "Product title is Jost h1; price uses the native price block (compare-at only when set).",
+    "Running `shopify theme check` introduces zero new errors versus baseline.",
+    "templates/product.json is valid JSON after stripping its leading comment banner; any new snippet passes theme check."
+  ],
+  "verification": [
+    "cd c:\\Users\\yashs\\Downloads\\shuklarugsv1\\shopify-live-horizon ; shopify theme check  (no NEW errors vs baseline)",
+    "Validate product.json parses as JSON after removing the leading comment block.",
+    "Confirm variant-picker and buy-buttons blocks remain present and no metafield VALUES are hardcoded (only guarded references)."
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}

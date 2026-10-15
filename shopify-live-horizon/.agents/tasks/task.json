@@ -1,0 +1,7 @@
+{
+  "task_id": "task-shukla-horizon-storefront",
+  "task_description": "Customize the stock Shopify Horizon theme in shopify-live-horizon to match the Shukla Rugs Next.js storefront in src/: complete the remaining homepage sections (Shop by Room, Shop by Category/Construction, Bhadohi Story, Brand Statement, Design Consultation, Reviews, Journal, Final CTA) and customize the collection and product pages. Preserve the existing hero + Featured Loom Releases sections, Horizon's native commerce (filters, sorting, variants, cart, checkout, recommendations), and the already-applied palette/typography tokens. Use real Shopify data; never fabricate reviews, ratings, product metafields, or claims; expose merchant-editable empty states when data is absent. Local work only: never run shopify theme push/publish.",
+  "status": "pending",
+  "feature_order": ["FEAT-001", "FEAT-002", "FEAT-003"],
+  "blocked_reason": null
+}
