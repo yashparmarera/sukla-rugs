@@ -6,8 +6,36 @@
 
 - **Overall phase:** Shopify theme implementation complete; store configuration and visual/data QA
 - **Active focus:** assign the dedicated templates in Shopify Admin, populate real catalog/content, and test the development-store preview
-- **Next exact task:** create the Shopify pages/blog/catalog/metafields, assign the new `page.*` templates, and run `shopify theme dev`
-- **Production status:** not approved for production publishing
+- **Next exact task:** configure the store in Shopify Admin (see "Store configuration findings"): local-currency Markets, shipping coverage for the 11 unavailable countries, shipping/refund policies, product metafields in the `sukla` namespace, collection assignment; then run end-to-end QA on the development store
+- **Production status:** not approved for production publishing. Code-complete does not mean production-ready.
+
+## Store configuration findings
+
+Verified against `vt0dch-hg.myshopify.com` through the Storefront API on 2026-10-16. These are store-side facts that code cannot fix.
+
+- **Currency:** all 36 available countries price in USD. No local-currency Markets are enabled, so the Next.js storefront shows other currencies as labelled approximations only; checkout is in USD.
+- **Availability:** Shopify reports every product as unavailable in 11 countries: BH, CY, HU, LT, LU, LV, MT, RO, SA, SI, SK (almost certainly missing shipping/market coverage).
+- **Policies:** no shipping or refund policy is configured, so the product page shows no shipping and returns section.
+- **Catalog data:** 3 products, each with a single `Default Title` variant; no product type, tags or SKU; vendor is the placeholder `My Store`; two of three products belong to no collection.
+- **Metafields:** the specification metafields the storefront reads (namespace `sukla`: technique, material, color_family, origin_region, care_instructions, pile_height, weight, knots_per_sq_inch, craft_duration, product_story) are not populated.
+- **Descriptions:** marketplace-style bullet lists. Two descriptions contain "Karori Rugs"; this is kept as is for now by the owner's decision.
+- **API scope:** the Storefront token cannot read `quantityAvailable` (needs `unauthenticated_read_product_inventory`).
+
+## Horizon theme folder
+
+- `shopify-live-horizon/` is a local copy of the live theme "Updated copy of Horizon" (#188131279037). A customisation attempt was made and then reverted: the folder was re-pulled from the store and the Kiro-created files were removed. The folder now mirrors the live theme.
+- Nothing was pushed to, published on, or modified in the Shopify store from this repository. Unpublished development/preview themes created by `shopify theme dev` may exist on the store and have not been deleted.
+- `shopify-theme/` (the earlier custom Liquid theme) is untouched.
+
+## Next.js reference storefront (src/)
+
+Updated as the rollback/reference implementation; these are not Shopify theme changes.
+
+- Brand text, CSS variables and storage keys renamed from `shukla` to `sukla` (external addresses `shuklarugsv1.vercel.app` and `concierge@shuklarugs.com` deliberately unchanged and need the owner's confirmation).
+- Typography system (Jost display, Ibarra Real Nova editorial, Inter UI and numbers).
+- Product page: real-data-only content, pinned gallery, feature list from the product description, related products ranking.
+- Country selector and display currency. Prices outside USD are approximations from daily ExchangeRate-API rates; checkout always uses Shopify.
+- Known limitation: the search modal and Find Your Rug quiz load products in the browser, where the Shopify call is unavailable, so they fall back to mock products.
 
 ## Architecture
 
@@ -60,6 +88,8 @@ At the time this file was created, the worktree already contained unrelated chan
 | 2026-10-03 | Shopify theme implementation and Theme Check | Added dedicated service/content templates, testimonials, image-picker paths, analytics hooks, accessibility feedback, and metadata; Theme Check passed with no offenses |
 | 2026-10-03 | Hero parity pass | Matched Shopify hero copy structure, text treatment, CTA shape, veil behavior, image scale, and responsive presentation to the Next.js hero; Theme Check passed |
 | 2026-10-03 | Hero autoplay fix | Made hero initialization resilient to deferred loading and Shopify section reloads; manual controls restart the timer; Theme Check passed |
+| 2026-10-16 | Next.js storefront (src/) | `npm run build` passes (all routes compile, TypeScript clean); ESLint clean on every file changed in this work. Pre-existing lint errors elsewhere remain (for example `setState` in effects in Header, CartDrawer, SearchModal, and `any` types in the Shopify client). Verified against the live store through the dev server: product pages, per-country currency display, availability messaging. Not visually verified in a browser. |
+| 2026-10-16 | shopify-live-horizon | Folder re-pulled from live theme #188131279037 and verified by file hashes. Theme Check was last run before the restore, with 2 pre-existing `UnknownFilter: applicable_disclosures` errors in stock Horizon files; it was not re-run after the restore. |
 
 ## Blockers and prerequisites
 
