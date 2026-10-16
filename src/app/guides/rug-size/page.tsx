@@ -74,33 +74,33 @@ export default function RugSizeGuidePage() {
   const activeGuide = ROOM_GUIDES[activeTab];
 
   return (
-    <div className="flex flex-col min-h-screen bg-[var(--shukla-ivory)]">
+    <div className="flex flex-col min-h-screen bg-[var(--sukla-ivory)]">
       <Header />
 
       <main className="flex-1 py-16 md:py-24">
         <div className="editorial-container max-w-4xl mx-auto space-y-12">
           
           <div className="text-center space-y-4">
-            <KnotGlyph size="md" className="text-[var(--shukla-terracotta)]" />
-            <span className="text-xs uppercase tracking-[0.25em] text-[var(--shukla-taupe)] font-sans block">
+            <KnotGlyph size="md" className="text-[var(--sukla-terracotta)]" />
+            <span className="text-xs uppercase tracking-[0.25em] text-[var(--sukla-taupe)] font-sans block">
               Architectural Dimensioning
             </span>
-            <h1 className="display-lg text-3xl sm:text-4xl md:text-5xl text-[var(--shukla-charcoal)]">
+            <h1 className="display-lg text-3xl sm:text-4xl md:text-5xl text-[var(--sukla-charcoal)]">
               Interactive Rug Size Guide
             </h1>
-            <p className="font-sans text-base md:text-lg text-[var(--shukla-charcoal)]/75 max-w-2xl mx-auto leading-relaxed">
+            <p className="font-sans text-base md:text-lg text-[var(--sukla-charcoal)]/75 max-w-2xl mx-auto leading-relaxed">
               Selecting the ideal proportions is essential for spatial harmony. Follow our room placement standards below.
             </p>
           </div>
 
           {/* Room Selector Tabs */}
-          <div className="flex justify-center border-b border-[var(--shukla-muted-border)] text-xs font-sans uppercase tracking-widest gap-4">
+          <div className="flex justify-center border-b border-[var(--sukla-muted-border)] text-xs font-sans uppercase tracking-widest gap-4">
             <button
               onClick={() => setActiveTab('living')}
               className={`pb-4 px-6 font-semibold border-b-2 transition-all ${
                 activeTab === 'living'
-                  ? 'border-[var(--shukla-charcoal)] text-[var(--shukla-charcoal)]'
-                  : 'border-transparent text-[var(--shukla-taupe)] hover:text-[var(--shukla-charcoal)]'
+                  ? 'border-[var(--sukla-charcoal)] text-[var(--sukla-charcoal)]'
+                  : 'border-transparent text-[var(--sukla-taupe)] hover:text-[var(--sukla-charcoal)]'
               }`}
             >
               Living Room
@@ -109,8 +109,8 @@ export default function RugSizeGuidePage() {
               onClick={() => setActiveTab('bedroom')}
               className={`pb-4 px-6 font-semibold border-b-2 transition-all ${
                 activeTab === 'bedroom'
-                  ? 'border-[var(--shukla-charcoal)] text-[var(--shukla-charcoal)]'
-                  : 'border-transparent text-[var(--shukla-taupe)] hover:text-[var(--shukla-charcoal)]'
+                  ? 'border-[var(--sukla-charcoal)] text-[var(--sukla-charcoal)]'
+                  : 'border-transparent text-[var(--sukla-taupe)] hover:text-[var(--sukla-charcoal)]'
               }`}
             >
               Bedroom
@@ -119,8 +119,8 @@ export default function RugSizeGuidePage() {
               onClick={() => setActiveTab('dining')}
               className={`pb-4 px-6 font-semibold border-b-2 transition-all ${
                 activeTab === 'dining'
-                  ? 'border-[var(--shukla-charcoal)] text-[var(--shukla-charcoal)]'
-                  : 'border-transparent text-[var(--shukla-taupe)] hover:text-[var(--shukla-charcoal)]'
+                  ? 'border-[var(--sukla-charcoal)] text-[var(--sukla-charcoal)]'
+                  : 'border-transparent text-[var(--sukla-taupe)] hover:text-[var(--sukla-charcoal)]'
               }`}
             >
               Dining Room
@@ -128,26 +128,26 @@ export default function RugSizeGuidePage() {
           </div>
 
           {/* Tab Content Display */}
-          <div className="space-y-8 bg-[var(--shukla-cream)] border border-[var(--shukla-muted-border)] p-8 sm:p-12 shadow-subtle">
+          <div className="space-y-8 bg-[var(--sukla-cream)] border border-[var(--sukla-muted-border)] p-8 sm:p-12 shadow-subtle">
             <div className="space-y-2">
-              <h2 className="display-lg text-2xl text-[var(--shukla-charcoal)]">
+              <h2 className="display-lg text-2xl text-[var(--sukla-charcoal)]">
                 {activeGuide.title}
               </h2>
-              <p className="font-sans text-sm text-[var(--shukla-charcoal)]/75 leading-relaxed">
+              <p className="font-sans text-sm text-[var(--sukla-charcoal)]/75 leading-relaxed">
                 {activeGuide.description}
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
               {activeGuide.options.map((opt) => (
-                <div key={opt.size} className="p-6 bg-[var(--shukla-ivory)] border border-[var(--shukla-muted-border)] space-y-3">
-                  <span className="nums block text-xl font-semibold text-[var(--shukla-charcoal)]">
+                <div key={opt.size} className="p-6 bg-[var(--sukla-ivory)] border border-[var(--sukla-muted-border)] space-y-3">
+                  <span className="nums block text-xl font-semibold text-[var(--sukla-charcoal)]">
                     {opt.size}
                   </span>
-                  <span className="block text-xs uppercase tracking-wider text-[var(--shukla-terracotta)] font-sans font-semibold">
+                  <span className="block text-xs uppercase tracking-wider text-[var(--sukla-terracotta)] font-sans font-semibold">
                     {opt.rule}
                   </span>
-                  <p className="text-xs font-sans text-[var(--shukla-charcoal)]/80 leading-relaxed">
+                  <p className="text-xs font-sans text-[var(--sukla-charcoal)]/80 leading-relaxed">
                     {opt.detail}
                   </p>
                 </div>

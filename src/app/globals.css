@@ -4,21 +4,21 @@
 @layer base {
   *, ::before, ::after {
     box-sizing: border-box;
-    border-color: var(--shukla-muted-border);
+    border-color: var(--sukla-muted-border);
   }
 
   html {
     scroll-behavior: smooth;
-    background-color: var(--shukla-ivory);
-    color: var(--shukla-charcoal);
+    background-color: var(--sukla-ivory);
+    color: var(--sukla-charcoal);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   body {
-    background-color: var(--shukla-ivory);
-    color: var(--shukla-charcoal);
+    background-color: var(--sukla-ivory);
+    color: var(--sukla-charcoal);
     overflow-x: hidden;
     min-height: 100vh;
     display: flex;
@@ -98,14 +98,14 @@
     height: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: var(--shukla-ivory);
+    background: var(--sukla-ivory);
   }
   ::-webkit-scrollbar-thumb {
-    background: var(--shukla-taupe);
+    background: var(--sukla-taupe);
     border-radius: 0px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--shukla-terracotta);
+    background: var(--sukla-terracotta);
   }
 }
 
@@ -133,24 +133,24 @@
   }
 }
 
-.bg-shukla-ivory { background-color: var(--shukla-ivory); }
-.bg-shukla-cream { background-color: var(--shukla-cream); }
-.bg-shukla-sand { background-color: var(--shukla-sand); }
-.bg-shukla-charcoal { background-color: var(--shukla-charcoal); }
-.bg-shukla-black { background-color: var(--shukla-black); }
-.bg-shukla-taupe { background-color: var(--shukla-taupe); }
-.bg-shukla-terracotta { background-color: var(--shukla-terracotta); }
+.bg-sukla-ivory { background-color: var(--sukla-ivory); }
+.bg-sukla-cream { background-color: var(--sukla-cream); }
+.bg-sukla-sand { background-color: var(--sukla-sand); }
+.bg-sukla-charcoal { background-color: var(--sukla-charcoal); }
+.bg-sukla-black { background-color: var(--sukla-black); }
+.bg-sukla-taupe { background-color: var(--sukla-taupe); }
+.bg-sukla-terracotta { background-color: var(--sukla-terracotta); }
 
-.text-shukla-ivory { color: var(--shukla-ivory); }
-.text-shukla-cream { color: var(--shukla-cream); }
-.text-shukla-sand { color: var(--shukla-sand); }
-.text-shukla-charcoal { color: var(--shukla-charcoal); }
-.text-shukla-taupe { color: var(--shukla-taupe); }
-.text-shukla-terracotta { color: var(--shukla-terracotta); }
+.text-sukla-ivory { color: var(--sukla-ivory); }
+.text-sukla-cream { color: var(--sukla-cream); }
+.text-sukla-sand { color: var(--sukla-sand); }
+.text-sukla-charcoal { color: var(--sukla-charcoal); }
+.text-sukla-taupe { color: var(--sukla-taupe); }
+.text-sukla-terracotta { color: var(--sukla-terracotta); }
 
-.border-shukla-border { border-color: var(--shukla-muted-border); }
-.border-shukla-taupe { border-color: var(--shukla-taupe); }
-.border-shukla-charcoal { border-color: var(--shukla-charcoal); }
+.border-sukla-border { border-color: var(--sukla-muted-border); }
+.border-sukla-taupe { border-color: var(--sukla-taupe); }
+.border-sukla-charcoal { border-color: var(--sukla-charcoal); }
 
 .hover-underline-animation {
   position: relative;
@@ -188,8 +188,8 @@
   inset: 0;
   z-index: 100;
   overflow: hidden;
-  background: var(--shukla-charcoal);
-  color: var(--shukla-cream);
+  background: var(--sukla-charcoal);
+  color: var(--sukla-cream);
   isolation: isolate;
   animation: brand-entrance-in 700ms ease both;
 }
@@ -254,13 +254,13 @@
   width: 4rem;
   height: 1px;
   margin: 1.6rem 0 1.5rem;
-  background: var(--shukla-terracotta);
+  background: var(--sukla-terracotta);
 }
 
 .brand-entrance__wordmark {
   font-family: var(--font-display);
   font-size: clamp(0.75rem, 1.2vw, 1rem);
-  color: var(--shukla-cream);
+  color: var(--sukla-cream);
 }
 
 .brand-entrance h1 {
@@ -271,7 +271,7 @@
   line-height: 0.92;
   letter-spacing: -0.025em;
   text-transform: none;
-  color: var(--shukla-cream);
+  color: var(--sukla-cream);
 }
 
 .brand-entrance__description {
@@ -290,8 +290,8 @@
   margin-top: 2.25rem;
   padding: 0.9rem 1.35rem 0.9rem 1.5rem;
   border: 1px solid rgba(250, 247, 242, 0.75);
-  background: var(--shukla-cream);
-  color: var(--shukla-charcoal);
+  background: var(--sukla-cream);
+  color: var(--sukla-charcoal);
   font-size: 0.65rem;
   cursor: pointer;
   transition: background-color 250ms ease, color 250ms ease, border-color 250ms ease;
@@ -299,14 +299,14 @@
 
 .brand-entrance__cta:hover,
 .brand-entrance__cta:focus-visible {
-  border-color: var(--shukla-cream);
+  border-color: var(--sukla-cream);
   background: transparent;
-  color: var(--shukla-cream);
+  color: var(--sukla-cream);
 }
 
 .brand-entrance__cta:focus-visible,
 .brand-entrance__skip:focus-visible {
-  outline: 2px solid var(--shukla-cream);
+  outline: 2px solid var(--sukla-cream);
   outline-offset: 4px;
 }
 
@@ -339,7 +339,7 @@
   padding: 0.9rem 1.1rem;
   border: 1px solid rgba(250, 247, 242, 0.45);
   background: rgba(20, 17, 16, 0.3);
-  color: var(--shukla-cream);
+  color: var(--sukla-cream);
   font-family: var(--font-sans);
   font-size: 0.9rem;
   letter-spacing: 0.08em;
@@ -353,7 +353,7 @@
 
 .brand-entrance__access-input:focus {
   outline: none;
-  border-color: var(--shukla-cream);
+  border-color: var(--sukla-cream);
   background: rgba(20, 17, 16, 0.45);
 }
 
@@ -379,9 +379,9 @@
   gap: 0.55rem;
   margin: 1rem 0 0 0.15rem;
   padding: 0.55rem 0.8rem;
-  border-left: 2px solid var(--shukla-terracotta);
+  border-left: 2px solid var(--sukla-terracotta);
   background: rgba(250, 247, 242, 0.12);
-  color: var(--shukla-cream);
+  color: var(--sukla-cream);
   font-family: var(--font-serif);
   font-size: 0.86rem;
   font-style: italic;
@@ -439,20 +439,20 @@
   border: 1px solid rgba(250, 247, 242, 0.45);
   border-radius: 50%;
   background: rgba(20, 17, 16, 0.18);
-  color: var(--shukla-cream);
+  color: var(--sukla-cream);
   cursor: pointer;
   transition: background-color 250ms ease, border-color 250ms ease, color 250ms ease;
 }
 
 .brand-entrance__arrow:hover,
 .brand-entrance__arrow:focus-visible {
-  border-color: var(--shukla-cream);
-  background: var(--shukla-cream);
-  color: var(--shukla-charcoal);
+  border-color: var(--sukla-cream);
+  background: var(--sukla-cream);
+  color: var(--sukla-charcoal);
 }
 
 .brand-entrance__arrow:focus-visible {
-  outline: 2px solid var(--shukla-cream);
+  outline: 2px solid var(--sukla-cream);
   outline-offset: 3px;
 }
 
@@ -471,7 +471,7 @@
 }
 
 .brand-entrance__progress .brand-entrance__progress-item--active {
-  background: var(--shukla-cream);
+  background: var(--sukla-cream);
 }
 
 @keyframes brand-entrance-in {

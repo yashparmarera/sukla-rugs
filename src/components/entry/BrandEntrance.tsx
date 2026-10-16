@@ -5,7 +5,7 @@ import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
 import React, { useEffect, useState, useSyncExternalStore } from 'react';
 import { heroImages } from '@/components/hero/hero-images';
 
-const SESSION_KEY = 'shukla-entry-seen';
+const SESSION_KEY = 'sukla-entry-seen';
 const SLIDE_DURATION = 2200;
 const ACCESS_PASSWORD = 'suklarugs20';
 

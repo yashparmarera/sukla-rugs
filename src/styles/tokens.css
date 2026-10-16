@@ -1,18 +1,18 @@
-/* SHUKLA RUGS - Ultra-Premium Design System Tokens */
+/* SUKLA RUGS - Ultra-Premium Design System Tokens */
 
 :root {
   /* Core Brand Colors */
-  --shukla-ivory: #F3ECE4;
-  --shukla-cream: #FAF7F2;
-  --shukla-sand: #E6DDD4;
-  --shukla-charcoal: #211D1B;
-  --shukla-black: #141110;
-  --shukla-taupe: #A8917E;
-  --shukla-taupe-light: #C9BAAB;
-  --shukla-terracotta: #BC8A5A;
-  --shukla-terracotta-dark: #96673A;
-  --shukla-muted-border: rgba(33, 29, 27, 0.12);
-  --shukla-subtle-bg: rgba(33, 29, 27, 0.03);
+  --sukla-ivory: #F3ECE4;
+  --sukla-cream: #FAF7F2;
+  --sukla-sand: #E6DDD4;
+  --sukla-charcoal: #211D1B;
+  --sukla-black: #141110;
+  --sukla-taupe: #A8917E;
+  --sukla-taupe-light: #C9BAAB;
+  --sukla-terracotta: #BC8A5A;
+  --sukla-terracotta-dark: #96673A;
+  --sukla-muted-border: rgba(33, 29, 27, 0.12);
+  --sukla-subtle-bg: rgba(33, 29, 27, 0.03);
 
   /* Collection Accent Palette */
   --accent-oushak: #9E3324;

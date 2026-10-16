@@ -32,21 +32,21 @@ const ROOMS = [
 
 export const ShopByRoom: React.FC = () => {
   return (
-    <section className="py-20 bg-[var(--shukla-cream)] border-y border-[var(--shukla-muted-border)]">
+    <section className="py-20 bg-[var(--sukla-cream)] border-y border-[var(--sukla-muted-border)]">
       <div className="editorial-container">
         
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 space-y-4 md:space-y-0">
           <div>
-            <span className="block text-xs uppercase tracking-[0.25em] text-[var(--shukla-terracotta)] font-sans mb-2">
+            <span className="block text-xs uppercase tracking-[0.25em] text-[var(--sukla-terracotta)] font-sans mb-2">
               Architectural Placement
             </span>
-            <h2 className="display-lg text-2xl md:text-3xl lg:text-4xl text-[var(--shukla-charcoal)]">
+            <h2 className="display-lg text-2xl md:text-3xl lg:text-4xl text-[var(--sukla-charcoal)]">
               Shop by Space &amp; Scale
             </h2>
           </div>
           <Link
             href="/shop"
-            className="text-xs font-sans uppercase tracking-[0.18em] text-[var(--shukla-charcoal)] hover:text-[var(--shukla-terracotta)] hover-underline-animation flex items-center gap-2 font-semibold"
+            className="text-xs font-sans uppercase tracking-[0.18em] text-[var(--sukla-charcoal)] hover:text-[var(--sukla-terracotta)] hover-underline-animation flex items-center gap-2 font-semibold"
           >
             Explore Interactive Size Guide <ArrowRight className="w-3.5 h-3.5" />
           </Link>
@@ -57,9 +57,9 @@ export const ShopByRoom: React.FC = () => {
             <Link
               key={room.title}
               href="/shop"
-              className="group relative flex flex-col bg-[var(--shukla-ivory)] border border-[var(--shukla-muted-border)] overflow-hidden"
+              className="group relative flex flex-col bg-[var(--sukla-ivory)] border border-[var(--sukla-muted-border)] overflow-hidden"
             >
-              <div className="relative aspect-[4/5] w-full overflow-hidden bg-[var(--shukla-sand)]">
+              <div className="relative aspect-[4/5] w-full overflow-hidden bg-[var(--sukla-sand)]">
                 <Image
                   src={room.image}
                   alt={room.title}
@@ -67,10 +67,10 @@ export const ShopByRoom: React.FC = () => {
                   sizes="(max-width: 768px) 100vw, 25vw"
                   className="object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[var(--shukla-charcoal)]/80 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[var(--sukla-charcoal)]/80 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
                 
                 <div className="absolute bottom-4 left-4 right-4 text-white">
-                  <h3 className="heading text-lg mb-1 group-hover:text-[var(--shukla-terracotta)] transition-colors">
+                  <h3 className="heading text-lg mb-1 group-hover:text-[var(--sukla-terracotta)] transition-colors">
                     {room.title}
                   </h3>
                   <p className="text-xs font-sans text-white/80 line-clamp-2">
@@ -79,11 +79,11 @@ export const ShopByRoom: React.FC = () => {
                 </div>
               </div>
 
-              <div className="p-4 bg-[var(--shukla-ivory)] border-t border-[var(--shukla-muted-border)] flex items-center justify-between text-xs font-sans text-[var(--shukla-charcoal)]">
-                <span className="font-sans text-[var(--shukla-taupe)] text-[11px] truncate">
+              <div className="p-4 bg-[var(--sukla-ivory)] border-t border-[var(--sukla-muted-border)] flex items-center justify-between text-xs font-sans text-[var(--sukla-charcoal)]">
+                <span className="font-sans text-[var(--sukla-taupe)] text-[11px] truncate">
                   {room.recommendation}
                 </span>
-                <ArrowRight className="w-4 h-4 text-[var(--shukla-charcoal)] group-hover:translate-x-1 transition-transform shrink-0 ml-2" />
+                <ArrowRight className="w-4 h-4 text-[var(--sukla-charcoal)] group-hover:translate-x-1 transition-transform shrink-0 ml-2" />
               </div>
             </Link>
           ))}

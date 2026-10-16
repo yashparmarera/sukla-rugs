@@ -19,19 +19,19 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-[var(--shukla-charcoal)] text-[var(--shukla-ivory)] pt-20 pb-12 border-t border-white/10">
+    <footer className="bg-[var(--sukla-charcoal)] text-[var(--sukla-ivory)] pt-20 pb-12 border-t border-white/10">
       <div className="editorial-container">
         
         {/* Top Newsletter & Brand Statement */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-16 border-b border-white/10">
           <div className="lg:col-span-6 space-y-6">
             <div className="flex items-center gap-3">
-              <KnotGlyph size="md" className="text-[var(--shukla-terracotta)]" />
+              <KnotGlyph size="md" className="text-[var(--sukla-terracotta)]" />
               <span className="font-display text-2xl tracking-[0.22em] uppercase font-medium">
                 SUKLA RUGS
               </span>
             </div>
-            <p className="font-serif italic text-lg text-[var(--shukla-taupe-light)] max-w-md">
+            <p className="font-serif italic text-lg text-[var(--sukla-taupe-light)] max-w-md">
               &quot;Every rug tells a story. Handcrafted in Bhadohi, Uttar Pradesh — designed for living spaces around the world.&quot;
             </p>
             <div className="text-xs font-sans text-white/60 space-y-1">
@@ -41,16 +41,16 @@ export const Footer: React.FC = () => {
           </div>
 
           <div className="lg:col-span-6 space-y-4 lg:pl-12">
-            <h4 className="eyebrow text-xs text-[var(--shukla-terracotta)]">
+            <h4 className="eyebrow text-xs text-[var(--sukla-terracotta)]">
               The Sukla Journal &amp; Private Inquiries
             </h4>
-            <p className="text-xs font-sans text-[var(--shukla-ivory)]/70 leading-relaxed">
+            <p className="text-xs font-sans text-[var(--sukla-ivory)]/70 leading-relaxed">
               Subscribe to receive private previews of new loom releases, artisan narratives, and bespoke design guides.
             </p>
             
             {subscribed ? (
-              <div className="p-4 bg-white/5 border border-[var(--shukla-terracotta)] text-xs font-sans text-white flex items-center gap-3">
-                <Check className="w-4 h-4 text-[var(--shukla-terracotta)]" />
+              <div className="p-4 bg-white/5 border border-[var(--sukla-terracotta)] text-xs font-sans text-white flex items-center gap-3">
+                <Check className="w-4 h-4 text-[var(--sukla-terracotta)]" />
                 <span>Thank you. You have been added to the SUKLA RUGS private registry.</span>
               </div>
             ) : (
@@ -61,7 +61,7 @@ export const Footer: React.FC = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email address..."
-                  className="flex-1 bg-white/5 border border-white/20 px-4 py-3 text-xs font-sans text-white placeholder:text-white/40 focus:outline-none focus:border-[var(--shukla-terracotta)] transition-colors"
+                  className="flex-1 bg-white/5 border border-white/20 px-4 py-3 text-xs font-sans text-white placeholder:text-white/40 focus:outline-none focus:border-[var(--sukla-terracotta)] transition-colors"
                 />
                 <Button type="submit" variant="terracotta" size="sm">
                   <span>Join</span>
@@ -77,7 +77,7 @@ export const Footer: React.FC = () => {
           
           {/* Col 1: Shop */}
           <div className="space-y-4">
-            <h5 className="eyebrow text-[var(--shukla-terracotta)] text-[11px]">
+            <h5 className="eyebrow text-[var(--sukla-terracotta)] text-[11px]">
               Shop Collections
             </h5>
             <ul className="space-y-2.5 text-white/70">
@@ -93,7 +93,7 @@ export const Footer: React.FC = () => {
 
           {/* Col 2: Discover */}
           <div className="space-y-4">
-            <h5 className="eyebrow text-[var(--shukla-terracotta)] text-[11px]">
+            <h5 className="eyebrow text-[var(--sukla-terracotta)] text-[11px]">
               Discover &amp; Heritage
             </h5>
             <ul className="space-y-2.5 text-white/70">
@@ -107,7 +107,7 @@ export const Footer: React.FC = () => {
 
           {/* Col 3: Services & Guides */}
           <div className="space-y-4">
-            <h5 className="eyebrow text-[var(--shukla-terracotta)] text-[11px]">
+            <h5 className="eyebrow text-[var(--sukla-terracotta)] text-[11px]">
               Services &amp; Guides
             </h5>
             <ul className="space-y-2.5 text-white/70">
@@ -122,7 +122,7 @@ export const Footer: React.FC = () => {
 
           {/* Col 4: International Markets & Guarantees */}
           <div className="space-y-4">
-            <h5 className="eyebrow text-[var(--shukla-terracotta)] text-[11px]">
+            <h5 className="eyebrow text-[var(--sukla-terracotta)] text-[11px]">
               Global Markets
             </h5>
             <p className="text-white/70 leading-relaxed">

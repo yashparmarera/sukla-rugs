@@ -65,7 +65,7 @@ const STAGES = [
 
 export default function ProcessPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-[var(--shukla-ivory)]">
+    <div className="flex flex-col min-h-screen bg-[var(--sukla-ivory)]">
       <Header />
 
       <main className="flex-1 py-16 md:py-24">
@@ -73,14 +73,14 @@ export default function ProcessPage() {
           
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto space-y-4 mb-20">
-            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[var(--shukla-terracotta)] font-sans">
+            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[var(--sukla-terracotta)] font-sans">
               <KnotGlyph size="sm" />
               <span>Artisanal Alchemy</span>
             </div>
-            <h1 className="display-lg text-3xl sm:text-4xl md:text-5xl text-[var(--shukla-charcoal)]">
+            <h1 className="display-lg text-3xl sm:text-4xl md:text-5xl text-[var(--sukla-charcoal)]">
               The 7 Stages of Master Knotting
             </h1>
-            <p className="font-sans text-base md:text-lg text-[var(--shukla-charcoal)]/75 leading-relaxed">
+            <p className="font-sans text-base md:text-lg text-[var(--sukla-charcoal)]/75 leading-relaxed">
               A <span className="nums">14</span>-week journey of patience, discipline, and human touch in Bhadohi, Uttar Pradesh.
             </p>
           </div>
@@ -96,7 +96,7 @@ export default function ProcessPage() {
               >
                 {/* Image */}
                 <div className={`lg:col-span-6 ${idx % 2 === 1 ? 'lg:order-2' : 'lg:order-1'}`}>
-                  <div className="relative aspect-[4/3] w-full bg-[var(--shukla-sand)] border border-[var(--shukla-muted-border)] overflow-hidden shadow-subtle">
+                  <div className="relative aspect-[4/3] w-full bg-[var(--sukla-sand)] border border-[var(--sukla-muted-border)] overflow-hidden shadow-subtle">
                     <Image
                       src={stage.image}
                       alt={stage.title}
@@ -104,7 +104,7 @@ export default function ProcessPage() {
                       sizes="(max-width: 1024px) 100vw, 50vw"
                       className="object-cover"
                     />
-                    <span className="nums absolute top-4 left-4 text-2xl font-semibold px-3 py-1 bg-[var(--shukla-charcoal)] text-white">
+                    <span className="nums absolute top-4 left-4 text-2xl font-semibold px-3 py-1 bg-[var(--sukla-charcoal)] text-white">
                       {stage.num}
                     </span>
                   </div>
@@ -112,16 +112,16 @@ export default function ProcessPage() {
 
                 {/* Content */}
                 <div className={`lg:col-span-6 space-y-4 ${idx % 2 === 1 ? 'lg:order-1' : 'lg:order-2'}`}>
-                  <span className="eyebrow block text-xs text-[var(--shukla-terracotta)]">
+                  <span className="eyebrow block text-xs text-[var(--sukla-terracotta)]">
                     Stage <span className="nums">{stage.num}</span>
                   </span>
-                  <h2 className="display-lg text-2xl md:text-3xl text-[var(--shukla-charcoal)]">
+                  <h2 className="display-lg text-2xl md:text-3xl text-[var(--sukla-charcoal)]">
                     {stage.title}
                   </h2>
-                  <h3 className="font-sans text-base text-[var(--shukla-taupe)]">
+                  <h3 className="font-sans text-base text-[var(--sukla-taupe)]">
                     {stage.subtitle}
                   </h3>
-                  <p className="text-xs font-sans text-[var(--shukla-charcoal)]/85 leading-relaxed">
+                  <p className="text-xs font-sans text-[var(--sukla-charcoal)]/85 leading-relaxed">
                     {stage.description}
                   </p>
                 </div>
@@ -134,7 +134,7 @@ export default function ProcessPage() {
           {/* Call to action */}
           <div className="text-center max-w-xl mx-auto space-y-6">
             <h3 className="display-lg text-2xl">Experience the Finished Masterpieces</h3>
-            <p className="font-sans text-sm text-[var(--shukla-charcoal)]/75 leading-relaxed">
+            <p className="font-sans text-sm text-[var(--sukla-charcoal)]/75 leading-relaxed">
               Browse our collections to see how these <span className="nums">7</span> craft stages coalesce into enduring floor textiles.
             </p>
             <Button href="/shop" variant="primary" size="lg">

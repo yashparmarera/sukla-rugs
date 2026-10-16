@@ -64,7 +64,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[var(--shukla-ivory)]">
+    <div className="flex flex-col min-h-screen bg-[var(--sukla-ivory)]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

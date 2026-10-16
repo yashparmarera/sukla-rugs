@@ -13,14 +13,14 @@ const EMPTY_CART: Cart = {
 
 function notifyCartUpdate(cart: Cart): void {
   if (typeof window === 'undefined') return;
-  window.dispatchEvent(new CustomEvent('shukla:cart-updated', { detail: cart }));
+  window.dispatchEvent(new CustomEvent('sukla:cart-updated', { detail: cart }));
 }
 
 export function getLocalCart(): Cart {
   if (typeof window === 'undefined') return { ...EMPTY_CART, lines: [], cost: { ...EMPTY_CART.cost } };
 
   try {
-    const raw = localStorage.getItem('shukla_cart_v1');
+    const raw = localStorage.getItem('sukla_cart_v1');
     if (raw) return JSON.parse(raw);
 
     const emptyCart: Cart = {
@@ -32,7 +32,7 @@ export function getLocalCart(): Cart {
         totalAmount: { amount: '0.00', currencyCode: 'USD' }
       }
     };
-    localStorage.setItem('shukla_cart_v1', JSON.stringify(emptyCart));
+    localStorage.setItem('sukla_cart_v1', JSON.stringify(emptyCart));
     return emptyCart;
   } catch {
     return { ...EMPTY_CART, lines: [], cost: { ...EMPTY_CART.cost } };
@@ -41,7 +41,7 @@ export function getLocalCart(): Cart {
 
 function persistCart(cart: Cart): Cart {
   if (typeof window !== 'undefined') {
-    localStorage.setItem('shukla_cart_v1', JSON.stringify(cart));
+    localStorage.setItem('sukla_cart_v1', JSON.stringify(cart));
     notifyCartUpdate(cart);
   }
   return cart;

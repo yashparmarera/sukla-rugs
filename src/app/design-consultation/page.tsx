@@ -28,43 +28,43 @@ export default function DesignConsultationPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[var(--shukla-ivory)]">
+    <div className="flex flex-col min-h-screen bg-[var(--sukla-ivory)]">
       <Header />
 
       <main className="flex-1 py-16 md:py-24">
         <div className="editorial-container max-w-3xl mx-auto space-y-12">
           
           <div className="text-center space-y-4">
-            <Compass className="w-8 h-8 text-[var(--shukla-terracotta)] mx-auto" />
-            <span className="text-xs uppercase tracking-[0.25em] text-[var(--shukla-taupe)] font-sans block">
+            <Compass className="w-8 h-8 text-[var(--sukla-terracotta)] mx-auto" />
+            <span className="text-xs uppercase tracking-[0.25em] text-[var(--sukla-taupe)] font-sans block">
               Complimentary Concierge
             </span>
-            <h1 className="display-lg text-3xl sm:text-4xl text-[var(--shukla-charcoal)]">
+            <h1 className="display-lg text-3xl sm:text-4xl text-[var(--sukla-charcoal)]">
               Bespoke Design Consultation
             </h1>
-            <p className="font-sans text-base text-[var(--shukla-charcoal)]/75 leading-relaxed">
+            <p className="font-sans text-base text-[var(--sukla-charcoal)]/75 leading-relaxed">
               Work directly with our Bhadohi textile specialists for spatial rendering, swatch ordering, and custom dimensioning.
             </p>
           </div>
 
           {submitted ? (
-            <div className="p-12 bg-[var(--shukla-cream)] border border-[var(--shukla-terracotta)] text-center space-y-4 shadow-subtle">
+            <div className="p-12 bg-[var(--sukla-cream)] border border-[var(--sukla-terracotta)] text-center space-y-4 shadow-subtle">
               <div className="w-12 h-12 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto">
                 <Check className="w-6 h-6" />
               </div>
-              <h2 className="display-lg text-2xl text-[var(--shukla-charcoal)]">
+              <h2 className="display-lg text-2xl text-[var(--sukla-charcoal)]">
                 Consultation Request Received
               </h2>
-              <p className="font-sans text-base text-[var(--shukla-charcoal)]/75 leading-relaxed">
+              <p className="font-sans text-base text-[var(--sukla-charcoal)]/75 leading-relaxed">
                 Thank you, {formData.name}. A senior SUKLA RUGS design concierge will review your architectural requirements and contact you within <span className="nums">24</span> business hours.
               </p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="bg-[var(--shukla-cream)] border border-[var(--shukla-muted-border)] p-8 sm:p-12 space-y-6 shadow-subtle">
+            <form onSubmit={handleSubmit} className="bg-[var(--sukla-cream)] border border-[var(--sukla-muted-border)] p-8 sm:p-12 space-y-6 shadow-subtle">
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-xs uppercase tracking-widest text-[var(--shukla-taupe)] font-sans mb-2">
+                  <label className="block text-xs uppercase tracking-widest text-[var(--sukla-taupe)] font-sans mb-2">
                     Full Name *
                   </label>
                   <input
@@ -72,12 +72,12 @@ export default function DesignConsultationPage() {
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full bg-[var(--shukla-ivory)] border border-[var(--shukla-muted-border)] p-3 text-xs font-sans focus:outline-none focus:border-[var(--shukla-charcoal)]"
+                    className="w-full bg-[var(--sukla-ivory)] border border-[var(--sukla-muted-border)] p-3 text-xs font-sans focus:outline-none focus:border-[var(--sukla-charcoal)]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs uppercase tracking-widest text-[var(--shukla-taupe)] font-sans mb-2">
+                  <label className="block text-xs uppercase tracking-widest text-[var(--sukla-taupe)] font-sans mb-2">
                     Email Address *
                   </label>
                   <input
@@ -85,20 +85,20 @@ export default function DesignConsultationPage() {
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full bg-[var(--shukla-ivory)] border border-[var(--shukla-muted-border)] p-3 text-xs font-sans focus:outline-none focus:border-[var(--shukla-charcoal)]"
+                    className="w-full bg-[var(--sukla-ivory)] border border-[var(--sukla-muted-border)] p-3 text-xs font-sans focus:outline-none focus:border-[var(--sukla-charcoal)]"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-xs uppercase tracking-widest text-[var(--shukla-taupe)] font-sans mb-2">
+                  <label className="block text-xs uppercase tracking-widest text-[var(--sukla-taupe)] font-sans mb-2">
                     Room Type
                   </label>
                   <select
                     value={formData.roomType}
                     onChange={(e) => setFormData({ ...formData, roomType: e.target.value })}
-                    className="w-full bg-[var(--shukla-ivory)] border border-[var(--shukla-muted-border)] p-3 text-xs font-sans focus:outline-none"
+                    className="w-full bg-[var(--sukla-ivory)] border border-[var(--sukla-muted-border)] p-3 text-xs font-sans focus:outline-none"
                   >
                     <option value="Living Room">Living Room</option>
                     <option value="Primary Bedroom">Primary Bedroom</option>
@@ -109,13 +109,13 @@ export default function DesignConsultationPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs uppercase tracking-widest text-[var(--shukla-taupe)] font-sans mb-2">
+                  <label className="block text-xs uppercase tracking-widest text-[var(--sukla-taupe)] font-sans mb-2">
                     Target Budget Range
                   </label>
                   <select
                     value={formData.budget}
                     onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                    className="w-full bg-[var(--shukla-ivory)] border border-[var(--shukla-muted-border)] p-3 text-xs font-sans focus:outline-none"
+                    className="w-full bg-[var(--sukla-ivory)] border border-[var(--sukla-muted-border)] p-3 text-xs font-sans focus:outline-none"
                   >
                     <option value="$1,500 - $2,500">$1,500 - $2,500</option>
                     <option value="$2,500 - $5,000">$2,500 - $5,000</option>
@@ -126,7 +126,7 @@ export default function DesignConsultationPage() {
               </div>
 
               <div>
-                <label className="block text-xs uppercase tracking-widest text-[var(--shukla-taupe)] font-sans mb-2">
+                <label className="block text-xs uppercase tracking-widest text-[var(--sukla-taupe)] font-sans mb-2">
                   Project Notes / Space Details
                 </label>
                 <textarea
@@ -134,7 +134,7 @@ export default function DesignConsultationPage() {
                   value={formData.notes}
                   onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                   placeholder="Share room dimensions, lighting conditions, or color palettes..."
-                  className="w-full bg-[var(--shukla-ivory)] border border-[var(--shukla-muted-border)] p-3 text-xs font-sans focus:outline-none"
+                  className="w-full bg-[var(--sukla-ivory)] border border-[var(--sukla-muted-border)] p-3 text-xs font-sans focus:outline-none"
                 />
               </div>
 

@@ -5,21 +5,21 @@ import { Button } from '@/components/ui/Button';
 
 export const DesignConsultationBanner: React.FC = () => {
   return (
-    <section className="py-20 bg-[var(--shukla-sand)]/60 border-y border-[var(--shukla-muted-border)]">
+    <section className="py-20 bg-[var(--sukla-sand)]/60 border-y border-[var(--sukla-muted-border)]">
       <div className="editorial-container">
-        <div className="bg-[var(--shukla-ivory)] border border-[var(--shukla-muted-border)] p-8 sm:p-12 md:p-16 shadow-subtle grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="bg-[var(--sukla-ivory)] border border-[var(--sukla-muted-border)] p-8 sm:p-12 md:p-16 shadow-subtle grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           
           <div className="lg:col-span-8 space-y-4">
-            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[var(--shukla-terracotta)] font-sans">
+            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[var(--sukla-terracotta)] font-sans">
               <Compass className="w-4 h-4" />
               <span>Complimentary Concierge & Trade Services</span>
             </div>
 
-            <h2 className="display-lg text-2xl sm:text-3xl md:text-4xl text-[var(--shukla-charcoal)]">
+            <h2 className="display-lg text-2xl sm:text-3xl md:text-4xl text-[var(--sukla-charcoal)]">
               Need Assistance Specifying the Perfect Rug?
             </h2>
 
-            <p className="font-sans text-base sm:text-lg text-[var(--shukla-charcoal)]/75 max-w-2xl leading-relaxed">
+            <p className="font-sans text-base sm:text-lg text-[var(--sukla-charcoal)]/75 max-w-2xl leading-relaxed">
               Whether you require custom dimensions, swatch samples, or room scale recommendations, our Bhadohi design specialists guide your selection step-by-step.
             </p>
           </div>
@@ -32,9 +32,9 @@ export const DesignConsultationBanner: React.FC = () => {
             
             <Link
               href="/find-your-rug"
-              className="inline-flex items-center justify-center border border-[var(--shukla-charcoal)] px-6 py-3.5 text-xs font-sans uppercase tracking-[0.18em] text-[var(--shukla-charcoal)] hover:bg-[var(--shukla-charcoal)] hover:text-white transition-colors"
+              className="inline-flex items-center justify-center border border-[var(--sukla-charcoal)] px-6 py-3.5 text-xs font-sans uppercase tracking-[0.18em] text-[var(--sukla-charcoal)] hover:bg-[var(--sukla-charcoal)] hover:text-white transition-colors"
             >
-              <Sparkles className="w-4 h-4 mr-2 text-[var(--shukla-terracotta)]" />
+              <Sparkles className="w-4 h-4 mr-2 text-[var(--sukla-terracotta)]" />
               Take 60-Sec Rug Quiz
             </Link>
           </div>

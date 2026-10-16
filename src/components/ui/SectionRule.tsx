@@ -12,13 +12,13 @@ export const SectionRule: React.FC<SectionRuleProps> = ({
 }) => {
   return (
     <div className={`w-full flex items-center justify-center my-12 md:my-20 ${className}`}>
-      <div className="h-[1px] bg-[var(--shukla-muted-border)] flex-grow" />
+      <div className="h-[1px] bg-[var(--sukla-muted-border)] flex-grow" />
       {withGlyph && (
-        <div className="px-6 text-[var(--shukla-taupe)]">
+        <div className="px-6 text-[var(--sukla-taupe)]">
           <KnotGlyph size="sm" />
         </div>
       )}
-      <div className="h-[1px] bg-[var(--shukla-muted-border)] flex-grow" />
+      <div className="h-[1px] bg-[var(--sukla-muted-border)] flex-grow" />
     </div>
   );
 };

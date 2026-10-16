@@ -69,16 +69,16 @@ export const productFragment = `
         }
       }
     }
-    technique: metafield(namespace: "shukla", key: "technique") { value }
-    material: metafield(namespace: "shukla", key: "material") { value }
-    color_family: metafield(namespace: "shukla", key: "color_family") { value }
-    origin_region: metafield(namespace: "shukla", key: "origin_region") { value }
-    care_instructions: metafield(namespace: "shukla", key: "care_instructions") { value }
-    pile_height: metafield(namespace: "shukla", key: "pile_height") { value }
-    weight: metafield(namespace: "shukla", key: "weight") { value }
-    knots_per_sq_inch: metafield(namespace: "shukla", key: "knots_per_sq_inch") { value }
-    craft_duration: metafield(namespace: "shukla", key: "craft_duration") { value }
-    product_story: metafield(namespace: "shukla", key: "product_story") { value }
+    technique: metafield(namespace: "sukla", key: "technique") { value }
+    material: metafield(namespace: "sukla", key: "material") { value }
+    color_family: metafield(namespace: "sukla", key: "color_family") { value }
+    origin_region: metafield(namespace: "sukla", key: "origin_region") { value }
+    care_instructions: metafield(namespace: "sukla", key: "care_instructions") { value }
+    pile_height: metafield(namespace: "sukla", key: "pile_height") { value }
+    weight: metafield(namespace: "sukla", key: "weight") { value }
+    knots_per_sq_inch: metafield(namespace: "sukla", key: "knots_per_sq_inch") { value }
+    craft_duration: metafield(namespace: "sukla", key: "craft_duration") { value }
+    product_story: metafield(namespace: "sukla", key: "product_story") { value }
   }
   ${imageFragment}
 `;

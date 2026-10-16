@@ -19,26 +19,26 @@ export default function AccountPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[var(--shukla-ivory)]">
+    <div className="flex flex-col min-h-screen bg-[var(--sukla-ivory)]">
       <Header />
 
       <main className="flex-1 py-16 md:py-24">
         <div className="editorial-container max-w-3xl mx-auto space-y-12">
           
           <div className="text-center space-y-4">
-            <User className="w-8 h-8 text-[var(--shukla-terracotta)] mx-auto" />
-            <span className="text-xs uppercase tracking-[0.25em] text-[var(--shukla-taupe)] font-sans block">
+            <User className="w-8 h-8 text-[var(--sukla-terracotta)] mx-auto" />
+            <span className="text-xs uppercase tracking-[0.25em] text-[var(--sukla-taupe)] font-sans block">
               Shopify Customer Account
             </span>
-            <h1 className="display-lg text-3xl sm:text-4xl text-[var(--shukla-charcoal)]">
+            <h1 className="display-lg text-3xl sm:text-4xl text-[var(--sukla-charcoal)]">
               Client Portal
             </h1>
           </div>
 
           {!isLoggedIn ? (
-            <div className="bg-[var(--shukla-cream)] border border-[var(--shukla-muted-border)] p-8 sm:p-12 max-w-md mx-auto space-y-6 shadow-subtle">
+            <div className="bg-[var(--sukla-cream)] border border-[var(--sukla-muted-border)] p-8 sm:p-12 max-w-md mx-auto space-y-6 shadow-subtle">
               <h2 className="heading text-lg text-center">Sign In to Your Account</h2>
-              <p className="text-xs font-sans text-[var(--shukla-charcoal)]/80 text-center">
+              <p className="text-xs font-sans text-[var(--sukla-charcoal)]/80 text-center">
                 Enter your email address to access your order history, delivery tracking, and saved address book.
               </p>
               <form onSubmit={handleLogin} className="space-y-4">
@@ -48,7 +48,7 @@ export default function AccountPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter email address..."
-                  className="w-full bg-[var(--shukla-ivory)] border border-[var(--shukla-muted-border)] p-3 text-xs font-sans focus:outline-none"
+                  className="w-full bg-[var(--sukla-ivory)] border border-[var(--sukla-muted-border)] p-3 text-xs font-sans focus:outline-none"
                 />
                 <Button type="submit" variant="primary" fullWidth size="md">
                   Continue with Shopify Account
@@ -56,11 +56,11 @@ export default function AccountPage() {
               </form>
             </div>
           ) : (
-            <div className="space-y-8 bg-[var(--shukla-cream)] border border-[var(--shukla-muted-border)] p-8 shadow-subtle">
-              <div className="flex justify-between items-center pb-4 border-b border-[var(--shukla-muted-border)]">
+            <div className="space-y-8 bg-[var(--sukla-cream)] border border-[var(--sukla-muted-border)] p-8 shadow-subtle">
+              <div className="flex justify-between items-center pb-4 border-b border-[var(--sukla-muted-border)]">
                 <div>
                   <h2 className="heading text-lg">Welcome back</h2>
-                  <span className="text-xs font-sans text-[var(--shukla-taupe)]">{email}</span>
+                  <span className="text-xs font-sans text-[var(--sukla-taupe)]">{email}</span>
                 </div>
                 <button
                   onClick={() => setIsLoggedIn(false)}
@@ -71,10 +71,10 @@ export default function AccountPage() {
               </div>
 
               <div className="space-y-4">
-                <div className="eyebrow flex items-center gap-2 text-sm text-[var(--shukla-charcoal)]">
-                  <Package className="w-4 h-4 text-[var(--shukla-terracotta)]" /> Order History
+                <div className="eyebrow flex items-center gap-2 text-sm text-[var(--sukla-charcoal)]">
+                  <Package className="w-4 h-4 text-[var(--sukla-terracotta)]" /> Order History
                 </div>
-                <div className="p-6 bg-[var(--shukla-ivory)] border border-[var(--shukla-muted-border)] text-center text-xs font-sans text-[var(--shukla-taupe)]">
+                <div className="p-6 bg-[var(--sukla-ivory)] border border-[var(--sukla-muted-border)] text-center text-xs font-sans text-[var(--sukla-taupe)]">
                   No orders have been placed yet under {email}.
                 </div>
               </div>

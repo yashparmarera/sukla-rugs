@@ -36,12 +36,12 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
   const products = await getProducts({ collection: collection.handle });
 
   return (
-    <div className="flex flex-col min-h-screen bg-[var(--shukla-ivory)]">
+    <div className="flex flex-col min-h-screen bg-[var(--sukla-ivory)]">
       <Header />
 
       <main className="flex-1">
         {/* Collection Hero */}
-        <section className="relative py-20 md:py-28 bg-[var(--shukla-charcoal)] text-white overflow-hidden">
+        <section className="relative py-20 md:py-28 bg-[var(--sukla-charcoal)] text-white overflow-hidden">
           {collection.image && (
             <div className="absolute inset-0 z-0">
               <Image
@@ -51,7 +51,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
                 priority
                 className="object-cover opacity-35"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[var(--shukla-charcoal)] via-[var(--shukla-charcoal)]/60 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--sukla-charcoal)] via-[var(--sukla-charcoal)]/60 to-transparent" />
             </div>
           )}
 
@@ -65,7 +65,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
             <h1 className="display-xl text-4xl sm:text-5xl md:text-6xl">
               {collection.title}
             </h1>
-            <p className="font-sans text-base md:text-lg text-[var(--shukla-ivory)]/90 leading-relaxed">
+            <p className="font-sans text-base md:text-lg text-[var(--sukla-ivory)]/90 leading-relaxed">
               {collection.description}
             </p>
           </div>
@@ -73,13 +73,13 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
 
         {/* Collection Products Grid */}
         <section className="py-16 editorial-container">
-          <div className="flex justify-between items-center pb-6 border-b border-[var(--shukla-muted-border)] mb-8 text-xs font-sans">
-            <span className="uppercase tracking-[0.1em] text-[var(--shukla-taupe)]">
-              Displaying <strong className="nums text-[var(--shukla-charcoal)]">{products.length}</strong> Designs
+          <div className="flex justify-between items-center pb-6 border-b border-[var(--sukla-muted-border)] mb-8 text-xs font-sans">
+            <span className="uppercase tracking-[0.1em] text-[var(--sukla-taupe)]">
+              Displaying <strong className="nums text-[var(--sukla-charcoal)]">{products.length}</strong> Designs
             </span>
             <div className="flex items-center gap-2">
-              <KnotGlyph size="sm" className="text-[var(--shukla-terracotta)]" />
-              <span className="uppercase tracking-widest text-[var(--shukla-charcoal)] font-semibold">
+              <KnotGlyph size="sm" className="text-[var(--sukla-terracotta)]" />
+              <span className="uppercase tracking-widest text-[var(--sukla-charcoal)] font-semibold">
                 Authentic Bhadohi Weave
               </span>
             </div>

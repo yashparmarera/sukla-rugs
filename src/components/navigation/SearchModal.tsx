@@ -54,13 +54,13 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
       <div className="fixed inset-0 bg-black/65 backdrop-blur-xs transition-opacity" onClick={onClose} />
 
       <div className="relative min-h-screen flex items-start justify-center pt-16 md:pt-24 px-4 pb-12">
-        <div className="relative w-full max-w-3xl bg-[var(--shukla-ivory)] border border-[var(--shukla-muted-border)] shadow-2xl p-6 md:p-10">
+        <div className="relative w-full max-w-3xl bg-[var(--sukla-ivory)] border border-[var(--sukla-muted-border)] shadow-2xl p-6 md:p-10">
           {/* Header */}
-          <div className="flex items-center justify-between pb-6 border-b border-[var(--shukla-muted-border)]">
-            <h2 className="heading text-lg text-[var(--shukla-charcoal)]">Search Catalogue</h2>
+          <div className="flex items-center justify-between pb-6 border-b border-[var(--sukla-muted-border)]">
+            <h2 className="heading text-lg text-[var(--sukla-charcoal)]">Search Catalogue</h2>
             <button
               onClick={onClose}
-              className="p-2 text-[var(--shukla-charcoal)] hover:text-[var(--shukla-terracotta)] transition-colors"
+              className="p-2 text-[var(--sukla-charcoal)] hover:text-[var(--sukla-terracotta)] transition-colors"
               aria-label="Close search"
             >
               <X className="w-5 h-5" />
@@ -69,19 +69,19 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
 
           {/* Search Bar Input */}
           <div className="relative my-6">
-            <SearchIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--shukla-taupe)]" />
+            <SearchIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--sukla-taupe)]" />
             <input
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search by collection, technique, material, or color (e.g. Oushak, Wool, Terracotta)..."
               autoFocus
-              className="w-full bg-[var(--shukla-cream)] border border-[var(--shukla-muted-border)] pl-12 pr-10 py-4 text-sm font-sans focus:outline-none focus:border-[var(--shukla-charcoal)] placeholder:text-[var(--shukla-taupe)]"
+              className="w-full bg-[var(--sukla-cream)] border border-[var(--sukla-muted-border)] pl-12 pr-10 py-4 text-sm font-sans focus:outline-none focus:border-[var(--sukla-charcoal)] placeholder:text-[var(--sukla-taupe)]"
             />
             {query && (
               <button
                 onClick={() => setQuery('')}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-[var(--shukla-taupe)] hover:text-[var(--shukla-charcoal)] text-xs uppercase"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-[var(--sukla-taupe)] hover:text-[var(--sukla-charcoal)] text-xs uppercase"
               >
                 Clear
               </button>
@@ -90,8 +90,8 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
 
           {/* Popular Search Suggestions */}
           {!query && (
-            <div className="py-4 border-t border-[var(--shukla-muted-border)]/60">
-              <span className="block text-[10px] uppercase tracking-widest text-[var(--shukla-taupe)] font-sans mb-3">
+            <div className="py-4 border-t border-[var(--sukla-muted-border)]/60">
+              <span className="block text-[10px] uppercase tracking-widest text-[var(--sukla-taupe)] font-sans mb-3">
                 Suggested Searches
               </span>
               <div className="flex flex-wrap gap-2">
@@ -99,7 +99,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
                   <button
                     key={term}
                     onClick={() => setQuery(term)}
-                    className="px-3.5 py-1.5 bg-[var(--shukla-cream)] border border-[var(--shukla-muted-border)] text-xs text-[var(--shukla-charcoal)] hover:border-[var(--shukla-charcoal)] transition-colors font-sans"
+                    className="px-3.5 py-1.5 bg-[var(--sukla-cream)] border border-[var(--sukla-muted-border)] text-xs text-[var(--sukla-charcoal)] hover:border-[var(--sukla-charcoal)] transition-colors font-sans"
                   >
                     {term}
                   </button>
@@ -110,17 +110,17 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
 
           {/* Results Grid */}
           {loading && (
-            <div className="text-center py-12 text-xs font-sans text-[var(--shukla-taupe)] uppercase tracking-widest">
+            <div className="text-center py-12 text-xs font-sans text-[var(--sukla-taupe)] uppercase tracking-widest">
               Searching catalogue...
             </div>
           )}
 
           {!loading && query && results.length === 0 && (
             <div className="text-center py-12 space-y-2">
-              <p className="font-sans text-base text-[var(--shukla-charcoal)]">
+              <p className="font-sans text-base text-[var(--sukla-charcoal)]">
                 No rugs found matching &quot;{query}&quot;
               </p>
-              <p className="text-xs font-sans text-[var(--shukla-taupe)]">
+              <p className="text-xs font-sans text-[var(--sukla-taupe)]">
                 Try searching for materials like &quot;Wool&quot; or collections like &quot;Oushak&quot;.
               </p>
             </div>
@@ -128,7 +128,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
 
           {!loading && results.length > 0 && (
             <div className="mt-6 space-y-4 max-h-[50vh] overflow-y-auto pr-2">
-              <span className="block text-[10px] uppercase tracking-widest text-[var(--shukla-taupe)] font-sans">
+              <span className="block text-[10px] uppercase tracking-widest text-[var(--sukla-taupe)] font-sans">
                 <span className="nums">{results.length}</span> Result{results.length > 1 ? 's' : ''} Found
               </span>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -137,9 +137,9 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
                     key={product.id}
                     href={`/products/${product.handle}`}
                     onClick={onClose}
-                    className="flex items-center gap-4 p-3 bg-[var(--shukla-cream)]/70 border border-[var(--shukla-muted-border)] hover:border-[var(--shukla-charcoal)] transition-all group"
+                    className="flex items-center gap-4 p-3 bg-[var(--sukla-cream)]/70 border border-[var(--sukla-muted-border)] hover:border-[var(--sukla-charcoal)] transition-all group"
                   >
-                    <div className="relative w-16 h-20 shrink-0 bg-[var(--shukla-sand)] overflow-hidden">
+                    <div className="relative w-16 h-20 shrink-0 bg-[var(--sukla-sand)] overflow-hidden">
                       {product.featuredImage && (
                         <Image
                           src={product.featuredImage.url}
@@ -151,17 +151,17 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
                       )}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <span className="block text-[10px] uppercase tracking-widest text-[var(--shukla-taupe)] truncate">
+                      <span className="block text-[10px] uppercase tracking-widest text-[var(--sukla-taupe)] truncate">
                         {product.collection.title}
                       </span>
-                      <h4 className="heading text-sm text-[var(--shukla-charcoal)] group-hover:text-[var(--shukla-terracotta)] transition-colors truncate">
+                      <h4 className="heading text-sm text-[var(--sukla-charcoal)] group-hover:text-[var(--sukla-terracotta)] transition-colors truncate">
                         {product.title}
                       </h4>
-                      <span className="block text-xs text-[var(--shukla-charcoal)]/80 mt-1 font-medium">
+                      <span className="block text-xs text-[var(--sukla-charcoal)]/80 mt-1 font-medium">
                         From <span className="nums">${parseFloat(product.priceRange.minVariantPrice.amount).toLocaleString('en-US')}</span>
                       </span>
                     </div>
-                    <ArrowRight className="w-4 h-4 text-[var(--shukla-taupe)] group-hover:translate-x-1 group-hover:text-[var(--shukla-charcoal)] transition-all shrink-0 mr-2" />
+                    <ArrowRight className="w-4 h-4 text-[var(--sukla-taupe)] group-hover:translate-x-1 group-hover:text-[var(--sukla-charcoal)] transition-all shrink-0 mr-2" />
                   </Link>
                 ))}
               </div>

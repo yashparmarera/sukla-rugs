@@ -35,7 +35,7 @@ export default async function JournalArticlePage({ params }: ArticlePageProps) {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-[var(--shukla-ivory)]">
+    <div className="flex flex-col min-h-screen bg-[var(--sukla-ivory)]">
       <Header />
 
       <main className="flex-1 py-16 md:py-24">
@@ -43,26 +43,26 @@ export default async function JournalArticlePage({ params }: ArticlePageProps) {
           
           <Link
             href="/journal"
-            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[var(--shukla-taupe)] hover:text-[var(--shukla-charcoal)] font-sans"
+            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[var(--sukla-taupe)] hover:text-[var(--sukla-charcoal)] font-sans"
           >
             <ArrowLeft className="w-3.5 h-3.5" /> Back to Journal
           </Link>
 
           <div className="space-y-4">
-            <span className="text-xs uppercase tracking-[0.25em] text-[var(--shukla-terracotta)] font-sans block font-semibold">
+            <span className="text-xs uppercase tracking-[0.25em] text-[var(--sukla-terracotta)] font-sans block font-semibold">
               {article.category} • {article.readTime}
             </span>
-            <h1 className="display-lg text-3xl sm:text-4xl md:text-5xl text-[var(--shukla-charcoal)] leading-tight">
+            <h1 className="display-lg text-3xl sm:text-4xl md:text-5xl text-[var(--sukla-charcoal)] leading-tight">
               {article.title}
             </h1>
-            <div className="flex items-center gap-3 text-xs font-sans text-[var(--shukla-taupe)] pt-2 border-t border-[var(--shukla-muted-border)]">
+            <div className="flex items-center gap-3 text-xs font-sans text-[var(--sukla-taupe)] pt-2 border-t border-[var(--sukla-muted-border)]">
               <span>By {article.author}</span>
               <span>•</span>
               <span>Published {article.publishedAt}</span>
             </div>
           </div>
 
-          <div className="relative aspect-[16/9] w-full bg-[var(--shukla-sand)] border border-[var(--shukla-muted-border)] overflow-hidden">
+          <div className="relative aspect-[16/9] w-full bg-[var(--sukla-sand)] border border-[var(--sukla-muted-border)] overflow-hidden">
             <Image
               src={article.image.url}
               alt={article.title}
@@ -72,8 +72,8 @@ export default async function JournalArticlePage({ params }: ArticlePageProps) {
             />
           </div>
 
-          <div className="prose prose-stone max-w-none text-sm font-sans leading-relaxed text-[var(--shukla-charcoal)]/90 space-y-6 pt-4">
-            <p className="text-base font-normal text-[var(--shukla-charcoal)]">{article.excerpt}</p>
+          <div className="prose prose-stone max-w-none text-sm font-sans leading-relaxed text-[var(--sukla-charcoal)]/90 space-y-6 pt-4">
+            <p className="text-base font-normal text-[var(--sukla-charcoal)]">{article.excerpt}</p>
             <p className="font-sans text-sm leading-relaxed">{article.content}</p>
           </div>
 

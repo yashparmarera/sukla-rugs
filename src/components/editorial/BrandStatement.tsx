@@ -4,20 +4,20 @@ import { SectionRule } from '@/components/ui/SectionRule';
 
 export const BrandStatement: React.FC = () => {
   return (
-    <section className="py-20 md:py-28 bg-[var(--shukla-ivory)] text-center">
+    <section className="py-20 md:py-28 bg-[var(--sukla-ivory)] text-center">
       <div className="editorial-container max-w-4xl mx-auto space-y-6">
         
-        <KnotGlyph size="md" className="text-[var(--shukla-terracotta)]" />
+        <KnotGlyph size="md" className="text-[var(--sukla-terracotta)]" />
 
-        <h2 className="eyebrow text-xs text-[var(--shukla-taupe)]">
+        <h2 className="eyebrow text-xs text-[var(--sukla-taupe)]">
           The Sukla Rugs Ethos
         </h2>
 
-        <p className="display-xl text-3xl sm:text-4xl md:text-5xl text-[var(--shukla-charcoal)] leading-tight">
+        <p className="display-xl text-3xl sm:text-4xl md:text-5xl text-[var(--sukla-charcoal)] leading-tight">
           &quot;Every rug tells a story.&quot;
         </p>
 
-        <p className="font-sans text-base md:text-lg text-[var(--shukla-charcoal)]/75 leading-relaxed max-w-2xl mx-auto">
+        <p className="font-sans text-base md:text-lg text-[var(--sukla-charcoal)]/75 leading-relaxed max-w-2xl mx-auto">
           In the historic looms of Bhadohi, Uttar Pradesh, rug making is an enduring discipline of patience. Thousands of individually tied knots, hand-dyed organic yarns, and generations of inherited mastery yield textiles of quiet luxury and permanent resonance.
         </p>
 

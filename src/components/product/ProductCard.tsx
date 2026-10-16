@@ -27,9 +27,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
   const formattedPrice = minPrice.toLocaleString('en-US', { minimumFractionDigits: 2 });
 
   return (
-    <div className="group relative flex flex-col bg-[var(--shukla-cream)] border border-[var(--shukla-muted-border)]/70 hover:border-[var(--shukla-taupe)] transition-all duration-300">
+    <div className="group relative flex flex-col bg-[var(--sukla-cream)] border border-[var(--sukla-muted-border)]/70 hover:border-[var(--sukla-taupe)] transition-all duration-300">
       {/* Image Container with Hover Swap */}
-      <Link href={`/products/${product.handle}`} className="relative aspect-[3/4] w-full overflow-hidden bg-[var(--shukla-sand)]">
+      <Link href={`/products/${product.handle}`} className="relative aspect-[3/4] w-full overflow-hidden bg-[var(--sukla-sand)]">
         
         {/* Primary Image */}
         <Image
@@ -59,7 +59,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
             {product.collection.title}
           </span>
           {product.metafields.one_of_a_kind && (
-            <span className="text-[9px] uppercase tracking-[0.2em] font-sans px-2.5 py-1 bg-[var(--shukla-charcoal)] text-[var(--shukla-ivory)]">
+            <span className="text-[9px] uppercase tracking-[0.2em] font-sans px-2.5 py-1 bg-[var(--sukla-charcoal)] text-[var(--sukla-ivory)]">
               One of a Kind
             </span>
           )}
@@ -69,38 +69,38 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
         <button
           onClick={toggleWishlist}
           aria-label={isWishlisted ? 'Remove from wishlist' : 'Save to wishlist'}
-          className="absolute top-3 right-3 p-2.5 rounded-full bg-[var(--shukla-ivory)]/90 backdrop-blur-xs text-[var(--shukla-charcoal)] hover:text-[var(--shukla-terracotta)] hover:scale-110 transition-all duration-300 z-10 shadow-subtle"
+          className="absolute top-3 right-3 p-2.5 rounded-full bg-[var(--sukla-ivory)]/90 backdrop-blur-xs text-[var(--sukla-charcoal)] hover:text-[var(--sukla-terracotta)] hover:scale-110 transition-all duration-300 z-10 shadow-subtle"
         >
-          <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-[var(--shukla-terracotta)] text-[var(--shukla-terracotta)]' : ''}`} />
+          <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-[var(--sukla-terracotta)] text-[var(--sukla-terracotta)]' : ''}`} />
         </button>
 
       </Link>
 
       {/* Content Metadata */}
-      <div className="p-5 flex-1 flex flex-col justify-between space-y-3 bg-[var(--shukla-cream)]">
+      <div className="p-5 flex-1 flex flex-col justify-between space-y-3 bg-[var(--sukla-cream)]">
         <div>
-          <span className="block text-[10px] uppercase tracking-[0.2em] text-[var(--shukla-taupe)] font-sans">
+          <span className="block text-[10px] uppercase tracking-[0.2em] text-[var(--sukla-taupe)] font-sans">
             {product.metafields.technique || 'Handcrafted'} • {product.metafields.material || 'Wool'}
           </span>
           <Link href={`/products/${product.handle}`}>
-            <h3 className="heading text-base text-[var(--shukla-charcoal)] group-hover:text-[var(--shukla-terracotta)] transition-colors mt-1">
+            <h3 className="heading text-base text-[var(--sukla-charcoal)] group-hover:text-[var(--sukla-terracotta)] transition-colors mt-1">
               {product.title}
             </h3>
           </Link>
           {product.subtitle && (
-            <p className="text-xs font-sans text-[var(--shukla-charcoal)]/65 line-clamp-1 mt-0.5">
+            <p className="text-xs font-sans text-[var(--sukla-charcoal)]/65 line-clamp-1 mt-0.5">
               {product.subtitle}
             </p>
           )}
         </div>
 
-        <div className="pt-3 border-t border-[var(--shukla-muted-border)]/60 flex items-center justify-between">
-          <span className="nums text-sm font-medium text-[var(--shukla-charcoal)]">
-            ${formattedPrice} <span className="text-[10px] font-sans text-[var(--shukla-taupe)] font-normal">USD</span>
+        <div className="pt-3 border-t border-[var(--sukla-muted-border)]/60 flex items-center justify-between">
+          <span className="nums text-sm font-medium text-[var(--sukla-charcoal)]">
+            ${formattedPrice} <span className="text-[10px] font-sans text-[var(--sukla-taupe)] font-normal">USD</span>
           </span>
           <Link
             href={`/products/${product.handle}`}
-            className="text-[10px] font-sans uppercase tracking-[0.18em] text-[var(--shukla-charcoal)] hover:text-[var(--shukla-terracotta)] hover-underline-animation font-semibold"
+            className="text-[10px] font-sans uppercase tracking-[0.18em] text-[var(--sukla-charcoal)] hover:text-[var(--sukla-terracotta)] hover-underline-animation font-semibold"
           >
             Explore Rug
           </Link>

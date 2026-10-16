@@ -382,7 +382,7 @@ export async function searchProducts(
    SHOPIFY CART API OPERATIONS
    ========================================== */
 
-const CART_STORAGE_KEY = 'shukla_shopify_cart_id';
+const CART_STORAGE_KEY = 'sukla_shopify_cart_id';
 
 export async function createCart(
   lineItems: Array<{ merchandiseId: string; quantity: number }> = [],
@@ -532,7 +532,7 @@ function saveCartId(id: string): void {
 
 function notifyCartUpdate(cart: Cart): void {
   if (typeof window === 'undefined') return;
-  window.dispatchEvent(new CustomEvent('shukla:cart-updated', { detail: cart }));
+  window.dispatchEvent(new CustomEvent('sukla:cart-updated', { detail: cart }));
 }
 
 // Local Cart fallback when client side requires immediate responsive offline updates
@@ -551,7 +551,7 @@ export function getLocalCart(): Cart {
   }
 
   try {
-    const raw = localStorage.getItem('shukla_cart_v1');
+    const raw = localStorage.getItem('sukla_cart_v1');
     if (!raw) {
       const emptyCart: Cart = {
         id: 'cart-' + Math.random().toString(36).substring(2, 9),
@@ -563,7 +563,7 @@ export function getLocalCart(): Cart {
           totalAmount: { amount: '0.00', currencyCode: 'USD' }
         }
       };
-      localStorage.setItem('shukla_cart_v1', JSON.stringify(emptyCart));
+      localStorage.setItem('sukla_cart_v1', JSON.stringify(emptyCart));
       return emptyCart;
     }
     return JSON.parse(raw);
@@ -637,7 +637,7 @@ export function addToLocalCart(product: Product, variantId?: string, quantity: n
   };
 
   if (typeof window !== 'undefined') {
-    localStorage.setItem('shukla_cart_v1', JSON.stringify(currentCart));
+    localStorage.setItem('sukla_cart_v1', JSON.stringify(currentCart));
     notifyCartUpdate(currentCart);
   }
 
@@ -670,7 +670,7 @@ export function updateLocalCartLine(lineId: string, quantity: number): Cart {
   };
 
   if (typeof window !== 'undefined') {
-    localStorage.setItem('shukla_cart_v1', JSON.stringify(currentCart));
+    localStorage.setItem('sukla_cart_v1', JSON.stringify(currentCart));
     notifyCartUpdate(currentCart);
   }
 

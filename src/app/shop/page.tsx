@@ -37,7 +37,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
   });
 
   return (
-    <div className="flex flex-col min-h-screen bg-[var(--shukla-ivory)]">
+    <div className="flex flex-col min-h-screen bg-[var(--sukla-ivory)]">
       <Header />
 
       <main className="flex-1 py-12">
@@ -45,31 +45,31 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
           
           {/* Header Banner */}
           <div className="text-center max-w-3xl mx-auto space-y-4 mb-8">
-            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[var(--shukla-terracotta)] font-sans">
+            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[var(--sukla-terracotta)] font-sans">
               <KnotGlyph size="sm" />
               <span>Master Catalogue</span>
             </div>
-            <h1 className="display-lg text-3xl sm:text-4xl md:text-5xl text-[var(--shukla-charcoal)]">
+            <h1 className="display-lg text-3xl sm:text-4xl md:text-5xl text-[var(--sukla-charcoal)]">
               All Handcrafted Rugs
             </h1>
-            <p className="font-sans text-base md:text-lg text-[var(--shukla-charcoal)]/75 leading-relaxed">
+            <p className="font-sans text-base md:text-lg text-[var(--sukla-charcoal)]/75 leading-relaxed">
               Each piece is individually woven in Bhadohi, India using natural long-staple wool, organic jute, and silk.
             </p>
           </div>
 
           {/* Interactive URL-Persisted Filter Bar */}
-          <Suspense fallback={<div className="h-16 bg-[var(--shukla-sand)] animate-pulse my-8" />}>
+          <Suspense fallback={<div className="h-16 bg-[var(--sukla-sand)] animate-pulse my-8" />}>
             <FilterBar totalCount={products.length} />
           </Suspense>
 
           {/* Product Grid or Empty State */}
           {products.length === 0 ? (
-            <div className="py-24 text-center space-y-4 border border-[var(--shukla-muted-border)] bg-[var(--shukla-cream)] my-8">
-              <KnotGlyph size="md" className="text-[var(--shukla-taupe)]" />
-              <h2 className="heading text-xl text-[var(--shukla-charcoal)]">
+            <div className="py-24 text-center space-y-4 border border-[var(--sukla-muted-border)] bg-[var(--sukla-cream)] my-8">
+              <KnotGlyph size="md" className="text-[var(--sukla-taupe)]" />
+              <h2 className="heading text-xl text-[var(--sukla-charcoal)]">
                 No Rugs Match Your Filter Criteria
               </h2>
-              <p className="font-sans text-sm text-[var(--shukla-charcoal)]/70 max-w-md mx-auto leading-relaxed">
+              <p className="font-sans text-sm text-[var(--sukla-charcoal)]/70 max-w-md mx-auto leading-relaxed">
                 Try selecting a broader material or color family, or clear your active filters.
               </p>
             </div>

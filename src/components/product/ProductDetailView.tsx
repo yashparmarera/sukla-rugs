@@ -83,16 +83,16 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product, r
     <>
       <div className="editorial-container py-8 md:py-12">
         {/* Breadcrumb Navigation */}
-        <nav className="flex items-center gap-2 text-xs font-sans text-[var(--shukla-taupe)] mb-8 uppercase tracking-wider">
-          <Link href="/" className="hover:text-[var(--shukla-charcoal)]">Home</Link>
+        <nav className="flex items-center gap-2 text-xs font-sans text-[var(--sukla-taupe)] mb-8 uppercase tracking-wider">
+          <Link href="/" className="hover:text-[var(--sukla-charcoal)]">Home</Link>
           <ChevronRight className="w-3 h-3" />
-          <Link href="/shop" className="hover:text-[var(--shukla-charcoal)]">Shop</Link>
+          <Link href="/shop" className="hover:text-[var(--sukla-charcoal)]">Shop</Link>
           <ChevronRight className="w-3 h-3" />
-          <Link href={`/collections/${product.collection.handle}`} className="hover:text-[var(--shukla-charcoal)]">
+          <Link href={`/collections/${product.collection.handle}`} className="hover:text-[var(--sukla-charcoal)]">
             {product.collection.title}
           </Link>
-          <ChevronRight className="w-3 h-3 text-[var(--shukla-charcoal)]" />
-          <span className="text-[var(--shukla-charcoal)] font-semibold truncate">{product.title}</span>
+          <ChevronRight className="w-3 h-3 text-[var(--sukla-charcoal)]" />
+          <span className="text-[var(--sukla-charcoal)] font-semibold truncate">{product.title}</span>
         </nav>
 
         {/* Main PDP Grid */}
@@ -102,7 +102,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product, r
           <div className="lg:col-span-7 space-y-4">
             
             {/* Primary View with Fullscreen Zoom Trigger */}
-            <div className="relative aspect-[4/5] w-full bg-[var(--shukla-sand)] border border-[var(--shukla-muted-border)] overflow-hidden group">
+            <div className="relative aspect-[4/5] w-full bg-[var(--sukla-sand)] border border-[var(--sukla-muted-border)] overflow-hidden group">
               <Image
                 src={currentImage.url}
                 alt={currentImage.altText || product.title}
@@ -115,7 +115,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product, r
 
               <button
                 onClick={() => setIsFullscreenZoom(true)}
-                className="absolute top-4 right-4 p-2.5 bg-white/80 backdrop-blur-xs text-[var(--shukla-charcoal)] hover:bg-[var(--shukla-charcoal)] hover:text-white transition-all shadow-subtle"
+                className="absolute top-4 right-4 p-2.5 bg-white/80 backdrop-blur-xs text-[var(--sukla-charcoal)] hover:bg-[var(--sukla-charcoal)] hover:text-white transition-all shadow-subtle"
                 title="Fullscreen View"
               >
                 <Maximize2 className="w-4 h-4" />
@@ -136,10 +136,10 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product, r
                   <button
                     key={img.id}
                     onClick={() => setActiveImageIndex(idx)}
-                    className={`relative aspect-[4/3] bg-[var(--shukla-cream)] border transition-all overflow-hidden ${
+                    className={`relative aspect-[4/3] bg-[var(--sukla-cream)] border transition-all overflow-hidden ${
                       activeImageIndex === idx
-                        ? 'border-[var(--shukla-charcoal)] ring-1 ring-[var(--shukla-charcoal)]'
-                        : 'border-[var(--shukla-muted-border)] opacity-70 hover:opacity-100'
+                        ? 'border-[var(--sukla-charcoal)] ring-1 ring-[var(--sukla-charcoal)]'
+                        : 'border-[var(--sukla-muted-border)] opacity-70 hover:opacity-100'
                     }`}
                   >
                     <Image src={img.url} alt={img.altText || ''} fill className="object-cover" sizes="150px" />
@@ -152,24 +152,24 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product, r
           {/* Right Column: Product Specs & Actions */}
           <div className="lg:col-span-5 space-y-8 lg:pl-4">
             
-            <div className="space-y-3 pb-6 border-b border-[var(--shukla-muted-border)]">
-              <span className="text-xs uppercase tracking-[0.25em] text-[var(--shukla-taupe)] font-sans block">
+            <div className="space-y-3 pb-6 border-b border-[var(--sukla-muted-border)]">
+              <span className="text-xs uppercase tracking-[0.25em] text-[var(--sukla-taupe)] font-sans block">
                 {product.metafields.technique || 'Handcrafted'} • {product.metafields.origin_region || 'Bhadohi, India'}
               </span>
 
-              <h1 className="display-lg text-3xl sm:text-4xl text-[var(--shukla-charcoal)]">
+              <h1 className="display-lg text-3xl sm:text-4xl text-[var(--sukla-charcoal)]">
                 {product.title}
               </h1>
 
               {product.subtitle && (
-                <p className="font-sans text-base text-[var(--shukla-charcoal)]/75 leading-relaxed">
+                <p className="font-sans text-base text-[var(--sukla-charcoal)]/75 leading-relaxed">
                   {product.subtitle}
                 </p>
               )}
 
               <div className="pt-2 flex items-baseline justify-between">
-                <span className="nums text-2xl md:text-3xl font-medium text-[var(--shukla-charcoal)]">
-                  ${formattedPrice} <span className="text-xs font-sans font-normal text-[var(--shukla-taupe)]">USD</span>
+                <span className="nums text-2xl md:text-3xl font-medium text-[var(--sukla-charcoal)]">
+                  ${formattedPrice} <span className="text-xs font-sans font-normal text-[var(--sukla-taupe)]">USD</span>
                 </span>
                 <span className="text-xs font-sans text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 font-medium">
                   In Stock & Ready for Dispatch
@@ -180,12 +180,12 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product, r
             {/* Size Selector */}
             <div className="space-y-4">
               <div className="flex justify-between items-center text-xs font-sans">
-                <span className="uppercase tracking-widest text-[var(--shukla-charcoal)] font-semibold">
+                <span className="uppercase tracking-widest text-[var(--sukla-charcoal)] font-semibold">
                   Select Dimension / Size:
                 </span>
                 <button
                   onClick={() => setSizeModalOpen(true)}
-                  className="text-[var(--shukla-terracotta)] hover:underline flex items-center gap-1 font-medium"
+                  className="text-[var(--sukla-terracotta)] hover:underline flex items-center gap-1 font-medium"
                 >
                   <Ruler className="w-3.5 h-3.5" /> Interactive Size Guide
                 </button>
@@ -198,12 +198,12 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product, r
                     onClick={() => setSelectedVariant(v)}
                     className={`p-3 text-xs font-sans text-left border transition-all flex justify-between items-center ${
                       selectedVariant.id === v.id
-                        ? 'border-[var(--shukla-charcoal)] bg-[var(--shukla-cream)] ring-1 ring-[var(--shukla-charcoal)] font-semibold'
-                        : 'border-[var(--shukla-muted-border)] hover:border-[var(--shukla-taupe)] bg-[var(--shukla-ivory)]'
+                        ? 'border-[var(--sukla-charcoal)] bg-[var(--sukla-cream)] ring-1 ring-[var(--sukla-charcoal)] font-semibold'
+                        : 'border-[var(--sukla-muted-border)] hover:border-[var(--sukla-taupe)] bg-[var(--sukla-ivory)]'
                     }`}
                   >
                     <span>{v.title}</span>
-                    <span className="nums text-[11px] text-[var(--shukla-taupe)]">
+                    <span className="nums text-[11px] text-[var(--sukla-taupe)]">
                       ${parseFloat(v.price.amount).toLocaleString()}
                     </span>
                   </button>
@@ -222,10 +222,10 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product, r
                 <button
                   onClick={() => setIsWishlisted(!isWishlisted)}
                   aria-label="Wishlist product"
-                  className={`p-4 border border-[var(--shukla-muted-border)] transition-all ${
+                  className={`p-4 border border-[var(--sukla-muted-border)] transition-all ${
                     isWishlisted
                       ? 'bg-rose-50 border-rose-300 text-rose-700'
-                      : 'hover:border-[var(--shukla-charcoal)] text-[var(--shukla-charcoal)]'
+                      : 'hover:border-[var(--sukla-charcoal)] text-[var(--sukla-charcoal)]'
                   }`}
                 >
                   <Heart className={`w-5 h-5 ${isWishlisted ? 'fill-rose-700 text-rose-700' : ''}`} />
@@ -241,26 +241,26 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product, r
             </div>
 
             {/* Trust Assurances */}
-            <div className="grid grid-cols-2 gap-4 py-4 border-y border-[var(--shukla-muted-border)] text-xs font-sans text-[var(--shukla-charcoal)]/80">
+            <div className="grid grid-cols-2 gap-4 py-4 border-y border-[var(--sukla-muted-border)] text-xs font-sans text-[var(--sukla-charcoal)]/80">
               <div className="flex items-center gap-2.5">
-                <Truck className="w-4 h-4 text-[var(--shukla-terracotta)] shrink-0" />
+                <Truck className="w-4 h-4 text-[var(--sukla-terracotta)] shrink-0" />
                 <span>Complimentary Global White-Glove Shipping</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <ShieldCheck className="w-4 h-4 text-[var(--shukla-terracotta)] shrink-0" />
+                <ShieldCheck className="w-4 h-4 text-[var(--sukla-terracotta)] shrink-0" />
                 <span>Authentic Bhadohi Certificate Included</span>
               </div>
             </div>
 
             {/* Accordion Tabs for Story, Specifications & Care */}
             <div className="space-y-4 pt-4">
-              <div className="flex border-b border-[var(--shukla-muted-border)] text-xs font-sans uppercase tracking-wider">
+              <div className="flex border-b border-[var(--sukla-muted-border)] text-xs font-sans uppercase tracking-wider">
                 <button
                   onClick={() => setActiveTab('story')}
                   className={`pb-3 px-4 font-semibold border-b-2 transition-all ${
                     activeTab === 'story'
-                      ? 'border-[var(--shukla-charcoal)] text-[var(--shukla-charcoal)]'
-                      : 'border-transparent text-[var(--shukla-taupe)] hover:text-[var(--shukla-charcoal)]'
+                      ? 'border-[var(--sukla-charcoal)] text-[var(--sukla-charcoal)]'
+                      : 'border-transparent text-[var(--sukla-taupe)] hover:text-[var(--sukla-charcoal)]'
                   }`}
                 >
                   Product Story
@@ -269,8 +269,8 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product, r
                   onClick={() => setActiveTab('specs')}
                   className={`pb-3 px-4 font-semibold border-b-2 transition-all ${
                     activeTab === 'specs'
-                      ? 'border-[var(--shukla-charcoal)] text-[var(--shukla-charcoal)]'
-                      : 'border-transparent text-[var(--shukla-taupe)] hover:text-[var(--shukla-charcoal)]'
+                      ? 'border-[var(--sukla-charcoal)] text-[var(--sukla-charcoal)]'
+                      : 'border-transparent text-[var(--sukla-taupe)] hover:text-[var(--sukla-charcoal)]'
                   }`}
                 >
                   Craft Specs
@@ -279,51 +279,51 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product, r
                   onClick={() => setActiveTab('care')}
                   className={`pb-3 px-4 font-semibold border-b-2 transition-all ${
                     activeTab === 'care'
-                      ? 'border-[var(--shukla-charcoal)] text-[var(--shukla-charcoal)]'
-                      : 'border-transparent text-[var(--shukla-taupe)] hover:text-[var(--shukla-charcoal)]'
+                      ? 'border-[var(--sukla-charcoal)] text-[var(--sukla-charcoal)]'
+                      : 'border-transparent text-[var(--sukla-taupe)] hover:text-[var(--sukla-charcoal)]'
                   }`}
                 >
                   Care & Maintenance
                 </button>
               </div>
 
-              <div className="py-4 text-xs font-sans leading-relaxed text-[var(--shukla-charcoal)]/85">
+              <div className="py-4 text-xs font-sans leading-relaxed text-[var(--sukla-charcoal)]/85">
                 {activeTab === 'story' && (
                   <div className="space-y-3">
-                    <p className="font-sans text-sm text-[var(--shukla-charcoal)] leading-relaxed">
+                    <p className="font-sans text-sm text-[var(--sukla-charcoal)] leading-relaxed">
                       {product.description}
                     </p>
                     <p>{product.metafields.product_story}</p>
-                    <Link href="/process" className="text-[var(--shukla-terracotta)] font-semibold uppercase tracking-wider text-[10px] hover:underline block pt-2">
+                    <Link href="/process" className="text-[var(--sukla-terracotta)] font-semibold uppercase tracking-wider text-[10px] hover:underline block pt-2">
                       Learn how this rug was crafted in Bhadohi &rarr;
                     </Link>
                   </div>
                 )}
 
                 {activeTab === 'specs' && (
-                  <div className="grid grid-cols-2 gap-y-3 gap-x-4 border border-[var(--shukla-muted-border)] p-4 bg-[var(--shukla-cream)]">
+                  <div className="grid grid-cols-2 gap-y-3 gap-x-4 border border-[var(--sukla-muted-border)] p-4 bg-[var(--sukla-cream)]">
                     <div>
-                      <span className="block text-[10px] text-[var(--shukla-taupe)] uppercase tracking-widest">Technique</span>
+                      <span className="block text-[10px] text-[var(--sukla-taupe)] uppercase tracking-widest">Technique</span>
                       <span className="font-medium">{product.metafields.technique || 'Hand-Knotted'}</span>
                     </div>
                     <div>
-                      <span className="block text-[10px] text-[var(--shukla-taupe)] uppercase tracking-widest">Material</span>
+                      <span className="block text-[10px] text-[var(--sukla-taupe)] uppercase tracking-widest">Material</span>
                       <span className="font-medium">{product.metafields.material || '100% Wool'}</span>
                     </div>
                     <div>
-                      <span className="block text-[10px] text-[var(--shukla-taupe)] uppercase tracking-widest">Knot Density</span>
+                      <span className="block text-[10px] text-[var(--sukla-taupe)] uppercase tracking-widest">Knot Density</span>
                       <span className="font-medium">{product.metafields.knots_per_sq_inch || '80-100 Knots/SQI'}</span>
                     </div>
                     <div>
-                      <span className="block text-[10px] text-[var(--shukla-taupe)] uppercase tracking-widest">Pile Height</span>
+                      <span className="block text-[10px] text-[var(--sukla-taupe)] uppercase tracking-widest">Pile Height</span>
                       <span className="font-medium">{product.metafields.pile_height || '0.4 in'}</span>
                     </div>
                     <div>
-                      <span className="block text-[10px] text-[var(--shukla-taupe)] uppercase tracking-widest">Craft Duration</span>
+                      <span className="block text-[10px] text-[var(--sukla-taupe)] uppercase tracking-widest">Craft Duration</span>
                       <span className="font-medium">{product.metafields.craft_duration || '12-14 Weeks'}</span>
                     </div>
                     <div>
-                      <span className="block text-[10px] text-[var(--shukla-taupe)] uppercase tracking-widest">Origin</span>
+                      <span className="block text-[10px] text-[var(--sukla-taupe)] uppercase tracking-widest">Origin</span>
                       <span className="font-medium">{product.metafields.origin_region || 'Bhadohi, India'}</span>
                     </div>
                   </div>
@@ -332,10 +332,10 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product, r
                 {activeTab === 'care' && (
                   <div className="space-y-3">
                     <p>{product.metafields.care_instructions}</p>
-                    <p className="text-[11px] text-[var(--shukla-taupe)]">
+                    <p className="text-[11px] text-[var(--sukla-taupe)]">
                       For liquid spills, blot immediately with a clean dry cotton cloth. Do not rub.
                     </p>
-                    <Link href="/guides/rug-care" className="text-[var(--shukla-terracotta)] font-semibold uppercase tracking-wider text-[10px] hover:underline block pt-1">
+                    <Link href="/guides/rug-care" className="text-[var(--sukla-terracotta)] font-semibold uppercase tracking-wider text-[10px] hover:underline block pt-1">
                       Read Complete Rug Care & Stain Removal Guide &rarr;
                     </Link>
                   </div>
@@ -348,12 +348,12 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product, r
 
         {/* Related Products Section */}
         {relatedProducts.length > 0 && (
-          <section className="mt-24 pt-16 border-t border-[var(--shukla-muted-border)]">
+          <section className="mt-24 pt-16 border-t border-[var(--sukla-muted-border)]">
             <div className="flex justify-between items-center mb-8">
-              <h2 className="display-lg text-2xl text-[var(--shukla-charcoal)]">
+              <h2 className="display-lg text-2xl text-[var(--sukla-charcoal)]">
                 You May Also Appreciate
               </h2>
-              <Link href="/shop" className="text-xs uppercase tracking-widest text-[var(--shukla-terracotta)] font-semibold hover:underline">
+              <Link href="/shop" className="text-xs uppercase tracking-widest text-[var(--sukla-terracotta)] font-semibold hover:underline">
                 View Full Catalogue
               </Link>
             </div>
@@ -368,12 +368,12 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product, r
 
       {/* Mobile Sticky Add to Cart Bar */}
       {showStickyBar && (
-        <div className="fixed bottom-0 inset-x-0 z-40 bg-[var(--shukla-ivory)] border-t border-[var(--shukla-muted-border)] p-4 shadow-2xl lg:hidden flex items-center justify-between">
+        <div className="fixed bottom-0 inset-x-0 z-40 bg-[var(--sukla-ivory)] border-t border-[var(--sukla-muted-border)] p-4 shadow-2xl lg:hidden flex items-center justify-between">
           <div>
             <span className="heading text-sm font-medium block truncate max-w-[160px]">
               {product.title}
             </span>
-            <span className="nums text-xs font-medium text-[var(--shukla-charcoal)]">
+            <span className="nums text-xs font-medium text-[var(--sukla-charcoal)]">
               ${formattedPrice}
             </span>
           </div>
@@ -388,7 +388,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product, r
         <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4">
           <button
             onClick={() => setIsFullscreenZoom(false)}
-            className="absolute top-6 right-6 text-white p-2 hover:text-[var(--shukla-terracotta)]"
+            className="absolute top-6 right-6 text-white p-2 hover:text-[var(--sukla-terracotta)]"
           >
             <X className="w-8 h-8" />
           </button>
@@ -406,14 +406,14 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product, r
       {/* Size Guide Modal */}
       {sizeModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4">
-          <div className="bg-[var(--shukla-ivory)] max-w-xl w-full p-8 border border-[var(--shukla-muted-border)] shadow-2xl relative space-y-4">
-            <div className="flex justify-between items-center border-b border-[var(--shukla-muted-border)] pb-4">
+          <div className="bg-[var(--sukla-ivory)] max-w-xl w-full p-8 border border-[var(--sukla-muted-border)] shadow-2xl relative space-y-4">
+            <div className="flex justify-between items-center border-b border-[var(--sukla-muted-border)] pb-4">
               <h3 className="heading text-lg">Rug Placement &amp; Size Guide</h3>
               <button onClick={() => setSizeModalOpen(false)}>
                 <X className="w-5 h-5" />
               </button>
             </div>
-            <div className="space-y-3 text-xs font-sans text-[var(--shukla-charcoal)]/85">
+            <div className="space-y-3 text-xs font-sans text-[var(--sukla-charcoal)]/85">
               <p><strong>8&apos; x 10&apos; (244cm x 305cm):</strong> Standard anchor size for standard living rooms and queen/king beds.</p>
               <p><strong>9&apos; x 12&apos; (274cm x 366cm):</strong> Ideal for generous open-plan seating zones with all furniture legs resting on the rug.</p>
               <p><strong>6&apos; x 9&apos; (183cm x 274cm):</strong> Perfect for compact sitting rooms, offices, and nursery suites.</p>

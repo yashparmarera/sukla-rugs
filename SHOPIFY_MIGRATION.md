@@ -38,7 +38,7 @@ Document the final contract before depending on it in Liquid:
 
 - Product attributes: handle, title, description, vendor, product type, tags, variants, price, compare-at price, inventory, images, and availability.
 - Collection attributes: handle, title, description, image, products, sorting, and filters.
-- `shukla.*` metafields for rug dimensions, materials, construction, origin, care, lead time, and custom-rug metadata where needed.
+- `sukla.*` metafields for rug dimensions, materials, construction, origin, care, lead time, and custom-rug metadata where needed.
 - Metaobjects for artisans, room/category navigation, process content, reviews, and consultation/trade content where structured editing is required.
 - Form destinations and notification ownership for consultation, trade, contact, and custom-rug requests.
 - Review provider and the source/shape of review data.

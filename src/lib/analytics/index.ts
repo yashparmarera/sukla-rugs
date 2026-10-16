@@ -20,7 +20,7 @@ export function trackEvent(event: AnalyticsEvent, payload?: Record<string, unkno
   // Integration point for GA4 / Shopify Pixel / Segment
   if (Array.isArray((window as unknown as { dataLayer?: unknown[] }).dataLayer)) {
     (window as unknown as { dataLayer: unknown[] }).dataLayer.push({
-      event: `shukla_${event}`,
+      event: `sukla_${event}`,
       ...payload
     });
   }

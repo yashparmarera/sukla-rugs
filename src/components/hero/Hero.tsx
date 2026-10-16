@@ -23,7 +23,7 @@ export const Hero: React.FC = () => {
 
   return (
     <section
-      className="relative w-full min-h-[85vh] flex items-center justify-center overflow-hidden bg-[var(--shukla-charcoal)] text-[var(--shukla-ivory)]"
+      className="relative w-full min-h-[85vh] flex items-center justify-center overflow-hidden bg-[var(--sukla-charcoal)] text-[var(--sukla-ivory)]"
       aria-roledescription="carousel"
       aria-label="Sukla Rugs featured interiors"
     >
@@ -63,7 +63,7 @@ export const Hero: React.FC = () => {
           </p>
 
           <div className="mt-8 flex justify-center">
-            <Button href="/shop" variant="secondary" size="lg" className="rounded-full border-0 bg-[var(--shukla-cream)] px-9 py-4 text-[var(--shukla-charcoal)] hover:bg-white">
+            <Button href="/shop" variant="secondary" size="lg" className="rounded-full border-0 bg-[var(--sukla-cream)] px-9 py-4 text-[var(--sukla-charcoal)] hover:bg-white">
               <span>Explore Collections</span>
               <ArrowRight size={17} strokeWidth={1.7} className="ml-3" />
             </Button>
@@ -73,7 +73,7 @@ export const Hero: React.FC = () => {
             <button
               type="button"
               onClick={() => moveSlide(-1)}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/75 bg-black/15 text-white backdrop-blur-sm transition-colors hover:bg-white hover:text-[var(--shukla-charcoal)]"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/75 bg-black/15 text-white backdrop-blur-sm transition-colors hover:bg-white hover:text-[var(--sukla-charcoal)]"
               aria-label="Previous hero image"
               title="Previous hero image"
             >
@@ -82,7 +82,7 @@ export const Hero: React.FC = () => {
             <button
               type="button"
               onClick={() => moveSlide(1)}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/75 bg-black/15 text-white backdrop-blur-sm transition-colors hover:bg-white hover:text-[var(--shukla-charcoal)]"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/75 bg-black/15 text-white backdrop-blur-sm transition-colors hover:bg-white hover:text-[var(--sukla-charcoal)]"
               aria-label="Next hero image"
               title="Next hero image"
             >

@@ -2,7 +2,7 @@
 
 ## System overview
 
-Shukla Rugs has two independent storefront implementations:
+Sukla Rugs has two independent storefront implementations:
 
 1. **Next.js implementation** in `src/`
    - Existing storefront and reference implementation.

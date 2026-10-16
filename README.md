@@ -1,6 +1,6 @@
-# Shukla Rugs
+# Sukla Rugs
 
-Shukla Rugs currently has two intentionally independent storefront implementations:
+Sukla Rugs currently has two intentionally independent storefront implementations:
 
 | Implementation | Location | Purpose |
 | --- | --- | --- |

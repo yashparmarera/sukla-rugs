@@ -27,9 +27,9 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
       setCart(e.detail);
     };
 
-    window.addEventListener('shukla:cart-updated', handleCartUpdate as EventListener);
+    window.addEventListener('sukla:cart-updated', handleCartUpdate as EventListener);
     return () => {
-      window.removeEventListener('shukla:cart-updated', handleCartUpdate as EventListener);
+      window.removeEventListener('sukla:cart-updated', handleCartUpdate as EventListener);
     };
   }, []);
 
@@ -101,20 +101,20 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
       />
 
       <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
-        <div className="w-screen max-w-md bg-[var(--shukla-ivory)] text-[var(--shukla-charcoal)] shadow-2xl flex flex-col justify-between">
+        <div className="w-screen max-w-md bg-[var(--sukla-ivory)] text-[var(--sukla-charcoal)] shadow-2xl flex flex-col justify-between">
           
           {/* Drawer Header */}
-          <div className="p-6 border-b border-[var(--shukla-muted-border)] flex items-center justify-between">
+          <div className="p-6 border-b border-[var(--sukla-muted-border)] flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <ShoppingBag className="w-5 h-5 text-[var(--shukla-taupe)]" />
+              <ShoppingBag className="w-5 h-5 text-[var(--sukla-taupe)]" />
               <h2 className="heading text-lg">Your Selection</h2>
-              <span className="nums text-xs bg-[var(--shukla-sand)] px-2 py-0.5 rounded-full font-medium">
+              <span className="nums text-xs bg-[var(--sukla-sand)] px-2 py-0.5 rounded-full font-medium">
                 {cart?.totalQuantity || 0}
               </span>
             </div>
             <button
               onClick={onClose}
-              className="p-2 text-[var(--shukla-charcoal)] hover:text-[var(--shukla-terracotta)] transition-colors"
+              className="p-2 text-[var(--sukla-charcoal)] hover:text-[var(--sukla-terracotta)] transition-colors"
               aria-label="Close cart"
             >
               <X className="w-5 h-5" />
@@ -122,10 +122,10 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
           </div>
 
           {/* Free Shipping Incentive */}
-          <div className="bg-[var(--shukla-cream)] px-6 py-3 border-b border-[var(--shukla-muted-border)]">
+          <div className="bg-[var(--sukla-cream)] px-6 py-3 border-b border-[var(--sukla-muted-border)]">
             <div className="flex items-center justify-between text-xs font-sans mb-1.5">
-              <span className="flex items-center gap-1.5 text-[var(--shukla-charcoal)] font-medium">
-                <Truck className="w-4 h-4 text-[var(--shukla-terracotta)]" />
+              <span className="flex items-center gap-1.5 text-[var(--sukla-charcoal)] font-medium">
+                <Truck className="w-4 h-4 text-[var(--sukla-terracotta)]" />
                 {remainingForFreeShipping > 0 ? (
                   <span>
                     Add{' '}
@@ -139,9 +139,9 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                 )}
               </span>
             </div>
-            <div className="w-full h-1 bg-[var(--shukla-sand)] rounded-full overflow-hidden">
+            <div className="w-full h-1 bg-[var(--sukla-sand)] rounded-full overflow-hidden">
               <div
-                className="h-full bg-[var(--shukla-terracotta)] transition-all duration-500"
+                className="h-full bg-[var(--sukla-terracotta)] transition-all duration-500"
                 style={{ width: `${progressToFreeShipping}%` }}
               />
             </div>
@@ -151,11 +151,11 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
           <div className="flex-1 overflow-y-auto p-6 space-y-6">
             {!cart || cart.lines.length === 0 ? (
               <div className="text-center py-16 space-y-4">
-                <ShoppingBag className="w-12 h-12 stroke-1 text-[var(--shukla-taupe)] mx-auto" />
-                <p className="font-sans text-base text-[var(--shukla-charcoal)]/80">
+                <ShoppingBag className="w-12 h-12 stroke-1 text-[var(--sukla-taupe)] mx-auto" />
+                <p className="font-sans text-base text-[var(--sukla-charcoal)]/80">
                   Your cart is currently empty.
                 </p>
-                <p className="text-xs text-[var(--shukla-taupe)] font-sans max-w-xs mx-auto">
+                <p className="text-xs text-[var(--sukla-taupe)] font-sans max-w-xs mx-auto">
                   Explore our handcrafted collections from Bhadohi, UP.
                 </p>
                 <Button variant="outline" size="sm" onClick={onClose} href="/shop">
@@ -164,9 +164,9 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
               </div>
             ) : (
               cart.lines.map((line) => (
-                <div key={line.id} className="flex gap-4 pb-6 border-b border-[var(--shukla-muted-border)]">
+                <div key={line.id} className="flex gap-4 pb-6 border-b border-[var(--sukla-muted-border)]">
                   {/* Thumbnail */}
-                  <div className="relative w-20 h-24 bg-[var(--shukla-cream)] shrink-0 overflow-hidden border border-[var(--shukla-muted-border)]">
+                  <div className="relative w-20 h-24 bg-[var(--sukla-cream)] shrink-0 overflow-hidden border border-[var(--sukla-muted-border)]">
                     {line.merchandise.product.featuredImage ? (
                       <Image
                         src={line.merchandise.product.featuredImage.url}
@@ -176,7 +176,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                         sizes="80px"
                       />
                     ) : (
-                      <div className="w-full h-full bg-[var(--shukla-sand)]" />
+                      <div className="w-full h-full bg-[var(--sukla-sand)]" />
                     )}
                   </div>
 
@@ -185,36 +185,36 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                     <div>
                       <div className="flex justify-between items-start">
                         <div>
-                          <span className="block text-[10px] uppercase tracking-widest text-[var(--shukla-taupe)]">
+                          <span className="block text-[10px] uppercase tracking-widest text-[var(--sukla-taupe)]">
                             {line.merchandise.product.collection?.title}
                           </span>
                           <Link
                             href={`/products/${line.merchandise.product.handle}`}
                             onClick={onClose}
-                            className="heading text-sm hover:text-[var(--shukla-terracotta)] transition-colors"
+                            className="heading text-sm hover:text-[var(--sukla-terracotta)] transition-colors"
                           >
                             {line.merchandise.product.title}
                           </Link>
                         </div>
                         <button
                           onClick={() => handleRemoveLine(line.id)}
-                          className="text-[var(--shukla-taupe)] hover:text-red-700 transition-colors p-1"
+                          className="text-[var(--sukla-taupe)] hover:text-red-700 transition-colors p-1"
                           title="Remove item"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
                       </div>
-                      <span className="text-xs text-[var(--shukla-charcoal)]/70 font-sans mt-0.5 block">
+                      <span className="text-xs text-[var(--sukla-charcoal)]/70 font-sans mt-0.5 block">
                         {line.merchandise.title}
                       </span>
                     </div>
 
                     <div className="flex justify-between items-center mt-3">
                       {/* Qty Selector */}
-                      <div className="flex items-center border border-[var(--shukla-muted-border)] bg-[var(--shukla-cream)]">
+                      <div className="flex items-center border border-[var(--sukla-muted-border)] bg-[var(--sukla-cream)]">
                         <button
                           onClick={() => handleUpdateQty(line.id, line.quantity, -1)}
-                          className="px-2.5 py-1 text-[var(--shukla-charcoal)] hover:bg-[var(--shukla-sand)] transition-colors"
+                          className="px-2.5 py-1 text-[var(--sukla-charcoal)] hover:bg-[var(--sukla-sand)] transition-colors"
                           aria-label="Decrease quantity"
                         >
                           <Minus className="w-3 h-3" />
@@ -222,7 +222,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                         <span className="nums px-3 text-xs font-medium">{line.quantity}</span>
                         <button
                           onClick={() => handleUpdateQty(line.id, line.quantity, 1)}
-                          className="px-2.5 py-1 text-[var(--shukla-charcoal)] hover:bg-[var(--shukla-sand)] transition-colors"
+                          className="px-2.5 py-1 text-[var(--sukla-charcoal)] hover:bg-[var(--sukla-sand)] transition-colors"
                           aria-label="Increase quantity"
                         >
                           <Plus className="w-3 h-3" />
@@ -243,19 +243,19 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
 
           {/* Drawer Footer */}
           {cart && cart.lines.length > 0 && (
-            <div className="p-6 border-t border-[var(--shukla-muted-border)] bg-[var(--shukla-cream)]/80 space-y-4">
+            <div className="p-6 border-t border-[var(--sukla-muted-border)] bg-[var(--sukla-cream)]/80 space-y-4">
               <div className="space-y-1.5">
-                <div className="flex justify-between text-xs font-sans text-[var(--shukla-taupe)]">
+                <div className="flex justify-between text-xs font-sans text-[var(--sukla-taupe)]">
                   <span>Subtotal</span>
-                  <span className="nums text-[var(--shukla-charcoal)] font-medium">
+                  <span className="nums text-[var(--sukla-charcoal)] font-medium">
                     ${subtotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                   </span>
                 </div>
-                <div className="flex justify-between text-xs font-sans text-[var(--shukla-taupe)]">
+                <div className="flex justify-between text-xs font-sans text-[var(--sukla-taupe)]">
                   <span>Taxes &amp; Duties</span>
                   <span>Calculated at checkout</span>
                 </div>
-                <div className="flex justify-between items-baseline text-sm font-sans text-[var(--shukla-charcoal)] font-semibold pt-2 border-t border-[var(--shukla-muted-border)]">
+                <div className="flex justify-between items-baseline text-sm font-sans text-[var(--sukla-charcoal)] font-semibold pt-2 border-t border-[var(--sukla-muted-border)]">
                   <span className="eyebrow text-[11px]">Total</span>
                   <span className="nums text-base">${subtotal.toLocaleString('en-US', { minimumFractionDigits: 2 })} USD</span>
                 </div>
@@ -266,7 +266,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
 
-              <div className="flex items-center justify-center gap-2 text-[10px] text-[var(--shukla-taupe)] font-sans">
+              <div className="flex items-center justify-center gap-2 text-[10px] text-[var(--sukla-taupe)] font-sans">
                 <ShieldCheck className="w-3.5 h-3.5" />
                 <span>Shopify Encrypted & Guaranteed Authenticity</span>
               </div>
