@@ -58,6 +58,7 @@ export interface Product {
   subtitle?: string;
   description: string;
   descriptionHtml?: string;
+  productType?: string;
   collection: {
     title: string;
     handle: string;

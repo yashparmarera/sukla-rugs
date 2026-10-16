@@ -6,6 +6,7 @@ import { Search, ShoppingBag, User, Menu, X, ChevronDown } from 'lucide-react';
 import { KnotGlyph } from '@/components/ui/KnotGlyph';
 import { CartDrawer } from '@/components/cart/CartDrawer';
 import { SearchModal } from '@/components/navigation/SearchModal';
+import { CountrySelector } from '@/components/navigation/CountrySelector';
 import { getLocalCart } from '@/lib/shopify/local-cart';
 
 export const Header: React.FC = () => {
@@ -191,6 +192,11 @@ export const Header: React.FC = () => {
               Trade & Designers
             </Link>
 
+            {/* Country and currency. In the mobile menu on small screens. */}
+            <div className="hidden sm:block">
+              <CountrySelector />
+            </div>
+
             <button
               onClick={() => setSearchOpen(true)}
               className="p-1.5 hover:text-[var(--sukla-terracotta)] transition-colors"
@@ -295,6 +301,11 @@ export const Header: React.FC = () => {
               <Link href="/journal" onClick={() => setMobileMenuOpen(false)} className="block text-xs">
                 The Journal
               </Link>
+            </div>
+
+            <div className="border-t border-[var(--sukla-muted-border)] pt-6 space-y-3">
+              <span className="eyebrow block text-[10px] text-[var(--sukla-taupe)]">Country &amp; currency</span>
+              <CountrySelector variant="menu" />
             </div>
           </nav>
         </div>

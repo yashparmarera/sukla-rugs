@@ -56,12 +56,39 @@ function recalculateCart(cart: Cart): Cart {
     subtotal += parseFloat(line.merchandise.price.amount) * line.quantity;
   });
 
+  // Use the currency of the items themselves rather than assuming USD.
+  const currencyCode = cart.lines[0]?.merchandise.price.currencyCode ?? 'USD';
+
   cart.totalQuantity = totalQuantity;
   cart.cost = {
-    subtotalAmount: { amount: subtotal.toFixed(2), currencyCode: 'USD' },
-    totalAmount: { amount: subtotal.toFixed(2), currencyCode: 'USD' }
+    subtotalAmount: { amount: subtotal.toFixed(2), currencyCode },
+    totalAmount: { amount: subtotal.toFixed(2), currencyCode }
   };
   return persistCart(cart);
+}
+
+/**
+ * Applies fresh Shopify prices (for the shopper's newly selected country) to
+ * every line in the cart. Lines Shopify did not return a price for are kept
+ * unchanged, so a partial failure never corrupts the cart.
+ */
+export function repriceLocalCart(
+  prices: Record<string, { amount: string; currencyCode: string }>
+): Cart {
+  const cart = getLocalCart();
+
+  cart.lines.forEach((line) => {
+    const fresh = prices[line.merchandise.id];
+    if (!fresh) return;
+
+    line.merchandise.price = fresh;
+    line.cost.totalAmount = {
+      amount: (parseFloat(fresh.amount) * line.quantity).toFixed(2),
+      currencyCode: fresh.currencyCode
+    };
+  });
+
+  return recalculateCart(cart);
 }
 
 export function addToLocalCart(product: Product, variantId?: string, quantity = 1): Cart {

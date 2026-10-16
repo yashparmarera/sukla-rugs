@@ -8,6 +8,8 @@ import { Cart } from '@/types';
 import { getLocalCart, updateLocalCartLine, removeFromLocalCartLine } from '@/lib/shopify/local-cart';
 import { Button } from '@/components/ui/Button';
 import { trackEvent } from '@/lib/analytics';
+import { formatMoney } from '@/lib/format-money';
+import { useCurrency } from '@/components/providers/CurrencyProvider';
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -17,6 +19,7 @@ interface CartDrawerProps {
 const FREE_SHIPPING_THRESHOLD = 2500;
 
 export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
+  const { format } = useCurrency();
   const [cart, setCart] = useState<Cart | null>(null);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
 
@@ -46,6 +49,11 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   const subtotal = cart ? parseFloat(cart.cost.subtotalAmount.amount) : 0;
+  const currencyCode = cart?.cost.subtotalAmount.currencyCode ?? 'USD';
+  const subtotalDisplay = format(subtotal, currencyCode);
+  // The shipping threshold is defined in USD. It is not converted for other
+  // currencies (that would invent an exchange rate), so it is shown for USD only.
+  const showShippingThreshold = currencyCode === 'USD';
   const progressToFreeShipping = Math.min(100, (subtotal / FREE_SHIPPING_THRESHOLD) * 100);
   const remainingForFreeShipping = Math.max(0, FREE_SHIPPING_THRESHOLD - subtotal);
 
@@ -121,31 +129,30 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
             </button>
           </div>
 
-          {/* Free Shipping Incentive */}
-          <div className="bg-[var(--sukla-cream)] px-6 py-3 border-b border-[var(--sukla-muted-border)]">
-            <div className="flex items-center justify-between text-xs font-sans mb-1.5">
-              <span className="flex items-center gap-1.5 text-[var(--sukla-charcoal)] font-medium">
-                <Truck className="w-4 h-4 text-[var(--sukla-terracotta)]" />
-                {remainingForFreeShipping > 0 ? (
-                  <span>
-                    Add{' '}
-                    <span className="nums">
-                      ${remainingForFreeShipping.toLocaleString('en-US', { minimumFractionDigits: 2 })}
-                    </span>{' '}
-                    for complimentary global shipping
-                  </span>
-                ) : (
-                  'Complimentary White-Glove Global Shipping Unlocked'
-                )}
-              </span>
+          {/* Free Shipping Incentive (USD only, see showShippingThreshold) */}
+          {showShippingThreshold && (
+            <div className="bg-[var(--sukla-cream)] px-6 py-3 border-b border-[var(--sukla-muted-border)]">
+              <div className="flex items-center justify-between text-xs font-sans mb-1.5">
+                <span className="flex items-center gap-1.5 text-[var(--sukla-charcoal)] font-medium">
+                  <Truck className="w-4 h-4 text-[var(--sukla-terracotta)]" />
+                  {remainingForFreeShipping > 0 ? (
+                    <span>
+                      Add <span className="nums">{format(remainingForFreeShipping, currencyCode).text}</span> for
+                      complimentary global shipping
+                    </span>
+                  ) : (
+                    'Complimentary White-Glove Global Shipping Unlocked'
+                  )}
+                </span>
+              </div>
+              <div className="w-full h-1 bg-[var(--sukla-sand)] rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-[var(--sukla-terracotta)] transition-all duration-500"
+                  style={{ width: `${progressToFreeShipping}%` }}
+                />
+              </div>
             </div>
-            <div className="w-full h-1 bg-[var(--sukla-sand)] rounded-full overflow-hidden">
-              <div
-                className="h-full bg-[var(--sukla-terracotta)] transition-all duration-500"
-                style={{ width: `${progressToFreeShipping}%` }}
-              />
-            </div>
-          </div>
+          )}
 
           {/* Cart Items List */}
           <div className="flex-1 overflow-y-auto p-6 space-y-6">
@@ -230,9 +237,12 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                       </div>
 
                       <span className="nums text-sm font-medium">
-                        ${(parseFloat(line.merchandise.price.amount) * line.quantity).toLocaleString('en-US', {
-                          minimumFractionDigits: 2
-                        })}
+                        {
+                          format(
+                            parseFloat(line.merchandise.price.amount) * line.quantity,
+                            line.merchandise.price.currencyCode
+                          ).text
+                        }
                       </span>
                     </div>
                   </div>
@@ -248,7 +258,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                 <div className="flex justify-between text-xs font-sans text-[var(--sukla-taupe)]">
                   <span>Subtotal</span>
                   <span className="nums text-[var(--sukla-charcoal)] font-medium">
-                    ${subtotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                    {subtotalDisplay.text}
                   </span>
                 </div>
                 <div className="flex justify-between text-xs font-sans text-[var(--sukla-taupe)]">
@@ -257,8 +267,14 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                 </div>
                 <div className="flex justify-between items-baseline text-sm font-sans text-[var(--sukla-charcoal)] font-semibold pt-2 border-t border-[var(--sukla-muted-border)]">
                   <span className="eyebrow text-[11px]">Total</span>
-                  <span className="nums text-base">${subtotal.toLocaleString('en-US', { minimumFractionDigits: 2 })} USD</span>
+                  <span className="nums text-base">{subtotalDisplay.text}</span>
                 </div>
+                {subtotalDisplay.approximate && (
+                  <p className="text-[11px] font-sans text-[var(--sukla-taupe)] text-right">
+                    Approximate. You are charged <span className="nums">{formatMoney(subtotal, currencyCode)}</span>{' '}
+                    {currencyCode} at checkout.
+                  </p>
+                )}
               </div>
 
               <Button variant="primary" fullWidth onClick={handleCheckout} disabled={isCheckingOut} className="group">

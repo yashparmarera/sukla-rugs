@@ -3,7 +3,10 @@ import { notFound } from 'next/navigation';
 import { Header } from '@/components/navigation/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ProductDetailView } from '@/components/product/ProductDetailView';
-import { getProductByHandle, getProducts } from '@/lib/shopify/client';
+import { getProductByHandle, getProducts, getStorePolicies } from '@/lib/shopify/client';
+import { rankRelatedProducts } from '@/lib/product-display';
+import { getSelectedCountry } from '@/lib/localization.server';
+import { DEFAULT_COUNTRY } from '@/lib/localization';
 
 interface ProductPageProps {
   params: Promise<{
@@ -19,10 +22,10 @@ export async function generateMetadata({ params }: ProductPageProps) {
 
   return {
     title: `${product.title} | SUKLA RUGS`,
-    description: product.description,
+    description: product.description || undefined,
     openGraph: {
       title: `${product.title} | SUKLA RUGS`,
-      description: product.description,
+      description: product.description || undefined,
       images: [{ url: product.featuredImage.url }]
     }
   };
@@ -30,16 +33,29 @@ export async function generateMetadata({ params }: ProductPageProps) {
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const { handle } = await params;
-  const product = await getProductByHandle(handle);
+  const country = await getSelectedCountry();
+  const product = await getProductByHandle(handle, { country });
 
   if (!product) {
     notFound();
   }
 
-  const allProducts = await getProducts();
-  const relatedProducts = allProducts.filter(
-    (p) => p.handle !== product.handle && p.collection.handle === product.collection.handle
-  );
+  const policies = await getStorePolicies();
+
+  // If Shopify says this product cannot be bought in the shopper's country but
+  // can in the default one, it is a delivery-region issue, not "sold out".
+  let unavailableRegion: string | undefined;
+  if (!product.availableForSale && country !== DEFAULT_COUNTRY) {
+    const baseline = await getProductByHandle(handle, { country: DEFAULT_COUNTRY });
+    if (baseline?.availableForSale) {
+      unavailableRegion = new Intl.DisplayNames(['en'], { type: 'region' }).of(country) ?? country;
+    }
+  }
+
+  // Suggestions are real, purchasable products ranked by genuine relevance
+  // (same collection, product type, shared tags), then newest first.
+  const allProducts = await getProducts({ country });
+  const relatedProducts = rankRelatedProducts(product, allProducts);
 
   // JSON-LD Structured Data
   const jsonLd = {
@@ -58,7 +74,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
       url: `https://shuklarugsv1.vercel.app/products/${product.handle}`,
       priceCurrency: product.priceRange.minVariantPrice.currencyCode,
       price: product.priceRange.minVariantPrice.amount,
-      availability: 'https://schema.org/InStock',
+      availability: product.availableForSale
+        ? 'https://schema.org/InStock'
+        : 'https://schema.org/OutOfStock',
       itemCondition: 'https://schema.org/NewCondition'
     }
   };
@@ -71,7 +89,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
       />
       <Header />
       <main className="flex-1">
-        <ProductDetailView product={product} relatedProducts={relatedProducts} />
+        <ProductDetailView
+          product={product}
+          relatedProducts={relatedProducts}
+          policies={policies}
+          unavailableRegion={unavailableRegion}
+        />
       </main>
       <Footer />
     </div>

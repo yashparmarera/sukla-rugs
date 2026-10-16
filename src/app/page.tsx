@@ -12,6 +12,7 @@ import { DesignConsultationBanner } from '@/components/services/DesignConsultati
 import { ReviewsSection } from '@/components/editorial/ReviewsSection';
 import { JournalPreview } from '@/components/journal/JournalPreview';
 import { getProducts } from '@/lib/shopify/client';
+import { getSelectedCountry } from '@/lib/localization.server';
 import { Button } from '@/components/ui/Button';
 import { KnotGlyph } from '@/components/ui/KnotGlyph';
 import { BrandEntrance } from '@/components/entry/BrandEntrance';
@@ -28,7 +29,8 @@ export const metadata = {
 };
 
 export default async function HomePage() {
-  const signatureProducts = await getProducts({ limit: 6 });
+  const country = await getSelectedCountry();
+  const signatureProducts = await getProducts({ limit: 6, country });
 
   return (
     <BrandEntrance>

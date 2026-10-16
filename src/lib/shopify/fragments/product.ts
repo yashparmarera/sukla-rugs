@@ -7,6 +7,7 @@ export const productFragment = `
     title
     description
     descriptionHtml
+    productType
     tags
     availableForSale
     createdAt

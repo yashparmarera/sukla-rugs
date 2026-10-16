@@ -5,6 +5,7 @@ import { Header } from '@/components/navigation/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ProductCard } from '@/components/product/ProductCard';
 import { getCollectionByHandle, getProducts } from '@/lib/shopify/client';
+import { getSelectedCountry } from '@/lib/localization.server';
 import { KnotGlyph } from '@/components/ui/KnotGlyph';
 
 interface CollectionPageProps {
@@ -33,7 +34,8 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
     notFound();
   }
 
-  const products = await getProducts({ collection: collection.handle });
+  const country = await getSelectedCountry();
+  const products = await getProducts({ collection: collection.handle, country });
 
   return (
     <div className="flex flex-col min-h-screen bg-[var(--sukla-ivory)]">

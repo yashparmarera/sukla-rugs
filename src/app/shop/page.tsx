@@ -4,6 +4,7 @@ import { Footer } from '@/components/layout/Footer';
 import { FilterBar } from '@/components/filters/FilterBar';
 import { ProductCard } from '@/components/product/ProductCard';
 import { getProducts } from '@/lib/shopify/client';
+import { getSelectedCountry } from '@/lib/localization.server';
 import { KnotGlyph } from '@/components/ui/KnotGlyph';
 
 interface ShopPageProps {
@@ -27,7 +28,9 @@ export const dynamic = 'force-dynamic';
 export default async function ShopPage({ searchParams }: ShopPageProps) {
   const params = await searchParams;
 
+  const country = await getSelectedCountry();
   const products = await getProducts({
+    country,
     collection: params.collection,
     material: params.material,
     color: params.color,

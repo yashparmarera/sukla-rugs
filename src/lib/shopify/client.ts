@@ -4,6 +4,7 @@ import { getProductQuery, getProductsQuery, getCollectionProductsQuery } from '.
 import { getCollectionQuery, getCollectionsQuery } from './queries/collection';
 import { createCartMutation, addToCartMutation, updateCartMutation, removeFromCartMutation, getCartQuery } from './mutations/cart';
 import { MOCK_COLLECTIONS, MOCK_PRODUCTS } from './mock-data';
+import type { LocalizedCountry } from '@/lib/localization';
 
 const storeDomain = process.env.SHOPIFY_STORE_DOMAIN || 'vt0dch-hg.myshopify.com';
 const privateAccessToken = process.env.SHOPIFY_STOREFRONT_PRIVATE_TOKEN;
@@ -99,12 +100,12 @@ function reshapeProduct(productNode: any): Product {
     id: productNode.id,
     handle: productNode.handle,
     title: productNode.title,
-    subtitle: productNode.title + ' — Handcrafted in Bhadohi',
-    description: productNode.description || 'Ultra-premium handcrafted rug woven in Bhadohi, India using natural raw wool, silk, and organic jute.',
+    description: productNode.description || '',
     descriptionHtml: productNode.descriptionHtml,
+    productType: productNode.productType || undefined,
     collection: {
-      title: collectionNode?.title || 'Handcrafted Collection',
-      handle: collectionNode?.handle || 'hand-knotted-oushak',
+      title: collectionNode?.title || '',
+      handle: collectionNode?.handle || '',
       accentColor: getCollectionAccentColor(collectionNode?.handle || '')
     },
     priceRange: productNode.priceRange || {
@@ -116,21 +117,21 @@ function reshapeProduct(productNode: any): Product {
     variants,
     options: productNode.options || [],
     metafields: {
-      technique: productNode.technique?.value || 'Hand-Knotted',
-      material: productNode.material?.value || '100% Hand-Spun Wool',
-      color_family: productNode.color_family?.value || 'Terracotta & Ivory',
-      origin_region: productNode.origin_region?.value || 'Bhadohi, Uttar Pradesh, India',
-      care_instructions: productNode.care_instructions?.value || 'Rotate every 6 months. Professional cleaning only.',
-      pile_height: productNode.pile_height?.value || '0.4 in (10mm)',
-      weight: productNode.weight?.value || '0.8 lbs / sq ft',
-      knots_per_sq_inch: productNode.knots_per_sq_inch?.value || '80-100 Knots/SQI',
-      craft_duration: productNode.craft_duration?.value || '14 Weeks of Hand Knotting',
-      product_story: productNode.product_story?.value || 'Crafted individually on vertical pit looms in Bhadohi using natural hand-carded yarn.'
+      // Only real store values. Missing metafields stay undefined so the UI
+      // can omit the row instead of presenting an invented specification.
+      technique: productNode.technique?.value || undefined,
+      material: productNode.material?.value || undefined,
+      color_family: productNode.color_family?.value || undefined,
+      origin_region: productNode.origin_region?.value || undefined,
+      care_instructions: productNode.care_instructions?.value || undefined,
+      pile_height: productNode.pile_height?.value || undefined,
+      weight: productNode.weight?.value || undefined,
+      knots_per_sq_inch: productNode.knots_per_sq_inch?.value || undefined,
+      craft_duration: productNode.craft_duration?.value || undefined,
+      product_story: productNode.product_story?.value || undefined
     },
     tags: productNode.tags || [],
     availableForSale: productNode.availableForSale ?? true,
-    rating: 4.9,
-    reviewCount: 14,
     createdAt: productNode.createdAt || '2026-01-01'
   };
 }
@@ -331,6 +332,88 @@ export async function getProductByHandle(
   // Check fallback mock catalog if handle matches
   const mockMatch = MOCK_PRODUCTS.find((p) => p.handle === handle);
   return mockMatch || null;
+}
+
+/**
+ * Countries (and the currency Shopify sells in for each) that the store's
+ * Markets configuration makes available. Returns an empty list on any error.
+ */
+export async function getAvailableCountries(): Promise<LocalizedCountry[]> {
+  const res = await shopifyFetch<any>({
+    query: `
+      query getAvailableCountries {
+        localization {
+          availableCountries {
+            isoCode
+            name
+            currency { isoCode symbol }
+          }
+        }
+      }
+    `
+  });
+
+  const countries: LocalizedCountry[] = res?.localization?.availableCountries ?? [];
+  return countries
+    .filter((c) => c?.isoCode && c?.name && c?.currency?.isoCode)
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
+
+/**
+ * Current prices for a set of variants, in the context of a country. Used to
+ * reprice the cart when the shopper changes country. Unknown ids are omitted.
+ */
+export async function getVariantPrices(
+  variantIds: string[],
+  options?: { country?: string }
+): Promise<Record<string, { amount: string; currencyCode: string }>> {
+  if (variantIds.length === 0) return {};
+
+  const res = await shopifyFetch<any>({
+    query: `
+      query getVariantPrices($ids: [ID!]!, $country: CountryCode) @inContext(country: $country) {
+        nodes(ids: $ids) {
+          ... on ProductVariant {
+            id
+            price { amount currencyCode }
+          }
+        }
+      }
+    `,
+    variables: { ids: variantIds, country: options?.country || 'US' }
+  });
+
+  const prices: Record<string, { amount: string; currencyCode: string }> = {};
+  for (const node of res?.nodes ?? []) {
+    if (node?.id && node?.price) prices[node.id] = node.price;
+  }
+  return prices;
+}
+
+export interface StorePolicyLink {
+  title: string;
+  url: string;
+}
+
+/**
+ * Returns the store's real shipping and refund policies, when they are
+ * configured in Shopify. Nothing is invented: an unset policy is simply
+ * omitted, and any API error yields an empty list.
+ */
+export async function getStorePolicies(): Promise<StorePolicyLink[]> {
+  const res = await shopifyFetch<any>({
+    query: `
+      query getStorePolicies {
+        shop {
+          shippingPolicy { title url }
+          refundPolicy { title url }
+        }
+      }
+    `
+  });
+
+  const policies = [res?.shop?.shippingPolicy, res?.shop?.refundPolicy];
+  return policies.filter((p): p is StorePolicyLink => Boolean(p?.title && p?.url));
 }
 
 export async function getCollections(options?: { country?: string; language?: string }): Promise<Collection[]> {

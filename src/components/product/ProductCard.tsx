@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { Heart } from 'lucide-react';
 import { Product } from '@/types';
 import { trackEvent } from '@/lib/analytics';
+import { useCurrency } from '@/components/providers/CurrencyProvider';
+import { getDisplayTitle } from '@/lib/product-display';
 
 interface ProductCardProps {
   product: Product;
@@ -23,8 +25,15 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
     trackEvent('wishlist', { productId: product.id, productTitle: product.title, action: !isWishlisted ? 'add' : 'remove' });
   };
 
-  const minPrice = parseFloat(product.priceRange.minVariantPrice.amount);
-  const formattedPrice = minPrice.toLocaleString('en-US', { minimumFractionDigits: 2 });
+  const { format } = useCurrency();
+  const { minVariantPrice } = product.priceRange;
+  const formattedPrice = format(minVariantPrice.amount, minVariantPrice.currencyCode).text;
+  const { display: displayTitle } = getDisplayTitle(product.title);
+  // Only real data: construction and material when set, otherwise the product type.
+  const attributeLine =
+    [product.metafields.technique, product.metafields.material].filter(Boolean).join(' • ') ||
+    product.productType ||
+    '';
 
   return (
     <div className="group relative flex flex-col bg-[var(--sukla-cream)] border border-[var(--sukla-muted-border)]/70 hover:border-[var(--sukla-taupe)] transition-all duration-300">
@@ -52,12 +61,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
 
         {/* Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-1 z-10">
-          <span
-            className="text-[9px] uppercase tracking-[0.2em] font-sans px-2.5 py-1 text-white shadow-xs font-semibold"
-            style={{ backgroundColor: product.collection.accentColor || '#BC8A5A' }}
-          >
-            {product.collection.title}
-          </span>
+          {product.collection.title && (
+            <span
+              className="text-[9px] uppercase tracking-[0.2em] font-sans px-2.5 py-1 text-white shadow-xs font-semibold"
+              style={{ backgroundColor: product.collection.accentColor || '#BC8A5A' }}
+            >
+              {product.collection.title}
+            </span>
+          )}
           {product.metafields.one_of_a_kind && (
             <span className="text-[9px] uppercase tracking-[0.2em] font-sans px-2.5 py-1 bg-[var(--sukla-charcoal)] text-[var(--sukla-ivory)]">
               One of a Kind
@@ -79,12 +90,17 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
       {/* Content Metadata */}
       <div className="p-5 flex-1 flex flex-col justify-between space-y-3 bg-[var(--sukla-cream)]">
         <div>
-          <span className="block text-[10px] uppercase tracking-[0.2em] text-[var(--sukla-taupe)] font-sans">
-            {product.metafields.technique || 'Handcrafted'} • {product.metafields.material || 'Wool'}
-          </span>
+          {attributeLine && (
+            <span className="block text-[10px] uppercase tracking-[0.2em] text-[var(--sukla-taupe)] font-sans">
+              {attributeLine}
+            </span>
+          )}
           <Link href={`/products/${product.handle}`}>
-            <h3 className="heading text-base text-[var(--sukla-charcoal)] group-hover:text-[var(--sukla-terracotta)] transition-colors mt-1">
-              {product.title}
+            <h3
+              className="heading text-base text-[var(--sukla-charcoal)] group-hover:text-[var(--sukla-terracotta)] transition-colors mt-1 line-clamp-2"
+              title={product.title}
+            >
+              {displayTitle}
             </h3>
           </Link>
           {product.subtitle && (
@@ -96,7 +112,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
 
         <div className="pt-3 border-t border-[var(--sukla-muted-border)]/60 flex items-center justify-between">
           <span className="nums text-sm font-medium text-[var(--sukla-charcoal)]">
-            ${formattedPrice} <span className="text-[10px] font-sans text-[var(--sukla-taupe)] font-normal">USD</span>
+            {formattedPrice}
           </span>
           <Link
             href={`/products/${product.handle}`}

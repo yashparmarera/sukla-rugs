@@ -128,13 +128,18 @@ export const Footer: React.FC = () => {
             <p className="text-white/70 leading-relaxed">
               Servicing interior designers, private residences, and architecture firms across United States, Canada, United Kingdom, European Union, Australia, and UAE.
             </p>
-            <div className="pt-2 flex flex-wrap gap-2 text-[10px] nums text-white/50">
-              <span className="px-2 py-1 bg-white/5 border border-white/10">USD ($)</span>
-              <span className="px-2 py-1 bg-white/5 border border-white/10">EUR (â‚¬)</span>
-              <span className="px-2 py-1 bg-white/5 border border-white/10">GBP (Â£)</span>
-              <span className="px-2 py-1 bg-white/5 border border-white/10">CAD ($)</span>
-              <span className="px-2 py-1 bg-white/5 border border-white/10">AED</span>
-            </div>
+            <p className="pt-2 text-[11px] text-white/50 leading-relaxed">
+              Choose your country from the globe icon in the header to see prices in your local currency. Local
+              prices are approximate; orders are charged in the store currency at checkout.{' '}
+              <a
+                href="https://www.exchangerate-api.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-white"
+              >
+                Rates by ExchangeRate-API
+              </a>
+            </p>
           </div>
 
         </div>

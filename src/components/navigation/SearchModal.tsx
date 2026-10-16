@@ -7,6 +7,7 @@ import { Search as SearchIcon, X, ArrowRight } from 'lucide-react';
 import { Product } from '@/types';
 import { getProducts } from '@/lib/shopify/client';
 import { trackEvent } from '@/lib/analytics';
+import { useCurrency } from '@/components/providers/CurrencyProvider';
 
 interface SearchModalProps {
   isOpen: boolean;
@@ -16,6 +17,7 @@ interface SearchModalProps {
 const POPULAR_SEARCHES = ['Hand-Knotted Oushak', 'Jute Runner', 'Living Room 8x10', 'Bhadohi', 'Silk Highlight', 'Terracotta'];
 
 export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
+  const { format } = useCurrency();
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
@@ -158,7 +160,15 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
                         {product.title}
                       </h4>
                       <span className="block text-xs text-[var(--sukla-charcoal)]/80 mt-1 font-medium">
-                        From <span className="nums">${parseFloat(product.priceRange.minVariantPrice.amount).toLocaleString('en-US')}</span>
+                        From{' '}
+                        <span className="nums">
+                          {
+                            format(
+                              product.priceRange.minVariantPrice.amount,
+                              product.priceRange.minVariantPrice.currencyCode
+                            ).text
+                          }
+                        </span>
                       </span>
                     </div>
                     <ArrowRight className="w-4 h-4 text-[var(--sukla-taupe)] group-hover:translate-x-1 group-hover:text-[var(--sukla-charcoal)] transition-all shrink-0 mr-2" />

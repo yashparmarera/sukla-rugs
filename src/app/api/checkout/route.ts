@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createCart } from '@/lib/shopify/client';
+import { getSelectedCountry } from '@/lib/localization.server';
 
 interface CheckoutLine {
   merchandiseId?: unknown;
@@ -25,7 +26,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Your cart is empty.' }, { status: 400 });
     }
 
-    const cart = await createCart(lines);
+    // Create the checkout for the same country the shopper browsed in, so the
+    // payment page uses the same market and currency as the prices they saw.
+    const country = await getSelectedCountry();
+    const cart = await createCart(lines, { country });
 
     if (!cart.checkoutUrl || cart.checkoutUrl === 'https://checkout.shopify.com') {
       return NextResponse.json(
