@@ -135,8 +135,8 @@
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
-                    "type_preset": "h2",
-                    "font": "var(--font-heading--family)",
+                    "type_preset": "h3",
+                    "font": "var(--font-body--family)",
                     "font_size": "1rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
@@ -301,14 +301,6 @@
                 "padding-inline-end": 0
               },
               "blocks": {}
-            },
-            "shukla_product_details_dtl001": {
-              "type": "custom-liquid",
-              "name": "t:names.custom_liquid",
-              "settings": {
-                "custom_liquid": "{% render 'shukla-product-details', product: closest.product %}"
-              },
-              "blocks": {}
             }
           },
           "block_order": [
@@ -316,8 +308,7 @@
             "divider_VJhene",
             "variant_picker_R3rGDr",
             "buy_buttons_eYQEYi",
-            "text_aEtTtq",
-            "shukla_product_details_dtl001"
+            "text_aEtTtq"
           ]
         }
       },
