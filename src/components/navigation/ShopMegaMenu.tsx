@@ -5,9 +5,11 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ChevronDown } from 'lucide-react';
 import { SHOP_MENU } from '@/lib/shop-menu';
+import { announceMegaMenuOpen, useCloseWhenOtherMegaMenuOpens } from '@/lib/mega-menu-events';
 
 const CLOSE_DELAY_MS = 150;
 const PANEL_ID = 'shop-mega-panel';
+const MENU_ID = 'shop';
 
 const FOCUS_RING =
   'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--sukla-charcoal)]';
@@ -44,6 +46,17 @@ export const ShopMegaMenu: React.FC = () => {
       closeTimer.current = null;
     }
   }, []);
+
+  // Keep Shop and About us from being open together.
+  const closeFromOtherMenu = useCallback(() => {
+    clearTimer();
+    pinned.current = false;
+    setOpen(false);
+  }, [clearTimer]);
+  useCloseWhenOtherMegaMenuOpens(MENU_ID, closeFromOtherMenu);
+  useEffect(() => {
+    if (open) announceMegaMenuOpen(MENU_ID);
+  }, [open]);
 
   // Outside click / tap. Attached only while open.
   useEffect(() => {
