@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Search, ShoppingBag, User, Menu, X, ChevronDown } from 'lucide-react';
-import { KnotGlyph } from '@/components/ui/KnotGlyph';
+import { BrandMark } from '@/components/ui/BrandMark';
 import { CartDrawer } from '@/components/cart/CartDrawer';
 import { SearchModal } from '@/components/navigation/SearchModal';
 import { CountrySelector } from '@/components/navigation/CountrySelector';
@@ -138,11 +138,11 @@ export const Header: React.FC = () => {
           {/* Brand Logo - Centered Brand Lock */}
           <Link href="/" className="flex min-w-0 flex-col items-center justify-self-center group">
             <div className="flex min-w-0 items-center gap-1.5 md:gap-2">
-              <KnotGlyph size="sm" className="text-[var(--sukla-terracotta)] group-hover:rotate-45 transition-transform duration-500" />
+              <BrandMark className="h-3 md:h-4" />
               <span className="whitespace-nowrap font-display text-base md:text-xl tracking-[0.16em] md:tracking-[0.22em] font-medium text-[var(--sukla-charcoal)] uppercase">
                 SUKLA RUGS
               </span>
-              <KnotGlyph size="sm" className="text-[var(--sukla-terracotta)] group-hover:-rotate-45 transition-transform duration-500" />
+              <BrandMark className="h-3 md:h-4" />
             </div>
             <span className="text-[9px] uppercase tracking-[0.3em] text-[var(--sukla-taupe)] font-sans -mt-1 hidden sm:block">
               Bhadohi • India
