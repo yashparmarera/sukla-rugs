@@ -71,7 +71,9 @@ function reshapeImage(imageNode: any): ProductImage {
   return {
     id: imageNode.id || 'img-' + Math.random().toString(36).substring(2),
     url: imageNode.url,
-    altText: imageNode.altText || 'SUKLA RUGS Handcrafted Textile',
+    // Empty when Shopify has no alt text, so each component falls back to its own
+    // title (product, collection or article) instead of one generic phrase.
+    altText: imageNode.altText || '',
     width: imageNode.width,
     height: imageNode.height
   };
