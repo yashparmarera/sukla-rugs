@@ -41,7 +41,9 @@ export const FilterBar: React.FC<FilterBarProps> = ({ totalCount }) => {
     currentCollection !== 'all' ||
     currentMaterial !== 'all' ||
     currentColor !== 'all' ||
-    currentConstruction !== 'all'
+    currentConstruction !== 'all' ||
+    Boolean(searchParams.get('room')) ||
+    Boolean(searchParams.get('style'))
   );
 
   return (

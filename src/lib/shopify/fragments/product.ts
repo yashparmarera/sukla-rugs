@@ -81,6 +81,9 @@ export const productFragment = `
     craft_duration: metafield(namespace: "sukla", key: "craft_duration") { value }
     product_story: metafield(namespace: "sukla", key: "product_story") { value }
     short_description: metafield(namespace: "sukla", key: "short_description") { value }
+    style: metafield(namespace: "sukla", key: "style") { value }
+    room: metafield(namespace: "sukla", key: "room") { value }
+    shape: metafield(namespace: "sukla", key: "shape") { value }
   }
   ${imageFragment}
 `;

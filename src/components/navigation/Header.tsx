@@ -7,6 +7,8 @@ import { KnotGlyph } from '@/components/ui/KnotGlyph';
 import { CartDrawer } from '@/components/cart/CartDrawer';
 import { SearchModal } from '@/components/navigation/SearchModal';
 import { CountrySelector } from '@/components/navigation/CountrySelector';
+import { ShopMegaMenu } from '@/components/navigation/ShopMegaMenu';
+import { ShopMobileMenu } from '@/components/navigation/ShopMobileMenu';
 import { getLocalCart } from '@/lib/shopify/local-cart';
 
 export const Header: React.FC = () => {
@@ -73,44 +75,8 @@ export const Header: React.FC = () => {
           {/* Left Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8 text-sm font-sans tracking-[0.01em] text-[var(--sukla-charcoal)]">
             
-            {/* SHOP Dropdown */}
-            <div
-              className="relative group py-2"
-              onMouseEnter={() => setActiveDropdown('shop')}
-              onMouseLeave={() => setActiveDropdown(null)}
-            >
-              <Link href="/shop" className="hover-underline-animation flex items-center gap-1 font-medium">
-                Shop <ChevronDown className="w-3 h-3 text-[var(--sukla-taupe)] group-hover:rotate-180 transition-transform" />
-              </Link>
-              {activeDropdown === 'shop' && (
-                <div className="absolute top-full left-0 w-72 bg-[var(--sukla-ivory)] border border-[var(--sukla-muted-border)] shadow-xl p-6 space-y-3 z-50">
-                  <div className="border-b border-[var(--sukla-muted-border)] pb-2 mb-3">
-                    <span className="eyebrow text-[10px] text-[var(--sukla-taupe)] block">Collections</span>
-                  </div>
-                  <Link href="/shop" className="block text-xs hover:text-[var(--sukla-terracotta)] font-semibold">
-                    All Rugs
-                  </Link>
-                  <Link href="/collections/hand-knotted-oushak" className="block text-xs hover:text-[var(--sukla-terracotta)]">
-                    Hand-Knotted Oushak
-                  </Link>
-                  <Link href="/collections/persian-hand-tufted" className="block text-xs hover:text-[var(--sukla-terracotta)]">
-                    Persian Hand-Tufted
-                  </Link>
-                  <Link href="/collections/modern-hand-tufted" className="block text-xs hover:text-[var(--sukla-terracotta)]">
-                    Modern Hand-Tufted
-                  </Link>
-                  <Link href="/collections/hand-woven-rugs" className="block text-xs hover:text-[var(--sukla-terracotta)]">
-                    Hand-Woven Rugs
-                  </Link>
-                  <Link href="/collections/the-artisan-loop-collection" className="block text-xs hover:text-[var(--sukla-terracotta)]">
-                    The Artisan Loop
-                  </Link>
-                  <Link href="/collections/hand-woven-jute" className="block text-xs hover:text-[var(--sukla-terracotta)]">
-                    Hand-Woven Jute
-                  </Link>
-                </div>
-              )}
-            </div>
+            {/* SHOP mega menu */}
+            <ShopMegaMenu />
 
             {/* DISCOVER Dropdown */}
             <div
@@ -240,7 +206,9 @@ export const Header: React.FC = () => {
           </div>
 
           <nav className="py-8 space-y-6 text-sm font-sans tracking-[0.01em] text-[var(--sukla-charcoal)]">
-            <div className="space-y-3">
+            <ShopMobileMenu onNavigate={() => setMobileMenuOpen(false)} />
+
+            <div className="border-t border-[var(--sukla-muted-border)] pt-6 space-y-3">
               <span className="eyebrow block text-[10px] text-[var(--sukla-taupe)]">Collections</span>
               <Link href="/shop" onClick={() => setMobileMenuOpen(false)} className="block font-semibold">
                 All Rugs

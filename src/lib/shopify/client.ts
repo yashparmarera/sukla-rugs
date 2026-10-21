@@ -129,7 +129,10 @@ function reshapeProduct(productNode: any): Product {
       knots_per_sq_inch: productNode.knots_per_sq_inch?.value || undefined,
       craft_duration: productNode.craft_duration?.value || undefined,
       product_story: productNode.product_story?.value || undefined,
-      short_description: productNode.short_description?.value || undefined
+      short_description: productNode.short_description?.value || undefined,
+      style: productNode.style?.value || undefined,
+      room: productNode.room?.value || undefined,
+      shape: productNode.shape?.value || undefined
     },
     tags: productNode.tags || [],
     availableForSale: productNode.availableForSale ?? true,
@@ -228,6 +231,12 @@ export async function getProducts(options?: {
   limit?: number;
   country?: string;
   language?: string;
+  /**
+   * Opt-in: when the collection handle does not exist or is empty, return []
+   * instead of falling through to the unfiltered product list. Used by the
+   * /shop mega menu so it never presents unrelated products as a match.
+   */
+  strictCollection?: boolean;
 }): Promise<Product[]> {
   // If query is for a specific collection handle
   if (options?.collection && options.collection !== 'all') {
@@ -244,6 +253,10 @@ export async function getProducts(options?: {
     if (res?.collection?.products?.edges?.length) {
       const products = res.collection.products.edges.map((e: any) => reshapeProduct(e.node));
       return filterAndSortProducts(products, options);
+    }
+
+    if (options.strictCollection) {
+      return [];
     }
   }
 
