@@ -78,14 +78,14 @@ export const Header: React.FC = () => {
             {/* SHOP mega menu */}
             <ShopMegaMenu />
 
-            {/* DISCOVER Dropdown */}
+            {/* ABOUT US Dropdown */}
             <div
               className="relative group py-2"
               onMouseEnter={() => setActiveDropdown('discover')}
               onMouseLeave={() => setActiveDropdown(null)}
             >
               <Link href="/story" className="hover-underline-animation flex items-center gap-1 font-medium">
-                Discover <ChevronDown className="w-3 h-3 text-[var(--sukla-taupe)] group-hover:rotate-180 transition-transform" />
+                About us <ChevronDown className="w-3 h-3 text-[var(--sukla-taupe)] group-hover:rotate-180 transition-transform" />
               </Link>
               {activeDropdown === 'discover' && (
                 <div className="absolute top-full left-0 w-64 bg-[var(--sukla-ivory)] border border-[var(--sukla-muted-border)] shadow-xl p-6 space-y-3 z-50">
