@@ -256,14 +256,14 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
   // Only real store values are shown. Missing rows are omitted.
   const m = product.metafields;
   const eyebrow =
-    [m.technique, m.origin_region].filter(Boolean).join(' • ') ||
+    [m.construction || m.technique, m.origin_region].filter(Boolean).join(' • ') ||
     (product.collection.handle ? product.collection.title : '') ||
     product.productType ||
     '';
 
   const specRows = (
     [
-      ['Construction', m.technique],
+      ['Construction', m.construction || m.technique],
       ['Material', m.material],
       ['Color family', m.color_family],
       ['Origin', m.origin_region],

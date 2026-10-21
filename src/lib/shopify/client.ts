@@ -317,7 +317,10 @@ function filterAndSortProducts(products: Product[], options?: any): Product[] {
   if (options?.construction && options.construction !== 'all') {
     const con = options.construction.toLowerCase();
     result = result.filter(
-      (p) => p.metafields.technique?.toLowerCase().includes(con) || p.tags.some((t) => t.toLowerCase().includes(con))
+      (p) =>
+        p.metafields.construction?.toLowerCase().includes(con) ||
+        p.metafields.technique?.toLowerCase().includes(con) ||
+        p.tags.some((t) => t.toLowerCase().includes(con))
     );
   }
 

@@ -31,7 +31,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
   const { display: displayTitle } = getDisplayTitle(product.title);
   // Only real data: construction and material when set, otherwise the product type.
   const attributeLine =
-    [product.metafields.technique, product.metafields.material].filter(Boolean).join(' • ') ||
+    [product.metafields.construction || product.metafields.technique, product.metafields.material]
+      .filter(Boolean)
+      .join(' • ') ||
     product.productType ||
     '';
 
