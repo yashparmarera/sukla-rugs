@@ -29,7 +29,7 @@ I checked the code again while writing this and found three things the first gui
 
 | Field | Decision | Why | If wrong |
 |---|---|---|---|
-| **Title** | Fill: short, with size as `(LxW ft)` | It is the page heading, the browser tab title and the link-preview title. [Code] The site reads a size like `2.6x10 ft` from the title to build the "Listed size" row. [Code] A title with ` \| `, ` - `, ` – ` or `, ` more than about 20 characters in is cut at that point for display, and the full title is kept elsewhere. [Code] | A long keyword-stuffed title looks cluttered even with the cut, and the size may not be found if you write it differently. |
+| **Title** | Fill: short. Add the size as `(LxW ft)` only for single-size rugs; multi-size rugs use the Size option instead | It is the page heading, the browser tab title and the link-preview title. [Code] The site reads a size like `2.6x10 ft` from the title to build the "Listed size" row. [Code] A title with ` \| `, ` - `, ` – ` or `, ` more than about 20 characters in is cut at that point for display, and the full title is kept elsewhere. [Code] | A long keyword-stuffed title looks cluttered even with the cut, and the size may not be found if you write it differently. |
 | **Description** | Fill: bullet list of true statements | The site reads each bullet from the product's HTML description and turns it into the "About" feature list. [Code] The first bullet's body becomes the short line under the title when you do not set `sukla.short_description`. [Code] The description text is also the page's meta description. [Code] Bullets in the form `Lead-in - detail` give a bold lead-in plus text. [Code] | Plain paragraphs still show, but as one block with no feature list. Pasting from a marketplace can bring in odd formatting. The site shows text only, never the HTML. [Code] |
 | **Media** | Fill: 3+ images, first is the main image | The first image is the featured image used on cards, in link previews and as the gallery start. [Code] More images fill the gallery, swipe and zoom. Variant images switch the gallery when that variant is chosen. [Code] | One image makes the page feel thin. A wrong first image is what shoppers and Google see first. |
 | **Alt text** | Fill: describe the rug | It is read by screen readers and used when an image fails to load. [Code] A blank alt now falls back to the product title (see correction 3). | A screen-reader user hears the product title for every unlabelled image instead of a description of that view. |
@@ -44,7 +44,7 @@ I checked the code again while writing this and found three things the first gui
 | **Collections** | Fill: right ones | The first collection's title is shown on the product card and as the "Collection" row in details. [Code] Menu collection handles also pull products by collection. [Code] | A collection named for internal use (like "Home page") is shown to shoppers as a label. |
 | **Weight (Shopify shipping weight)** | Fill: real weight | Used by Shopify to calculate shipping rates at checkout. [Shopify] The site does not read this field. [Code] This is separate from the display metafield `sukla.weight`. | Shipping rates are wrong or missing. |
 | **Inventory: track quantity** | Fill: real stock | Shopify marks a variant unavailable at zero stock, and the site shows it as unavailable with a struck-through size button. [Code, Shopify] The site cannot read the exact quantity, because that needs an extra API permission the token lacks. [Code] | Untracked stock stays buyable forever. |
-| **Continue selling when out of stock** | Leave off | When on, a variant at zero stock still counts as available. [Shopify] | Shoppers can buy something you cannot ship. |
+| **Continue selling when out of stock** | Leave off for stocked rugs. Made-to-order is a separate, deliberate policy. | When on, a variant at zero stock still counts as available. [Shopify] | Shoppers can buy something you cannot ship. |
 | **SEO title and description** | Optional | Not read by this site (correction 1). Fill them if you ever use Shopify's own storefront. | None for the Next.js site. |
 | **URL handle** | Fill: final before publishing | It becomes `/products/<handle>`. [Code] Changing it later breaks old links, bookmarks and search results unless you add a redirect. [Shopify] | Broken links. |
 | **Sales channel** | Fill: storefront channel | The Storefront API token only returns products published to its channel. [Shopify] Existing products appear, which shows the channel is set up. | A product that is Active but not published to the channel is missing from the site. |
@@ -61,9 +61,9 @@ I checked the code again while writing this and found three things the first gui
 | `sukla.style` | Fill from the list | Drives the Style menu. It is a list, so one rug can be Modern and Minimalist. [Code] | A style not in the list will not match any menu link. |
 | `sukla.palette` | Fill with colour names | Style filters also check it, so "Neutral" works as a colour. Neutral is a colour palette more than a design style, which is why it is kept separate. [Code, Judgment] | If left blank, Neutral can only match through `sukla.style`. |
 | `sukla.room` | Fill from the list | Drives the Room menu. A list, because one rug suits several rooms. [Code] | A rug missing a room never appears under that room. |
-| `sukla.construction` | Fill from the list | Drives the Construction menu and is checked first for construction matching. [Code] | See the next row. |
-| `sukla.technique` | Fill with the same value | The specifications table row "Construction" and the product cards read this field, not `construction`. [Code] | Construction is missing on cards and in specifications even though the filter works. |
-| `sukla.material` | Fill as single text | Drives the Material menu and shows in specifications and on cards. [Code] It must be plain text. A list would print as `["Wool","Silk"]` on the cards. [Code] | Brackets and quotes appear on the page. |
+| `sukla.construction` | Fill from the list | The single source of truth for construction. It drives the Construction menu, the product cards and the "Construction" specification row. [Code] | A value outside the list will not match the menu link. |
+| `sukla.technique` | Leave blank | An older field. The cards, the specification row and the filters now use `construction` first and fall back to `technique` only when `construction` is empty. [Code] Keeping one authoritative field avoids two values that disagree. [Judgment] | Filling both with different values causes confusion. The site shows `construction`. |
+| `sukla.material` | Fill as single text | Drives the Material menu and shows in specifications and on cards. [Code] It must be plain text. A list would print as `["Wool","Silk"]` on the cards. [Code] A blend such as `Wool, Silk` is one text value; the filter finds each material by matching text inside it. It is not two separate structured values. A list or referenced entries would be a cleaner future structure, but only after the code that reads and filters it is updated. [Code, Judgment] | Brackets and quotes appear on the page. |
 | `sukla.shape` | Fill from the list | Round Rugs matches `Round`. Shaped Rugs matches any shape other than rectangular, square or round. [Code] | Entering Rectangular for a shaped rug hides it from Shaped Rugs. |
 | `sukla.rug_format` | Fill: Area Rug or Runner | Drives the Runners link. [Code] | A runner left blank is only found if its title or tags say "runner". |
 | `sukla.premium` | Set `true` only for premium | Premium Rugs matches `true`, or a premium tag or product type. A blank or false value never matches on its own. [Code] | Marking everything premium makes the link meaningless. |
@@ -82,7 +82,7 @@ I checked the code again while writing this and found three things the first gui
 | Scenario | Why this approach |
 |---|---|
 | **One rug, one size** | The page ignores Shopify's placeholder variant called "Default Title" and shows no size picker. [Code] The size lives in the title. |
-| **Several sizes** | Sizes become buttons labelled with the option name. Each size has its own price, SKU and stock, and the total updates. [Code] |
+| **Several sizes** | Sizes become buttons labelled with the option name. Each size has its own price, SKU and stock, and the total updates. [Code] A title can only name one size, so with several sizes it would be wrong for every other variant. Leave the size out of the title. [Judgment] |
 | **Several colours** | See the golden rule: only the first option's name is used for the label, and two options were not tested. [Code] |
 | **Runner** | Gets the Runners link through `rug_format`, and the product type keeps related ranking sensible. [Code] |
 | **Round or shaped rug** | `shape` is the only field the Round and Shaped links trust. [Code] |
@@ -130,3 +130,22 @@ I checked the code again while writing this and found three things the first gui
 | URL handle final | Avoids broken links. |
 | Status Active | Otherwise it does not appear. |
 | Checked on the live site | The only way to confirm the above worked on your store. |
+
+## 8. Why the guide has these extra sections
+
+These were added after a review of the first version.
+
+| Addition | Reason |
+|---|---|
+| **Schema contract** | The metafield namespace, keys, types and collection handles are read by name in `src/`. Renaming one in Shopify alone makes it silently stop working, because the site shows nothing for a field it cannot find. [Code] |
+| **Observed on [date]** | Statements about unavailable countries, missing policies, vendor "My Store" and USD pricing came from API checks on 2026-10-16. They describe that day, not a permanent fact, and should be rechecked. [Code] |
+| **Current storefront limitations** | Title cutting, bullet parsing, the card badge and the single option label are behaviours of this website, not Shopify rules. Listing them keeps owners from treating them as Shopify requirements. [Code] |
+| **Measurements: decide what "2.6" means** | The site deliberately does no conversion, because `2.6 ft` is ambiguous (2.6 decimal feet or 2 ft 6 in). One written convention across the catalogue prevents mixed meanings. [Code, Judgment] |
+| **Round rugs** | The "Listed size" reader only recognises `length x width` in feet. A diameter has no length and width, so it is written in the title or option text instead. [Code] |
+| **Neutral lives in palette** | Neutral is a colour, not a design style. The Style menu matches both fields, so putting it in `palette` costs nothing and keeps the two ideas apart. [Code, Judgment] |
+| **`construction` is the source of truth** | The cards, the specification row and the filters now read `construction` first, so `technique` no longer needs to be filled. This removes a duplicate value that could disagree with the first. [Code] |
+| **Intended collection rules** | When a Shopify collection with a menu handle exists, its own membership is used. If it does not exist, the site falls back to matching rules. Stating the rules once lets you build the collection conditions to match, so both paths give the same answer. [Code] |
+| **Bestseller is curated** | The site has no sales data. A `bestseller` tag or collection is a hand-picked selection, not a calculated ranking. [Code] |
+| **Product loading limit** | The site loads 25 products by default and filters what it loaded, so filters would miss products beyond that. With 3 products it makes no difference, but it will before the catalogue reaches 25. [Code] |
+| **After saving: test** | Metafields without Storefront access return nothing, so a quick check catches the most common mistake. Pages render on demand, but caching in front of the API was not measured, so an unexpected delay should be reported. [Code, Shopify] |
+| **Redirects on the Next.js side** | The Next.js app has no redirects configured, and a Shopify redirect only applies to Shopify-hosted URLs. A changed handle would break the live link. [Code] |
