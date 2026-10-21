@@ -43,3 +43,6 @@ next-env.d.ts
 # local backups and agent tooling
 /.recovery-*/
 /.kilo/
+
+# Local workflow task artifacts
+.agents/
