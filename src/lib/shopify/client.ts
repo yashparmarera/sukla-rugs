@@ -128,7 +128,8 @@ function reshapeProduct(productNode: any): Product {
       weight: productNode.weight?.value || undefined,
       knots_per_sq_inch: productNode.knots_per_sq_inch?.value || undefined,
       craft_duration: productNode.craft_duration?.value || undefined,
-      product_story: productNode.product_story?.value || undefined
+      product_story: productNode.product_story?.value || undefined,
+      short_description: productNode.short_description?.value || undefined
     },
     tags: productNode.tags || [],
     availableForSale: productNode.availableForSale ?? true,
@@ -339,7 +340,7 @@ export async function getProductByHandle(
  * Markets configuration makes available. Returns an empty list on any error.
  */
 export async function getAvailableCountries(): Promise<LocalizedCountry[]> {
-  const res = await shopifyFetch<any>({
+  const res = await shopifyFetch<{ localization?: { availableCountries?: LocalizedCountry[] } }>({
     query: `
       query getAvailableCountries {
         localization {
@@ -369,7 +370,9 @@ export async function getVariantPrices(
 ): Promise<Record<string, { amount: string; currencyCode: string }>> {
   if (variantIds.length === 0) return {};
 
-  const res = await shopifyFetch<any>({
+  const res = await shopifyFetch<{
+    nodes?: Array<{ id?: string; price?: { amount: string; currencyCode: string } } | null>;
+  }>({
     query: `
       query getVariantPrices($ids: [ID!]!, $country: CountryCode) @inContext(country: $country) {
         nodes(ids: $ids) {
@@ -401,7 +404,9 @@ export interface StorePolicyLink {
  * omitted, and any API error yields an empty list.
  */
 export async function getStorePolicies(): Promise<StorePolicyLink[]> {
-  const res = await shopifyFetch<any>({
+  const res = await shopifyFetch<{
+    shop?: { shippingPolicy?: StorePolicyLink | null; refundPolicy?: StorePolicyLink | null };
+  }>({
     query: `
       query getStorePolicies {
         shop {

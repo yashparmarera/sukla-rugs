@@ -19,6 +19,7 @@ export interface ProductMetafields {
   collection_story?: string;
   artisan_story?: string;
   knots_per_sq_inch?: string;
+  short_description?: string;
 }
 
 export interface ProductImage {

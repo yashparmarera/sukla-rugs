@@ -101,6 +101,53 @@ export function extractDescriptionFeatures(descriptionHtml?: string, description
   return lines.map(splitLeadIn);
 }
 
+const MAX_SHORT_DESCRIPTION = 170;
+const MIN_SENTENCE_LENGTH = 60;
+
+/**
+ * Builds the short line shown under the product title, using only real store text.
+ *
+ * Preference order:
+ *  1. The merchant-written `short_description` metafield, when set.
+ *  2. The body of the first feature in the product's own description.
+ *  3. The start of the plain description.
+ *
+ * The result ends on a sentence boundary when one fits, is never longer than
+ * about 170 characters, and is empty when it would just repeat the title.
+ */
+export function buildShortDescription(options: {
+  override?: string;
+  features: DescriptionFeature[];
+  description?: string;
+  title: string;
+}): string {
+  const { override, features, description, title } = options;
+  const clean = (value: string) => value.replace(/\s+/g, ' ').trim();
+
+  let source = clean(override ?? '');
+  if (!source) {
+    const firstFeature = features.find((feature) => feature.text.length >= 40);
+    source = firstFeature
+      ? clean(firstFeature.text)
+      : clean((description ?? '').replace(/^About this item\s*/i, ''));
+  }
+  if (!source) return '';
+
+  // Never repeat the title itself.
+  const titleStart = clean(title).toLowerCase().slice(0, 30);
+  if (titleStart && source.toLowerCase().startsWith(titleStart)) return '';
+
+  if (source.length <= MAX_SHORT_DESCRIPTION) return source;
+
+  const window = source.slice(0, MAX_SHORT_DESCRIPTION);
+  const sentenceEnd = Math.max(window.lastIndexOf('. '), window.lastIndexOf('! '), window.lastIndexOf('? '));
+  if (sentenceEnd >= MIN_SENTENCE_LENGTH) return window.slice(0, sentenceEnd + 1);
+
+  const lastSpace = window.lastIndexOf(' ');
+  const cut = lastSpace > MIN_SENTENCE_LENGTH ? window.slice(0, lastSpace) : window;
+  return cut.replace(/[,;:\-\u2013\u2014\s]+$/, '') + '\u2026';
+}
+
 /**
  * Reads a listed size such as "(2.6x10 ft)" or "5 x 8 ft" from the product
  * title. It returns the text exactly as the listing wrote it. No unit

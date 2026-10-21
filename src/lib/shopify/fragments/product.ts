@@ -80,6 +80,7 @@ export const productFragment = `
     knots_per_sq_inch: metafield(namespace: "sukla", key: "knots_per_sq_inch") { value }
     craft_duration: metafield(namespace: "sukla", key: "craft_duration") { value }
     product_story: metafield(namespace: "sukla", key: "product_story") { value }
+    short_description: metafield(namespace: "sukla", key: "short_description") { value }
   }
   ${imageFragment}
 `;

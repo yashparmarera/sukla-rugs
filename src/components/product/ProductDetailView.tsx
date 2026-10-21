@@ -25,6 +25,7 @@ import { addToLocalCart } from '@/lib/shopify/local-cart';
 import { formatMoney } from '@/lib/format-money';
 import { useCurrency } from '@/components/providers/CurrencyProvider';
 import {
+  buildShortDescription,
   extractDescriptionFeatures,
   getDisplayTitle,
   isPlaceholderVariantTitle,
@@ -275,6 +276,12 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
 
   // Real structure from the product's own description, presented as a list.
   const features = extractDescriptionFeatures(product.descriptionHtml, product.description);
+  const shortDescription = buildShortDescription({
+    override: m.short_description,
+    features,
+    description: product.description,
+    title: product.title
+  });
   const highlightHeadings = features
     .map((f) => f.heading)
     .filter((h): h is string => Boolean(h))
@@ -448,9 +455,9 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                 {displayTitle}
               </h1>
 
-              {product.subtitle && (
-                <p className="font-sans text-base text-[var(--sukla-charcoal)]/75 leading-relaxed">
-                  {product.subtitle}
+              {shortDescription && (
+                <p className="font-sans text-sm text-[var(--sukla-charcoal)]/70 leading-relaxed max-w-prose">
+                  {shortDescription}
                 </p>
               )}
 
