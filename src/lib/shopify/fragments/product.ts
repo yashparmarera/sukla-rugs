@@ -84,6 +84,10 @@ export const productFragment = `
     style: metafield(namespace: "sukla", key: "style") { value }
     room: metafield(namespace: "sukla", key: "room") { value }
     shape: metafield(namespace: "sukla", key: "shape") { value }
+    construction: metafield(namespace: "sukla", key: "construction") { value }
+    palette: metafield(namespace: "sukla", key: "palette") { value }
+    premium: metafield(namespace: "sukla", key: "premium") { value }
+    rug_format: metafield(namespace: "sukla", key: "rug_format") { value }
   }
   ${imageFragment}
 `;

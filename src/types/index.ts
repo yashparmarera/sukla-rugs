@@ -12,6 +12,12 @@ export interface ProductMetafields {
   shape?: string;
   size_family?: string;
   construction?: string;
+  /** sukla.palette: list of text, raw JSON array string, e.g. '["Neutral","Ivory"]'. */
+  palette?: string;
+  /** sukla.premium: boolean metafield, value string "true" or "false". */
+  premium?: string;
+  /** sukla.rug_format: single text, "Area Rug" or "Runner". */
+  rug_format?: string;
   designer?: string;
   one_of_a_kind?: boolean;
   craft_duration?: string;

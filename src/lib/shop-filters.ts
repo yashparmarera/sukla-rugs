@@ -11,7 +11,17 @@
  *
  * 1. Structured sources, checked for every filter. Curated data, so a
  *    case-insensitive substring match on the value is enough:
- *      - sukla metafields: style, room, construction + technique, material, shape
+ *      - sukla metafields (namespace `sukla`, never `custom`):
+ *          style  -> sukla.style AND sukla.palette (so style=neutral matches a
+ *                    product whose palette list contains "Neutral")
+ *          room   -> sukla.room
+ *          construction -> sukla.construction, else sukla.technique
+ *          material -> sukla.material
+ *        List metafields arrive as JSON array strings ('["Modern","Minimalist"]').
+ *        parseMetafieldValues() turns them into real values before comparing,
+ *        so matching never runs on raw JSON text. Plain strings behave as before.
+ *        Shopify GIDs (gid://shopify/...) in a list are not labels: they are
+ *        dropped and never match (and never throw).
  *      - product.tags
  *      - product.productType
  *      - product.options[].values and variants[].selectedOptions[].value
@@ -28,11 +38,22 @@
  *
  * 3. Collection keywords (menu "Area Rugs" column). Used by /shop ONLY when a
  *    real Shopify collection with that handle does not exist:
- *      - runners: "runner" in title, tags, product type or option values
- *      - round-rugs: "round" in title, tags, product type or option values
- *      - shaped-rugs: a sukla.shape metafield, a "shaped" tag, or "shaped" in title
+ *      - runners: sukla.rug_format equal to "Runner" (case-insensitive), OR
+ *        "runner" in title, tags, product type or option values
+ *      - round-rugs: sukla.shape equal to "Round" (case-insensitive), OR
+ *        "round" in title, tags, product type or option values
+ *      - shaped-rugs: a sukla.shape value that is present and is NOT
+ *        rectangular / rectangle / square / round (e.g. Irregular, Oval,
+ *        Scalloped, Organic), OR a "shaped" tag, OR "shaped" in title.
+ *        A product with shape Rectangular or Round does NOT match shaped-rugs.
  *      - bestseller: a "bestseller" / "best-seller" tag only
- *      - premium-rugs: a "premium" tag or a product type containing "premium" only
+ *      - premium-rugs: sukla.premium equal to "true" (case-insensitive), OR a
+ *        "premium" tag, OR a product type containing "premium". A false or
+ *        absent sukla.premium never matches by itself.
+ *
+ *    Metafield keys read by the storefront (all in namespace `sukla`):
+ *    style, room, shape, construction, technique, material (text or list text),
+ *    palette (list text), premium (boolean), rug_format (single text).
  *    Any other collection handle never matches by keyword.
  *
  * Values are slugs (lowercase letters, digits, hyphens). Anything else is
@@ -107,18 +128,62 @@ function strictPattern(value: string): RegExp {
   return new RegExp(`\\b${phrasePattern(value)}\\b`, 'i');
 }
 
+/**
+ * Read a metafield value as a list of comparable strings.
+ *
+ * Shopify returns list metafields as a JSON array string, for example
+ * '["Modern","Minimalist"]', and single-value metafields as plain text. This
+ * parser is defensive: JSON.parse is only attempted on values that look like
+ * an array, a parse failure falls back to the raw string, entries are trimmed
+ * and non-string entries are dropped. Plain strings come back as a one item
+ * list, so single-value behaviour is unchanged.
+ *
+ * Shopify GIDs (gid://shopify/...), which a reference-type list metafield
+ * returns, are NOT human labels and are dropped here so they never match.
+ */
+export function parseMetafieldValues(raw: string | undefined): string[] {
+  const text = raw?.trim();
+  if (!text) return [];
+
+  let parsed: unknown = text;
+  if (text.startsWith('[')) {
+    try {
+      parsed = JSON.parse(text);
+    } catch {
+      parsed = text;
+    }
+  }
+
+  const items: unknown[] = Array.isArray(parsed) ? parsed : [text];
+  return items
+    .filter((item): item is string => typeof item === 'string')
+    .map((item) => item.trim())
+    .filter((item) => item.length > 0 && !item.startsWith('gid://shopify/'));
+}
+
+function hasMetafieldValue(raw: string | undefined, expected: string): boolean {
+  return parseMetafieldValues(raw).some((entry) => entry.toLowerCase() === expected);
+}
+
+/** Shape values that are ordinary rugs, not "shaped" rugs. */
+const PLAIN_SHAPES: ReadonlySet<string> = new Set(['rectangular', 'rectangle', 'square', 'round']);
+
 function structuredText(product: Product, key: ShopFilterKey): string[] {
   const m = product.metafields;
-  const fromMetafields: Array<string | undefined> =
+  // Construction: sukla.construction first, sukla.technique only as a fallback.
+  const construction = parseMetafieldValues(m.construction);
+  const fromMetafields: string[] =
     key === 'style'
-      ? [m.style]
+      ? [...parseMetafieldValues(m.style), ...parseMetafieldValues(m.palette)]
       : key === 'room'
-        ? [m.room]
+        ? parseMetafieldValues(m.room)
         : key === 'construction'
-          ? [m.construction, m.technique]
+          ? construction.length > 0
+            ? construction
+            : parseMetafieldValues(m.technique)
           : key === 'material'
-            ? [m.material]
-            : [m.shape];
+            ? parseMetafieldValues(m.material)
+            : parseMetafieldValues(m.shape);
 
   return [
     ...fromMetafields,
@@ -145,12 +210,18 @@ function matchesCollectionKeyword(product: Product, handle: string): boolean {
 
   switch (handle) {
     case 'runners':
-      return titleTagsTypeOptions.some((entry) => /\brunners?\b/i.test(entry));
+      return (
+        hasMetafieldValue(product.metafields.rug_format, 'runner') ||
+        titleTagsTypeOptions.some((entry) => /\brunners?\b/i.test(entry))
+      );
     case 'round-rugs':
-      return titleTagsTypeOptions.some((entry) => /\bround\b/i.test(entry));
+      return (
+        hasMetafieldValue(product.metafields.shape, 'round') ||
+        titleTagsTypeOptions.some((entry) => /\bround\b/i.test(entry))
+      );
     case 'shaped-rugs':
       return (
-        Boolean(product.metafields.shape?.trim()) ||
+        parseMetafieldValues(product.metafields.shape).some((shape) => !PLAIN_SHAPES.has(shape.toLowerCase())) ||
         product.tags.some((tag) => /\bshaped\b/i.test(tag)) ||
         /\bshaped\b/i.test(product.title)
       );
@@ -158,6 +229,7 @@ function matchesCollectionKeyword(product: Product, handle: string): boolean {
       return product.tags.some((tag) => /^best[\s-]?seller$/i.test(tag.trim()));
     case 'premium-rugs':
       return (
+        hasMetafieldValue(product.metafields.premium, 'true') ||
         product.tags.some((tag) => /^premium([\s-]?rugs?)?$/i.test(tag.trim())) ||
         /premium/i.test(product.productType ?? '')
       );

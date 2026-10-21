@@ -5,6 +5,7 @@ import { getCollectionQuery, getCollectionsQuery } from './queries/collection';
 import { createCartMutation, addToCartMutation, updateCartMutation, removeFromCartMutation, getCartQuery } from './mutations/cart';
 import { MOCK_COLLECTIONS, MOCK_PRODUCTS } from './mock-data';
 import type { LocalizedCountry } from '@/lib/localization';
+import { parseMetafieldValues } from '@/lib/shop-filters';
 
 const storeDomain = process.env.SHOPIFY_STORE_DOMAIN || 'vt0dch-hg.myshopify.com';
 const privateAccessToken = process.env.SHOPIFY_STOREFRONT_PRIVATE_TOKEN;
@@ -132,7 +133,14 @@ function reshapeProduct(productNode: any): Product {
       short_description: productNode.short_description?.value || undefined,
       style: productNode.style?.value || undefined,
       room: productNode.room?.value || undefined,
-      shape: productNode.shape?.value || undefined
+      shape: productNode.shape?.value || undefined,
+      construction: productNode.construction?.value || undefined,
+      // List metafields (palette, and style/room/material when defined as lists)
+      // arrive as JSON array strings and are kept raw; shop-filters.ts parses them.
+      palette: productNode.palette?.value || undefined,
+      // Boolean metafield value is the string "true" or "false".
+      premium: productNode.premium?.value || undefined,
+      rug_format: productNode.rug_format?.value || undefined
     },
     tags: productNode.tags || [],
     availableForSale: productNode.availableForSale ?? true,
@@ -297,7 +305,10 @@ function filterAndSortProducts(products: Product[], options?: any): Product[] {
   if (options?.color && options.color !== 'all') {
     const col = options.color.toLowerCase();
     result = result.filter(
-      (p) => p.metafields.color_family?.toLowerCase().includes(col) || p.tags.some((t) => t.toLowerCase().includes(col))
+      (p) =>
+        p.metafields.color_family?.toLowerCase().includes(col) ||
+        parseMetafieldValues(p.metafields.palette).some((v) => v.toLowerCase().includes(col)) ||
+        p.tags.some((t) => t.toLowerCase().includes(col))
     );
   }
 
