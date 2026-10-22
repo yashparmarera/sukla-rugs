@@ -38,6 +38,17 @@ export const metadata: Metadata = {
   },
   description:
     "SUKLA RUGS crafts contemporary Indian luxury rugs in Bhadohi, India — hand-knotted, hand-tufted, hand-woven, and hand-woven jute pieces designed for living spaces around the world.",
+  icons: {
+    // `src/app/favicon.ico` (multi-res 16/32/48) is picked up automatically
+    // by Next.js. These PNG entries give modern browsers crisp sizes and
+    // supply the Apple touch icon the .ico convention can't provide.
+    icon: [
+      { url: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
+      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+      { url: "/favicon-48x48.png", type: "image/png", sizes: "48x48" },
+    ],
+    apple: { url: "/apple-touch-icon.png", sizes: "180x180" },
+  },
 };
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
