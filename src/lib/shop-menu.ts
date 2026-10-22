@@ -103,6 +103,44 @@ export function isMenuCollection(handle: string): boolean {
   return MENU_COLLECTION_HANDLES.includes(handle);
 }
 
+export interface ShopFilterOption {
+  label: string;
+  value: string;
+}
+
+/** One filter group (a menu column that sets a query param) for the /shop filter bar. */
+export interface ShopFilterGroup {
+  id: string;
+  heading: string;
+  param: ShopFilterKey;
+  /** Label of the first option, which clears the param. */
+  allLabel: string;
+  options: ShopFilterOption[];
+}
+
+/** Wording of the "clear" option per menu column. Not catalogue data. */
+const ALL_OPTION_LABELS: Readonly<Record<string, string>> = {
+  style: 'All Styles',
+  room: 'All Rooms',
+  construction: 'All Constructions',
+  material: 'All Materials',
+  'area-rugs': 'All Rugs'
+};
+
+/**
+ * Filter groups for the /shop filter bar, derived from SHOP_MENU so the bar
+ * and the mega menu can never drift. Items without a param ("View All Rugs")
+ * are not options; they are represented by the group's "all" option.
+ */
+export const SHOP_FILTER_GROUPS: readonly ShopFilterGroup[] = SHOP_MENU.flatMap((column) => {
+  const options = column.items.flatMap((entry) =>
+    entry.param && entry.value ? [{ label: entry.label, value: entry.value }] : []
+  );
+  const param = column.items.find((entry) => entry.param)?.param;
+  if (!param || options.length === 0) return [];
+  return [{ id: column.id, heading: column.heading, param, allLabel: ALL_OPTION_LABELS[column.id] ?? `All ${column.heading}`, options }];
+});
+
 /** Menu label for a filter value, or undefined when it is not a menu item. */
 export function findMenuItem(param: ShopFilterKey, value: string): ShopMenuItem | undefined {
   for (const column of SHOP_MENU) {
