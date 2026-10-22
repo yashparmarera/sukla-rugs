@@ -30,7 +30,7 @@
  *    only where a plain word or phrase is a reliable signal, and always with
  *    word boundaries:
  *      - material (wool, silk, jute and any other material slug)
- *      - construction (hand knotted, hand tufted, hand woven, handloom ...)
+ *      - construction (hand knotted, hand tufted, hand woven, handloom, flatweave ...)
  *      - room: the exact phrases "living room", "bedroom", "dining room"
  *    STYLE NEVER MATCHES FREE TEXT. Words like "modern" or "neutral" are
  *    common filler; a style needs a tag, a sukla.style metafield, a product
@@ -113,7 +113,8 @@ export function describeFilter(key: ShopFilterKey | 'color', value: string): { k
 
 /** Values whose spelling differs from the plain slug. */
 const PHRASE_ALIASES: Record<string, string> = {
-  handloom: 'hand[\\s_-]?loom'
+  handloom: 'hand[\\s_-]?loom',
+  flatweave: 'flat[\\s_-]?weave'
 };
 
 function phrasePattern(value: string): string {

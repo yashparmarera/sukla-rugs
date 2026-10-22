@@ -65,7 +65,8 @@ export const SHOP_MENU: readonly ShopMenuColumn[] = [
       item('Hand Knotted', 'construction', 'hand-knotted'),
       item('Hand Tufted', 'construction', 'hand-tufted'),
       item('Hand Woven', 'construction', 'hand-woven'),
-      item('Handloom', 'construction', 'handloom')
+      item('Handloom', 'construction', 'handloom'),
+      item('Flatweave', 'construction', 'flatweave')
     ]
   },
   {
