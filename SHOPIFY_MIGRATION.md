@@ -81,3 +81,7 @@ Keep decisions here when they affect architecture or data contracts. Each entry 
 ### 2026-10-03 - Canonical status file
 
 Use one root `MIGRATION_STATUS.md` rather than maintaining a second Kiro-specific status copy. `.kiro/steering/` contains rules for reading and updating the canonical file.
+
+### 2026-10-24 - Contact details single source of truth (Next.js)
+
+`src/lib/contact.ts` is the single source of truth for the business phone number and WhatsApp details in the Next.js app: `PHONE_E164`, `PHONE_DISPLAY`, `PHONE_TEL`, `WHATSAPP_NUMBER`, `WHATSAPP_MESSAGE`, and the `whatsappUrl(message?)` helper. Any future contact surface (footer, header, contact/consultation/trade pages, `tel:`/`mailto:` CTAs, JSON-LD/schema.org `telephone` fields, metadata) must import these constants instead of hardcoding the number, so the number changes in exactly one place. Alternatives considered: inlining the literal per component (rejected — drift risk) and an env variable (rejected — the number is a public, stable brand value, not a secret or per-environment config). Consequence: the floating WhatsApp widget (`src/components/common/WhatsAppFloat.tsx`) and the footer both consume this module. Scope note: this contract is for the Next.js app only; the Shopify theme has its own data sources and is untouched.

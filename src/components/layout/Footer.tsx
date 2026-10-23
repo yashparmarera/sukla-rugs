@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { ArrowRight, Check } from 'lucide-react';
 import { KnotGlyph } from '@/components/ui/KnotGlyph';
 import { Button } from '@/components/ui/Button';
+import { PHONE_DISPLAY, PHONE_TEL } from '@/lib/contact';
 
 export const Footer: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -36,7 +37,19 @@ export const Footer: React.FC = () => {
             </p>
             <div className="text-xs font-sans text-white/60 space-y-1">
               <p>Craft Workshop: Bhadohi Carpet Belt, Uttar Pradesh 221401, India</p>
-              <p>Client Concierge: concierge@shuklarugs.com | +1 (800) 480-7847</p>
+              <p>
+                Client Concierge:{' '}
+                <a
+                  href="mailto:concierge@shuklarugs.com"
+                  className="hover:text-white transition-colors"
+                >
+                  concierge@shuklarugs.com
+                </a>{' '}
+                |{' '}
+                <a href={PHONE_TEL} className="nums hover:text-white transition-colors">
+                  {PHONE_DISPLAY}
+                </a>
+              </p>
             </div>
           </div>
 

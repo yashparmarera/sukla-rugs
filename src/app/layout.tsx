@@ -5,6 +5,7 @@ import { CurrencyProvider } from "@/components/providers/CurrencyProvider";
 import { getSelectedCountry } from "@/lib/localization.server";
 import { getCurrencyForCountry } from "@/lib/currency";
 import { getStoreCurrencyRate } from "@/lib/exchange-rates.server";
+import { WhatsAppFloat } from "@/components/common/WhatsAppFloat";
 
 // UI + numbers
 const inter = Inter({
@@ -68,6 +69,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
         <CurrencyProvider displayCurrency={displayCurrency} rate={rate}>
           {children}
         </CurrencyProvider>
+        <WhatsAppFloat />
       </body>
     </html>
   );
