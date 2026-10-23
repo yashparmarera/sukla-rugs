@@ -33,6 +33,7 @@ import {
 } from '@/lib/product-display';
 import { Button } from '@/components/ui/Button';
 import { ProductCard } from '@/components/product/ProductCard';
+import { TalkToExpert } from '@/components/product/TalkToExpert';
 import { trackEvent } from '@/lib/analytics';
 
 interface ProductDetailViewProps {
@@ -628,6 +629,9 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
               {/* Standalone only when there is no size row to hold the link */}
               {!showSizeRow && sizeGuideButton}
             </div>
+
+            {/* Direct contact with a design expert, sitting with the buy controls */}
+            <TalkToExpert />
 
             {/* Service links. Each statement is factual: checkout is Shopify-hosted, and the
                 custom-order and consultation pages exist on this site. */}
