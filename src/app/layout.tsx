@@ -32,10 +32,11 @@ const jost = Jost({
 });
 
 export const metadata: Metadata = {
-  title: {
-    default: "SUKLA RUGS | Handcrafted Luxury Rugs from Bhadohi, India",
-    template: "%s | SUKLA RUGS",
-  },
+  // Plain string on purpose: no `title.template`. Every page that exports its
+  // own title writes the brand itself (for example "Our Story | SUKLA RUGS"),
+  // and a template would append it a second time. Pages without a title use
+  // this default.
+  title: "SUKLA RUGS | Handcrafted Luxury Rugs from Bhadohi, India",
   description:
     "SUKLA RUGS crafts contemporary Indian luxury rugs in Bhadohi, India — hand-knotted, hand-tufted, hand-woven, and hand-woven jute pieces designed for living spaces around the world.",
   icons: {

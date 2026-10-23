@@ -27,10 +27,17 @@ import { useCurrency } from '@/components/providers/CurrencyProvider';
 import {
   buildShortDescription,
   extractDescriptionFeatures,
+  formatShippingWeight,
+  getCollectionFacts,
+  getDescriptionIntroForDisplay,
   getDisplayTitle,
+  getFacetValues,
+  getPlainValues,
   isPlaceholderVariantTitle,
-  parseListedSize
+  parseListedSize,
+  type FactValue
 } from '@/lib/product-display';
+import { parseMetafieldValues } from '@/lib/shop-filters';
 import { Button } from '@/components/ui/Button';
 import { ProductCard } from '@/components/product/ProductCard';
 import { trackEvent } from '@/lib/analytics';
@@ -112,6 +119,33 @@ const DetailSection: React.FC<DetailSectionProps> = ({ title, defaultOpen = fals
     </summary>
     <div className="pb-5 text-sm font-sans leading-relaxed text-[var(--sukla-charcoal)]/80">{children}</div>
   </details>
+);
+
+/** Plain text as a single fact value; empty text gives no value. */
+function text(value: string | undefined): FactValue[] {
+  const label = value?.trim();
+  return label ? [{ label }] : [];
+}
+
+/** Values joined by ", ". Values with a real target are links; the link style adds no size or weight. */
+const FactValues: React.FC<{ values: FactValue[] }> = ({ values }) => (
+  <>
+    {values.map((value, index) => (
+      <React.Fragment key={`${value.label}-${index}`}>
+        {index > 0 && ', '}
+        {value.href ? (
+          <Link
+            href={value.href}
+            className="text-[var(--sukla-terracotta)] hover:underline focus-visible:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--sukla-terracotta)]"
+          >
+            {value.label}
+          </Link>
+        ) : (
+          value.label
+        )}
+      </React.Fragment>
+    ))}
+  </>
 );
 
 export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
@@ -256,23 +290,31 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
   // Only real store values are shown. Missing rows are omitted.
   const m = product.metafields;
   const eyebrow =
-    [m.construction || m.technique, m.origin_region].filter(Boolean).join(' • ') ||
+    [parseMetafieldValues(m.construction || m.technique).join(', '), m.origin_region]
+      .filter(Boolean)
+      .join(' • ') ||
     (product.collection.handle ? product.collection.title : '') ||
     product.productType ||
     '';
 
+  // Classification values link to the matching /shop filter only when the Shop menu has it.
   const specRows = (
     [
-      ['Construction', m.construction || m.technique],
-      ['Material', m.material],
-      ['Color family', m.color_family],
-      ['Origin', m.origin_region],
-      ['Pile height', m.pile_height],
-      ['Weight', m.weight],
-      ['Knot density', m.knots_per_sq_inch],
-      ['Craft time', m.craft_duration]
-    ] as [string, string | undefined][]
-  ).filter((row): row is [string, string] => Boolean(row[1]));
+      ['Construction', getFacetValues('construction', m.construction || m.technique)],
+      ['Material', getFacetValues('material', m.material)],
+      ['Style', getFacetValues('style', m.style)],
+      ['Shape', getPlainValues(m.shape)],
+      ['Format', getPlainValues(m.rug_format)],
+      ['Suitable rooms', getFacetValues('room', m.room)],
+      ['Colours', getPlainValues(m.palette)],
+      ['Color family', text(m.color_family)],
+      ['Origin', text(m.origin_region)],
+      ['Pile height', text(m.pile_height)],
+      ['Weight', text(m.weight)],
+      ['Knot density', text(m.knots_per_sq_inch)],
+      ['Craft time', text(m.craft_duration)]
+    ] as [string, FactValue[]][]
+  ).filter(([, values]) => values.length > 0);
 
   // Real structure from the product's own description, presented as a list.
   const features = extractDescriptionFeatures(product.descriptionHtml, product.description);
@@ -281,6 +323,12 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
     features,
     description: product.description,
     title: product.title
+  });
+  // Leading paragraph(s) of the description, shown above the feature list.
+  const descriptionIntro = getDescriptionIntroForDisplay({
+    descriptionHtml: product.descriptionHtml,
+    features,
+    shortDescription
   });
   const highlightHeadings = features
     .map((f) => f.heading)
@@ -292,12 +340,13 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
   const sku = selectedVariant.sku || undefined;
   const detailRows = (
     [
-      ['Listed size', listedSize ?? undefined],
-      ['Product type', product.productType],
-      ['SKU', sku],
-      ['Collection', product.collection.handle ? product.collection.title : undefined]
-    ] as [string, string | undefined][]
-  ).filter((row): row is [string, string] => Boolean(row[1]));
+      ['Listed size', text(listedSize ?? undefined)],
+      ['Product type', text(product.productType)],
+      ['SKU', text(sku)],
+      ['Collections', getCollectionFacts(product)],
+      ['Shipping weight', text(formatShippingWeight(selectedVariant.weight, selectedVariant.weightUnit))]
+    ] as [string, FactValue[]][]
+  ).filter(([, values]) => values.length > 0);
 
   const showSizeRow = hasMultipleVariants || Boolean(singleVariantLabel) || Boolean(listedSize);
   const sizeGuideButton = (
@@ -666,6 +715,12 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
             <div className="space-y-6">
               <h2 className="display-lg text-2xl text-[var(--sukla-charcoal)]">About this rug</h2>
 
+              {descriptionIntro && (
+                <p className="text-sm font-sans leading-relaxed text-[var(--sukla-charcoal)]/80">
+                  {descriptionIntro}
+                </p>
+              )}
+
               {features.length > 0 ? (
                 <ul className="divide-y divide-[var(--sukla-muted-border)] border-y border-[var(--sukla-muted-border)]">
                   {features.map((feature, index) => (
@@ -711,10 +766,12 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
               {detailRows.length > 0 && (
                 <DetailSection title="Product details" defaultOpen>
                   <dl className="grid grid-cols-[auto_1fr] gap-x-6 gap-y-2">
-                    {detailRows.map(([label, value]) => (
+                    {detailRows.map(([label, values]) => (
                       <React.Fragment key={label}>
                         <dt className="text-[var(--sukla-taupe)]">{label}</dt>
-                        <dd className="nums text-[var(--sukla-charcoal)]">{value}</dd>
+                        <dd className="nums min-w-0 break-words text-[var(--sukla-charcoal)]">
+                          <FactValues values={values} />
+                        </dd>
                       </React.Fragment>
                     ))}
                   </dl>
@@ -727,10 +784,12 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
               {specRows.length > 0 && (
                 <DetailSection title="Specifications" defaultOpen>
                   <dl className="grid grid-cols-[auto_1fr] gap-x-6 gap-y-2">
-                    {specRows.map(([label, value]) => (
+                    {specRows.map(([label, values]) => (
                       <React.Fragment key={label}>
                         <dt className="text-[var(--sukla-taupe)]">{label}</dt>
-                        <dd className="nums text-[var(--sukla-charcoal)]">{value}</dd>
+                        <dd className="nums min-w-0 break-words text-[var(--sukla-charcoal)]">
+                          <FactValues values={values} />
+                        </dd>
                       </React.Fragment>
                     ))}
                   </dl>

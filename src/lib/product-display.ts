@@ -1,3 +1,7 @@
+import { parseMetafieldValues } from '@/lib/shop-filters';
+import { findMenuItem } from '@/lib/shop-menu';
+import type { ProductMetafields, WeightUnit } from '@/types';
+
 const TITLE_SEPARATORS = [' | ', ' - ', ' \u2013 ', ' \u2014 ', ', '];
 const MIN_DISPLAY_LENGTH = 20;
 
@@ -101,6 +105,119 @@ export function extractDescriptionFeatures(descriptionHtml?: string, description
   return lines.map(splitLeadIn);
 }
 
+const MAX_INTRO_LENGTH = 600;
+const MIN_INTRO_SENTENCE_LENGTH = 120;
+
+function htmlToPlainText(html: string): string {
+  return decodeEntities(
+    html
+      .replace(/<\/(p|div|li|h[1-6])>|<br\s*\/?>/gi, ' ')
+      .replace(/<[^>]+>/g, '')
+  )
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/**
+ * Returns the text of the leading paragraph(s) of `descriptionHtml`: everything
+ * before the first list or heading. Text only, so Shopify's HTML is never
+ * rendered. Capped near 600 characters, ending on a sentence when one fits.
+ * Returns an empty string when the description starts with a list or heading,
+ * or has no HTML.
+ */
+export function extractDescriptionIntro(descriptionHtml?: string): string {
+  const html = descriptionHtml ?? '';
+  const firstStructure = html.search(/<(ul|ol|h[1-6])[\s>]/i);
+  const leading = firstStructure === -1 ? html : html.slice(0, firstStructure);
+  const text = htmlToPlainText(leading);
+  if (text.length <= MAX_INTRO_LENGTH) return text;
+
+  const window = text.slice(0, MAX_INTRO_LENGTH);
+  const sentenceEnd = Math.max(window.lastIndexOf('. '), window.lastIndexOf('! '), window.lastIndexOf('? '));
+  if (sentenceEnd >= MIN_INTRO_SENTENCE_LENGTH) return window.slice(0, sentenceEnd + 1);
+
+  const lastSpace = window.lastIndexOf(' ');
+  const cut = lastSpace > MIN_INTRO_SENTENCE_LENGTH ? window.slice(0, lastSpace) : window;
+  return cut.replace(/[,;:\-\u2013\u2014\s]+$/, '') + '\u2026';
+}
+
+function normaliseForCompare(value: string): string {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+}
+
+/**
+ * The intro paragraph to show above the feature list in "About this rug".
+ * Empty when there is no intro, no feature list (the plain description is
+ * shown instead then), or the intro only repeats the short description under
+ * the title or the feature text itself.
+ */
+export function getDescriptionIntroForDisplay(options: {
+  descriptionHtml?: string;
+  features: DescriptionFeature[];
+  shortDescription: string;
+}): string {
+  const { descriptionHtml, features, shortDescription } = options;
+  if (features.length === 0) return '';
+
+  const intro = extractDescriptionIntro(descriptionHtml);
+  const normIntro = normaliseForCompare(intro);
+  if (!normIntro) return '';
+
+  const normShort = normaliseForCompare(shortDescription);
+  if (normShort && (normIntro.includes(normShort) || normShort.includes(normIntro))) return '';
+
+  // Features read from plain lines (no <li> in the HTML) would be repeated here.
+  const repeatsFeature = features.some((feature) => {
+    const normFeature = normaliseForCompare(feature.text);
+    return normFeature.length > 0 && normIntro.includes(normFeature);
+  });
+  return repeatsFeature ? '' : intro;
+}
+
+/** Brand name written into every page title. */
+export const BRAND_NAME = 'SUKLA RUGS';
+
+/** Meta descriptions are trimmed to about this many characters. */
+const META_DESCRIPTION_LENGTH = 160;
+
+/** Appends " | SUKLA RUGS" to a title unless it already ends with the brand (any case, "|", "-", en or em dash). */
+export function withBrandSuffix(title: string): string {
+  const stripped = title.replace(/\s*[|\u2013\u2014-]\s*sukla rugs\s*$/i, '').trim();
+  return `${stripped} | ${BRAND_NAME}`;
+}
+
+/** Trims plain text to about 160 characters on a word boundary; adds an ellipsis only when trimmed. */
+export function trimMetaDescription(text: string): string | undefined {
+  const clean = text.replace(/\s+/g, ' ').trim();
+  if (!clean) return undefined;
+  if (clean.length <= META_DESCRIPTION_LENGTH) return clean;
+
+  const window = clean.slice(0, META_DESCRIPTION_LENGTH + 1);
+  const lastSpace = window.lastIndexOf(' ');
+  const cut = lastSpace > 0 ? window.slice(0, lastSpace) : window.slice(0, META_DESCRIPTION_LENGTH);
+  return cut.replace(/[,;:\-\u2013\u2014\s]+$/, '') + '\u2026';
+}
+
+/**
+ * Title and description for a product page's metadata. Uses the Shopify
+ * "Search engine listing" values when set; otherwise the full product title
+ * (not the shortened display title) and the start of the plain description.
+ * Nothing is invented. The brand appears exactly once because the root layout
+ * has no title template.
+ */
+export function buildProductMetadata(product: {
+  title: string;
+  description: string;
+  seo?: { title?: string; description?: string };
+}): { title: string; description: string | undefined } {
+  const seoTitle = product.seo?.title?.trim();
+  const seoDescription = product.seo?.description?.trim();
+  return {
+    title: withBrandSuffix(seoTitle || product.title),
+    description: seoDescription || trimMetaDescription(product.description)
+  };
+}
+
 const MAX_SHORT_DESCRIPTION = 170;
 const MIN_SENTENCE_LENGTH = 60;
 
@@ -168,33 +285,188 @@ interface RelatedCandidate {
   tags: string[];
   createdAt: string;
   collection: { handle: string };
+  /** Every collection the product belongs to, when known. */
+  collections?: { handle: string }[];
+  metafields?: ProductMetafields;
+}
+
+/** Lower-cased, de-duplicated values of a list or text metafield. */
+function metafieldSet(raw: string | undefined): Set<string> {
+  return new Set(parseMetafieldValues(raw).map((value) => value.toLowerCase()));
+}
+
+function overlapCount(a: Set<string>, b: Set<string>): number {
+  let count = 0;
+  for (const value of a) if (b.has(value)) count += 1;
+  return count;
+}
+
+function collectionHandles(product: RelatedCandidate): Set<string> {
+  const handles = new Set<string>();
+  if (product.collection.handle) handles.add(product.collection.handle);
+  for (const entry of product.collections ?? []) if (entry.handle) handles.add(entry.handle);
+  return handles;
+}
+
+/**
+ * Score for how related `candidate` is to `current`, using only real catalog
+ * data. A metafield only scores when BOTH products have a value for it.
+ *
+ *  - shared collection +4 (once), same product type +2, shared tags up to +3
+ *  - sukla.style overlap +2 each (max 4), sukla.room +1 each (max 2),
+ *    sukla.palette +1 each (max 2)
+ *  - same sukla.shape +2, same sukla.rug_format +2
+ *  - sukla.construction (else technique) overlap +2, sukla.material +1 each (max 2)
+ */
+function relatedScore(current: RelatedCandidate, candidate: RelatedCandidate): number {
+  let score = 0;
+
+  const currentHandles = collectionHandles(current);
+  if ([...collectionHandles(candidate)].some((handle) => currentHandles.has(handle))) score += 4;
+
+  if (current.productType && candidate.productType === current.productType) score += 2;
+
+  const currentTags = new Set(current.tags.map((t) => t.toLowerCase()));
+  score += Math.min(3, candidate.tags.filter((t) => currentTags.has(t.toLowerCase())).length);
+
+  const a = current.metafields;
+  const b = candidate.metafields;
+  if (a && b) {
+    score += Math.min(4, 2 * overlapCount(metafieldSet(a.style), metafieldSet(b.style)));
+    score += Math.min(2, overlapCount(metafieldSet(a.room), metafieldSet(b.room)));
+    score += Math.min(2, overlapCount(metafieldSet(a.palette), metafieldSet(b.palette)));
+    score += Math.min(2, overlapCount(metafieldSet(a.material), metafieldSet(b.material)));
+    if (overlapCount(metafieldSet(a.shape), metafieldSet(b.shape)) > 0) score += 2;
+    if (overlapCount(metafieldSet(a.rug_format), metafieldSet(b.rug_format)) > 0) score += 2;
+    const constructionA = metafieldSet(a.construction || a.technique);
+    const constructionB = metafieldSet(b.construction || b.technique);
+    if (overlapCount(constructionA, constructionB) > 0) score += 2;
+  }
+
+  return score;
 }
 
 /**
  * Ranks other purchasable products by how related they genuinely are, using
- * only real catalog data: same collection, same product type, shared tags.
- * Remaining products follow newest first, so a small catalog still gets
- * suggestions. Nothing is invented; the result is always real products.
+ * only real catalog data: shared collections, product type, tags and the
+ * `sukla` metafields (style, room, palette, shape, format, construction,
+ * material). Ties go to the newest product, then to the handle, so the order
+ * is deterministic. Remaining products follow, so a small catalog still gets
+ * suggestions. Nothing is invented or padded; the result only contains
+ * products that were passed in.
  */
 export function rankRelatedProducts<T extends RelatedCandidate>(current: T, candidates: T[], limit = 4): T[] {
-  const currentTags = new Set(current.tags.map((t) => t.toLowerCase()));
-
   return candidates
     .filter((p) => p.handle !== current.handle && p.availableForSale)
-    .map((p) => {
-      let score = 0;
-      if (current.collection.handle && p.collection.handle === current.collection.handle) score += 4;
-      if (current.productType && p.productType === current.productType) score += 2;
-      score += Math.min(3, p.tags.filter((t) => currentTags.has(t.toLowerCase())).length);
-      return { product: p, score };
-    })
+    .map((p) => ({ product: p, score: relatedScore(current, p) }))
     .sort(
       (a, b) =>
         b.score - a.score ||
-        new Date(b.product.createdAt).getTime() - new Date(a.product.createdAt).getTime()
+        new Date(b.product.createdAt).getTime() - new Date(a.product.createdAt).getTime() ||
+        a.product.handle.localeCompare(b.product.handle)
     )
     .slice(0, limit)
     .map((entry) => entry.product);
+}
+
+/** One value shown in a specification or detail row; linked only when a real target exists. */
+export interface FactValue {
+  label: string;
+  href?: string;
+}
+
+/** "Living Room" -> "living-room". Matches the slugs used by the Shop menu. */
+export function facetSlug(label: string): string {
+  return label
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function uniqueValues(values: string[]): string[] {
+  const seen = new Set<string>();
+  return values.filter((value) => {
+    const key = value.toLowerCase();
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+/**
+ * Values of a classification metafield (a list, or text such as "Wool, Silk"),
+ * each linked to the matching /shop filter only when that value is a Shop menu item.
+ */
+export function getFacetValues(
+  key: 'style' | 'room' | 'construction' | 'material',
+  raw: string | undefined
+): FactValue[] {
+  const labels = uniqueValues(
+    parseMetafieldValues(raw).flatMap((entry) =>
+      entry
+        .split(',')
+        .map((part) => part.trim())
+        .filter((part) => part.length > 0)
+    )
+  );
+  return labels.map((label) => {
+    const href = findMenuItem(key, facetSlug(label))?.href;
+    return href ? { label, href } : { label };
+  });
+}
+
+/** Values of a metafield that is shown as plain text (no filter exists for it). */
+export function getPlainValues(raw: string | undefined): FactValue[] {
+  return uniqueValues(parseMetafieldValues(raw)).map((label) => ({ label }));
+}
+
+/**
+ * Every collection the product belongs to. Each links to its collection page
+ * (which renders real Shopify data for real handles), except Shopify's
+ * "frontpage" (Home page) collection, which is not a merchandising link.
+ */
+export function getCollectionFacts(product: {
+  collection: { title: string; handle: string };
+  collections?: { title: string; handle: string }[];
+}): FactValue[] {
+  const source = product.collections?.length
+    ? product.collections
+    : product.collection.handle
+      ? [product.collection]
+      : [];
+  const seen = new Set<string>();
+  const facts: FactValue[] = [];
+  for (const entry of source) {
+    if (!entry.title || !entry.handle || seen.has(entry.handle)) continue;
+    seen.add(entry.handle);
+    facts.push(
+      entry.handle === 'frontpage'
+        ? { label: entry.title }
+        : { label: entry.title, href: `/collections/${encodeURIComponent(entry.handle)}` }
+    );
+  }
+  return facts;
+}
+
+const WEIGHT_UNITS: Record<WeightUnit, { suffix: string; decimals: number }> = {
+  KILOGRAMS: { suffix: 'kg', decimals: 2 },
+  GRAMS: { suffix: 'g', decimals: 0 },
+  POUNDS: { suffix: 'lb', decimals: 2 },
+  OUNCES: { suffix: 'oz', decimals: 1 }
+};
+
+/**
+ * Shipping weight text such as "1 kg" or "12.35 lb". Undefined when the
+ * weight is missing, not positive, or has no known unit (Shopify stores 0 when
+ * no weight was entered). Locale independent so server and client agree.
+ */
+export function formatShippingWeight(weight: number | undefined, unit: WeightUnit | undefined): string | undefined {
+  if (typeof weight !== 'number' || !Number.isFinite(weight) || weight <= 0 || !unit) return undefined;
+  const config = WEIGHT_UNITS[unit];
+  if (!config) return undefined;
+  const rounded = Number(weight.toFixed(config.decimals));
+  if (rounded <= 0) return undefined;
+  return `${rounded.toString()} ${config.suffix}`;
 }
 
 /**

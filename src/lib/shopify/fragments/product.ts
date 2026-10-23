@@ -7,6 +7,10 @@ export const productFragment = `
     title
     description
     descriptionHtml
+    seo {
+      title
+      description
+    }
     productType
     tags
     availableForSale
@@ -31,7 +35,7 @@ export const productFragment = `
         currencyCode
       }
     }
-    collections(first: 1) {
+    collections(first: 10) {
       edges {
         node {
           id
@@ -67,6 +71,8 @@ export const productFragment = `
             ...image
           }
           sku
+          weight
+          weightUnit
         }
       }
     }

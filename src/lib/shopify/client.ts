@@ -93,11 +93,18 @@ function reshapeProduct(productNode: any): Product {
       availableForSale: node.availableForSale ?? true,
       selectedOptions: node.selectedOptions || [],
       image: reshapeImage(node.image || featuredImage),
-      sku: node.sku
+      sku: node.sku,
+      weight: typeof node.weight === 'number' ? node.weight : undefined,
+      weightUnit: node.weightUnit || undefined
     };
   }) || [];
 
   const collectionNode = productNode.collections?.edges?.[0]?.node;
+  const collectionEdges: { node?: { title?: string; handle?: string } }[] = productNode.collections?.edges ?? [];
+  const collections: { title: string; handle: string }[] = [];
+  for (const { node } of collectionEdges) {
+    if (node?.title && node.handle) collections.push({ title: node.title, handle: node.handle });
+  }
 
   return {
     id: productNode.id,
@@ -105,12 +112,20 @@ function reshapeProduct(productNode: any): Product {
     title: productNode.title,
     description: productNode.description || '',
     descriptionHtml: productNode.descriptionHtml,
+    seo:
+      productNode.seo?.title || productNode.seo?.description
+        ? {
+            title: productNode.seo.title || undefined,
+            description: productNode.seo.description || undefined
+          }
+        : undefined,
     productType: productNode.productType || undefined,
     collection: {
       title: collectionNode?.title || '',
       handle: collectionNode?.handle || '',
       accentColor: getCollectionAccentColor(collectionNode?.handle || '')
     },
+    collections: collections.length > 0 ? collections : undefined,
     priceRange: productNode.priceRange || {
       minVariantPrice: variants[0]?.price || { amount: '1200.00', currencyCode: 'USD' },
       maxVariantPrice: variants[variants.length - 1]?.price || { amount: '3800.00', currencyCode: 'USD' }

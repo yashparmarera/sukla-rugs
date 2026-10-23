@@ -4,7 +4,8 @@ import { Header } from '@/components/navigation/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ProductDetailView } from '@/components/product/ProductDetailView';
 import { getProductByHandle, getProducts, getStorePolicies } from '@/lib/shopify/client';
-import { rankRelatedProducts } from '@/lib/product-display';
+import { buildProductMetadata, rankRelatedProducts } from '@/lib/product-display';
+import { buildProductJsonLd, serializeJsonLd } from '@/lib/product-jsonld';
 import { getSelectedCountry } from '@/lib/localization.server';
 import { DEFAULT_COUNTRY } from '@/lib/localization';
 
@@ -20,12 +21,14 @@ export async function generateMetadata({ params }: ProductPageProps) {
 
   if (!product) return { title: 'Product Not Found | SUKLA RUGS' };
 
+  const { title, description } = buildProductMetadata(product);
+
   return {
-    title: `${product.title} | SUKLA RUGS`,
-    description: product.description || undefined,
+    title,
+    description,
     openGraph: {
-      title: `${product.title} | SUKLA RUGS`,
-      description: product.description || undefined,
+      title,
+      description,
       images: [{ url: product.featuredImage.url }]
     }
   };
@@ -53,39 +56,15 @@ export default async function ProductPage({ params }: ProductPageProps) {
   }
 
   // Suggestions are real, purchasable products ranked by genuine relevance
-  // (same collection, product type, shared tags), then newest first.
+  // (shared collections, product type, tags and sukla metafields), then newest first.
   const allProducts = await getProducts({ country });
   const relatedProducts = rankRelatedProducts(product, allProducts);
-
-  // JSON-LD Structured Data
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Product',
-    name: product.title,
-    image: product.images.map((img) => img.url),
-    description: product.description,
-    sku: product.variants[0]?.id || product.id,
-    brand: {
-      '@type': 'Brand',
-      name: 'SUKLA RUGS'
-    },
-    offers: {
-      '@type': 'Offer',
-      url: `https://shuklarugsv1.vercel.app/products/${product.handle}`,
-      priceCurrency: product.priceRange.minVariantPrice.currencyCode,
-      price: product.priceRange.minVariantPrice.amount,
-      availability: product.availableForSale
-        ? 'https://schema.org/InStock'
-        : 'https://schema.org/OutOfStock',
-      itemCondition: 'https://schema.org/NewCondition'
-    }
-  };
 
   return (
     <div className="flex flex-col min-h-screen bg-[var(--sukla-ivory)]">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(buildProductJsonLd(product)) }}
       />
       <Header />
       <main className="flex-1">

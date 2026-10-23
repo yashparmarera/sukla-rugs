@@ -37,6 +37,9 @@ export interface ProductImage {
   type?: 'primary' | 'lifestyle' | 'detail' | 'fringe' | 'back' | 'room';
 }
 
+/** Shopify Storefront API `WeightUnit` values. */
+export type WeightUnit = 'GRAMS' | 'KILOGRAMS' | 'OUNCES' | 'POUNDS';
+
 export interface ProductVariant {
   id: string;
   title: string; // e.g. "8' x 10' / Ivory"
@@ -56,6 +59,9 @@ export interface ProductVariant {
   image?: ProductImage;
   sku?: string;
   dimensions?: string;
+  /** Shipping weight from Shopify (variant weight). Zero means "not set". */
+  weight?: number;
+  weightUnit?: WeightUnit;
 }
 
 export interface Product {
@@ -65,12 +71,23 @@ export interface Product {
   subtitle?: string;
   description: string;
   descriptionHtml?: string;
+  /** Shopify "Search engine listing" values. Each is undefined when not customised in Admin. */
+  seo?: {
+    title?: string;
+    description?: string;
+  };
   productType?: string;
+  /** The first collection only; used as the card label, breadcrumb and gallery tag. */
   collection: {
     title: string;
     handle: string;
     accentColor: string;
   };
+  /** Every collection the product belongs to (up to 10). Absent for mock products. */
+  collections?: {
+    title: string;
+    handle: string;
+  }[];
   priceRange: {
     minVariantPrice: {
       amount: string;
