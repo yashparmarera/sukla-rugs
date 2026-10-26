@@ -186,6 +186,24 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
   const imageCount = product.images.length;
   const currentImage = product.images[activeImageIndex] || product.featuredImage;
 
+  // Main frame follows the active image's own aspect ratio (Shopify width/height,
+  // or the natural size once loaded), so the whole rug shows as large as the
+  // viewport allows with no letterbox whitespace. Clamped so overlay controls
+  // stay usable on extreme runners; object-contain still prevents any crop.
+  const [loadedRatios, setLoadedRatios] = useState<Record<string, number>>({});
+  const knownRatio =
+    currentImage.width && currentImage.height ? currentImage.width / currentImage.height : undefined;
+  const imageRatio = Math.min(2.4, Math.max(0.45, knownRatio ?? loadedRatios[currentImage.url] ?? 1));
+  // Tallest the frame may be: the viewport minus the sticky header offset. Below lg
+  // the thumbnail row sits under the image, so its height is reserved too; on lg the
+  // thumbnails are a column to the left, so their width (5rem + 2px ring room + 0.75rem gap) is reserved.
+  const hasThumbs = imageCount > 1;
+  const ratioText = imageRatio.toFixed(4);
+  const frameMaxHeightSm = `max(320px, calc(100svh - ${hasThumbs ? '14rem' : '9rem'}))`;
+  const frameMaxHeightLg = 'max(320px, calc(100svh - 9rem))';
+  const galleryWidthSm = `min(100%, calc(${frameMaxHeightSm} * ${ratioText}))`;
+  const galleryWidthLg = `min(${hasThumbs ? 'calc(100% - 5.75rem - 2px)' : '100%'}, calc(${frameMaxHeightLg} * ${ratioText}))`;
+
   const showImage = (index: number) => {
     if (imageCount === 0) return;
     setActiveImageIndex((index + imageCount) % imageCount);
@@ -397,29 +415,41 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-[11fr_9fr] gap-10 lg:gap-14 items-start">
 
           {/* Gallery: pinned below the header on desktop while the details scroll past.
-              Its height is viewport-based, so it always fits on screen when pinned. */}
-          <div className="space-y-3 lg:sticky lg:top-28">
-            {/* Height-capped frame with object-contain: the whole rug is always
-                visible, so runners and unusual shapes are never cropped. */}
+              Its width follows the image ratio and its height is viewport-capped, so it
+              always fits on screen when pinned. Thumbnails sit left of the image on lg. */}
+          <div className="min-w-0 space-y-3 lg:space-y-0 lg:flex lg:gap-3 lg:sticky lg:top-28">
+            {/* Frame sized to the image's aspect ratio with object-contain: the whole
+                rug is always visible, never cropped or stretched, with minimal whitespace. */}
             <div
-              className="relative w-full h-[55vh] min-h-[320px] max-h-[620px] bg-[var(--sukla-cream)] border border-[var(--sukla-muted-border)] overflow-hidden touch-pan-y"
+              className="relative lg:order-2 w-[var(--gallery-w-sm)] lg:w-[var(--gallery-w-lg)] bg-[var(--sukla-cream)] border border-[var(--sukla-muted-border)] overflow-hidden touch-pan-y"
+              style={
+                {
+                  aspectRatio: imageRatio,
+                  '--gallery-w-sm': galleryWidthSm,
+                  '--gallery-w-lg': galleryWidthLg,
+                } as React.CSSProperties
+              }
               onTouchStart={handleTouchStart}
               onTouchEnd={handleTouchEnd}
             >
-              {/* Inner padding keeps the rug comfortably inset, never cropped */}
-              <div className="absolute inset-0 p-5 sm:p-8">
-                <div className="relative h-full w-full">
-                  <Image
-                    src={currentImage.url}
-                    alt={currentImage.altText || product.title}
-                    fill
-                    priority
-                    sizes="(max-width: 1024px) 100vw, 55vw"
-                    className="object-contain cursor-zoom-in"
-                    onClick={() => setIsFullscreenZoom(true)}
-                  />
-                </div>
-              </div>
+              <Image
+                src={currentImage.url}
+                alt={currentImage.altText || product.title}
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 55vw"
+                className="object-contain cursor-zoom-in"
+                onClick={() => setIsFullscreenZoom(true)}
+                onLoad={(event) => {
+                  if (knownRatio) return;
+                  const img = event.currentTarget;
+                  if (!img.naturalWidth || !img.naturalHeight) return;
+                  const ratio = img.naturalWidth / img.naturalHeight;
+                  setLoadedRatios((prev) =>
+                    prev[currentImage.url] === ratio ? prev : { ...prev, [currentImage.url]: ratio }
+                  );
+                }}
+              />
 
               <button
                 type="button"
@@ -467,9 +497,17 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
               )}
             </div>
 
-            {/* Compact thumbnails, never cropped */}
+            {/* Compact thumbnails, never cropped. Below lg: one scrollable row under the
+                image. On lg: a column to the left of the image; the wrapper is stretched to
+                the image's height and the list scrolls inside it, so it never makes the
+                pinned gallery taller than the image. */}
             {product.images.length > 1 && (
-              <div className="flex flex-wrap gap-2" role="group" aria-label="Product images">
+              <div className="lg:order-1 lg:relative lg:w-[calc(5rem+2px)] lg:shrink-0">
+              <div
+                className="flex gap-2 overflow-x-auto p-px lg:absolute lg:inset-0 lg:flex-col lg:overflow-x-hidden lg:overflow-y-auto"
+                role="group"
+                aria-label="Product images"
+              >
                 {product.images.map((img, idx) => (
                   <button
                     key={img.id}
@@ -477,7 +515,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                     onClick={() => setActiveImageIndex(idx)}
                     aria-label={`Show image ${idx + 1} of ${product.images.length}`}
                     aria-pressed={activeImageIndex === idx}
-                    className={`relative w-16 h-16 sm:w-20 sm:h-20 bg-[var(--sukla-cream)] border transition-all overflow-hidden ${
+                    className={`relative shrink-0 w-16 h-16 sm:w-20 sm:h-20 bg-[var(--sukla-cream)] border transition-all overflow-hidden ${
                       activeImageIndex === idx
                         ? 'border-[var(--sukla-charcoal)] ring-1 ring-[var(--sukla-charcoal)]'
                         : 'border-[var(--sukla-muted-border)] opacity-70 hover:opacity-100'
@@ -486,6 +524,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                     <Image src={img.url} alt="" fill className="object-contain" sizes="80px" />
                   </button>
                 ))}
+              </div>
               </div>
             )}
           </div>
