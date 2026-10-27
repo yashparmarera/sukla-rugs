@@ -58,8 +58,8 @@ export const Header: React.FC = () => {
       <header
         className={`sticky top-0 z-40 w-full transition-all duration-300 ${
           isScrolled
-            ? 'bg-[var(--sukla-ivory)]/95 backdrop-blur-md border-b border-[var(--sukla-muted-border)] py-4 shadow-subtle'
-            : 'bg-[var(--sukla-ivory)] border-b border-[var(--sukla-muted-border)]/60 py-6'
+            ? 'bg-[var(--sukla-ivory)]/95 backdrop-blur-md border-b border-[var(--sukla-muted-border)] py-2 shadow-subtle'
+            : 'bg-[var(--sukla-ivory)] border-b border-[var(--sukla-muted-border)]/60 py-2'
         }`}
       >
         <div className="editorial-container grid grid-cols-[1fr_auto_1fr] items-center">
@@ -74,7 +74,7 @@ export const Header: React.FC = () => {
           </button>
 
           {/* Left Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8 text-sm font-sans tracking-[0.01em] text-[var(--sukla-charcoal)]">
+          <nav className="hidden lg:flex items-center whitespace-nowrap space-x-4 xl:space-x-8 text-[13px] xl:text-sm font-sans tracking-[0.01em] text-[var(--sukla-charcoal)]">
             
             {/* SHOP mega menu */}
             <ShopMegaMenu />
