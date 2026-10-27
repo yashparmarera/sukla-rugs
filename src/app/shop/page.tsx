@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Header } from '@/components/navigation/Header';
 import { Footer } from '@/components/layout/Footer';
 import { FilterBar } from '@/components/filters/FilterBar';
+import { SortControl } from '@/components/filters/SortControl';
 import { ProductCard } from '@/components/product/ProductCard';
 import { ActiveFilterChips } from '@/components/filters/ActiveFilterChips';
 import { getProducts, getCollectionByHandle } from '@/lib/shopify/client';
@@ -89,45 +90,55 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
             </p>
           </div>
 
-          {/* Interactive URL-Persisted Filter Bar */}
-          <Suspense fallback={<div className="h-16 bg-[var(--sukla-sand)] animate-pulse my-8" />}>
-            <FilterBar totalCount={products.length} />
-          </Suspense>
+          {/* Two-column shell: left filter rail (desktop) + right content column */}
+          <div className="lg:grid lg:grid-cols-[15rem_1fr] lg:gap-10 lg:items-start my-8">
 
-          <ActiveFilterChips filters={filters} color={colorFilter} searchParams={params} />
+            {/* Column 1 — Interactive URL-Persisted Filter Rail (mobile button + modal live here too) */}
+            <Suspense fallback={<div className="hidden lg:block h-96 bg-[var(--sukla-sand)] animate-pulse" />}>
+              <FilterBar totalCount={products.length} />
+            </Suspense>
 
-          {/* Product Grid or Empty State */}
-          {products.length === 0 && activeLabels.length > 0 ? (
-            <div className="py-24 text-center space-y-4 border border-[var(--sukla-muted-border)] bg-[var(--sukla-cream)] my-8">
-              <KnotGlyph size="md" className="text-[var(--sukla-taupe)]" />
-              <h2 className="heading text-xl text-[var(--sukla-charcoal)]">{emptyHeading}</h2>
-              <p className="font-sans text-sm text-[var(--sukla-charcoal)]/70 max-w-md mx-auto leading-relaxed">
-                We only list rugs that exist in our catalogue. As new pieces are added, they will appear here.
-              </p>
-              <Link
-                href={SHOP_ROOT_HREF}
-                className="inline-block bg-[var(--sukla-charcoal)] px-6 py-3 font-sans text-xs font-semibold uppercase tracking-[0.1em] text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--sukla-charcoal)]"
-              >
-                View All Rugs
-              </Link>
+            {/* Column 2 — Sort row, active chips, then grid or empty state */}
+            <div className="min-w-0">
+              <SortControl totalCount={products.length} />
+
+              <ActiveFilterChips filters={filters} color={colorFilter} searchParams={params} />
+
+              {/* Product Grid or Empty State */}
+              {products.length === 0 && activeLabels.length > 0 ? (
+                <div className="py-24 text-center space-y-4 border border-[var(--sukla-muted-border)] bg-[var(--sukla-cream)]">
+                  <KnotGlyph size="md" className="text-[var(--sukla-taupe)]" />
+                  <h2 className="heading text-xl text-[var(--sukla-charcoal)]">{emptyHeading}</h2>
+                  <p className="font-sans text-sm text-[var(--sukla-charcoal)]/70 max-w-md mx-auto leading-relaxed">
+                    We only list rugs that exist in our catalogue. As new pieces are added, they will appear here.
+                  </p>
+                  <Link
+                    href={SHOP_ROOT_HREF}
+                    className="inline-block bg-[var(--sukla-charcoal)] px-6 py-3 font-sans text-xs font-semibold uppercase tracking-[0.1em] text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--sukla-charcoal)]"
+                  >
+                    View All Rugs
+                  </Link>
+                </div>
+              ) : products.length === 0 ? (
+                <div className="py-24 text-center space-y-4 border border-[var(--sukla-muted-border)] bg-[var(--sukla-cream)]">
+                  <KnotGlyph size="md" className="text-[var(--sukla-taupe)]" />
+                  <h2 className="heading text-xl text-[var(--sukla-charcoal)]">
+                    No Rugs Match Your Filter Criteria
+                  </h2>
+                  <p className="font-sans text-sm text-[var(--sukla-charcoal)]/70 max-w-md mx-auto leading-relaxed">
+                    Try selecting a broader material or color family, or clear your active filters.
+                  </p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-8">
+                  {products.map((product, idx) => (
+                    <ProductCard key={product.id} product={product} priority={idx < 4} />
+                  ))}
+                </div>
+              )}
             </div>
-          ) : products.length === 0 ? (
-            <div className="py-24 text-center space-y-4 border border-[var(--sukla-muted-border)] bg-[var(--sukla-cream)] my-8">
-              <KnotGlyph size="md" className="text-[var(--sukla-taupe)]" />
-              <h2 className="heading text-xl text-[var(--sukla-charcoal)]">
-                No Rugs Match Your Filter Criteria
-              </h2>
-              <p className="font-sans text-sm text-[var(--sukla-charcoal)]/70 max-w-md mx-auto leading-relaxed">
-                Try selecting a broader material or color family, or clear your active filters.
-              </p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 my-8">
-              {products.map((product, idx) => (
-                <ProductCard key={product.id} product={product} priority={idx < 4} />
-              ))}
-            </div>
-          )}
+
+          </div>
 
         </div>
       </main>
