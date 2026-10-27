@@ -102,9 +102,11 @@ export const FilterBar: React.FC<FilterBarProps> = ({ totalCount }) => {
 
   return (
     <>
-      {/* Desktop Left Filter Rail */}
-      <div className="hidden lg:block lg:sticky lg:top-[89px] lg:self-start lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto">
-        <p className="eyebrow flex items-center gap-2 text-[var(--sukla-charcoal)] mb-4">
+      {/* Desktop Left Filter Rail — sized to its own content (no forced viewport
+          height) so it ends right after the last filter instead of leaving empty
+          space below. Sticky so it follows the scroll beside the grid. */}
+      <div className="hidden lg:block lg:sticky lg:top-[89px] lg:self-start">
+        <p className="eyebrow flex items-center gap-2 text-[var(--sukla-charcoal)] mb-3">
           <SlidersHorizontal aria-hidden="true" className="w-3.5 h-3.5 text-[var(--sukla-terracotta)]" /> Filter By
         </p>
 
@@ -112,7 +114,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({ totalCount }) => {
           {SHOP_FILTER_GROUPS.map((group) => {
             const selectId = `${idPrefix}-rail-${group.id}`;
             return (
-              <div key={group.id} className="mb-4">
+              <div key={group.id} className="mb-3">
                 <label
                   htmlFor={selectId}
                   className="block text-[10px] uppercase tracking-widest text-[var(--sukla-taupe)] mb-1"
@@ -137,7 +139,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({ totalCount }) => {
           })}
 
           {hasActiveFilters && (
-            <div className="pt-4 mt-2 border-t border-[var(--sukla-muted-border)]">
+            <div className="pt-3 mt-1 border-t border-[var(--sukla-muted-border)]">
               <button
                 type="button"
                 onClick={clearAllFilters}
