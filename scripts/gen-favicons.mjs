@@ -4,7 +4,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const src = path.join(root, "public/images/visual-mark-sukla.png");
+const src = path.join(root, "public/favicon-v2.jpg");
 const outDir = path.join(root, "public");
 
 // Square sizes to emit onto a transparent, aspect-preserving canvas.
