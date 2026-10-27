@@ -30,7 +30,7 @@ export const metadata = {
 
 export default async function HomePage() {
   const country = await getSelectedCountry();
-  const signatureProducts = await getProducts({ limit: 6, country });
+  const signatureProducts = await getProducts({ limit: 8, country });
 
   return (
     <BrandEntrance>
@@ -61,9 +61,9 @@ export default async function HomePage() {
               </Button>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {signatureProducts.map((product, idx) => (
-                <ProductCard key={product.id} product={product} priority={idx < 3} />
+                <ProductCard key={product.id} product={product} priority={idx < 4} />
               ))}
             </div>
           </div>

@@ -40,16 +40,17 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
   return (
     <div className="group relative flex flex-col bg-[var(--sukla-cream)] border border-[var(--sukla-muted-border)]/70 hover:border-[var(--sukla-taupe)] transition-all duration-300">
       {/* Image Container with Hover Swap */}
-      <Link href={`/products/${product.handle}`} className="relative aspect-[3/4] w-full overflow-hidden bg-[var(--sukla-sand)]">
-        
-        {/* Primary Image */}
+      <Link href={`/products/${product.handle}`} className="relative aspect-[3/4] w-full overflow-hidden bg-[var(--sukla-cream)] border-b border-[var(--sukla-muted-border)]/50">
+
+        {/* Primary Image — matted frame: whole rug shown on a near-white tile,
+            never cropped, so mixed-aspect photography reads as a uniform catalog. */}
         <Image
           src={product.featuredImage.url}
           alt={product.featuredImage.altText || product.title}
           fill
           priority={priority}
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="object-cover group-hover:opacity-0 transition-opacity duration-700 ease-in-out"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          className="object-contain p-4 group-hover:opacity-0 transition-opacity duration-700 ease-in-out"
         />
 
         {/* Secondary Image (Hover) */}
@@ -57,8 +58,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
           src={secondaryImage.url}
           alt={secondaryImage.altText || `${product.title} secondary view`}
           fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="object-cover opacity-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-in-out"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          className="object-contain p-4 opacity-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-in-out"
         />
 
         {/* Badges */}
