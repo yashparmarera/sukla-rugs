@@ -145,7 +145,7 @@ export const BrandEntrance: React.FC<BrandEntranceProps> = ({ children }) => {
             )}
 
             <p className="brand-entrance__disclaimer">
-              <span aria-hidden="true">✦</span> Going live for the public on 20 October.
+              <span aria-hidden="true">✦</span> Going live for the public on 28 October.
             </p>
           </div>
 

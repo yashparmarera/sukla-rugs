@@ -46,8 +46,8 @@ export const Hero: React.FC = () => {
         ))}
       </div>
 
-      <div className="relative z-10 editorial-container py-20 text-center max-w-4xl mx-auto">
-        <div className="mx-auto max-w-2xl">
+      <div className="relative z-10 editorial-container w-full py-20 text-left">
+        <div className="max-w-2xl">
           <p className="font-sans text-[10px] uppercase tracking-[0.42em] text-white">
             <span className="hero-text-backdrop">Handcrafted Rugs</span>
           </p>
@@ -56,20 +56,20 @@ export const Hero: React.FC = () => {
             <span className="hero-text-backdrop">Rugs for <br />Every Space</span>
           </h1>
 
-          <div className="mx-auto mt-8 h-px w-20 bg-white/80" />
+          <div className="mt-8 h-px w-20 bg-white/80" />
 
-          <p className="mt-7 font-sans text-sm sm:text-base leading-relaxed text-white max-w-md mx-auto">
+          <p className="mt-7 font-sans text-sm sm:text-base leading-relaxed text-white max-w-md">
             <span className="hero-text-backdrop">From serene corners to everyday journeys, our handcrafted rugs bring warmth, texture and character to every space.</span>
           </p>
 
-          <div className="mt-8 flex justify-center">
+          <div className="mt-8 flex justify-start">
             <Button href="/shop" variant="secondary" size="lg" className="rounded-full border-0 bg-[var(--sukla-cream)] px-9 py-4 text-[var(--sukla-charcoal)] hover:bg-white">
               <span>Explore Collections</span>
               <ArrowRight size={17} strokeWidth={1.7} className="ml-3" />
             </Button>
           </div>
 
-          <div className="mt-5 flex justify-center gap-3" aria-label="Control hero slideshow">
+          <div className="mt-5 flex justify-start gap-3" aria-label="Control hero slideshow">
             <button
               type="button"
               onClick={() => moveSlide(-1)}
