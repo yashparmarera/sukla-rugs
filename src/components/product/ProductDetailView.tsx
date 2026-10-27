@@ -41,7 +41,32 @@ import { parseMetafieldValues } from '@/lib/shop-filters';
 import { Button } from '@/components/ui/Button';
 import { ProductCard } from '@/components/product/ProductCard';
 import { TalkToExpert } from '@/components/product/TalkToExpert';
+import { CustomSizeCalculator } from '@/components/product/CustomSizeCalculator';
+import { ProductAtAGlance } from '@/components/product/infographics/ProductAtAGlance';
+import { CareGuide } from '@/components/product/infographics/CareGuide';
+import { parseCareInstructions } from '@/lib/product-infographics';
 import { trackEvent } from '@/lib/analytics';
+
+/**
+ * TEMPORARY A/B FLAG — pure-white product gallery for visual comparison.
+ *
+ * `true`  → the main image frame uses a pure-white (#fff) matte with a lighter
+ *           hairline border, for the "white around the product" look.
+ * `false` → the default warm cream matte (`--sukla-cream`) that matches the
+ *           beige theme.
+ *
+ * ROLLBACK: set this to `false` (instant revert), or delete this constant plus
+ * the `GALLERY_FRAME_CLASS` usage below to remove the experiment entirely.
+ * Scoped to the PDP main gallery only; the rest of the theme is untouched.
+ */
+const WHITE_GALLERY_EXPERIMENT = true;
+
+const GALLERY_FRAME_CLASS = WHITE_GALLERY_EXPERIMENT
+  ? 'bg-white border-[var(--sukla-muted-border)]/40'
+  : 'bg-[var(--sukla-cream)] border-[var(--sukla-muted-border)]';
+
+// Thumbnail tile surface, kept in sync with the main frame so the experiment reads coherently.
+const GALLERY_THUMB_BG = WHITE_GALLERY_EXPERIMENT ? 'bg-white' : 'bg-[var(--sukla-cream)]';
 
 interface ProductDetailViewProps {
   product: Product;
@@ -122,6 +147,14 @@ const DetailSection: React.FC<DetailSectionProps> = ({ title, defaultOpen = fals
   </details>
 );
 
+/** Same look as DetailSection, but always visible with no dropdown toggle. */
+const StaticDetailSection: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
+  <section className="border-b border-[var(--sukla-muted-border)]">
+    <h3 className="heading text-base text-[var(--sukla-charcoal)] py-4">{title}</h3>
+    <div className="pb-5 text-sm font-sans leading-relaxed text-[var(--sukla-charcoal)]/80">{children}</div>
+  </section>
+);
+
 /** Plain text as a single fact value; empty text gives no value. */
 function text(value: string | undefined): FactValue[] {
   const label = value?.trim();
@@ -200,7 +233,8 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
   const hasThumbs = imageCount > 1;
   const ratioText = imageRatio.toFixed(4);
   const frameMaxHeightSm = `max(320px, calc(100svh - ${hasThumbs ? '14rem' : '9rem'}))`;
-  const frameMaxHeightLg = 'max(320px, calc(100svh - 9rem))';
+  // lg: pinned at top-20 (5rem) below the slim header, plus 2rem breathing room.
+  const frameMaxHeightLg = 'max(320px, calc(100svh - 7rem))';
   const galleryWidthSm = `min(100%, calc(${frameMaxHeightSm} * ${ratioText}))`;
   const galleryWidthLg = `min(${hasThumbs ? 'calc(100% - 5.75rem - 2px)' : '100%'}, calc(${frameMaxHeightLg} * ${ratioText}))`;
 
@@ -379,6 +413,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
   );
 
   const hasAboutContent = Boolean(product.description || m.product_story || isShortened);
+  const careGuide = parseCareInstructions(m.care_instructions);
   const related = relatedProducts.slice(0, 4);
   const totalPrice = format(
     parseFloat(selectedVariant.price.amount) * quantity,
@@ -417,11 +452,11 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
           {/* Gallery: pinned below the header on desktop while the details scroll past.
               Its width follows the image ratio and its height is viewport-capped, so it
               always fits on screen when pinned. Thumbnails sit left of the image on lg. */}
-          <div className="min-w-0 space-y-3 lg:space-y-0 lg:flex lg:gap-3 lg:sticky lg:top-28">
+          <div className="min-w-0 space-y-3 lg:space-y-0 lg:flex lg:gap-3 lg:sticky lg:top-20">
             {/* Frame sized to the image's aspect ratio with object-contain: the whole
                 rug is always visible, never cropped or stretched, with minimal whitespace. */}
             <div
-              className="relative lg:order-2 w-[var(--gallery-w-sm)] lg:w-[var(--gallery-w-lg)] bg-[var(--sukla-cream)] border border-[var(--sukla-muted-border)] overflow-hidden touch-pan-y"
+              className={`relative lg:order-2 w-[var(--gallery-w-sm)] lg:w-[var(--gallery-w-lg)] border overflow-hidden touch-pan-y ${GALLERY_FRAME_CLASS}`}
               style={
                 {
                   aspectRatio: imageRatio,
@@ -515,7 +550,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                     onClick={() => setActiveImageIndex(idx)}
                     aria-label={`Show image ${idx + 1} of ${product.images.length}`}
                     aria-pressed={activeImageIndex === idx}
-                    className={`relative shrink-0 w-16 h-16 sm:w-20 sm:h-20 bg-[var(--sukla-cream)] border transition-all overflow-hidden ${
+                    className={`relative shrink-0 w-16 h-16 sm:w-20 sm:h-20 ${GALLERY_THUMB_BG} border transition-all overflow-hidden ${
                       activeImageIndex === idx
                         ? 'border-[var(--sukla-charcoal)] ring-1 ring-[var(--sukla-charcoal)]'
                         : 'border-[var(--sukla-muted-border)] opacity-70 hover:opacity-100'
@@ -628,6 +663,9 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                 {sizeGuideButton}
               </div>
             )}
+
+            {/* Custom-size estimate; renders nothing unless the construction has a price rate */}
+            <CustomSizeCalculator key={product.id} product={product} />
 
             {highlightHeadings.length > 0 && (
               <ul className="space-y-1.5 text-sm font-sans text-[var(--sukla-charcoal)]/80" aria-label="Highlights">
@@ -755,6 +793,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
             aria-label="Product details"
             className="pt-8 border-t border-[var(--sukla-muted-border)] space-y-8"
           >
+            <ProductAtAGlance product={product} selectedVariant={selectedVariant} />
             <div className="space-y-6">
               <h2 className="display-lg text-2xl text-[var(--sukla-charcoal)]">About this rug</h2>
 
@@ -839,9 +878,9 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                 </DetailSection>
               )}
 
-              <DetailSection title="Care">
+              <StaticDetailSection title="Care">
                 <div className="space-y-3">
-                  {m.care_instructions && <p className="whitespace-pre-line">{m.care_instructions}</p>}
+                  <CareGuide guide={careGuide} />
                   <Link
                     href="/guides/rug-care"
                     className="text-[var(--sukla-terracotta)] font-semibold uppercase tracking-[0.1em] text-[10px] hover:underline block"
@@ -849,7 +888,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                     Read the rug care guide &rarr;
                   </Link>
                 </div>
-              </DetailSection>
+              </StaticDetailSection>
 
               {policies.length > 0 && (
                 <DetailSection title="Shipping & returns">

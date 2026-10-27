@@ -9,7 +9,8 @@ export type AnalyticsEvent =
   | 'purchase'
   | 'wishlist'
   | 'consultation_submit'
-  | 'trade_enquiry';
+  | 'trade_enquiry'
+  | 'custom_quote_request';
 
 export function trackEvent(event: AnalyticsEvent, payload?: Record<string, unknown>): void {
   if (typeof window === 'undefined') return;
