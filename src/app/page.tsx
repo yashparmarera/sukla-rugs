@@ -12,6 +12,7 @@ import { DesignConsultationBanner } from '@/components/services/DesignConsultati
 import { ReviewsSection } from '@/components/editorial/ReviewsSection';
 import { JournalPreview } from '@/components/journal/JournalPreview';
 import { getProducts } from '@/lib/shopify/client';
+import { getStyleTiles } from '@/lib/style-tiles';
 import { getSelectedCountry } from '@/lib/localization.server';
 import { Button } from '@/components/ui/Button';
 import { KnotGlyph } from '@/components/ui/KnotGlyph';
@@ -30,7 +31,10 @@ export const metadata = {
 
 export default async function HomePage() {
   const country = await getSelectedCountry();
-  const signatureProducts = await getProducts({ limit: 8, country });
+  const [signatureProducts, styleTiles] = await Promise.all([
+    getProducts({ limit: 8, country }),
+    getStyleTiles(country)
+  ]);
 
   return (
     <BrandEntrance>
@@ -70,7 +74,7 @@ export default async function HomePage() {
         </section>
 
         {/* Shop by Rug Category */}
-        <ShopByCategory />
+        <ShopByCategory tiles={styleTiles} />
 
         {/* Bhadohi Story & 7 Craft Stages */}
         <BhadohiStorySection />
