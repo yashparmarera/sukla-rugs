@@ -1,27 +1,14 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import type { StyleTile } from '@/lib/style-tiles';
 
-const CATEGORIES = [
-  {
-    title: 'Natural fibre rugs',
-    image: 'https://images.unsplash.com/photo-1594040226829-7f251ab46d80?auto=format&fit=crop&w=900&q=85'
-  },
-  {
-    title: 'Shaggy rugs',
-    image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=900&q=85'
-  },
-  {
-    title: 'Washable rugs',
-    image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=85'
-  },
-  {
-    title: 'Viscose rugs',
-    image: 'https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=900&q=85'
-  }
-];
+interface ShopByCategoryProps {
+  /** Style tiles built from real Shopify data (see src/lib/style-tiles.ts). */
+  tiles: StyleTile[];
+}
 
-export const ShopByCategory: React.FC = () => {
+export const ShopByCategory: React.FC<ShopByCategoryProps> = ({ tiles }) => {
   return (
     <section className="bg-[var(--sukla-ivory)] py-16 md:py-20">
       <div className="editorial-container">
@@ -38,19 +25,21 @@ export const ShopByCategory: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-4 md:gap-x-8">
-          {CATEGORIES.map((category) => (
-            <Link key={category.title} href="/shop" className="group block">
+          {tiles.map((tile) => (
+            <Link key={tile.label} href={tile.href} className="group block">
               <div className="relative aspect-[3/4] overflow-hidden bg-[var(--sukla-sand)]">
-                <Image
-                  src={category.image}
-                  alt={category.title}
-                  fill
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                  className="object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
-                />
+                {tile.image ? (
+                  <Image
+                    src={tile.image.url}
+                    alt={tile.label}
+                    fill
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                    className="object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
+                  />
+                ) : null}
               </div>
               <h3 className="mt-4 text-sm font-sans text-[var(--sukla-charcoal)] group-hover:text-[var(--sukla-terracotta)] transition-colors">
-                {category.title}
+                {tile.label}
               </h3>
             </Link>
           ))}
