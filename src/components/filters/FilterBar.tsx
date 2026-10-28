@@ -105,36 +105,57 @@ export const FilterBar: React.FC<FilterBarProps> = ({ totalCount }) => {
       {/* Desktop Left Filter Rail — sized to its own content (no forced viewport
           height) so it ends right after the last filter instead of leaving empty
           space below. Sticky so it follows the scroll beside the grid. */}
-      <div className="hidden lg:block lg:sticky lg:top-[89px] lg:self-start">
+      <div className="hidden lg:block lg:sticky lg:top-[89px] lg:self-start lg:max-h-[calc(100vh-89px-1rem)] lg:overflow-y-auto lg:pr-3">
         <p className="eyebrow flex items-center gap-2 text-[var(--sukla-charcoal)] mb-3">
           <SlidersHorizontal aria-hidden="true" className="w-3.5 h-3.5 text-[var(--sukla-terracotta)]" /> Filter By
         </p>
 
         <div className="text-xs font-sans">
           {SHOP_FILTER_GROUPS.map((group) => {
-            const selectId = `${idPrefix}-rail-${group.id}`;
+            const groupName = `${idPrefix}-rail-${group.id}`;
+            const selected = selectedValue(group);
+            const railOptions = [{ value: 'all', label: group.allLabel }, ...group.options];
             return (
-              <div key={group.id} className="mb-3">
-                <label
-                  htmlFor={selectId}
-                  className="block text-[10px] uppercase tracking-widest text-[var(--sukla-taupe)] mb-1"
-                >
+              <fieldset
+                key={group.id}
+                className="min-w-0 border-0 border-t border-[var(--sukla-muted-border)] py-3 m-0 px-0"
+              >
+                <legend className="float-left w-full text-[10px] uppercase tracking-widest text-[var(--sukla-taupe)] mb-1.5 p-0">
                   {group.heading}
-                </label>
-                <select
-                  id={selectId}
-                  value={selectedValue(group)}
-                  onChange={(e) => updateParam(group.param, e.target.value)}
-                  className={MOBILE_SELECT_CLASS}
-                >
-                  <option value="all">{group.allLabel}</option>
-                  {group.options.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
+                </legend>
+                <div className="clear-both flex flex-col">
+                  {railOptions.map((option) => {
+                    const isSelected = selected === option.value;
+                    return (
+                      <label key={option.value} className="block cursor-pointer">
+                        <input
+                          type="radio"
+                          name={groupName}
+                          value={option.value}
+                          checked={isSelected}
+                          onChange={() => updateParam(group.param, option.value)}
+                          className="peer sr-only"
+                        />
+                        <span
+                          className={`flex items-center gap-2 px-2 py-1 border-l-2 transition-colors hover:text-[var(--sukla-charcoal)] peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-[var(--sukla-charcoal)] ${
+                            isSelected
+                              ? 'border-[var(--sukla-terracotta)] bg-[var(--sukla-ivory)] font-semibold text-[var(--sukla-charcoal)]'
+                              : 'border-transparent text-[var(--sukla-charcoal)]/75'
+                          }`}
+                        >
+                          <span
+                            aria-hidden="true"
+                            className={`h-1.5 w-1.5 shrink-0 rounded-full ${
+                              isSelected ? 'bg-[var(--sukla-terracotta)]' : 'border border-[var(--sukla-taupe)]'
+                            }`}
+                          />
+                          {option.label}
+                        </span>
+                      </label>
+                    );
+                  })}
+                </div>
+              </fieldset>
             );
           })}
 
