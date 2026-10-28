@@ -223,7 +223,7 @@ export default function FindYourRugPage() {
                 </button>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-x-4 gap-y-6">
                 {results.map((product) => (
                   <ProductCard key={product.id} product={product} />
                 ))}

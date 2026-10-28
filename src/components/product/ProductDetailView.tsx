@@ -925,7 +925,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                 View all rugs
               </Link>
             </div>
-            <div className={`grid gap-8 ${RELATED_GRID_CLASSES[related.length]}`}>
+            <div className={`grid gap-x-5 gap-y-8 ${RELATED_GRID_CLASSES[related.length]}`}>
               {related.map((rel) => (
                 <ProductCard key={rel.id} product={rel} />
               ))}
