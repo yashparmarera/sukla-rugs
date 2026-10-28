@@ -446,10 +446,11 @@ export function formatTypedDimension(fields: DimensionFields, unit: CalculatorUn
 }
 
 export interface QuoteMessageInput {
-  productTitle: string;
+  /** Omitted on the home page, where the quote is not for a specific product. */
+  productTitle?: string;
   pageUrl: string;
   result: CustomPriceResult;
-  /** Local-currency approximation (already starts with "≈"); only when not USD. */
+  /** Local-currency approximation; only when not USD. */
   localEstimate?: string;
 }
 
@@ -464,7 +465,7 @@ export function buildQuoteMessage({ productTitle, pageUrl, result, localEstimate
 
   return [
     "Hi Sukla Rugs, I'd like a quote for a custom-size rug.",
-    `Product: ${productTitle}`,
+    ...(productTitle ? [`Product: ${productTitle}`] : []),
     `Link: ${pageUrl}`,
     `Construction: ${result.categoryLabel}`,
     `Shape: ${result.shapeLabel}`,

@@ -49,6 +49,8 @@ interface CalculatedState {
   pageUrl: string;
 }
 
+const CATEGORY_ORDER = Object.keys(CUSTOM_RUG_PRICING) as PricingCategory[];
+
 /**
  * "Customise" button and inline panel under the PDP size options. Renders
  * nothing unless the product's construction maps to a priced category.
@@ -56,12 +58,38 @@ interface CalculatedState {
 export const CustomSizeCalculator: React.FC<{ product: Product }> = ({ product }) => {
   const category = getPricingCategory(product.metafields);
   if (!category) return null;
-  return <CalculatorPanel product={product} category={category} />;
+  const isRunner = parseMetafieldValues(product.metafields.rug_format).some((value) => /runner/i.test(value));
+  return (
+    <CalculatorPanel
+      product={{ id: product.id, title: product.title }}
+      fixedCategory={category}
+      isRunner={isRunner}
+    />
+  );
 };
 
-const CalculatorPanel: React.FC<{ product: Product; category: PricingCategory }> = ({ product, category }) => {
-  const pricing = CUSTOM_RUG_PRICING[category];
-  const isRunner = parseMetafieldValues(product.metafields.rug_format).some((value) => /runner/i.test(value));
+/**
+ * Enlarged "Customise" button and panel for the home page. There is no product
+ * here, so the customer picks the construction first; pricing is the same
+ * CUSTOM_RUG_PRICING table and calculator the product page uses.
+ */
+export const HomeCustomSizeCalculator: React.FC = () => <CalculatorPanel large />;
+
+interface CalculatorPanelProps {
+  /** Product page only. Absent on the home page. */
+  product?: { id: string; title: string };
+  /** Product page: the construction is fixed by the product. Home page: the customer picks it. */
+  fixedCategory?: PricingCategory;
+  isRunner?: boolean;
+  /** Enlarged presentation used on the home page. */
+  large?: boolean;
+}
+
+const CalculatorPanel: React.FC<CalculatorPanelProps> = ({ product, fixedCategory, isRunner = false, large = false }) => {
+  const [selectedCategory, setSelectedCategory] = useState<PricingCategory | ''>('');
+  const category: PricingCategory | null = fixedCategory ?? (selectedCategory || null);
+  const pricing = category ? CUSTOM_RUG_PRICING[category] : null;
+  const [categoryError, setCategoryError] = useState<string | null>(null);
 
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState<CalculatorInput>({
@@ -78,6 +106,10 @@ const CalculatorPanel: React.FC<{ product: Product; category: PricingCategory }>
   const toggleId = `${baseId}-toggle`;
   const panelId = `${baseId}-panel`;
   const quoteHelpId = `${baseId}-quote-help`;
+
+  const categoryRef = useRef<HTMLSelectElement>(null);
+  const categoryId = `${baseId}-category`;
+  const categoryErrorId = `${baseId}-category-error`;
 
   const mainRefs = {
     width: useRef<HTMLInputElement>(null),
@@ -96,6 +128,12 @@ const CalculatorPanel: React.FC<{ product: Product; category: PricingCategory }>
   const resetResult = () => {
     setCalculated(null);
     setErrors({});
+    setCategoryError(null);
+  };
+
+  const handleCategoryChange = (value: PricingCategory | '') => {
+    setSelectedCategory(value);
+    resetResult();
   };
 
   const handleUnitChange = (unit: CalculatorUnit) => {
@@ -120,6 +158,13 @@ const CalculatorPanel: React.FC<{ product: Product; category: PricingCategory }>
 
   const handleCalculate = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (!category) {
+      setCategoryError('Choose a construction.');
+      setErrors({});
+      setCalculated(null);
+      categoryRef.current?.focus();
+      return;
+    }
     const outcome = calculateCustomPrice(category, input);
     if (!outcome.ok) {
       setErrors(outcome.errors);
@@ -139,7 +184,7 @@ const CalculatorPanel: React.FC<{ product: Product; category: PricingCategory }>
   const quoteHref =
     calculated && result
       ? whatsappUrl(
-          buildQuoteMessage({ productTitle: product.title, pageUrl: calculated.pageUrl, result, localEstimate })
+          buildQuoteMessage({ productTitle: product?.title, pageUrl: calculated.pageUrl, result, localEstimate })
         )
       : null;
 
@@ -226,28 +271,69 @@ const CalculatorPanel: React.FC<{ product: Product; category: PricingCategory }>
   };
 
   return (
-    <div className="space-y-3">
-      <div className="space-y-1.5">
-        <Button
-          id={toggleId}
-          type="button"
-          variant="outline"
-          fullWidth
-          aria-expanded={open}
-          aria-controls={panelId}
-          onClick={() => setOpen((value) => !value)}
-          className="gap-2"
-        >
-          <SlidersHorizontal className="w-4 h-4" aria-hidden="true" />
-          Customise
-          <ChevronDown
-            className={`w-4 h-4 transition-transform motion-reduce:transition-none ${open ? 'rotate-180' : ''}`}
-            aria-hidden="true"
-          />
-        </Button>
-        <p className="text-xs font-sans text-[var(--sukla-charcoal)]/70">
-          Need another size? Get an instant estimate.
-        </p>
+    <div className={large ? 'space-y-4 w-full' : 'space-y-3'}>
+      <div className={large ? undefined : 'space-y-1.5'}>
+        {large ? (
+          <div className="relative pr-1.5 pb-1.5">
+            {/* Attention cue: soft pulsing ring until the panel is opened. Hidden for reduced motion. */}
+            {!open && (
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute -inset-1.5 right-0 bottom-0 border-2 border-[var(--sukla-terracotta)]/60 motion-safe:animate-pulse motion-reduce:hidden"
+              />
+            )}
+            <button
+              id={toggleId}
+              type="button"
+              aria-expanded={open}
+              aria-controls={panelId}
+              onClick={() => setOpen((value) => !value)}
+              className="group relative flex w-full items-center justify-between gap-4 px-5 py-5 sm:px-6 sm:py-6 text-left font-sans uppercase text-[var(--sukla-ivory)] bg-[var(--sukla-terracotta-dark)] bg-linear-to-r from-[color-mix(in_srgb,var(--sukla-terracotta-dark)_58%,var(--sukla-charcoal))] to-[color-mix(in_srgb,var(--sukla-terracotta-dark)_88%,var(--sukla-charcoal))] border-2 border-[var(--sukla-charcoal)] shadow-[6px_6px_0_0_var(--sukla-terracotta)] transition-all duration-300 hover:bg-none hover:bg-[var(--sukla-charcoal)] hover:-translate-y-0.5 hover:shadow-[8px_8px_0_0_var(--sukla-terracotta)] active:translate-y-0 active:shadow-[4px_4px_0_0_var(--sukla-terracotta)] motion-reduce:transition-none motion-reduce:hover:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sukla-charcoal)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--sukla-ivory)]"
+            >
+              <span className="flex items-center gap-4">
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[var(--sukla-terracotta)] text-[var(--sukla-charcoal)] ring-4 ring-[var(--sukla-ivory)]/15 transition-transform duration-300 group-hover:rotate-12 motion-reduce:transition-none motion-reduce:group-hover:rotate-0">
+                  <SlidersHorizontal className="w-6 h-6" aria-hidden="true" />
+                </span>
+                <span className="flex flex-col gap-1">
+                  <span className="text-base sm:text-lg font-semibold tracking-[0.18em] leading-none">Customise</span>
+                  <span className="text-xs normal-case tracking-normal text-[var(--sukla-ivory)]/85">
+                    Get a quote by size
+                  </span>
+                </span>
+              </span>
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[var(--sukla-ivory)]/60 transition-colors duration-300 group-hover:border-[var(--sukla-terracotta)] group-hover:text-[var(--sukla-terracotta)]">
+                <ChevronDown
+                  className={`w-5 h-5 transition-transform motion-reduce:transition-none ${open ? 'rotate-180' : ''}`}
+                  aria-hidden="true"
+                />
+              </span>
+            </button>
+          </div>
+        ) : (
+          <>
+            <Button
+              id={toggleId}
+              type="button"
+              variant="outline"
+              size="md"
+              fullWidth
+              aria-expanded={open}
+              aria-controls={panelId}
+              onClick={() => setOpen((value) => !value)}
+              className="gap-2"
+            >
+              <SlidersHorizontal className="w-4 h-4" aria-hidden="true" />
+              Customise
+              <ChevronDown
+                className={`w-4 h-4 transition-transform motion-reduce:transition-none ${open ? 'rotate-180' : ''}`}
+                aria-hidden="true"
+              />
+            </Button>
+            <p className="text-xs font-sans text-[var(--sukla-charcoal)]/70">
+              Need another size? Get an instant estimate.
+            </p>
+          </>
+        )}
       </div>
 
       <div
@@ -255,16 +341,48 @@ const CalculatorPanel: React.FC<{ product: Product; category: PricingCategory }>
         role="region"
         aria-labelledby={toggleId}
         hidden={!open}
-        className="border border-[var(--sukla-muted-border)] bg-[var(--sukla-cream)] p-4 sm:p-5 space-y-4"
+        className={`border border-[var(--sukla-muted-border)] bg-[var(--sukla-cream)] space-y-4 ${large ? 'p-5 sm:p-8 sm:space-y-6' : 'p-4 sm:p-5'}`}
       >
         <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-          <span className="eyebrow text-xs text-[var(--sukla-charcoal)]">Custom size · {pricing.label}</span>
-          <span className="nums text-xs font-sans text-[var(--sukla-charcoal)]/70">
-            {formatUsd(pricing.ratePerSqFt)} per sq ft
+          <span className="eyebrow text-xs text-[var(--sukla-charcoal)]">
+            Custom size{pricing ? ` · ${pricing.label}` : ''}
           </span>
+          {pricing && (
+            <span className="nums text-xs font-sans text-[var(--sukla-charcoal)]/70">
+              {formatUsd(pricing.ratePerSqFt)} per sq ft
+            </span>
+          )}
         </div>
 
         <form noValidate onSubmit={handleCalculate} className="space-y-4">
+          {!fixedCategory && (
+            <div className="space-y-1.5">
+              <label htmlFor={categoryId} className="eyebrow text-xs text-[var(--sukla-charcoal)] block">
+                Construction
+              </label>
+              <select
+                ref={categoryRef}
+                id={categoryId}
+                value={selectedCategory}
+                onChange={(event) => handleCategoryChange(event.target.value as PricingCategory | '')}
+                className={FIELD_CLASSES}
+                {...(categoryError ? { 'aria-invalid': true as const, 'aria-describedby': categoryErrorId } : {})}
+              >
+                <option value="">Select a construction</option>
+                {CATEGORY_ORDER.map((key) => (
+                  <option key={key} value={key}>
+                    {CUSTOM_RUG_PRICING[key].label}
+                  </option>
+                ))}
+              </select>
+              {categoryError && (
+                <p id={categoryErrorId} className="text-xs font-sans text-rose-800">
+                  {categoryError}
+                </p>
+              )}
+            </div>
+          )}
+
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-1.5">
               <label htmlFor={`${baseId}-unit`} className="eyebrow text-xs text-[var(--sukla-charcoal)] block">
@@ -346,8 +464,9 @@ const CalculatorPanel: React.FC<{ product: Product; category: PricingCategory }>
             className={TERRACOTTA_LINK_CLASSES}
             onClick={() =>
               trackEvent('custom_quote_request', {
-                productId: product.id,
-                category,
+                productId: product?.id,
+                category: result.category,
+                ...(product ? {} : { source: 'home' }),
                 shape: result.shape,
                 widthFt: result.widthFt,
                 lengthFt: result.lengthFt,

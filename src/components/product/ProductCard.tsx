@@ -45,11 +45,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
     '';
 
   return (
-    <div className="group relative flex flex-col bg-[var(--sukla-cream)] border border-[var(--sukla-muted-border)]/70 hover:border-[var(--sukla-taupe)] transition-all duration-300">
+    <div className="group relative flex flex-col bg-white border border-[var(--sukla-muted-border)]/70 hover:border-[var(--sukla-taupe)] transition-all duration-300">
       {/* Image Container with Hover Swap */}
       <Link
         href={`/products/${product.handle}`}
-        className="relative aspect-square w-full overflow-hidden bg-[var(--sukla-ivory)] border-b border-[var(--sukla-muted-border)]/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[var(--sukla-charcoal)]"
+        className="relative aspect-square w-full overflow-hidden bg-white border-b border-[var(--sukla-muted-border)]/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[var(--sukla-charcoal)]"
       >
 
         {/* Primary Image — matted frame: whole rug shown on an ivory tile,
@@ -93,7 +93,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
       </Link>
 
       {/* Content Metadata */}
-      <div className="p-3.5 sm:p-4 flex-1 flex flex-col justify-between gap-2 bg-[var(--sukla-cream)]">
+      <div className="p-3.5 sm:p-4 flex-1 flex flex-col justify-between gap-2 bg-white">
         <div>
           {attributeLine && (
             <span className="block text-[10px] uppercase tracking-[0.2em] text-[var(--sukla-taupe)] font-sans">

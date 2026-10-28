@@ -6,6 +6,7 @@ import { Hero } from '@/components/hero/Hero';
 import { BrandStatement } from '@/components/editorial/BrandStatement';
 import { ShopByRoom } from '@/components/editorial/ShopByRoom';
 import { ShopByCategory } from '@/components/editorial/ShopByCategory';
+import { CustomiseRugSection } from '@/components/editorial/CustomiseRugSection';
 import { ProductCard } from '@/components/product/ProductCard';
 import { BhadohiStorySection } from '@/components/craft/BhadohiStorySection';
 import { DesignConsultationBanner } from '@/components/services/DesignConsultationBanner';
@@ -49,7 +50,7 @@ export default async function HomePage() {
         <ShopByRoom />
 
         {/* Signature Rugs Section */}
-        <section className="py-20 md:py-28 bg-[var(--sukla-ivory)] border-t border-[var(--sukla-muted-border)]">
+        <section className="py-20 md:py-28 bg-white border-t border-[var(--sukla-muted-border)]">
           <div className="editorial-container">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 space-y-4 md:space-y-0">
               <div>
@@ -65,13 +66,16 @@ export default async function HomePage() {
               </Button>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-8">
               {signatureProducts.map((product, idx) => (
                 <ProductCard key={product.id} product={product} priority={idx < 4} />
               ))}
             </div>
           </div>
         </section>
+
+        {/* Customise your rug: custom-size estimate */}
+        <CustomiseRugSection />
 
         {/* Shop by Rug Category */}
         <ShopByCategory tiles={styleTiles} />

@@ -74,23 +74,25 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
         </section>
 
         {/* Collection Products Grid */}
-        <section className="py-16 editorial-container">
-          <div className="flex justify-between items-center pb-6 border-b border-[var(--sukla-muted-border)] mb-8 text-xs font-sans">
-            <span className="uppercase tracking-[0.1em] text-[var(--sukla-taupe)]">
-              Displaying <strong className="nums text-[var(--sukla-charcoal)]">{products.length}</strong> Designs
-            </span>
-            <div className="flex items-center gap-2">
-              <KnotGlyph size="sm" className="text-[var(--sukla-terracotta)]" />
-              <span className="uppercase tracking-widest text-[var(--sukla-charcoal)] font-semibold">
-                Authentic Bhadohi Weave
+        <section className="py-16 bg-white">
+          <div className="editorial-container">
+            <div className="flex justify-between items-center pb-6 border-b border-[var(--sukla-muted-border)] mb-8 text-xs font-sans">
+              <span className="uppercase tracking-[0.1em] text-[var(--sukla-taupe)]">
+                Displaying <strong className="nums text-[var(--sukla-charcoal)]">{products.length}</strong> Designs
               </span>
+              <div className="flex items-center gap-2">
+                <KnotGlyph size="sm" className="text-[var(--sukla-terracotta)]" />
+                <span className="uppercase tracking-widest text-[var(--sukla-charcoal)] font-semibold">
+                  Authentic Bhadohi Weave
+                </span>
+              </div>
             </div>
-          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-8">
-            {products.map((product, idx) => (
-              <ProductCard key={product.id} product={product} priority={idx < 4} />
-            ))}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-8">
+              {products.map((product, idx) => (
+                <ProductCard key={product.id} product={product} priority={idx < 4} />
+              ))}
+            </div>
           </div>
         </section>
       </main>

@@ -70,7 +70,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
     activeLabels.length === 1 ? `No rugs match ${activeLabels[0]} yet` : 'No rugs match these filters yet';
 
   return (
-    <div className="flex flex-col min-h-screen bg-[var(--sukla-ivory)]">
+    <div className="flex flex-col min-h-screen bg-white">
       <Header />
 
       <main className="flex-1 py-12">

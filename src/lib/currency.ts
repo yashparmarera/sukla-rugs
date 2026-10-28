@@ -71,7 +71,7 @@ export function getCurrencySymbol(currencyCode: string): string {
 }
 
 export interface DisplayMoney {
-  /** Text to show. Approximate values are prefixed with "≈". */
+  /** Text to show. Converted values are flagged by `approximate`, not by a symbol. */
   text: string;
   approximate: boolean;
 }
@@ -81,8 +81,9 @@ export interface DisplayMoney {
  *
  * - Same currency, or no usable rate, or a non-store source currency: the exact
  *   amount is shown unchanged.
- * - Store currency to a different display currency: a rounded, "≈"-prefixed
- *   estimate using `rate` (units of display currency per 1 store-currency unit).
+ * - Store currency to a different display currency: a rounded estimate using
+ *   `rate` (units of display currency per 1 store-currency unit), with
+ *   `approximate: true` and no prefix symbol.
  */
 export function formatDisplayMoney(
   amount: string | number,
@@ -116,7 +117,9 @@ export function formatDisplayMoney(
       maximumFractionDigits: converted >= 100 ? 0 : 2,
       minimumFractionDigits: 0
     }).format(converted);
-    return { text: `\u2248 ${text}`, approximate: true };
+    // No "≈" prefix (owner request). `approximate` still drives the
+    // "charged in the store currency at checkout" notes on the PDP and cart.
+    return { text, approximate: true };
   } catch {
     return { text: formatMoney(value, sourceCurrency), approximate: false };
   }
