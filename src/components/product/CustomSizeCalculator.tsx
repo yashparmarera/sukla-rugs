@@ -8,6 +8,8 @@ import { useCurrency } from '@/components/providers/CurrencyProvider';
 import { parseMetafieldValues } from '@/lib/shop-filters';
 import { whatsappUrl } from '@/lib/contact';
 import { trackEvent } from '@/lib/analytics';
+import Link from 'next/link';
+import { CUSTOM_SIZE_RETURNS_NOTE } from '@/lib/legal/policy-highlights';
 import {
   CUSTOM_RUG_PRICING,
   SHAPE_LABELS,
@@ -451,6 +453,14 @@ const CalculatorPanel: React.FC<CalculatorPanelProps> = ({ product, fixedCategor
               <p className="text-sm font-sans text-[var(--sukla-charcoal)]/80">Lead time: {result.leadTime}</p>
               <p className="text-xs font-sans text-[var(--sukla-charcoal)]/70">
                 Estimate only. Our team confirms the final price and lead time on WhatsApp.
+              </p>
+              <p className="text-xs font-sans text-[var(--sukla-charcoal)]/70">
+                <Link
+                  href={CUSTOM_SIZE_RETURNS_NOTE.href}
+                  className="underline underline-offset-2 hover:text-[var(--sukla-terracotta)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--sukla-terracotta)]"
+                >
+                  {CUSTOM_SIZE_RETURNS_NOTE.text}
+                </Link>
               </p>
             </div>
           )}

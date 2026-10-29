@@ -1,6 +1,6 @@
 import { createStorefrontApiClient } from '@shopify/storefront-api-client';
 import { Collection, Product, Cart, CartItem, ProductImage, ProductVariant } from '@/types';
-import { getProductQuery, getProductsQuery, getCollectionProductsQuery } from './queries/product';
+import { getProductQuery, getProductsQuery, getCollectionProductsQuery, getProductsByIdsQuery } from './queries/product';
 import { getCollectionQuery, getCollectionsQuery } from './queries/collection';
 import { createCartMutation, addToCartMutation, updateCartMutation, removeFromCartMutation, getCartQuery } from './mutations/cart';
 import { MOCK_COLLECTIONS, MOCK_PRODUCTS } from './mock-data';
@@ -377,6 +377,40 @@ export async function getProductByHandle(
   // Check fallback mock catalog if handle matches
   const mockMatch = MOCK_PRODUCTS.find((p) => p.handle === handle);
   return mockMatch || null;
+}
+
+/**
+ * Current data for a set of products, fetched in one batched request by GID.
+ * Ids that do not resolve to a visible product (deleted, unpublished) are
+ * omitted. Returns null when the Storefront API is unavailable so callers can
+ * tell "no such products" from "could not load". Never falls back to mock data.
+ */
+export async function getProductsByIds(
+  ids: string[],
+  options?: { country?: string; language?: string }
+): Promise<Product[] | null> {
+  if (ids.length === 0) return [];
+
+  const res = await shopifyFetch<{ nodes?: Array<{ id?: string; handle?: string } | null> }>({
+    query: getProductsByIdsQuery,
+    variables: {
+      ids,
+      country: options?.country || 'US',
+      language: options?.language || 'EN'
+    }
+  });
+
+  if (!res?.nodes) return null;
+
+  const byId = new Map<string, Product>();
+  for (const node of res.nodes) {
+    if (node?.id && node.handle) byId.set(node.id, reshapeProduct(node));
+  }
+  // Keep the order of the requested ids.
+  return ids.flatMap((id) => {
+    const product = byId.get(id);
+    return product ? [product] : [];
+  });
 }
 
 /**

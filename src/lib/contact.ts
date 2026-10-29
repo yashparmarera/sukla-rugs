@@ -30,3 +30,12 @@ export const WHATSAPP_MESSAGE = "Hi Sukla Rugs, I'd like to know more about your
 export function whatsappUrl(message: string = WHATSAPP_MESSAGE): string {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }
+
+/** The only business email address (owner decision, 2026-10-28). Used by the footer and the policy pages. */
+export const EMAIL = 'info@suklarugs.com';
+
+/** `mailto:` link target for {@link EMAIL}. */
+export const EMAIL_HREF = `mailto:${EMAIL}`;
+
+/** Postal address, verbatim from the owner's Cookie Policy and Terms and Conditions. */
+export const MAILING_ADDRESS = 'SUKLA RUGS EXPORTERS, 128 KHAMARIA SANT RAVIDAS NAGAR UTTAR PRADESH -221306';

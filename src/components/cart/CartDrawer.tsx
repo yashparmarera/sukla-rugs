@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/Button';
 import { trackEvent } from '@/lib/analytics';
 import { formatMoney } from '@/lib/format-money';
 import { useCurrency } from '@/components/providers/CurrencyProvider';
+import { CART_DUTIES_NOTE, CART_DUTIES_ROW } from '@/lib/legal/policy-highlights';
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -262,8 +263,14 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                   </span>
                 </div>
                 <div className="flex justify-between text-xs font-sans text-[var(--sukla-taupe)]">
-                  <span>Taxes &amp; Duties</span>
-                  <span>Calculated at checkout</span>
+                  <span>{CART_DUTIES_ROW.label}</span>
+                  <Link
+                    href={CART_DUTIES_ROW.href}
+                    onClick={onClose}
+                    className="underline underline-offset-2 hover:text-[var(--sukla-charcoal)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--sukla-terracotta)]"
+                  >
+                    {CART_DUTIES_ROW.value}
+                  </Link>
                 </div>
                 <div className="flex justify-between items-baseline text-sm font-sans text-[var(--sukla-charcoal)] font-semibold pt-2 border-t border-[var(--sukla-muted-border)]">
                   <span className="eyebrow text-[11px]">Total</span>
@@ -281,6 +288,17 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                 <span>{isCheckingOut ? 'Connecting to secure checkout...' : 'Proceed to Checkout'}</span>
                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
+
+              <p className="text-center text-[11px] font-sans text-[var(--sukla-taupe)]">
+                {CART_DUTIES_NOTE.text}{' '}
+                <Link
+                  href={CART_DUTIES_NOTE.href}
+                  onClick={onClose}
+                  className="underline underline-offset-2 hover:text-[var(--sukla-charcoal)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--sukla-terracotta)]"
+                >
+                  {CART_DUTIES_NOTE.linkLabel}
+                </Link>
+              </p>
 
               <div className="flex items-center justify-center gap-2 text-[10px] text-[var(--sukla-taupe)] font-sans">
                 <ShieldCheck className="w-3.5 h-3.5" />

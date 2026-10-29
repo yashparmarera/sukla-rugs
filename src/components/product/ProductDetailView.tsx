@@ -24,6 +24,7 @@ import type { StorePolicyLink } from '@/lib/shopify/client';
 import { addToLocalCart } from '@/lib/shopify/local-cart';
 import { formatMoney } from '@/lib/format-money';
 import { useCurrency } from '@/components/providers/CurrencyProvider';
+import { useWishlist } from '@/components/providers/WishlistProvider';
 import {
   buildShortDescription,
   extractDescriptionFeatures,
@@ -46,6 +47,7 @@ import { ProductAtAGlance } from '@/components/product/infographics/ProductAtAGl
 import { CareGuide } from '@/components/product/infographics/CareGuide';
 import { parseCareInstructions } from '@/lib/product-infographics';
 import { trackEvent } from '@/lib/analytics';
+import { SHIPPING_RETURNS_HIGHLIGHTS } from '@/lib/legal/policy-highlights';
 
 /**
  * TEMPORARY A/B FLAG — pure-white product gallery for visual comparison.
@@ -202,7 +204,8 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
 
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [isFullscreenZoom, setIsFullscreenZoom] = useState(false);
-  const [isWishlisted, setIsWishlisted] = useState(false);
+  const { isSaved, toggle: toggleWishlistItem } = useWishlist();
+  const isWishlisted = isSaved(product.id);
   const [sizeModalOpen, setSizeModalOpen] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [addedNotice, setAddedNotice] = useState(false);
@@ -729,7 +732,16 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
 
                 <button
                   type="button"
-                  onClick={() => setIsWishlisted(!isWishlisted)}
+                  onClick={() => {
+                    const result = toggleWishlistItem(product.id);
+                    if (result !== 'full') {
+                      trackEvent('wishlist', {
+                        productId: product.id,
+                        productTitle: product.title,
+                        action: result === 'added' ? 'add' : 'remove'
+                      });
+                    }
+                  }}
                   aria-label={isWishlisted ? 'Remove from wishlist' : 'Save to wishlist'}
                   aria-pressed={isWishlisted}
                   className={`px-4 min-h-[3rem] border border-[var(--sukla-muted-border)] transition-all ${
@@ -903,6 +915,29 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                         >
                           {policy.title} &rarr;
                         </a>
+                      </li>
+                    ))}
+                  </ul>
+                </DetailSection>
+              )}
+
+              {/* Fallback when Shopify has no shipping/refund policy configured (or the lookup failed):
+                  short summaries of the site's own policy pages. Never shown alongside the Shopify links. */}
+              {policies.length === 0 && (
+                <DetailSection title="Shipping & returns" defaultOpen>
+                  <ul className="space-y-2.5">
+                    {SHIPPING_RETURNS_HIGHLIGHTS.map((item) => (
+                      <li key={item.href + item.linkLabel} className="flex items-start gap-2.5">
+                        <Check className="w-4 h-4 mt-0.5 shrink-0 text-[var(--sukla-terracotta)]" aria-hidden="true" />
+                        <span>
+                          {item.text}{' '}
+                          <Link
+                            href={item.href}
+                            className="text-[var(--sukla-terracotta)] hover:underline focus-visible:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--sukla-terracotta)]"
+                          >
+                            {item.linkLabel}
+                          </Link>
+                        </span>
                       </li>
                     ))}
                   </ul>

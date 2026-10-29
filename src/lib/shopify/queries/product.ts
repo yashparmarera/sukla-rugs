@@ -45,3 +45,14 @@ export const getCollectionProductsQuery = `
   }
   ${productFragment}
 `;
+
+export const getProductsByIdsQuery = `
+  query getProductsByIds($ids: [ID!]!, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
+    nodes(ids: $ids) {
+      ... on Product {
+        ...product
+      }
+    }
+  }
+  ${productFragment}
+`;

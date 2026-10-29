@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Search, ShoppingBag, User, Menu, X, ChevronDown } from 'lucide-react';
+import { Search, ShoppingBag, User, Heart, Menu, X, ChevronDown } from 'lucide-react';
 import { BrandMark } from '@/components/ui/BrandMark';
 import { CartDrawer } from '@/components/cart/CartDrawer';
 import { SearchModal } from '@/components/navigation/SearchModal';
@@ -11,6 +11,7 @@ import { AboutMegaMenu } from '@/components/navigation/AboutMegaMenu';
 import { ShopMegaMenu } from '@/components/navigation/ShopMegaMenu';
 import { ShopMobileMenu } from '@/components/navigation/ShopMobileMenu';
 import { getLocalCart } from '@/lib/shopify/local-cart';
+import { useWishlist } from '@/components/providers/WishlistProvider';
 
 export const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -19,6 +20,9 @@ export const Header: React.FC = () => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [cartCount, setCartCount] = useState(0);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  // Empty on the server and during hydration, so the badge only appears after mount.
+  const { ids: wishlistIds } = useWishlist();
+  const wishlistCount = wishlistIds.length;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -115,11 +119,11 @@ export const Header: React.FC = () => {
           {/* Brand Logo - Centered Brand Lock */}
           <Link href="/" className="flex min-w-0 flex-col items-center justify-self-center group">
             <div className="flex min-w-0 items-center gap-1.5 md:gap-2">
-              <BrandMark className="h-3 md:h-4" />
+              <BrandMark className="h-3 md:h-4 max-[359px]:hidden" />
               <span className="whitespace-nowrap font-display text-base md:text-xl tracking-[0.16em] md:tracking-[0.22em] font-medium text-[var(--sukla-charcoal)] uppercase">
                 SUKLA RUGS
               </span>
-              <BrandMark className="h-3 md:h-4" />
+              <BrandMark className="h-3 md:h-4 max-[359px]:hidden" />
             </div>
             <span className="text-[9px] uppercase tracking-[0.3em] text-[var(--sukla-taupe)] font-sans -mt-1 hidden sm:block">
               Bhadohi • India
@@ -127,7 +131,7 @@ export const Header: React.FC = () => {
           </Link>
 
           {/* Right Action Icons */}
-          <div className="flex items-center justify-self-end space-x-2.5 sm:space-x-5 text-[var(--sukla-charcoal)]">
+          <div className="flex items-center justify-self-end space-x-1.5 sm:space-x-5 text-[var(--sukla-charcoal)]">
             <Link
               href="/trade"
               className="hidden xl:inline-block text-sm font-sans tracking-[0.01em] hover:text-[var(--sukla-terracotta)] transition-colors border-b border-transparent hover:border-[var(--sukla-terracotta)] pb-0.5"
@@ -147,6 +151,23 @@ export const Header: React.FC = () => {
             >
               <Search className="w-5 h-5 stroke-[1.5]" />
             </button>
+
+            <Link
+              href="/wishlist"
+              className="p-1.5 hover:text-[var(--sukla-terracotta)] transition-colors relative"
+              aria-label={wishlistCount > 0 ? `Wishlist, ${wishlistCount} ${wishlistCount === 1 ? 'item' : 'items'}` : 'Wishlist'}
+            >
+              <Heart className="w-5 h-5 stroke-[1.5]" />
+              {wishlistCount > 0 && (
+                // Hidden from assistive tech: the count is already in the link's label.
+                <span
+                  aria-hidden="true"
+                  className="nums absolute -top-1 -right-1 bg-[var(--sukla-terracotta)] text-white text-[9px] font-bold min-w-4 h-4 px-[3px] rounded-full flex items-center justify-center"
+                >
+                  {wishlistCount}
+                </span>
+              )}
+            </Link>
 
             <Link
               href="/account"

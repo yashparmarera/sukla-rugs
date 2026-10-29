@@ -5,7 +5,9 @@ import Link from 'next/link';
 import { ArrowRight, Check } from 'lucide-react';
 import { KnotGlyph } from '@/components/ui/KnotGlyph';
 import { Button } from '@/components/ui/Button';
-import { PHONE_DISPLAY, PHONE_TEL } from '@/lib/contact';
+import { EMAIL, EMAIL_HREF, PHONE_DISPLAY, PHONE_TEL } from '@/lib/contact';
+import { LEGAL_PAGES } from '@/lib/legal/shared';
+import { ConsentButton } from '@/components/consent/ConsentButton';
 
 export const Footer: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -40,10 +42,10 @@ export const Footer: React.FC = () => {
               <p>
                 Client Concierge:{' '}
                 <a
-                  href="mailto:concierge@shuklarugs.com"
+                  href={EMAIL_HREF}
                   className="hover:text-white transition-colors"
                 >
-                  concierge@shuklarugs.com
+                  {EMAIL}
                 </a>{' '}
                 |{' '}
                 <a href={PHONE_TEL} className="nums hover:text-white transition-colors">
@@ -86,7 +88,7 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Multi-column Navigation Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-16 border-b border-white/10 text-xs font-sans">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 py-16 border-b border-white/10 text-xs font-sans">
           
           {/* Col 1: Shop */}
           <div className="space-y-4">
@@ -153,6 +155,34 @@ export const Footer: React.FC = () => {
                 Rates by ExchangeRate-API
               </a>
             </p>
+          </div>
+
+          {/* Col 5: Help & Policies */}
+          <div className="space-y-4">
+            <h5 className="eyebrow text-[var(--sukla-terracotta)] text-[11px]">
+              Help &amp; Policies
+            </h5>
+            <ul className="space-y-2.5 text-white/70">
+              {LEGAL_PAGES.map((page) => (
+                <li key={page.href}><Link href={page.href} className="hover:text-white transition-colors">{page.label}</Link></li>
+              ))}
+              <li>
+                <ConsentButton
+                  mode="preferences"
+                  className="text-left hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--sukla-terracotta)]"
+                >
+                  Cookie preferences
+                </ConsentButton>
+              </li>
+              <li>
+                <ConsentButton
+                  mode="do-not-sell"
+                  className="text-left hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--sukla-terracotta)]"
+                >
+                  Do Not Sell or Share My Personal Information
+                </ConsentButton>
+              </li>
+            </ul>
           </div>
 
         </div>

@@ -203,7 +203,7 @@ export const AboutMegaMenu: React.FC = () => {
                       alt=""
                       fill
                       sizes="195px"
-                      className="object-cover transition-transform duration-300 ease-out motion-reduce:transition-none motion-reduce:transform-none group-hover:scale-[1.03] group-focus-visible:scale-[1.03]"
+                      className={`object-cover ${entry.grayscale ? 'grayscale' : ''} transition-transform duration-300 ease-out motion-reduce:transition-none motion-reduce:transform-none group-hover:scale-[1.03] group-focus-visible:scale-[1.03]`}
                     />
                   )}
                 </span>

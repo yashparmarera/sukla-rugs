@@ -3,7 +3,6 @@ import Metadata from 'next';
 import { Header } from '@/components/navigation/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Hero } from '@/components/hero/Hero';
-import { BrandStatement } from '@/components/editorial/BrandStatement';
 import { ShopByRoom } from '@/components/editorial/ShopByRoom';
 import { ShopByCategory } from '@/components/editorial/ShopByCategory';
 import { CustomiseRugSection } from '@/components/editorial/CustomiseRugSection';
@@ -82,9 +81,6 @@ export default async function HomePage() {
 
         {/* Bhadohi Story & 7 Craft Stages */}
         <BhadohiStorySection />
-
-        {/* Brand Ethos Statement */}
-        <BrandStatement />
 
         {/* Design Consultation & Concierge Banner */}
         <DesignConsultationBanner />

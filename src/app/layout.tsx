@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import { Jost, Ibarra_Real_Nova, Inter } from "next/font/google";
 import "./globals.css";
 import { CurrencyProvider } from "@/components/providers/CurrencyProvider";
+import { WishlistProvider } from "@/components/providers/WishlistProvider";
 import { getSelectedCountry } from "@/lib/localization.server";
 import { getCurrencyForCountry } from "@/lib/currency";
 import { getStoreCurrencyRate } from "@/lib/exchange-rates.server";
 import { WhatsAppFloat } from "@/components/common/WhatsAppFloat";
+import { CookieConsent } from "@/components/consent/CookieConsent";
 
 // UI + numbers
 const inter = Inter({
@@ -66,8 +68,9 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
+        <CookieConsent />
         <CurrencyProvider displayCurrency={displayCurrency} rate={rate}>
-          {children}
+          <WishlistProvider>{children}</WishlistProvider>
         </CurrencyProvider>
         <WhatsAppFloat />
       </body>

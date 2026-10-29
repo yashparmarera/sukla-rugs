@@ -58,7 +58,7 @@ export const CUSTOM_RUG_PRICING: Record<PricingCategory, CategoryPricing> = {
   'hand-knotted': {
     label: 'Hand Knotted',
     ratePerSqFt: 12,
-    leadTime: '12\u201316 weeks',
+    leadTime: '6\u201312 weeks',
     area: [size(4, 6, 289), size(5, 8, 479), size(6, 9, 649), size(8, 10, 959), size(9, 12, 1299), size(10, 14, 1689)],
     runner: [
       size(2, 6, 149),
@@ -72,21 +72,21 @@ export const CUSTOM_RUG_PRICING: Record<PricingCategory, CategoryPricing> = {
   'hand-tufted': {
     label: 'Hand Tufted',
     ratePerSqFt: 8,
-    leadTime: '6\u20138 weeks',
+    leadTime: '6\u201312 weeks',
     area: [size(4, 6, 199), size(5, 8, 329), size(6, 9, 439), size(8, 10, 649), size(9, 12, 869), size(10, 14, 1129)],
     runner: [size(2, 6, 99), size(2.5, 7, 139), size(2.5, 8, 160), size(2.5, 10, 200), size(2.5, 12, 240), size(3, 10, 240)]
   },
   'jute-flatweave': {
     label: 'Jute / Flat Weave',
     ratePerSqFt: 6,
-    leadTime: '4\u20136 weeks',
+    leadTime: '6\u201312 weeks',
     area: [size(4, 6, 144), size(5, 8, 240), size(6, 9, 324), size(8, 10, 480), size(9, 12, 648), size(10, 14, 840)],
     runner: [size(2, 6, 72), size(2.5, 7, 105), size(2.5, 8, 120), size(2.5, 10, 150), size(2.5, 12, 180), size(3, 10, 180)]
   },
   'hand-loom': {
     label: 'Hand Loom',
     ratePerSqFt: 10,
-    leadTime: '6\u20138 weeks',
+    leadTime: '6\u201312 weeks',
     area: [
       size(4, 6, 239),
       size(5, 8, 439), // Chart price; area × rate would be $400.

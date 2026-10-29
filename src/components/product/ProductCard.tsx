@@ -1,12 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Heart } from 'lucide-react';
 import { Product } from '@/types';
 import { trackEvent } from '@/lib/analytics';
 import { useCurrency } from '@/components/providers/CurrencyProvider';
+import { useWishlist } from '@/components/providers/WishlistProvider';
 import { getDisplayTitle } from '@/lib/product-display';
 
 // The generic 'Premium Rugs' collection badge is not shown (title or handle, trimmed, case-insensitive).
@@ -20,7 +21,8 @@ interface ProductCardProps {
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = false }) => {
-  const [isWishlisted, setIsWishlisted] = useState(false);
+  const { isSaved, toggle } = useWishlist();
+  const isWishlisted = isSaved(product.id);
   const secondaryImage = product.images[1] || product.featuredImage;
   const showCollectionBadge = Boolean(product.collection.title) && !isPremiumBadge(product.collection);
   const showBadges = showCollectionBadge || Boolean(product.metafields.one_of_a_kind);
@@ -28,8 +30,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
   const toggleWishlist = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    setIsWishlisted(!isWishlisted);
-    trackEvent('wishlist', { productId: product.id, productTitle: product.title, action: !isWishlisted ? 'add' : 'remove' });
+    const result = toggle(product.id);
+    if (result !== 'full') {
+      trackEvent('wishlist', { productId: product.id, productTitle: product.title, action: result === 'added' ? 'add' : 'remove' });
+    }
   };
 
   const { format } = useCurrency();

@@ -13,7 +13,7 @@
  */
 
 import { getProducts } from '@/lib/shopify/client';
-import { applyShopFilters } from '@/lib/shop-filters';
+import { applyShopFilters, productMatchesFilter } from '@/lib/shop-filters';
 import { SHOP_MENU } from '@/lib/shop-menu';
 import type { Product } from '@/types';
 
@@ -38,24 +38,57 @@ function isShopifyImage(url: string | undefined): url is string {
 /**
  * Styles left off the home page tiles (owner request). They stay in the Shop
  * menu and the /shop filter bar; only this home section skips them.
+ * `contemporary` is excluded here because the home section shows the Runners
+ * collection tile in its place (owner request) — see HOME_TILE_EXTRA_ITEMS.
  */
-const HOME_TILE_EXCLUDED_STYLES = new Set(['minimalist', 'neutral']);
+const HOME_TILE_EXCLUDED_STYLES = new Set(['minimalist', 'neutral', 'contemporary']);
 
-export function getStyleMenuItems() {
-  const column = SHOP_MENU.find((entry) => entry.id === 'style');
-  return (column?.items ?? []).flatMap((entry) =>
-    entry.param === 'style' && entry.value && !HOME_TILE_EXCLUDED_STYLES.has(entry.value)
-      ? [{ label: entry.label, href: entry.href, value: entry.value }]
-      : []
-  );
+/**
+ * Non-style tiles added to the home section. Each names a menu column id and the
+ * value of the item within it, so the label/href come straight from SHOP_MENU
+ * (no duplicated strings) and the tile image is matched by that facet.
+ */
+const HOME_TILE_EXTRA_ITEMS: ReadonlyArray<{ columnId: string; value: string }> = [
+  { columnId: 'area-rugs', value: 'runners' }
+];
+
+interface TileMenuItem {
+  label: string;
+  href: string;
+  param: string;
+  value: string;
 }
 
-/** Pure helper: pick each style's tile image from an already loaded product list. */
+export function getStyleMenuItems(): TileMenuItem[] {
+  const styleColumn = SHOP_MENU.find((entry) => entry.id === 'style');
+  const styleTiles = (styleColumn?.items ?? []).flatMap((entry) =>
+    entry.param === 'style' && entry.value && !HOME_TILE_EXCLUDED_STYLES.has(entry.value)
+      ? [{ label: entry.label, href: entry.href, param: entry.param, value: entry.value }]
+      : []
+  );
+
+  const extraTiles = HOME_TILE_EXTRA_ITEMS.flatMap(({ columnId, value }) => {
+    const column = SHOP_MENU.find((entry) => entry.id === columnId);
+    const entry = column?.items.find((it) => it.value === value && it.param);
+    return entry && entry.param && entry.value
+      ? [{ label: entry.label, href: entry.href, param: entry.param, value: entry.value }]
+      : [];
+  });
+
+  return [...styleTiles, ...extraTiles];
+}
+
+/** Pure helper: pick each tile's image from an already loaded product list. */
 export function buildStyleTiles(products: Product[]): StyleTile[] {
-  return getStyleMenuItems().map(({ label, href, value }) => {
-    const match = applyShopFilters(products, { style: value }).find((product) =>
-      isShopifyImage(product.featuredImage?.url)
-    );
+  return getStyleMenuItems().map(({ label, href, param, value }) => {
+    // Style facets run through applyShopFilters; collection facets (e.g. Runners)
+    // match by the documented collection-keyword helper, since applyShopFilters
+    // intentionally ignores the collection key.
+    const matches =
+      param === 'collection'
+        ? products.filter((product) => productMatchesFilter(product, 'collection', value))
+        : applyShopFilters(products, { [param]: value });
+    const match = matches.find((product) => isShopifyImage(product.featuredImage?.url));
     const featured = match?.featuredImage;
     return {
       label,

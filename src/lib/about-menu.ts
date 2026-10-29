@@ -17,6 +17,8 @@ export interface AboutMenuItem {
   width: number;
   /** Source pixel height. */
   height: number;
+  /** Render the card image in black and white (CSS filter; the file is unchanged). */
+  grayscale?: boolean;
 }
 
 export const ABOUT_ROOT_HREF = '/story';
@@ -54,6 +56,7 @@ export const ABOUT_MENU: readonly AboutMenuItem[] = [
     href: '/sustainability',
     imageSrc: aboutImage('our impact.webp'),
     width: 2000,
-    height: 2000
+    height: 2000,
+    grayscale: true
   }
 ];
