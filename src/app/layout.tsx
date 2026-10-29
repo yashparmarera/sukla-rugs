@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Jost, Ibarra_Real_Nova, Inter } from "next/font/google";
+import { Jost, Ibarra_Real_Nova, Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 import { CurrencyProvider } from "@/components/providers/CurrencyProvider";
 import { WishlistProvider } from "@/components/providers/WishlistProvider";
@@ -34,6 +34,14 @@ const jost = Jost({
   weight: ["300", "400", "500"],
 });
 
+// Home hero headline only
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500", "600"],
+});
+
 export const metadata: Metadata = {
   // Plain string on purpose: no `title.template`. Every page that exports its
   // own title writes the brand itself (for example "Our Story | SUKLA RUGS"),
@@ -64,7 +72,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${jost.variable} ${ibarraRealNova.variable} ${inter.variable} h-full antialiased`}
+      className={`${jost.variable} ${ibarraRealNova.variable} ${inter.variable} ${montserrat.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>

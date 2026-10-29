@@ -1,6 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
-import { Compass, Sparkles, ArrowRight } from 'lucide-react';
+import { Compass, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 
 export const DesignConsultationBanner: React.FC = () => {
@@ -29,14 +28,6 @@ export const DesignConsultationBanner: React.FC = () => {
               <span>Book Design Consultation</span>
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
-            
-            <Link
-              href="/find-your-rug"
-              className="inline-flex items-center justify-center border border-[var(--sukla-charcoal)] px-6 py-3.5 text-xs font-sans uppercase tracking-[0.18em] text-[var(--sukla-charcoal)] hover:bg-[var(--sukla-charcoal)] hover:text-white transition-colors"
-            >
-              <Sparkles className="w-4 h-4 mr-2 text-[var(--sukla-terracotta)]" />
-              Take 60-Sec Rug Quiz
-            </Link>
           </div>
 
         </div>

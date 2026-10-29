@@ -105,9 +105,6 @@ export default async function HomePage() {
               <Button href="/shop" variant="primary" size="lg">
                 Shop All Rugs
               </Button>
-              <Button href="/find-your-rug" variant="secondary" size="lg">
-                Find Your Rug
-              </Button>
             </div>
           </div>
         </section>

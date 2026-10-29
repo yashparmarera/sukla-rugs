@@ -171,7 +171,7 @@ export const ShopMegaMenu: React.FC = () => {
         id={PANEL_ID}
         role="group"
         aria-label="Shop menu"
-        className={`absolute inset-x-0 top-full z-50 before:absolute before:inset-x-0 before:-top-8 before:h-8 before:content-[''] border-y border-[var(--sukla-muted-border)] bg-[var(--sukla-cream)] shadow-subtle [transition-property:opacity,transform,visibility] duration-150 ease-out motion-reduce:transition-none motion-reduce:transform-none ${
+        className={`absolute inset-x-0 top-full z-50 before:absolute before:inset-x-0 before:-top-2 before:h-2 before:content-[''] border-y border-[var(--sukla-muted-border)] bg-[var(--sukla-cream)] shadow-subtle [transition-property:opacity,transform,visibility] duration-150 ease-out motion-reduce:transition-none motion-reduce:transform-none ${
           open ? 'visible opacity-100 translate-y-0' : 'invisible opacity-0 -translate-y-1 pointer-events-none'
         }`}
       >

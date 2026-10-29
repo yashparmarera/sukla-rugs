@@ -68,7 +68,17 @@ export default function ProcessPage() {
     <div className="flex flex-col min-h-screen bg-[var(--sukla-ivory)]">
       <Header />
 
-      <main className="flex-1 py-16 md:py-24">
+      <Image
+        src="/images/ourcraftv1.jpg"
+        alt="Sukla Rugs artisans at work in Bhadohi"
+        width={2400}
+        height={1000}
+        priority
+        sizes="100vw"
+        className="block w-full h-auto"
+      />
+
+      <main className="flex-1 pt-8 md:pt-10 pb-16 md:pb-24">
         <div className="editorial-container">
           
           {/* Header */}

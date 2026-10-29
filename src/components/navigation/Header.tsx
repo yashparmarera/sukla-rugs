@@ -9,9 +9,11 @@ import { SearchModal } from '@/components/navigation/SearchModal';
 import { CountrySelector } from '@/components/navigation/CountrySelector';
 import { AboutMegaMenu } from '@/components/navigation/AboutMegaMenu';
 import { ShopMegaMenu } from '@/components/navigation/ShopMegaMenu';
+import { GuidesMegaMenu } from '@/components/navigation/GuidesMegaMenu';
 import { ShopMobileMenu } from '@/components/navigation/ShopMobileMenu';
 import { getLocalCart } from '@/lib/shopify/local-cart';
 import { useWishlist } from '@/components/providers/WishlistProvider';
+import { LEGAL_PAGES } from '@/lib/legal/shared';
 
 export const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -19,7 +21,6 @@ export const Header: React.FC = () => {
   const [cartOpen, setCartOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [cartCount, setCartCount] = useState(0);
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   // Empty on the server and during hydration, so the badge only appears after mount.
   const { ids: wishlistIds } = useWishlist();
   const wishlistCount = wishlistIds.length;
@@ -86,33 +87,12 @@ export const Header: React.FC = () => {
             {/* ABOUT US mega menu */}
             <AboutMegaMenu />
 
-            {/* GUIDES Dropdown */}
-            <div
-              className="relative group py-2"
-              onMouseEnter={() => setActiveDropdown('guides')}
-              onMouseLeave={() => setActiveDropdown(null)}
-            >
-              <Link href="/guides/rug-size" className="hover-underline-animation flex items-center gap-1 font-medium">
-                Guides <ChevronDown className="w-3 h-3 text-[var(--sukla-taupe)] group-hover:rotate-180 transition-transform" />
-              </Link>
-              {activeDropdown === 'guides' && (
-                <div className="absolute top-full left-0 w-64 bg-[var(--sukla-ivory)] border border-[var(--sukla-muted-border)] shadow-xl p-6 space-y-3 z-50">
-                  <Link href="/guides/rug-size" className="block text-xs hover:text-[var(--sukla-terracotta)]">
-                    Rug Size Guide
-                  </Link>
-                  <Link href="/guides/rug-care" className="block text-xs hover:text-[var(--sukla-terracotta)]">
-                    Rug Care & Maintenance
-                  </Link>
-                  <Link href="/journal" className="block text-xs hover:text-[var(--sukla-terracotta)]">
-                    The Journal
-                  </Link>
-                </div>
-              )}
-            </div>
+            {/* GUIDES mega menu (same behaviour as Shop) */}
+            <GuidesMegaMenu />
 
             {/* SERVICES */}
-            <Link href="/find-your-rug" className="hover-underline-animation font-medium text-[var(--sukla-terracotta)]">
-              Find Your Rug
+            <Link href="/customisation" className="hover-underline-animation font-medium text-[var(--sukla-terracotta)]">
+              Customisation
             </Link>
           </nav>
 
@@ -249,14 +229,8 @@ export const Header: React.FC = () => {
 
             <div className="border-t border-[var(--sukla-muted-border)] pt-6 space-y-3">
               <span className="eyebrow block text-[10px] text-[var(--sukla-taupe)]">Client Services</span>
-              <Link href="/find-your-rug" onClick={() => setMobileMenuOpen(false)} className="block text-xs text-[var(--sukla-terracotta)] font-bold">
-                Find Your Rug Quiz
-              </Link>
               <Link href="/design-consultation" onClick={() => setMobileMenuOpen(false)} className="block text-xs">
                 Design Consultation
-              </Link>
-              <Link href="/guides/rug-size" onClick={() => setMobileMenuOpen(false)} className="block text-xs">
-                Rug Size Guide
               </Link>
               <Link href="/guides/rug-care" onClick={() => setMobileMenuOpen(false)} className="block text-xs">
                 Rug Care Guide
@@ -265,9 +239,23 @@ export const Header: React.FC = () => {
                 Trade & Designers Program
               </Link>
               <Link href="/journal" onClick={() => setMobileMenuOpen(false)} className="block text-xs">
-                The Journal
+                Blogs
               </Link>
             </div>
+
+            <details className="group/policies border-t border-[var(--sukla-muted-border)] pt-6">
+              <summary className="flex cursor-pointer list-none items-center justify-between eyebrow text-[10px] text-[var(--sukla-taupe)] [&::-webkit-details-marker]:hidden">
+                Policies
+                <ChevronDown aria-hidden="true" className="w-3 h-3 transition-transform group-open/policies:rotate-180 motion-reduce:transition-none" />
+              </summary>
+              <div className="mt-3 space-y-3">
+                {LEGAL_PAGES.map((page) => (
+                  <Link key={page.href} href={page.href} onClick={() => setMobileMenuOpen(false)} className="block text-xs">
+                    {page.label}
+                  </Link>
+                ))}
+              </div>
+            </details>
 
             <div className="border-t border-[var(--sukla-muted-border)] pt-6 space-y-3">
               <span className="eyebrow block text-[10px] text-[var(--sukla-taupe)]">Country &amp; currency</span>

@@ -126,7 +126,6 @@ export const Footer: React.FC = () => {
               Services &amp; Guides
             </h5>
             <ul className="space-y-2.5 text-white/70">
-              <li><Link href="/find-your-rug" className="hover:text-white transition-colors font-medium text-white">Find Your Rug Quiz</Link></li>
               <li><Link href="/design-consultation" className="hover:text-white transition-colors">Design Consultation</Link></li>
               <li><Link href="/guides/rug-size" className="hover:text-white transition-colors">Rug Size Placement Guide</Link></li>
               <li><Link href="/guides/rug-care" className="hover:text-white transition-colors">Rug Care & Stain Removal</Link></li>
@@ -142,18 +141,6 @@ export const Footer: React.FC = () => {
             </h5>
             <p className="text-white/70 leading-relaxed">
               Servicing interior designers, private residences, and architecture firms across United States, Canada, United Kingdom, European Union, Australia, and UAE.
-            </p>
-            <p className="pt-2 text-[11px] text-white/50 leading-relaxed">
-              Choose your country from the globe icon in the header to see prices in your local currency. Local
-              prices are approximate; orders are charged in the store currency at checkout.{' '}
-              <a
-                href="https://www.exchangerate-api.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline hover:text-white"
-              >
-                Rates by ExchangeRate-API
-              </a>
             </p>
           </div>
 

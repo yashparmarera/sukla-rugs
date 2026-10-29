@@ -17,30 +17,73 @@ export default function StoryPage() {
 
       <main className="flex-1">
         {/* Story Hero */}
-        <section className="relative py-24 md:py-32 bg-[var(--sukla-charcoal)] text-white text-center">
-          <div className="editorial-container max-w-3xl mx-auto space-y-6">
-            <KnotGlyph size="md" className="text-[var(--sukla-terracotta)]" />
-            <span className="text-xs uppercase tracking-[0.3em] text-[var(--sukla-taupe-light)] font-sans block">
-              Heritage Narrative
-            </span>
-            <h1 className="display-xl text-4xl sm:text-5xl md:text-6xl">
-              Contemporary Indian Luxury Rooted in Craftsmanship
-            </h1>
-            <p className="font-serif italic text-lg sm:text-xl text-[var(--sukla-ivory)]/90 font-normal">
-              &quot;Bhadohi to the World: Every rug tells a story.&quot;
-            </p>
-          </div>
+        <section className="relative w-full">
+          <h1 className="sr-only">Contemporary Indian Luxury Rooted in Craftsmanship</h1>
+          <Image
+            src="/images/aboutusbanner.webp"
+            alt="Sukla Rugs: Bhadohi to the World, every rug tells a story"
+            width={2400}
+            height={1000}
+            priority
+            sizes="100vw"
+            className="w-full h-auto"
+          />
         </section>
 
         {/* Opening Statement */}
-        <section className="py-20 md:py-24 editorial-container max-w-3xl mx-auto text-center space-y-6">
-          <span className="eyebrow text-xs text-[var(--sukla-terracotta)] block">Our Story</span>
-          <p className="font-sans text-lg md:text-xl text-[var(--sukla-charcoal)]/80 leading-relaxed">
-            At Sukla Rugs, we do not just manufacture carpets; we weave stories, preserve heritage, and bring the timeless art of Indian craftsmanship to floors across the globe. Born from a deep-rooted family legacy, our journey began generations ago with a simple loom and a profound respect for the artisanal craft.
-          </p>
-          <p className="font-sans text-base text-[var(--sukla-charcoal)]/70 leading-relaxed">
-            Today, as the new generation takes the helm, we are proudly carrying forward this ancestral family business, blending traditional techniques with contemporary global aesthetics.
-          </p>
+        <section className="pt-8 md:pt-10 pb-20 md:pb-28 editorial-container">
+          {/* Welcome */}
+          <div className="max-w-3xl mx-auto text-center space-y-6">
+            <span className="eyebrow text-xs text-[var(--sukla-terracotta)] block">About Us</span>
+            <h2 className="display-lg text-3xl md:text-4xl text-[var(--sukla-charcoal)]">
+              Welcome to Sukla Rugs: Our Story Begins in the Carpet City
+            </h2>
+            <div className="flex items-center justify-center gap-4 pt-2" aria-hidden="true">
+              <span className="h-px w-12 bg-[var(--sukla-terracotta)]/50" />
+              <span className="font-serif italic text-[var(--sukla-terracotta)] text-lg">Since 1977</span>
+              <span className="h-px w-12 bg-[var(--sukla-terracotta)]/50" />
+            </div>
+            <p className="font-sans text-lg md:text-xl text-[var(--sukla-charcoal)]/80 leading-relaxed">
+              In 1977, our family laid the foundation of what would become a lifelong passion in Bhadohi, Uttar Pradesh, India&apos;s legendary Carpet City. We started with a simple vision: to craft rugs that carry the soul of traditional artistry into the modern home.
+            </p>
+            <p className="font-sans text-base md:text-lg text-[var(--sukla-charcoal)]/70 leading-relaxed">
+              Today, as a second-generation family business, Sukla Rugs proudly carries that original vision forward, preserving the techniques passed down through our family while sharing our heritage with the world.
+            </p>
+          </div>
+
+          {/* Two pillars */}
+          <div className="mt-16 md:mt-20 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-0 max-w-5xl mx-auto md:divide-x divide-[var(--sukla-muted-border)]">
+            <article className="space-y-4 md:pr-12 text-center md:text-left">
+              <span className="eyebrow text-[11px] text-[var(--sukla-terracotta)] block">01</span>
+              <h3 className="display-lg text-2xl text-[var(--sukla-charcoal)]">The Hands Behind the Heritage</h3>
+              <p className="font-sans text-base text-[var(--sukla-charcoal)]/70 leading-relaxed">
+                Every piece we create is a testament to the artisans who dedicate their lives to this craft. From the intricate, timeless rhythms of hand-knotted designs to the rich, earthy textures of hand-tufted wool and natural jute, our rugs are not just manufactured. They are born on the loom, woven with patience, precision, and a deep respect for the raw materials.
+              </p>
+              <p className="font-sans text-base text-[var(--sukla-charcoal)]/70 leading-relaxed">
+                When you bring one of our creations into your space, you are bringing home a tangible piece of Bhadohi&apos;s celebrated history.
+              </p>
+            </article>
+            <article className="space-y-4 md:pl-12 text-center md:text-left">
+              <span className="eyebrow text-[11px] text-[var(--sukla-terracotta)] block">02</span>
+              <h3 className="display-lg text-2xl text-[var(--sukla-charcoal)]">From Our Looms to Your Living Room</h3>
+              <p className="font-sans text-base text-[var(--sukla-charcoal)]/70 leading-relaxed">
+                We believe a rug is far more than a floor covering. It is the foundation of your sanctuary: where your family gathers, where your pets curl up to rest, and where your bare feet find warmth and comfort after a long day. It is the quiet backdrop to your favorite memories.
+              </p>
+              <p className="font-sans text-base text-[var(--sukla-charcoal)]/70 leading-relaxed">
+                We ship our creations globally because the desire for authentic, soulful craftsmanship knows no borders.
+              </p>
+            </article>
+          </div>
+
+          {/* Closing */}
+          <div className="mt-16 md:mt-20 max-w-2xl mx-auto text-center space-y-4 border-t border-[var(--sukla-muted-border)] pt-12">
+            <p className="font-serif italic text-xl md:text-2xl text-[var(--sukla-charcoal)] leading-relaxed">
+              Our legacy starts here at the loom, but it is fulfilled in your home.
+            </p>
+            <p className="font-sans text-base text-[var(--sukla-charcoal)]/70 leading-relaxed">
+              Thank you for letting the Sukla Rugs family&apos;s life work become a beautiful part of your everyday moments.
+            </p>
+          </div>
         </section>
 
         {/* Our Heritage */}
@@ -61,7 +104,7 @@ export default function StoryPage() {
 
             <div className="relative aspect-[4/5] bg-[var(--sukla-sand)] border border-[var(--sukla-muted-border)] overflow-hidden shadow-subtle">
               <Image
-                src="https://images.unsplash.com/photo-1579656381226-5fc0f0100c3b?auto=format&fit=crop&w=1000&q=85"
+                src="/images/customisation-2.webp"
                 alt="Bhadohi master weaver on a wooden loom"
                 fill
                 className="object-cover"

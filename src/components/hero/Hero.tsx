@@ -52,7 +52,7 @@ export const Hero: React.FC = () => {
             <span className="hero-text-backdrop">Handcrafted Rugs</span>
           </p>
 
-          <h1 className="mt-6 font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-normal tracking-[-0.02em] text-white leading-[0.88]">
+          <h1 className="mt-6 font-[family-name:var(--font-montserrat)] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium tracking-[-0.02em] text-white leading-[1.05]">
             <span className="hero-text-backdrop">Rugs for <br />Every Space</span>
           </h1>
 
