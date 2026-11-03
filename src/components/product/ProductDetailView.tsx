@@ -65,10 +65,10 @@ const WHITE_GALLERY_EXPERIMENT = true;
 
 const GALLERY_FRAME_CLASS = WHITE_GALLERY_EXPERIMENT
   ? 'bg-white border-[var(--sukla-muted-border)]/40'
-  : 'bg-[var(--sukla-cream)] border-[var(--sukla-muted-border)]';
+  : 'bg-white border-[var(--sukla-muted-border)]';
 
 // Thumbnail tile surface, kept in sync with the main frame so the experiment reads coherently.
-const GALLERY_THUMB_BG = WHITE_GALLERY_EXPERIMENT ? 'bg-white' : 'bg-[var(--sukla-cream)]';
+const GALLERY_THUMB_BG = WHITE_GALLERY_EXPERIMENT ? 'bg-white' : 'bg-white';
 
 interface ProductDetailViewProps {
   product: Product;
@@ -638,8 +638,8 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                         aria-pressed={selected}
                         className={`px-3 py-2.5 text-xs font-sans text-left border transition-all flex justify-between items-center gap-2 ${
                           selected
-                            ? 'border-[var(--sukla-charcoal)] bg-[var(--sukla-cream)] ring-1 ring-[var(--sukla-charcoal)] font-semibold'
-                            : 'border-[var(--sukla-muted-border)] hover:border-[var(--sukla-taupe)] bg-[var(--sukla-ivory)]'
+                            ? 'border-[var(--sukla-charcoal)] bg-white ring-1 ring-[var(--sukla-charcoal)] font-semibold'
+                            : 'border-[var(--sukla-muted-border)] hover:border-[var(--sukla-taupe)] bg-white'
                         } ${v.availableForSale ? '' : 'text-[var(--sukla-taupe)] line-through'}`}
                       >
                         <span>{v.title}</span>
@@ -685,7 +685,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
             <div className="space-y-3">
               <div className="flex gap-3" ref={purchaseRowRef}>
                 <div
-                  className="flex items-center border border-[var(--sukla-muted-border)] bg-[var(--sukla-cream)] min-h-[3rem]"
+                  className="flex items-center border border-[var(--sukla-muted-border)] bg-white min-h-[3rem]"
                   role="group"
                   aria-label="Quantity"
                 >
@@ -971,7 +971,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
 
       {/* Mobile Sticky Add to Cart Bar */}
       {showStickyBar && (
-        <div className="fixed bottom-0 inset-x-0 z-40 bg-[var(--sukla-ivory)] border-t border-[var(--sukla-muted-border)] p-4 pb-[max(1rem,env(safe-area-inset-bottom))] shadow-2xl lg:hidden flex items-center justify-between gap-4">
+        <div className="fixed bottom-0 inset-x-0 z-40 bg-white border-t border-[var(--sukla-muted-border)] p-4 pb-[max(1rem,env(safe-area-inset-bottom))] shadow-2xl lg:hidden flex items-center justify-between gap-4">
           <div className="min-w-0">
             <span className="heading text-sm font-medium block truncate">{displayTitle}</span>
             <span className="nums text-xs font-medium text-[var(--sukla-charcoal)]">{formattedPrice}</span>
@@ -1019,7 +1019,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
           aria-labelledby="size-guide-title"
           className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4"
         >
-          <div className="bg-[var(--sukla-ivory)] max-w-xl w-full p-8 border border-[var(--sukla-muted-border)] shadow-2xl relative space-y-4">
+          <div className="bg-white max-w-xl w-full p-8 border border-[var(--sukla-muted-border)] shadow-2xl relative space-y-4">
             <div className="flex justify-between items-center border-b border-[var(--sukla-muted-border)] pb-4">
               <h3 id="size-guide-title" className="heading text-lg">Rug Placement &amp; Size Guide</h3>
               <button type="button" onClick={() => setSizeModalOpen(false)} aria-label="Close size guide">

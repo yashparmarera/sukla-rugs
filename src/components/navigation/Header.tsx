@@ -2,10 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Search, ShoppingBag, User, Heart, Menu, X, ChevronDown } from 'lucide-react';
+import { ShoppingBag, User, Heart, Menu, X, ChevronDown } from 'lucide-react';
 import { BrandMark } from '@/components/ui/BrandMark';
 import { CartDrawer } from '@/components/cart/CartDrawer';
-import { SearchModal } from '@/components/navigation/SearchModal';
 import { CountrySelector } from '@/components/navigation/CountrySelector';
 import { AboutMegaMenu } from '@/components/navigation/AboutMegaMenu';
 import { ShopMegaMenu } from '@/components/navigation/ShopMegaMenu';
@@ -19,7 +18,6 @@ export const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
   const [cartCount, setCartCount] = useState(0);
   // Empty on the server and during hydration, so the badge only appears after mount.
   const { ids: wishlistIds } = useWishlist();
@@ -123,14 +121,6 @@ export const Header: React.FC = () => {
             <div className="hidden sm:block">
               <CountrySelector />
             </div>
-
-            <button
-              onClick={() => setSearchOpen(true)}
-              className="p-1.5 hover:text-[var(--sukla-terracotta)] transition-colors"
-              aria-label="Open search modal"
-            >
-              <Search className="w-5 h-5 stroke-[1.5]" />
-            </button>
 
             <Link
               href="/wishlist"
@@ -267,7 +257,6 @@ export const Header: React.FC = () => {
 
       {/* Global Drawers & Modals */}
       <CartDrawer isOpen={cartOpen} onClose={() => setCartOpen(false)} />
-      <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
     </>
   );
 };

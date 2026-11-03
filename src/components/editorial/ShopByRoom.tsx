@@ -1,32 +1,23 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
 
 const ROOMS = [
   {
     title: 'Living Room',
-    subtitle: 'Grounding anchors for grand & intimate seating areas',
-    image: '/images/shopbyroom/living%20room.webp',
-    recommendation: "Suggested: 8' x 10' or 9' x 12' Hand-Knotted Oushak"
+    image: '/images/shopbyroom/living%20room.webp'
   },
   {
     title: 'Bedroom',
-    subtitle: 'Soft plush piles providing morning warmth barefoot',
-    image: '/images/shopbyroom/bedroom.webp',
-    recommendation: "Suggested: 8' x 10' High-Low Artisan Loop"
+    image: '/images/shopbyroom/bedroom.webp'
   },
   {
     title: 'Dining Room',
-    subtitle: 'Low-profile weaves for smooth chair movement & stain resistance',
-    image: '/images/shopbyroom/dining.webp',
-    recommendation: "Suggested: 8' x 10' Reversible Flatweave"
+    image: '/images/shopbyroom/dining.webp'
   },
   {
     title: 'Entryway & Hallways',
-    subtitle: 'Resilient high-traffic runners & organic natural jute textures',
-    image: '/images/shopbyroom/hallway.webp',
-    recommendation: "Suggested: 3' x 10' Organic Jute Runner"
+    image: '/images/shopbyroom/hallway.webp'
   }
 ];
 
@@ -35,21 +26,14 @@ export const ShopByRoom: React.FC = () => {
     <section className="py-20 bg-[var(--sukla-cream)] border-y border-[var(--sukla-muted-border)]">
       <div className="editorial-container">
         
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 space-y-4 md:space-y-0">
+        <div className="flex flex-col items-center text-center mb-12">
           <div>
-            <span className="block text-xs uppercase tracking-[0.25em] text-[var(--sukla-terracotta)] font-sans mb-2">
-              Architectural Placement
-            </span>
             <h2 className="display-lg text-2xl md:text-3xl lg:text-4xl text-[var(--sukla-charcoal)]">
-              Shop by Space &amp; Scale
+              <span className="relative inline-block cursor-default pb-1 after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:bg-[var(--sukla-charcoal)] after:transition-transform after:duration-300 after:ease-out hover:after:scale-x-100">
+                Shop by Space
+              </span>
             </h2>
           </div>
-          <Link
-            href="/shop"
-            className="text-xs font-sans uppercase tracking-[0.18em] text-[var(--sukla-charcoal)] hover:text-[var(--sukla-terracotta)] hover-underline-animation flex items-center gap-2 font-semibold"
-          >
-            Explore Interactive Size Guide <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -70,23 +54,22 @@ export const ShopByRoom: React.FC = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-[var(--sukla-charcoal)]/80 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
                 
                 <div className="absolute bottom-4 left-4 right-4 text-white">
-                  <h3 className="heading text-lg mb-1 group-hover:text-[var(--sukla-terracotta)] transition-colors">
+                  <h3 className="heading text-lg group-hover:text-[var(--sukla-terracotta)] transition-colors">
                     {room.title}
                   </h3>
-                  <p className="text-xs font-sans text-white/80 line-clamp-2">
-                    {room.subtitle}
-                  </p>
                 </div>
-              </div>
-
-              <div className="p-4 bg-[var(--sukla-ivory)] border-t border-[var(--sukla-muted-border)] flex items-center justify-between text-xs font-sans text-[var(--sukla-charcoal)]">
-                <span className="font-sans text-[var(--sukla-taupe)] text-[11px] truncate">
-                  {room.recommendation}
-                </span>
-                <ArrowRight className="w-4 h-4 text-[var(--sukla-charcoal)] group-hover:translate-x-1 transition-transform shrink-0 ml-2" />
               </div>
             </Link>
           ))}
+        </div>
+
+        <div className="mt-10 flex justify-center">
+          <Link
+            href="/shop"
+            className="inline-flex items-center justify-center font-sans uppercase tracking-[0.1em] text-xs px-8 py-3 border border-[var(--sukla-charcoal)] text-[var(--sukla-charcoal)] transition-all duration-300 hover:bg-[var(--sukla-charcoal)] hover:text-[var(--sukla-ivory)] focus:outline-none focus:ring-1 focus:ring-[var(--sukla-charcoal)]"
+          >
+            Explore
+          </Link>
         </div>
 
       </div>

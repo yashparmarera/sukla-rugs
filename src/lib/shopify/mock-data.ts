@@ -518,7 +518,7 @@ export const MOCK_JOURNAL_ARTICLES: JournalArticle[] = [
   {
     id: 'j-1',
     slug: 'the-living-craft-of-bhadohi',
-    title: 'The Living Craft of Bhadohi: Uttar Pradesh’s Rug Capital',
+    title: 'The Living Craft of Bhadohi: Uttar Pradeshâ€™s Rug Capital',
     excerpt: 'Deep inside the carpet belt of northern India, generations of master weavers preserve a heritage of knotting that has adorned global spaces for centuries.',
     content: `Bhadohi, a historic district nestled in Uttar Pradesh near the sacred banks of the Ganges, has long earned its legacy as India's "Carpet City." Here, rug weaving is not merely an industry; it is a shared cultural rhythm passed down through family lineages...`,
     category: 'Heritage',
@@ -568,41 +568,45 @@ export const MOCK_JOURNAL_ARTICLES: JournalArticle[] = [
   }
 ];
 
+/** Placeholder reviews. Reviewer names, places and photos are the current ones; the review text is the earlier mock copy. */
 export const MOCK_REVIEWS: Review[] = [
   {
     id: 'rev-1',
-    author: 'Evelyn St. Clair',
-    location: 'London, UK',
+    author: 'Steven',
+    location: 'Brooklyn, CT',
     rating: 5,
     date: 'February 14, 2026',
     title: 'An absolute centerpiece in our living room',
     content: 'The Desert Loom in Terracotta is even more mesmerizing in person. The abrash variations give it such depth. You can feel the weight of genuine Bhadohi craftsmanship underfoot.',
     productHandle: 'desert-loom-oushak',
     productTitle: 'Desert Loom (Knotted)',
-    verifiedPurchase: true
+    verifiedPurchase: true,
+    avatar: '/images/review/review-1.jpg'
   },
   {
     id: 'rev-2',
-    author: 'Marcus Vance',
-    location: 'New York, NY',
+    author: 'Crystal Watson',
+    location: 'Columbia, MO',
     rating: 5,
     date: 'January 28, 2026',
     title: 'Unmatched texture and understated luxury',
-    content: 'Ordered the Ganges Pebble Loop for our penthouse library. The high-low loop structure feels incredible barefoot. Delivered seamlessly to Manhattan in protective custom casing.',
+    content: 'Ordered the Ganges Pebble Loop for our penthouse library. The high-low loop structure feels incredible barefoot. Delivered seamlessly in protective custom casing.',
     productHandle: 'ganges-pebble-loop',
     productTitle: 'Ganges Pebble Loop',
-    verifiedPurchase: true
+    verifiedPurchase: true,
+    avatar: '/images/review/review-2.jpg'
   },
   {
     id: 'rev-3',
-    author: 'Clara Dupuis',
-    location: 'Paris, France',
+    author: 'Akshit',
+    location: 'Mumbai',
     rating: 5,
     date: 'January 10, 2026',
     title: 'Exquisite color density and wool quality',
     content: 'The Anatolian Heritage rug has transformed our dining room. The indigo dye changes softly from daylight to evening illumination.',
     productHandle: 'anatolian-heritage',
     productTitle: 'Anatolian Heritage',
-    verifiedPurchase: true
+    verifiedPurchase: true,
+    avatar: '/images/review/review-3.jpg'
   }
 ];

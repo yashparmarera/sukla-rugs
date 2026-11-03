@@ -45,7 +45,7 @@ export const SHOP_MENU: readonly ShopMenuColumn[] = [
       item('Modern', 'style', 'modern'),
       item('Contemporary', 'style', 'contemporary'),
       item('Abstract', 'style', 'abstract'),
-      item('Minimalist', 'style', 'minimalist'),
+      item('Solid', 'style', 'minimalist'),
       item('Neutral', 'style', 'neutral')
     ]
   },

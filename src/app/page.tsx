@@ -4,7 +4,10 @@ import { Header } from '@/components/navigation/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Hero } from '@/components/hero/Hero';
 import { ShopByRoom } from '@/components/editorial/ShopByRoom';
-import { ShopByCategory } from '@/components/editorial/ShopByCategory';
+import { ShopBySize } from '@/components/editorial/ShopBySize';
+import { FindYourRug } from '@/components/editorial/FindYourRug';
+import { BehindTheScenes } from '@/components/editorial/BehindTheScenes';
+import { getFindYourRugGroups } from '@/lib/find-your-rug';
 import { CustomiseRugSection } from '@/components/editorial/CustomiseRugSection';
 import { ProductCard } from '@/components/product/ProductCard';
 import { BhadohiStorySection } from '@/components/craft/BhadohiStorySection';
@@ -12,7 +15,6 @@ import { DesignConsultationBanner } from '@/components/services/DesignConsultati
 import { ReviewsSection } from '@/components/editorial/ReviewsSection';
 import { JournalPreview } from '@/components/journal/JournalPreview';
 import { getProducts } from '@/lib/shopify/client';
-import { getStyleTiles } from '@/lib/style-tiles';
 import { getSelectedCountry } from '@/lib/localization.server';
 import { Button } from '@/components/ui/Button';
 import { KnotGlyph } from '@/components/ui/KnotGlyph';
@@ -31,9 +33,9 @@ export const metadata = {
 
 export default async function HomePage() {
   const country = await getSelectedCountry();
-  const [signatureProducts, styleTiles] = await Promise.all([
+  const [signatureProducts, findYourRugGroups] = await Promise.all([
     getProducts({ limit: 8, country }),
-    getStyleTiles(country)
+    getFindYourRugGroups(country)
   ]);
 
   return (
@@ -47,6 +49,15 @@ export default async function HomePage() {
 
         {/* Shop by Room Architectural Layout */}
         <ShopByRoom />
+
+        {/* Shop by Size */}
+        <ShopBySize />
+
+        {/* Find Your Rug: Style / Construction tabs from Shopify data */}
+        <FindYourRug groups={findYourRugGroups} />
+
+        {/* Behind the Scenes carousel */}
+        <BehindTheScenes />
 
         {/* Signature Rugs Section */}
         <section className="py-20 md:py-28 bg-white border-t border-[var(--sukla-muted-border)]">
@@ -75,9 +86,6 @@ export default async function HomePage() {
 
         {/* Customise your rug: custom-size estimate */}
         <CustomiseRugSection />
-
-        {/* Shop by Rug Category */}
-        <ShopByCategory tiles={styleTiles} />
 
         {/* Bhadohi Story & 7 Craft Stages */}
         <BhadohiStorySection />

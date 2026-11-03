@@ -26,7 +26,7 @@ export interface StyleTile {
 const SHOPIFY_CDN_HOST = 'cdn.shopify.com';
 
 /** Only Shopify-hosted images count; the mock catalog and placeholder use other hosts. */
-function isShopifyImage(url: string | undefined): url is string {
+export function isShopifyImage(url: string | undefined): url is string {
   if (!url) return false;
   try {
     return new URL(url).hostname === SHOPIFY_CDN_HOST;

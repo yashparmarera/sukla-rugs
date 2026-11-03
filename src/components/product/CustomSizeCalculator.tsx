@@ -40,7 +40,7 @@ const TERRACOTTA_LINK_CLASSES =
   'inline-flex items-center justify-center gap-2 font-sans uppercase tracking-[0.1em] text-xs transition-all duration-300 focus:outline-none focus:ring-1 focus:ring-[var(--sukla-charcoal)] px-7 py-3.5 bg-[var(--sukla-terracotta)] text-white hover:bg-[var(--sukla-terracotta-dark)] w-full';
 
 const FIELD_CLASSES =
-  'w-full min-h-[2.75rem] border border-[var(--sukla-muted-border)] bg-[var(--sukla-ivory)] px-3 py-2 text-sm font-sans nums text-[var(--sukla-charcoal)] focus:outline-none focus:ring-1 focus:ring-[var(--sukla-charcoal)] aria-[invalid=true]:border-rose-700';
+  'w-full min-h-[2.75rem] border border-[var(--sukla-muted-border)] bg-white px-3 py-2 text-sm font-sans nums text-[var(--sukla-charcoal)] focus:outline-none focus:ring-1 focus:ring-[var(--sukla-charcoal)] aria-[invalid=true]:border-rose-700';
 
 const INCHES_ERROR_PREFIX = 'Inches';
 
@@ -343,7 +343,7 @@ const CalculatorPanel: React.FC<CalculatorPanelProps> = ({ product, fixedCategor
         role="region"
         aria-labelledby={toggleId}
         hidden={!open}
-        className={`border border-[var(--sukla-muted-border)] bg-[var(--sukla-cream)] space-y-4 ${large ? 'p-5 sm:p-8 sm:space-y-6' : 'p-4 sm:p-5'}`}
+        className={`border border-[var(--sukla-muted-border)] bg-white space-y-4 ${large ? 'p-5 sm:p-8 sm:space-y-6' : 'p-4 sm:p-5'}`}
       >
         <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
           <span className="eyebrow text-xs text-[var(--sukla-charcoal)]">
@@ -445,7 +445,7 @@ const CalculatorPanel: React.FC<CalculatorPanelProps> = ({ product, fixedCategor
                   ? `${formatFeet(result.widthFt)} ft diameter · priced on ${formatArea(result.areaSqFt)} sq ft`
                   : `${formatFeet(result.widthFt)} × ${formatFeet(result.lengthFt)} ft · ${formatArea(result.areaSqFt)} sq ft`}
                 {result.isStandardSize && (
-                  <span className="ml-2 inline-block border border-[var(--sukla-muted-border)] bg-[var(--sukla-ivory)] px-1.5 py-0.5 text-[10px] uppercase tracking-[0.1em] align-middle">
+                  <span className="ml-2 inline-block border border-[var(--sukla-muted-border)] bg-white px-1.5 py-0.5 text-[10px] uppercase tracking-[0.1em] align-middle">
                     Standard size
                   </span>
                 )}

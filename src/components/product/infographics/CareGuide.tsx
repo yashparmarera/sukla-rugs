@@ -17,7 +17,7 @@ export const CareGuide: React.FC<{ guide: CareGuideData }> = ({ guide }) => {
           {guide.icons.map((item) => (
             <li
               key={item.key}
-              className="min-w-0 flex items-center gap-2.5 border border-[var(--sukla-muted-border)] bg-[var(--sukla-cream)] px-3 py-2.5"
+              className="min-w-0 flex items-center gap-2.5 border border-[var(--sukla-muted-border)] bg-white px-3 py-2.5"
             >
               <InfographicIcon name={item.icon} className="w-6 h-6 text-[var(--sukla-charcoal)]" />
               <span className="min-w-0 break-words text-xs font-sans text-[var(--sukla-charcoal)]">{item.caption}</span>

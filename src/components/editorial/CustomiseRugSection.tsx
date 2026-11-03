@@ -29,7 +29,7 @@ export const CustomiseRugSection: React.FC = () => {
   return (
     <section
       aria-labelledby="customise-rug-heading"
-      className="py-12 md:py-16 bg-[var(--sukla-ivory)] border-t border-[var(--sukla-muted-border)]"
+      className="py-12 md:py-16 bg-white border-t border-[var(--sukla-muted-border)]"
     >
       <div className="editorial-container grid grid-cols-1 md:grid-cols-2 items-start gap-8 lg:gap-14">
         {/* Desktop: the image cell is sticky below the header (items-start keeps it from stretching to

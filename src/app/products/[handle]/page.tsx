@@ -61,7 +61,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const relatedProducts = rankRelatedProducts(product, allProducts);
 
   return (
-    <div className="flex flex-col min-h-screen bg-[var(--sukla-ivory)]">
+    <div className="flex flex-col min-h-screen bg-white">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(buildProductJsonLd(product)) }}

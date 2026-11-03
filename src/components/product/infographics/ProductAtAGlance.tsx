@@ -5,7 +5,7 @@ import { InfographicIcon } from '@/components/product/infographics/InfographicIc
 import { ShapeSilhouette } from '@/components/product/infographics/ShapeSilhouette';
 import { KnotDensityGauge, PileHeightGauge } from '@/components/product/infographics/Gauges';
 
-const TILE = 'min-w-0 border border-[var(--sukla-muted-border)] bg-[var(--sukla-cream)] p-4 space-y-2';
+const TILE = 'min-w-0 border border-[var(--sukla-muted-border)] bg-white p-4 space-y-2';
 const VALUE = 'heading text-sm text-[var(--sukla-charcoal)] break-words';
 
 const TileTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => (
@@ -30,7 +30,7 @@ function renderTile(tile: GlanceTile): React.ReactNode {
       return (
         <li
           key={tile.kind}
-          className="min-w-0 border border-[var(--sukla-muted-border)] bg-[var(--sukla-cream)] p-4 col-span-full flex gap-4 items-start"
+          className="min-w-0 border border-[var(--sukla-muted-border)] bg-white p-4 col-span-full flex gap-4 items-start"
         >
           <InfographicIcon name={tile.icon} className="w-8 h-8 text-[var(--sukla-terracotta)]" />
           <div className="min-w-0 space-y-1">

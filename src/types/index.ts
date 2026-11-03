@@ -195,13 +195,16 @@ export interface Review {
   id: string;
   author: string;
   location: string;
-  rating: number;
-  date: string;
-  title: string;
-  content: string;
+  /** Text, rating, date and links stay unset until the customer's real words are supplied. */
+  rating?: number;
+  date?: string;
+  title?: string;
+  content?: string;
   productHandle?: string;
   productTitle?: string;
-  verifiedPurchase: boolean;
+  verifiedPurchase?: boolean;
+  /** Reviewer profile picture (path under /public). Initials are shown when absent. */
+  avatar?: string;
 }
 
 export interface JournalArticle {
