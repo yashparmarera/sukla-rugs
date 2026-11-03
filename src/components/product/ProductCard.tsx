@@ -49,11 +49,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
     '';
 
   return (
-    <div className="group relative flex flex-col bg-white border border-[var(--sukla-muted-border)]/70 hover:border-[var(--sukla-taupe)] transition-all duration-300">
+    <div className="group relative flex flex-col md:bg-white md:border md:border-[var(--sukla-muted-border)]/70 md:hover:border-[var(--sukla-taupe)] transition-all duration-300">
       {/* Image Container with Hover Swap */}
       <Link
         href={`/products/${product.handle}`}
-        className="relative aspect-square w-full overflow-hidden bg-white border-b border-[var(--sukla-muted-border)]/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[var(--sukla-charcoal)]"
+        className="relative aspect-[3/4] md:aspect-square w-full overflow-hidden bg-[var(--sukla-sand)] md:bg-white md:border-b md:border-[var(--sukla-muted-border)]/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[var(--sukla-charcoal)]"
       >
 
         {/* Primary Image — matted frame: whole rug shown on an ivory tile,
@@ -64,7 +64,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
           fill
           priority={priority}
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-          className="object-contain p-2 group-hover:opacity-0 transition-opacity duration-700 ease-in-out"
+          className="object-cover md:object-contain p-0 md:p-2 group-hover:opacity-0 transition-opacity duration-700 ease-in-out"
         />
 
         {/* Secondary Image (Hover) */}
@@ -73,12 +73,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
           alt={secondaryImage.altText || `${product.title} secondary view`}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-          className="object-contain p-2 opacity-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-in-out"
+          className="object-cover md:object-contain p-0 md:p-2 opacity-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-in-out"
         />
 
         {/* Badges */}
         {showBadges && (
-          <div className="absolute top-2 left-2 flex flex-col gap-1 z-10">
+          <div className="absolute top-2 left-2 hidden md:flex flex-col gap-1 z-10">
             {showCollectionBadge && (
               <span
                 className="text-[9px] uppercase tracking-[0.2em] font-sans px-2.5 py-1 text-white shadow-xs font-semibold"
@@ -97,10 +97,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
       </Link>
 
       {/* Content Metadata */}
-      <div className="p-3.5 sm:p-4 flex-1 flex flex-col justify-between gap-2 bg-white">
+      <div className="p-0 pt-4 text-center md:p-4 md:text-left flex-1 flex flex-col justify-between gap-2 md:bg-white">
         <div>
           {attributeLine && (
-            <span className="block text-[10px] uppercase tracking-[0.2em] text-[var(--sukla-taupe)] font-sans">
+            <span className="hidden md:block text-[10px] uppercase tracking-[0.2em] text-[var(--sukla-taupe)] font-sans">
               {attributeLine}
             </span>
           )}
@@ -109,20 +109,20 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
             className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--sukla-charcoal)]"
           >
             <h3
-              className="heading text-base text-[var(--sukla-charcoal)] group-hover:text-[var(--sukla-terracotta)] transition-colors mt-1 line-clamp-2"
+              className="heading text-sm md:text-base text-[var(--sukla-charcoal)] group-hover:text-[var(--sukla-terracotta)] transition-colors mt-0 md:mt-1 line-clamp-2"
               title={product.title}
             >
               {displayTitle}
             </h3>
           </Link>
           {product.subtitle && (
-            <p className="text-xs font-sans text-[var(--sukla-charcoal)]/65 line-clamp-1 mt-0.5">
+            <p className="hidden md:block text-xs font-sans text-[var(--sukla-charcoal)]/65 line-clamp-1 mt-0.5">
               {product.subtitle}
             </p>
           )}
         </div>
 
-        <div className="pt-2.5 border-t border-[var(--sukla-muted-border)]/60 flex items-center justify-between gap-2">
+        <div className="pt-0 md:pt-2.5 md:border-t md:border-[var(--sukla-muted-border)]/60 flex items-center justify-center md:justify-between gap-2">
           <span className="nums text-sm font-medium text-[var(--sukla-charcoal)]">
             {formattedPrice}
           </span>
@@ -139,7 +139,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
             </button>
             <Link
               href={`/products/${product.handle}`}
-              className="text-[10px] font-sans uppercase tracking-[0.18em] text-[var(--sukla-charcoal)] hover:text-[var(--sukla-terracotta)] hover-underline-animation font-semibold whitespace-nowrap"
+              className="hidden md:inline text-[10px] font-sans uppercase tracking-[0.18em] text-[var(--sukla-charcoal)] hover:text-[var(--sukla-terracotta)] hover-underline-animation font-semibold whitespace-nowrap"
             >
               Explore Rug
             </Link>

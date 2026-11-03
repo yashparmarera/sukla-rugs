@@ -276,39 +276,26 @@ const CalculatorPanel: React.FC<CalculatorPanelProps> = ({ product, fixedCategor
     <div className={large ? 'space-y-4 w-full' : 'space-y-3'}>
       <div className={large ? undefined : 'space-y-1.5'}>
         {large ? (
-          <div className="relative pr-1.5 pb-1.5">
-            {/* Attention cue: soft pulsing ring until the panel is opened. Hidden for reduced motion. */}
-            {!open && (
-              <span
-                aria-hidden="true"
-                className="pointer-events-none absolute -inset-1.5 right-0 bottom-0 border-2 border-[var(--sukla-terracotta)]/60 motion-safe:animate-pulse motion-reduce:hidden"
-              />
-            )}
+          <div className="relative">
             <button
               id={toggleId}
               type="button"
               aria-expanded={open}
               aria-controls={panelId}
               onClick={() => setOpen((value) => !value)}
-              className="group relative flex w-full items-center justify-between gap-4 px-5 py-5 sm:px-6 sm:py-6 text-left font-sans uppercase text-[var(--sukla-ivory)] bg-[var(--sukla-terracotta-dark)] bg-linear-to-r from-[color-mix(in_srgb,var(--sukla-terracotta-dark)_58%,var(--sukla-charcoal))] to-[color-mix(in_srgb,var(--sukla-terracotta-dark)_88%,var(--sukla-charcoal))] border-2 border-[var(--sukla-charcoal)] shadow-[6px_6px_0_0_var(--sukla-terracotta)] transition-all duration-300 hover:bg-none hover:bg-[var(--sukla-charcoal)] hover:-translate-y-0.5 hover:shadow-[8px_8px_0_0_var(--sukla-terracotta)] active:translate-y-0 active:shadow-[4px_4px_0_0_var(--sukla-terracotta)] motion-reduce:transition-none motion-reduce:hover:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sukla-charcoal)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--sukla-ivory)]"
+              className="group flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left font-sans text-[var(--sukla-charcoal)] bg-[var(--sukla-charcoal)]/[0.04] backdrop-blur-md border border-[var(--sukla-charcoal)]/15 rounded-sm transition-colors duration-300 hover:bg-[var(--sukla-charcoal)]/[0.08] hover:border-[var(--sukla-charcoal)]/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sukla-terracotta)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--sukla-ivory)] motion-reduce:transition-none"
             >
-              <span className="flex items-center gap-4">
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[var(--sukla-terracotta)] text-[var(--sukla-charcoal)] ring-4 ring-[var(--sukla-ivory)]/15 transition-transform duration-300 group-hover:rotate-12 motion-reduce:transition-none motion-reduce:group-hover:rotate-0">
-                  <SlidersHorizontal className="w-6 h-6" aria-hidden="true" />
-                </span>
-                <span className="flex flex-col gap-1">
-                  <span className="text-base sm:text-lg font-semibold tracking-[0.18em] leading-none">Customise</span>
-                  <span className="text-xs normal-case tracking-normal text-[var(--sukla-ivory)]/85">
-                    Get a quote by size
-                  </span>
+              <span className="flex items-center gap-3">
+                <SlidersHorizontal className="w-4 h-4 text-[var(--sukla-terracotta-dark)]" aria-hidden="true" />
+                <span className="flex flex-col gap-0.5">
+                  <span className="text-sm font-medium tracking-[0.12em] uppercase leading-none">Customise</span>
+                  <span className="text-xs text-[var(--sukla-charcoal)]/60">Get a quote by size</span>
                 </span>
               </span>
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[var(--sukla-ivory)]/60 transition-colors duration-300 group-hover:border-[var(--sukla-terracotta)] group-hover:text-[var(--sukla-terracotta)]">
-                <ChevronDown
-                  className={`w-5 h-5 transition-transform motion-reduce:transition-none ${open ? 'rotate-180' : ''}`}
-                  aria-hidden="true"
-                />
-              </span>
+              <ChevronDown
+                className={`w-4 h-4 text-[var(--sukla-charcoal)]/60 transition-transform motion-reduce:transition-none ${open ? 'rotate-180' : ''}`}
+                aria-hidden="true"
+              />
             </button>
           </div>
         ) : (

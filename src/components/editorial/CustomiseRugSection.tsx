@@ -37,7 +37,7 @@ export const CustomiseRugSection: React.FC = () => {
             The source image is a 3:4 collage with a thin white border baked in; the scale plus
             overflow-hidden crops that border so the image meets its box edge to edge. */}
         <div className="md:sticky md:top-24">
-          <div className="relative w-full aspect-[4/5] md:aspect-auto md:h-[calc(100vh-8rem)] md:min-h-[28rem] md:max-h-[680px] overflow-hidden bg-[var(--sukla-sand)]">
+          <div className="relative w-full aspect-[3/4] md:aspect-auto md:h-[calc(100vh-8rem)] md:min-h-[28rem] md:max-h-[680px] overflow-hidden bg-[var(--sukla-sand)]">
             <Image
               src="/images/customise.webp"
               alt="Artisans hand-knotting, tufting and weaving a rug, with trays of coloured wool yarn samples"
@@ -50,7 +50,7 @@ export const CustomiseRugSection: React.FC = () => {
         </div>
 
         <div className="min-w-0">
-          <div className="mb-6">
+          <div className="mb-10 md:mb-6 text-center md:text-left">
             <span className="block text-xs uppercase tracking-[0.25em] text-[var(--sukla-terracotta)] font-sans mb-2">
               Made to your measure
             </span>
@@ -64,7 +64,7 @@ export const CustomiseRugSection: React.FC = () => {
 
           <HomeCustomSizeCalculator />
 
-          <p className="mt-6 font-sans text-base text-[var(--sukla-charcoal)]/75 leading-relaxed">
+          <p className="mt-6 font-sans text-base text-[var(--sukla-charcoal)]/75 leading-relaxed text-center md:text-left">
             Need a size that is not on the product page? Choose a construction, enter the width and length you need,
             and get an instant estimated price for a custom-size rug.
           </p>
@@ -86,7 +86,7 @@ export const CustomiseRugSection: React.FC = () => {
             ))}
           </ol>
 
-          <p className="mt-6 font-sans text-sm text-[var(--sukla-charcoal)]/70">
+          <p className="mt-6 font-sans text-sm text-[var(--sukla-charcoal)]/70 text-center md:text-left">
             Prefer to talk it through?{' '}
             <a
               href={whatsappUrl("Hi Sukla Rugs, I'd like a custom-size rug.")}

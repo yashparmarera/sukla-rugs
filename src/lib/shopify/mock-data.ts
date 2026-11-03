@@ -578,8 +578,6 @@ export const MOCK_REVIEWS: Review[] = [
     date: 'February 14, 2026',
     title: 'An absolute centerpiece in our living room',
     content: 'The Desert Loom in Terracotta is even more mesmerizing in person. The abrash variations give it such depth. You can feel the weight of genuine Bhadohi craftsmanship underfoot.',
-    productHandle: 'desert-loom-oushak',
-    productTitle: 'Desert Loom (Knotted)',
     verifiedPurchase: true,
     avatar: '/images/review/review-1.jpg'
   },
@@ -591,8 +589,6 @@ export const MOCK_REVIEWS: Review[] = [
     date: 'January 28, 2026',
     title: 'Unmatched texture and understated luxury',
     content: 'Ordered the Ganges Pebble Loop for our penthouse library. The high-low loop structure feels incredible barefoot. Delivered seamlessly in protective custom casing.',
-    productHandle: 'ganges-pebble-loop',
-    productTitle: 'Ganges Pebble Loop',
     verifiedPurchase: true,
     avatar: '/images/review/review-2.jpg'
   },
@@ -604,8 +600,6 @@ export const MOCK_REVIEWS: Review[] = [
     date: 'January 10, 2026',
     title: 'Exquisite color density and wool quality',
     content: 'The Anatolian Heritage rug has transformed our dining room. The indigo dye changes softly from daylight to evening illumination.',
-    productHandle: 'anatolian-heritage',
-    productTitle: 'Anatolian Heritage',
     verifiedPurchase: true,
     avatar: '/images/review/review-3.jpg'
   }

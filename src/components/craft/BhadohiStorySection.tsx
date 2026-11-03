@@ -17,18 +17,18 @@ export const BhadohiStorySection: React.FC = () => {
   return (
     <section
       aria-labelledby="bhadohi-heading"
-      className="relative overflow-hidden border-y border-[var(--sukla-muted-border)] bg-white py-20 md:py-28"
+      className="relative overflow-hidden border-y border-[var(--sukla-muted-border)] bg-white py-12 md:py-28"
     >
       <div className="editorial-container">
-        <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-12 lg:gap-16">
+        <div className="grid grid-cols-1 items-center gap-10 md:gap-14 lg:grid-cols-12 lg:gap-16">
           {/* Image */}
           <div className="relative lg:order-2 lg:col-span-5">
             {/* Offset outline behind the photo */}
             <div
               aria-hidden="true"
-              className="absolute -bottom-4 -right-4 hidden h-full w-full border border-[var(--sukla-terracotta)]/60 sm:block"
+              className="absolute -bottom-4 -right-4 hidden h-full w-full border border-[var(--sukla-terracotta)]/60 md:block"
             />
-            <div className="relative aspect-[4/5] w-full overflow-hidden bg-[var(--sukla-sand)]">
+            <div className="relative aspect-[3/4] md:aspect-[4/5] w-full overflow-hidden bg-[var(--sukla-sand)]">
               <Image
                 src="/images/Hero%20Images%20Without%20text/3.jpg"
                 alt="Master weaver at a vertical loom in a Bhadohi loom house"
@@ -38,9 +38,9 @@ export const BhadohiStorySection: React.FC = () => {
               />
               <div
                 aria-hidden="true"
-                className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/55 to-transparent"
+                className="absolute inset-x-0 bottom-0 hidden h-1/3 md:block bg-gradient-to-t from-black/55 to-transparent"
               />
-              <p className="absolute bottom-5 left-5 right-5 flex items-center gap-2 font-sans text-[11px] uppercase tracking-[0.22em] text-white">
+              <p className="absolute bottom-5 left-5 right-5 hidden items-center gap-2 md:flex font-sans text-[11px] uppercase tracking-[0.22em] text-white">
                 <KnotGlyph size="sm" className="text-white" />
                 Bhadohi Guild Standard
               </p>
@@ -48,33 +48,33 @@ export const BhadohiStorySection: React.FC = () => {
           </div>
 
           {/* Story */}
-          <div className="space-y-7 lg:order-1 lg:col-span-7 lg:pr-6">
-            <p className="inline-flex items-center gap-2 font-sans text-[11px] uppercase tracking-[0.25em] text-[var(--sukla-terracotta-dark)]">
+          <div className="space-y-7 text-center lg:text-left lg:order-1 lg:col-span-7 lg:pr-6">
+            <p className="inline-flex items-center justify-center gap-2 lg:justify-start font-sans text-[11px] uppercase tracking-[0.25em] text-[var(--sukla-terracotta-dark)]">
               <KnotGlyph size="sm" />
               <span>Artisan Heritage &bull; Uttar Pradesh, India</span>
             </p>
 
             <h2
               id="bhadohi-heading"
-              className="display-lg text-3xl leading-[1.1] text-[var(--sukla-charcoal)] sm:text-4xl md:text-5xl"
+              className="display-lg text-2xl leading-[1.1] text-[var(--sukla-charcoal)] sm:text-4xl md:text-5xl"
             >
               Bhadohi: The Heart of
               <br className="hidden sm:block" /> Indian Rug Weaving
             </h2>
 
-            <div aria-hidden="true" className="h-px w-16 bg-[var(--sukla-terracotta)]" />
+            <div aria-hidden="true" className="mx-auto lg:mx-0 h-px w-16 bg-[var(--sukla-terracotta)]" />
 
             <p className="font-serif text-xl italic leading-relaxed text-[var(--sukla-charcoal)]/85 md:text-2xl">
               Centuries of craftsmanship flow through Bhadohi, where master weavers transform hand-spun wool and pure
               silk into enduring pieces of art.
             </p>
 
-            <p className="max-w-xl font-sans text-sm leading-relaxed text-[var(--sukla-charcoal)]/75 md:text-base">
+            <p className="mx-auto lg:mx-0 max-w-xl font-sans text-sm leading-relaxed text-[var(--sukla-charcoal)]/75 md:text-base">
               Every SUKLA RUG begins with natural raw materials: high-grade New Zealand wool, Bikaner long-staple
               fibres, and organic jute. Our 7-stage craft process takes those fibres through each step below.
             </p>
 
-            <ul className="flex flex-wrap gap-2" aria-label="Craft process steps">
+            <ul className="flex flex-wrap justify-center lg:justify-start gap-2" aria-label="Craft process steps">
               {PROCESS_STEPS.map((step) => (
                 <li
                   key={step}
@@ -94,7 +94,7 @@ export const BhadohiStorySection: React.FC = () => {
               ))}
             </dl>
 
-            <div className="flex flex-wrap items-center gap-5 pt-1">
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-5 pt-1">
               <Button href="/process" variant="terracotta" size="md">
                 Explore The 7 Craft Stages
               </Button>

@@ -60,9 +60,9 @@ export default async function HomePage() {
         <BehindTheScenes />
 
         {/* Signature Rugs Section */}
-        <section className="py-20 md:py-28 bg-white border-t border-[var(--sukla-muted-border)]">
+        <section className="py-12 md:py-28 bg-white border-t border-[var(--sukla-muted-border)]">
           <div className="editorial-container">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 space-y-4 md:space-y-0">
+            <div className="flex flex-col md:flex-row justify-between items-center text-center md:items-end md:text-left mb-10 md:mb-12 space-y-4 md:space-y-0">
               <div>
                 <span className="block text-xs uppercase tracking-[0.25em] text-[var(--sukla-terracotta)] font-sans mb-2">
                   Signature Curations
@@ -71,15 +71,16 @@ export default async function HomePage() {
                   Featured Loom Releases
                 </h2>
               </div>
-              <Button href="/shop" variant="outline" size="sm">
-                View All Handcrafted Rugs
-              </Button>
+              <div className="hidden md:block">
+                <Button href="/shop" variant="outline" size="sm">View All Handcrafted Rugs</Button>
+              </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-8">
-              {signatureProducts.map((product, idx) => (
-                <ProductCard key={product.id} product={product} priority={idx < 4} />
-              ))}
+            <div className="grid grid-cols-2 gap-x-6 gap-y-10 md:gap-x-5 md:gap-y-8 lg:grid-cols-4">
+              {signatureProducts.map((product, idx) => (<ProductCard key={product.id} product={product} priority={idx < 4} />))}
+            </div>
+            <div className="mt-10 flex justify-center md:hidden">
+              <Button href="/shop" variant="outline" size="sm">View All Handcrafted Rugs</Button>
             </div>
           </div>
         </section>
@@ -100,10 +101,10 @@ export default async function HomePage() {
         <JournalPreview />
 
         {/* Final Brand Banner CTA */}
-        <section className="py-24 bg-[var(--sukla-cream)] border-t border-[var(--sukla-muted-border)] text-center">
+        <section className="py-14 md:py-24 bg-[var(--sukla-cream)] border-t border-[var(--sukla-muted-border)] text-center">
           <div className="editorial-container max-w-3xl mx-auto space-y-6">
             <KnotGlyph size="md" className="text-[var(--sukla-terracotta)]" />
-            <h2 className="display-lg text-3xl md:text-5xl text-[var(--sukla-charcoal)]">
+            <h2 className="display-lg text-2xl md:text-5xl text-[var(--sukla-charcoal)]">
               Transform Your Architecture
             </h2>
             <p className="font-sans text-base md:text-lg text-[var(--sukla-charcoal)]/75 leading-relaxed">

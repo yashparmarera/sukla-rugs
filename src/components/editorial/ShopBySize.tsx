@@ -115,10 +115,10 @@ export const ShopBySize: React.FC = () => {
   return (
     <section
       aria-labelledby="shop-by-size-heading"
-      className="py-20 bg-[var(--sukla-ivory)] border-b border-[var(--sukla-muted-border)]"
+      className="py-12 md:py-20 bg-[var(--sukla-ivory)] border-b border-[var(--sukla-muted-border)]"
     >
       <div className="editorial-container">
-        <div className="flex flex-col items-center text-center mb-12">
+        <div className="flex flex-col items-center text-center mb-10 md:mb-12">
           <h2
             id="shop-by-size-heading"
             className="display-lg text-2xl md:text-3xl lg:text-4xl text-[var(--sukla-charcoal)]"
@@ -129,7 +129,7 @@ export const ShopBySize: React.FC = () => {
           </h2>
         </div>
 
-        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
+        <ul className="grid grid-cols-2 gap-x-6 gap-y-10 md:gap-8 lg:grid-cols-4 lg:gap-6">
           {DIAGRAMS.map((tile) => (
             <li key={tile.key}>
               <Link
@@ -146,10 +146,10 @@ export const ShopBySize: React.FC = () => {
                     {tile.diagram}
                   </svg>
                 </div>
-                <p className="mt-5 font-sans text-sm uppercase tracking-[0.12em] text-[var(--sukla-charcoal)] group-hover:text-[var(--sukla-terracotta)] transition-colors">
+                <p className="mt-4 md:mt-5 font-sans text-sm md:uppercase md:tracking-[0.12em] text-[var(--sukla-charcoal)] group-hover:text-[var(--sukla-terracotta)] transition-colors">
                   {tile.label}
                 </p>
-                <p className="mt-2 font-sans text-xs uppercase tracking-[0.1em] text-[var(--sukla-charcoal)]/70 nums">
+                <p className="mt-1 md:mt-2 font-sans text-xs uppercase tracking-[0.1em] text-[var(--sukla-charcoal)]/70 nums">
                   {tile.sizes}
                 </p>
               </Link>

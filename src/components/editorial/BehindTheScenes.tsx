@@ -125,10 +125,10 @@ export const BehindTheScenes: React.FC = () => {
   return (
     <section
       aria-labelledby="behind-the-scenes-heading"
-      className="py-20 bg-white border-b border-[var(--sukla-muted-border)]"
+      className="py-12 md:py-20 bg-white border-b border-[var(--sukla-muted-border)]"
     >
       <div className="editorial-container">
-        <div className="flex flex-col items-center text-center mb-12">
+        <div className="flex flex-col items-center text-center mb-10 md:mb-12">
           <h2
             id="behind-the-scenes-heading"
             className="display-lg text-2xl md:text-3xl lg:text-4xl text-[var(--sukla-charcoal)]"
@@ -140,7 +140,7 @@ export const BehindTheScenes: React.FC = () => {
         </div>
 
         <div
-          className="relative mx-auto flex w-full max-w-6xl flex-col overflow-hidden border border-[var(--sukla-muted-border)] lg:flex-row"
+          className="relative mx-auto flex w-full max-w-6xl flex-col overflow-hidden border-0 md:border md:border-[var(--sukla-muted-border)] lg:flex-row"
         >
           <button
             type="button"
@@ -202,7 +202,7 @@ export const BehindTheScenes: React.FC = () => {
           </div>
 
           {/* Image cards */}
-          <div className="relative flex min-h-[540px] flex-1 items-center justify-center overflow-hidden border-t border-[var(--sukla-muted-border)] bg-[var(--sukla-sand)] px-6 py-14 sm:min-h-[600px] lg:min-h-[560px] lg:border-l lg:border-t-0 lg:px-10 lg:py-12">
+          <div className="relative flex min-h-[460px] flex-1 items-center justify-center overflow-hidden border-t border-[var(--sukla-muted-border)] bg-[var(--sukla-sand)] px-6 py-14 sm:min-h-[600px] lg:min-h-[560px] lg:border-l lg:border-t-0 lg:px-10 lg:py-12">
             <div className="relative aspect-[4/5] w-full max-w-[400px]">
               {ITEMS.map((item, index) => {
                 const status = getCardStatus(index);
@@ -227,7 +227,7 @@ export const BehindTheScenes: React.FC = () => {
                     }}
                     style={{ pointerEvents: isActive ? 'auto' : 'none' }}
                     transition={cardSpring}
-                    className="absolute inset-0 origin-center overflow-hidden border-4 border-[var(--sukla-cream)] bg-[var(--sukla-cream)] shadow-subtle md:border-8"
+                    className="absolute inset-0 origin-center overflow-hidden border-0 border-[var(--sukla-cream)] bg-[var(--sukla-cream)] shadow-subtle md:border-8"
                   >
                     <Image
                       src={item.image}
