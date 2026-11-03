@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ShoppingBag, User, Heart, Menu, X, ChevronDown } from 'lucide-react';
-import { BrandMark } from '@/components/ui/BrandMark';
+import Image from 'next/image';
 import { CartDrawer } from '@/components/cart/CartDrawer';
 import { CountrySelector } from '@/components/navigation/CountrySelector';
 import { AboutMegaMenu } from '@/components/navigation/AboutMegaMenu';
@@ -65,8 +65,8 @@ export const Header: React.FC = () => {
             : 'bg-[var(--sukla-ivory)] border-b border-[var(--sukla-muted-border)]/60 py-2'
         }`}
       >
-        <div className="editorial-container grid grid-cols-[1fr_auto_1fr] items-center">
-          
+        <div className="editorial-container flex items-center justify-between gap-4">
+          <div className="flex min-w-0 items-center gap-3 lg:gap-6 xl:gap-10">
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -76,7 +76,27 @@ export const Header: React.FC = () => {
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
 
-          {/* Left Desktop Navigation */}
+          {/* Brand Logo - Left */}
+          <Link href="/" aria-label="Sukla Rugs home" className="flex shrink-0 items-center gap-2 md:gap-3">
+            <Image
+              src="/images/visual-mark/visualmark.png"
+              alt=""
+              width={2000}
+              height={2000}
+              priority
+              className="h-11 w-11 md:h-12 md:w-12 object-contain"
+            />
+            <span className="flex flex-col leading-none">
+              <span className="whitespace-nowrap font-display text-sm min-[400px]:text-base md:text-xl tracking-[0.16em] md:tracking-[0.22em] font-medium text-[var(--sukla-charcoal)] uppercase">
+                SUKLA RUGS
+              </span>
+              <span className="mt-1 hidden sm:block text-[9px] uppercase tracking-[0.3em] text-[var(--sukla-taupe)] font-sans">
+                Bhadohi • India
+              </span>
+            </span>
+          </Link>
+
+          {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center whitespace-nowrap space-x-4 xl:space-x-8 text-[13px] xl:text-sm font-sans tracking-[0.01em] text-[var(--sukla-charcoal)]">
             
             {/* SHOP mega menu */}
@@ -92,31 +112,24 @@ export const Header: React.FC = () => {
             <Link href="/customisation" className="hover-underline-animation font-medium text-[var(--sukla-terracotta)]">
               Customisation
             </Link>
-          </nav>
 
-          {/* Brand Logo - Centered Brand Lock */}
-          <Link href="/" className="flex min-w-0 flex-col items-center justify-self-center group">
-            <div className="flex min-w-0 items-center gap-1.5 md:gap-2">
-              <BrandMark className="h-3 md:h-4 max-[359px]:hidden" />
-              <span className="whitespace-nowrap font-display text-base md:text-xl tracking-[0.16em] md:tracking-[0.22em] font-medium text-[var(--sukla-charcoal)] uppercase">
-                SUKLA RUGS
-              </span>
-              <BrandMark className="h-3 md:h-4 max-[359px]:hidden" />
-            </div>
-            <span className="text-[9px] uppercase tracking-[0.3em] text-[var(--sukla-taupe)] font-sans -mt-1 hidden sm:block">
-              Bhadohi • India
-            </span>
-          </Link>
-
-          {/* Right Action Icons */}
-          <div className="flex items-center justify-self-end space-x-1.5 sm:space-x-5 text-[var(--sukla-charcoal)]">
+            {/* TRADE & DESIGNER: sit right beside Customisation */}
             <Link
               href="/trade"
-              className="hidden xl:inline-block text-sm font-sans tracking-[0.01em] hover:text-[var(--sukla-terracotta)] transition-colors border-b border-transparent hover:border-[var(--sukla-terracotta)] pb-0.5"
+              className="rounded-sm border border-[var(--sukla-charcoal)] px-3 py-1 text-[12px] xl:text-[13px] hover:border-[var(--sukla-terracotta)] hover:text-[var(--sukla-terracotta)] transition-colors"
             >
-              Trade & Designers
+              Trade
             </Link>
+            <Link
+              href="/trade"
+              className="-ml-1 xl:-ml-4 rounded-sm border border-[var(--sukla-charcoal)] px-3 py-1 text-[12px] xl:text-[13px] hover:border-[var(--sukla-terracotta)] hover:text-[var(--sukla-terracotta)] transition-colors"
+            >
+              Designer
+            </Link>
+          </nav>
+          </div>
 
+          <div className="flex shrink-0 items-center space-x-1.5 sm:space-x-5 text-[var(--sukla-charcoal)]">
             {/* Country and currency. In the mobile menu on small screens. */}
             <div className="hidden sm:block">
               <CountrySelector />
