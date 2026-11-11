@@ -239,7 +239,9 @@ export const BehindTheScenes: React.FC = () => {
                       }`}
                     />
 
-                    <AnimatePresence>
+                    {/* initial={false}: the first render uses the animate values, so the server HTML does not
+                        depend on the visitor's reduced-motion setting (which only the client knows). */}
+                    <AnimatePresence initial={false}>
                       {isActive && (
                         <motion.div
                           initial={{ opacity: 0, y: reduceMotion ? 0 : 12 }}

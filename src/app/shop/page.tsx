@@ -21,6 +21,7 @@ interface ShopPageProps {
     room?: string;
     style?: string;
     sortBy?: string;
+    show?: string;
   }>;
 }
 
@@ -30,6 +31,10 @@ export const metadata = {
 };
 
 export const dynamic = 'force-dynamic';
+
+/** Products revealed per page, and the most the Storefront API returns in one request. */
+const PAGE_SIZE = 25;
+const FETCH_LIMIT = 250;
 
 export default async function ShopPage({ searchParams }: ShopPageProps) {
   const params = await searchParams;
@@ -42,6 +47,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
   // helper in shop-filters.ts, so they are not passed to getProducts.
   let products = await getProducts({
     country,
+    limit: FETCH_LIMIT,
     collection: params.collection,
     color: params.color,
     sortBy: params.sortBy,
@@ -54,12 +60,23 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
   if (menuCollection && products.length === 0) {
     const realCollection = await getCollectionByHandle(menuCollection, { country });
     if (!realCollection) {
-      const allProducts = await getProducts({ country, color: params.color, sortBy: params.sortBy });
+      const allProducts = await getProducts({ country, limit: FETCH_LIMIT, color: params.color, sortBy: params.sortBy });
       products = allProducts.filter((product) => productMatchesFilter(product, 'collection', menuCollection));
     }
   }
 
   products = applyShopFilters(products, filters);
+
+  // Reveal PAGE_SIZE products at a time; ?show=N keeps the count in the URL.
+  const requested = Number.parseInt(params.show ?? '', 10);
+  const visibleCount = Number.isFinite(requested) && requested >= PAGE_SIZE ? Math.min(requested, products.length) : PAGE_SIZE;
+  const visibleProducts = products.slice(0, visibleCount);
+  const hasMore = products.length > visibleProducts.length;
+  const loadMoreQuery = new URLSearchParams();
+  for (const [key, value] of Object.entries(params)) {
+    if (key !== 'show' && typeof value === 'string' && value) loadMoreQuery.set(key, value);
+  }
+  loadMoreQuery.set('show', String(visibleProducts.length + PAGE_SIZE));
 
   const colorFilter = parseColorFilter(params.color);
   const activeLabels = (['style', 'room', 'construction', 'material', 'collection'] as const).flatMap((key) => {
@@ -131,9 +148,23 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
                 </div>
               ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-6">
-                  {products.map((product, idx) => (
+                  {visibleProducts.map((product, idx) => (
                     <ProductCard key={product.id} product={product} priority={idx < 4} />
                   ))}
+
+                  {/* Sits in the grid cell right after the last product. */}
+                  {hasMore && (
+                    <Link
+                      href={`/shop?${loadMoreQuery.toString()}`}
+                      scroll={false}
+                      className="group flex min-h-48 flex-col items-center justify-center gap-3 self-stretch border border-[var(--sukla-charcoal)] px-6 text-center font-sans text-xs uppercase tracking-[0.18em] text-[var(--sukla-charcoal)] transition-colors duration-300 hover:bg-[var(--sukla-charcoal)] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--sukla-charcoal)]"
+                    >
+                      <span className="text-sm">Load more</span>
+                      <span className="normal-case tracking-normal opacity-70">
+                        Showing <span className="nums">{visibleProducts.length}</span> of <span className="nums">{products.length}</span>
+                      </span>
+                    </Link>
+                  )}
                 </div>
               )}
             </div>
