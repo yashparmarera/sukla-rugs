@@ -38,6 +38,7 @@ import { parseMetafieldValues } from '@/lib/shop-filters';
 import { Button } from '@/components/ui/Button';
 import { Accordion } from '@/components/ui/Accordion';
 import { ProductCard } from '@/components/product/ProductCard';
+import { CraftStory } from '@/components/product/CraftStory';
 import { TalkToExpert } from '@/components/product/TalkToExpert';
 import { CustomSizeCalculator } from '@/components/product/CustomSizeCalculator';
 import { ProductAtAGlance } from '@/components/product/infographics/ProductAtAGlance';
@@ -890,6 +891,8 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
             </section>
           </div>
         </div>
+
+        <CraftStory />
 
         {/* Related Products: hidden when there are none, grid adapts to count */}
         {related.length > 0 && (
