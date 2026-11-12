@@ -2,63 +2,56 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { ChevronDown } from 'lucide-react';
-import { SHOP_MENU } from '@/lib/shop-menu';
+import { Disclosure } from '@/components/navigation/Disclosure';
+import { SHOP_COLLECTION_LINKS, SHOP_MENU, SHOP_ROOT_HREF } from '@/lib/shop-menu';
 
 interface ShopMobileMenuProps {
   onNavigate: () => void;
 }
 
-/** Mobile drawer Shop section: the same SHOP_MENU groups as a one-open-at-a-time accordion. */
+const LINK_CLASS = 'block py-2.5 pl-12 pr-5 text-base font-light';
+
+/**
+ * Body of the mobile drawer's Shop dropdown: All Rugs once, then each
+ * SHOP_MENU group and the collection links as nested dropdowns.
+ */
 export const ShopMobileMenu: React.FC<ShopMobileMenuProps> = ({ onNavigate }) => {
   const [openGroup, setOpenGroup] = useState<string | null>(null);
+  const groups = [
+    ...SHOP_MENU.map((column) => ({
+      id: column.id,
+      heading: column.heading,
+      // "All Rugs" is shown once at the top, so drop the menu's own root link.
+      items: column.items.filter((entry) => entry.href !== SHOP_ROOT_HREF)
+    })),
+    { id: 'collections', heading: 'Collections', items: SHOP_COLLECTION_LINKS }
+  ];
 
   return (
-    <div className="space-y-3">
-      <span className="eyebrow block text-[10px] text-[var(--sukla-taupe)]">Shop</span>
-      <Link href="/shop" onClick={onNavigate} className="block font-semibold">
+    <div className="pb-2">
+      <Link href={SHOP_ROOT_HREF} onClick={onNavigate} className="block py-2.5 pl-8 pr-5 text-base font-medium">
         All Rugs
       </Link>
-      <div className="border-t border-[var(--sukla-muted-border)]">
-        {SHOP_MENU.map((column) => {
-          const expanded = openGroup === column.id;
-          const listId = `shop-mobile-${column.id}`;
-          return (
-            <div key={column.id} className="border-b border-[var(--sukla-muted-border)]">
-              <button
-                type="button"
-                aria-expanded={expanded}
-                aria-controls={listId}
-                onClick={() => setOpenGroup(expanded ? null : column.id)}
-                className="flex w-full min-h-11 items-center justify-between text-left text-xs font-semibold uppercase tracking-[0.14em]"
-              >
-                {column.heading}
-                <ChevronDown
-                  aria-hidden="true"
-                  className={`w-4 h-4 text-[var(--sukla-charcoal)]/70 transition-transform motion-reduce:transition-none ${
-                    expanded ? 'rotate-180' : ''
-                  }`}
-                />
-              </button>
-              {expanded && (
-                <ul id={listId} className="pb-2">
-                  {column.items.map((entry) => (
-                    <li key={entry.label}>
-                      <Link
-                        href={entry.href}
-                        onClick={onNavigate}
-                        className={`block py-2.5 pl-3 text-xs ${entry.param ? '' : 'font-semibold'}`}
-                      >
-                        {entry.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          );
-        })}
-      </div>
+      {groups.map((group) => (
+        <Disclosure
+          key={group.id}
+          id={`mobile-shop-${group.id}`}
+          label={group.heading}
+          size="nested"
+          open={openGroup === group.id}
+          onToggle={() => setOpenGroup(openGroup === group.id ? null : group.id)}
+        >
+          <ul>
+            {group.items.map((entry) => (
+              <li key={entry.href}>
+                <Link href={entry.href} onClick={onNavigate} className={LINK_CLASS}>
+                  {entry.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Disclosure>
+      ))}
     </div>
   );
 };

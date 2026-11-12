@@ -1,6 +1,6 @@
 /**
  * SUKLA RUGS "About us" menu: single source of truth for the desktop image-card
- * mega menu (AboutMegaMenu). The mobile drawer keeps its own text links.
+ * mega menu (AboutMegaMenu). The mobile drawer reuses the labels and hrefs.
  *
  * Images live in public/images/about us/ (the folder name contains a space, so
  * every URL is encoded). Width and height are the real pixel sizes of the

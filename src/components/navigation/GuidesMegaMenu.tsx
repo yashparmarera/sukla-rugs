@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ChevronDown } from 'lucide-react';
-import { LEGAL_PAGES } from '@/lib/legal/shared';
+import { GUIDES_MENU, GUIDES_ROOT_HREF } from '@/lib/guides-menu';
 import {
   MEGA_MENU_HEADING_CLASS,
   MEGA_MENU_LINK_CLASS,
@@ -19,20 +19,6 @@ const MENU_ID = 'guides';
 
 const FOCUS_RING =
   'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--sukla-charcoal)]';
-
-/** Columns of the Guides panel. Policies reuse the footer's list, so both stay in sync. */
-const GUIDES_MENU: { id: string; heading: string; items: { label: string; href: string }[] }[] = [
-  // Policies first (left), Guides second (right), per owner request.
-  { id: 'policies', heading: 'Policies', items: LEGAL_PAGES },
-  {
-    id: 'guides',
-    heading: 'Guides',
-    items: [
-      { label: 'Rug Care & Maintenance', href: '/guides/rug-care' },
-      { label: 'Blogs', href: '/journal' }
-    ]
-  }
-];
 
 /**
  * Desktop Guides mega menu. Same disclosure pattern and behaviour as the Shop
@@ -157,7 +143,7 @@ export const GuidesMegaMenu: React.FC = () => {
       onKeyDown={handleKeyDown}
     >
       <div className="relative flex items-center gap-1">
-        <Link href="/guides/rug-care" className={`hover-underline-animation font-medium ${FOCUS_RING}`}>
+        <Link href={GUIDES_ROOT_HREF} className={`hover-underline-animation font-medium ${FOCUS_RING}`}>
           Guides
         </Link>
         <button

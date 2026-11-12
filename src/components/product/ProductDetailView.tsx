@@ -126,9 +126,9 @@ function useDialogFocus(isOpen: boolean, containerRef: React.RefObject<HTMLDivEl
 // actual number of related products instead of leaving empty columns.
 const RELATED_GRID_CLASSES: Record<number, string> = {
   1: 'grid-cols-1 max-w-xs mx-auto',
-  2: 'grid-cols-1 sm:grid-cols-2 max-w-2xl mx-auto',
-  3: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
-  4: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'
+  2: 'grid-cols-2 max-w-2xl mx-auto',
+  3: 'grid-cols-2 lg:grid-cols-3',
+  4: 'grid-cols-2 lg:grid-cols-4'
 };
 
 /** Plain text as a single fact value; empty text gives no value. */
@@ -905,7 +905,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                 View all rugs
               </Link>
             </div>
-            <div className={`grid gap-x-5 gap-y-8 ${RELATED_GRID_CLASSES[related.length]}`}>
+            <div className={`grid gap-x-3 gap-y-6 sm:gap-x-5 sm:gap-y-8 ${RELATED_GRID_CLASSES[related.length]}`}>
               {related.map((rel) => (
                 <ProductCard key={rel.id} product={rel} />
               ))}

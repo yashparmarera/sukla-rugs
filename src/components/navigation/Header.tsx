@@ -2,17 +2,16 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ShoppingBag, User, Heart, Menu, X, ChevronDown } from 'lucide-react';
+import { ShoppingBag, User, Heart, Menu, X } from 'lucide-react';
 import Image from 'next/image';
 import { CartDrawer } from '@/components/cart/CartDrawer';
 import { CountrySelector } from '@/components/navigation/CountrySelector';
 import { AboutMegaMenu } from '@/components/navigation/AboutMegaMenu';
 import { ShopMegaMenu } from '@/components/navigation/ShopMegaMenu';
 import { GuidesMegaMenu } from '@/components/navigation/GuidesMegaMenu';
-import { ShopMobileMenu } from '@/components/navigation/ShopMobileMenu';
+import { MobileMenu } from '@/components/navigation/MobileMenu';
 import { getLocalCart } from '@/lib/shopify/local-cart';
 import { useWishlist } from '@/components/providers/WishlistProvider';
-import { LEGAL_PAGES } from '@/lib/legal/shared';
 
 export const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -49,7 +48,7 @@ export const Header: React.FC = () => {
   return (
     <>
       {/* Top Announcement Bar */}
-      <div className="bg-[var(--sukla-charcoal)] text-[var(--sukla-ivory)] py-2 px-4 text-center text-[11px] font-sans uppercase tracking-[0.1em] border-b border-white/10 relative z-40">
+      <div className="hidden md:block bg-[var(--sukla-charcoal)] text-[var(--sukla-ivory)] py-2 px-4 text-center text-[11px] font-sans uppercase tracking-[0.1em] border-b border-white/10 relative z-40">
         <div className="editorial-container flex justify-between items-center">
           <span className="hidden md:inline text-[var(--sukla-taupe)]"><span className="nums">10%</span> cashback on first purchase</span>
           <span>Complimentary Global White-Glove Delivery on orders over <span className="nums">$2,500</span></span>
@@ -168,97 +167,7 @@ export const Header: React.FC = () => {
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden flex flex-col bg-[var(--sukla-ivory)] p-6 overflow-y-auto">
-          <div className="flex justify-between items-center pb-6 border-b border-[var(--sukla-muted-border)]">
-            <span className="font-display tracking-[0.22em] text-sm uppercase font-medium">SUKLA RUGS</span>
-            <button onClick={() => setMobileMenuOpen(false)} aria-label="Close menu">
-              <X className="w-6 h-6 text-[var(--sukla-charcoal)]" />
-            </button>
-          </div>
-
-          <nav className="py-8 space-y-6 text-sm font-sans tracking-[0.01em] text-[var(--sukla-charcoal)]">
-            <ShopMobileMenu onNavigate={() => setMobileMenuOpen(false)} />
-
-            <div className="border-t border-[var(--sukla-muted-border)] pt-6 space-y-3">
-              <span className="eyebrow block text-[10px] text-[var(--sukla-taupe)]">Collections</span>
-              <Link href="/shop" onClick={() => setMobileMenuOpen(false)} className="block font-semibold">
-                All Rugs
-              </Link>
-              <Link href="/collections/hand-knotted-oushak" onClick={() => setMobileMenuOpen(false)} className="block pl-3 text-xs">
-                Hand-Knotted Oushak
-              </Link>
-              <Link href="/collections/persian-hand-tufted" onClick={() => setMobileMenuOpen(false)} className="block pl-3 text-xs">
-                Persian Hand-Tufted
-              </Link>
-              <Link href="/collections/modern-hand-tufted" onClick={() => setMobileMenuOpen(false)} className="block pl-3 text-xs">
-                Modern Hand-Tufted
-              </Link>
-              <Link href="/collections/hand-woven-rugs" onClick={() => setMobileMenuOpen(false)} className="block pl-3 text-xs">
-                Hand-Woven Rugs
-              </Link>
-              <Link href="/collections/the-artisan-loop-collection" onClick={() => setMobileMenuOpen(false)} className="block pl-3 text-xs">
-                The Artisan Loop
-              </Link>
-              <Link href="/collections/hand-woven-jute" onClick={() => setMobileMenuOpen(false)} className="block pl-3 text-xs">
-                Hand-Woven Jute
-              </Link>
-            </div>
-
-            <div className="border-t border-[var(--sukla-muted-border)] pt-6 space-y-3">
-              <span className="eyebrow block text-[10px] text-[var(--sukla-taupe)]">Discover &amp; Craft</span>
-              <Link href="/story" onClick={() => setMobileMenuOpen(false)} className="block text-xs">
-                Our Story
-              </Link>
-              <Link href="/process" onClick={() => setMobileMenuOpen(false)} className="block text-xs">
-                Our Craft Process
-              </Link>
-              <Link href="/artisans" onClick={() => setMobileMenuOpen(false)} className="block text-xs">
-                Our Crafting Origin
-              </Link>
-              <Link href="/sustainability" onClick={() => setMobileMenuOpen(false)} className="block text-xs">
-                Our Impact
-              </Link>
-            </div>
-
-            <div className="border-t border-[var(--sukla-muted-border)] pt-6 space-y-3">
-              <span className="eyebrow block text-[10px] text-[var(--sukla-taupe)]">Client Services</span>
-              <Link href="/design-consultation" onClick={() => setMobileMenuOpen(false)} className="block text-xs">
-                Design Consultation
-              </Link>
-              <Link href="/guides/rug-care" onClick={() => setMobileMenuOpen(false)} className="block text-xs">
-                Rug Care Guide
-              </Link>
-              <Link href="/trade" onClick={() => setMobileMenuOpen(false)} className="block text-xs">
-                Trade & Designers Program
-              </Link>
-              <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="block text-xs">
-                Contact Us
-              </Link>
-              <Link href="/journal" onClick={() => setMobileMenuOpen(false)} className="block text-xs">
-                Blogs
-              </Link>
-            </div>
-
-            <details className="group/policies border-t border-[var(--sukla-muted-border)] pt-6">
-              <summary className="flex cursor-pointer list-none items-center justify-between eyebrow text-[10px] text-[var(--sukla-taupe)] [&::-webkit-details-marker]:hidden">
-                Policies
-                <ChevronDown aria-hidden="true" className="w-3 h-3 transition-transform group-open/policies:rotate-180 motion-reduce:transition-none" />
-              </summary>
-              <div className="mt-3 space-y-3">
-                {LEGAL_PAGES.map((page) => (
-                  <Link key={page.href} href={page.href} onClick={() => setMobileMenuOpen(false)} className="block text-xs">
-                    {page.label}
-                  </Link>
-                ))}
-              </div>
-            </details>
-
-            <div className="border-t border-[var(--sukla-muted-border)] pt-6 space-y-3">
-              <span className="eyebrow block text-[10px] text-[var(--sukla-taupe)]">Country &amp; currency</span>
-              <CountrySelector variant="menu" />
-            </div>
-          </nav>
-        </div>
+        <MobileMenu onClose={() => setMobileMenuOpen(false)} onOpenCart={() => setCartOpen(true)} cartCount={cartCount} />
       )}
 
       {/* Global Drawers & Modals */}

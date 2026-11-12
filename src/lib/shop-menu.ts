@@ -150,3 +150,17 @@ export function findMenuItem(param: ShopFilterKey, value: string): ShopMenuItem 
   }
   return undefined;
 }
+
+/**
+ * Collection landing pages (/collections/<handle>) listed in the mobile menu's
+ * Shop > Collections group. Not part of SHOP_MENU, so the /shop filter bar and
+ * the desktop mega menu are unaffected.
+ */
+export const SHOP_COLLECTION_LINKS: readonly { label: string; href: string }[] = [
+  { label: 'Hand-Knotted Oushak', href: '/collections/hand-knotted-oushak' },
+  { label: 'Persian Hand-Tufted', href: '/collections/persian-hand-tufted' },
+  { label: 'Modern Hand-Tufted', href: '/collections/modern-hand-tufted' },
+  { label: 'Hand-Woven Rugs', href: '/collections/hand-woven-rugs' },
+  { label: 'The Artisan Loop', href: '/collections/the-artisan-loop-collection' },
+  { label: 'Hand-Woven Jute', href: '/collections/hand-woven-jute' }
+];

@@ -51,9 +51,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
   return (
     <div className="group relative flex flex-col md:bg-white transition-all duration-300">
       {/* Image Container with Hover Swap */}
+      <div className="relative">
       <Link
         href={`/products/${product.handle}`}
-        className="relative aspect-[3/4] md:aspect-square w-full overflow-hidden bg-[var(--sukla-sand)] md:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[var(--sukla-charcoal)]"
+        className="relative block aspect-[3/4] md:aspect-square w-full overflow-hidden bg-[var(--sukla-sand)] md:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[var(--sukla-charcoal)]"
       >
 
         {/* Primary Image — matted frame: whole rug shown on an ivory tile,
@@ -63,7 +64,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
           alt={product.featuredImage.altText || product.title}
           fill
           priority={priority}
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          sizes="(max-width: 1024px) 50vw, 25vw"
           className="object-cover md:object-contain p-0 md:p-2 group-hover:opacity-0 transition-opacity duration-700 ease-in-out"
         />
 
@@ -72,23 +73,23 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
           src={secondaryImage.url}
           alt={secondaryImage.altText || `${product.title} secondary view`}
           fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-          className="object-cover md:object-contain p-0 md:p-2 opacity-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-in-out"
+          sizes="(max-width: 1024px) 50vw, 25vw"
+          className="object-cover md:object-contain p-0 md:p-2 opacity-0 max-md:hidden group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-in-out"
         />
 
         {/* Badges */}
         {showBadges && (
-          <div className="absolute top-2 left-2 hidden md:flex flex-col gap-1 z-10">
+          <div className="absolute top-2 left-2 flex flex-col items-start gap-1 z-10 max-w-[calc(100%-3.5rem)] md:max-w-none pointer-events-none">
             {showCollectionBadge && (
               <span
-                className="text-[9px] uppercase tracking-[0.2em] font-sans px-2.5 py-1 text-white shadow-xs font-semibold"
+                className="text-[8px] md:text-[9px] uppercase tracking-[0.12em] md:tracking-[0.2em] font-sans px-2 md:px-2.5 py-0.5 md:py-1 rounded-full md:rounded-none max-w-full truncate text-white shadow-xs font-semibold"
                 style={{ backgroundColor: product.collection.accentColor || '#BC8A5A' }}
               >
                 {product.collection.title}
               </span>
             )}
             {product.metafields.one_of_a_kind && (
-              <span className="text-[9px] uppercase tracking-[0.2em] font-sans px-2.5 py-1 bg-[var(--sukla-charcoal)] text-[var(--sukla-ivory)]">
+              <span className="text-[8px] md:text-[9px] uppercase tracking-[0.12em] md:tracking-[0.2em] font-sans px-2 md:px-2.5 py-0.5 md:py-1 rounded-full md:rounded-none max-w-full truncate bg-[var(--sukla-charcoal)] text-[var(--sukla-ivory)]">
                 One of a Kind
               </span>
             )}
@@ -96,8 +97,22 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
         )}
       </Link>
 
+      {/* Mobile wishlist: round white button over the image; 44px touch area, 32px visual circle. */}
+      <button
+        type="button"
+        onClick={toggleWishlist}
+        aria-label={isWishlisted ? 'Remove from wishlist' : 'Save to wishlist'}
+        aria-pressed={isWishlisted}
+        className="md:hidden absolute top-0 right-0 z-10 w-11 h-11 flex items-center justify-center group/heart focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[var(--sukla-charcoal)]"
+      >
+        <span className="w-8 h-8 rounded-full bg-white shadow-sm flex items-center justify-center text-[var(--sukla-charcoal)]">
+          <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-[var(--sukla-terracotta)] text-[var(--sukla-terracotta)]' : ''}`} />
+        </span>
+      </button>
+      </div>
+
       {/* Content Metadata */}
-      <div className="p-0 pt-4 text-center md:p-4 md:text-left flex-1 flex flex-col justify-between gap-2 md:bg-white">
+      <div className="min-w-0 p-0 pt-2.5 text-left md:pt-0 md:p-4 flex-1 flex flex-col justify-between gap-1 md:gap-2 md:bg-white">
         <div>
           {attributeLine && (
             <span className="hidden md:block text-[10px] uppercase tracking-[0.2em] text-[var(--sukla-taupe)] font-sans">
@@ -109,7 +124,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
             className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--sukla-charcoal)]"
           >
             <h3
-              className="heading text-sm md:text-base text-[var(--sukla-charcoal)] group-hover:text-[var(--sukla-terracotta)] transition-colors mt-0 md:mt-1 line-clamp-2"
+              className="heading text-xs sm:text-sm md:text-base break-words text-[var(--sukla-charcoal)] group-hover:text-[var(--sukla-terracotta)] transition-colors mt-0 md:mt-1 line-clamp-2"
               title={product.title}
             >
               {displayTitle}
@@ -122,7 +137,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
           )}
         </div>
 
-        <div className="pt-0 md:pt-2.5 md:border-t md:border-[var(--sukla-muted-border)]/60 flex items-center justify-center md:justify-between gap-2">
+        <div className="pt-0 md:pt-2.5 md:border-t md:border-[var(--sukla-muted-border)]/60 flex items-center justify-start md:justify-between gap-2">
           <span className="nums text-sm font-medium text-[var(--sukla-charcoal)]">
             {formattedPrice}
           </span>
@@ -133,7 +148,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
               onClick={toggleWishlist}
               aria-label={isWishlisted ? 'Remove from wishlist' : 'Save to wishlist'}
               aria-pressed={isWishlisted}
-              className="-my-3 -mr-1 p-3.5 rounded-full text-[var(--sukla-charcoal)] hover:text-[var(--sukla-terracotta)] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[var(--sukla-charcoal)]"
+              className="hidden md:block -my-3 -mr-1 p-3.5 rounded-full text-[var(--sukla-charcoal)] hover:text-[var(--sukla-terracotta)] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[var(--sukla-charcoal)]"
             >
               <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-[var(--sukla-terracotta)] text-[var(--sukla-terracotta)]' : ''}`} />
             </button>

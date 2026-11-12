@@ -198,14 +198,16 @@ export const CountrySelector: React.FC<CountrySelectorProps> = ({ variant = 'hea
         aria-label={`Country and currency: ${current.name}, ${currentDisplayCurrency}. Change country`}
         className={`inline-flex items-center gap-1.5 font-sans text-xs text-[var(--sukla-charcoal)] hover:text-[var(--sukla-terracotta)] transition-colors ${
           variant === 'menu'
-            ? 'w-full justify-between border border-[var(--sukla-muted-border)] px-3 py-3'
+            ? 'w-full justify-between px-0 py-2 text-base font-light'
             : 'p-1.5'
         }`}
       >
         <span className="inline-flex items-center gap-1.5">
           <Globe className="w-4 h-4 stroke-[1.5]" aria-hidden="true" />
           <span className="nums">
-            {current.isoCode} · {currentDisplayCurrency}
+            {variant === 'menu'
+              ? `${current.name} | ${currentDisplayCurrency}`
+              : `${current.isoCode} · ${currentDisplayCurrency}`}
           </span>
         </span>
         <ChevronDown
