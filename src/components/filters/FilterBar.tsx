@@ -2,7 +2,7 @@
 
 import React, { useEffect, useId, useOptimistic, useRef, useState, useTransition } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { SlidersHorizontal, X, RotateCcw } from 'lucide-react';
+import { SlidersHorizontal, X, RotateCcw, Check } from 'lucide-react';
 import { trackEvent } from '@/lib/analytics';
 import { SHOP_FILTER_GROUPS, SHOP_ROOT_HREF, type ShopFilterGroup } from '@/lib/shop-menu';
 
@@ -145,10 +145,15 @@ export const FilterBar: React.FC<FilterBarProps> = ({ totalCount }) => {
                         >
                           <span
                             aria-hidden="true"
-                            className={`h-1.5 w-1.5 shrink-0 rounded-full ${
-                              isSelected ? 'bg-[var(--sukla-terracotta)]' : 'border border-[var(--sukla-taupe)]'
+                            data-checked={isSelected}
+                            className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-[2px] border ${
+                              isSelected
+                                ? 'border-[var(--sukla-terracotta)] bg-[var(--sukla-terracotta)] text-white'
+                                : 'border-[var(--sukla-muted-border)] bg-white'
                             }`}
-                          />
+                          >
+                            {isSelected && <Check aria-hidden="true" strokeWidth={3} className="h-2.5 w-2.5" />}
+                          </span>
                           {option.label}
                         </span>
                       </label>
