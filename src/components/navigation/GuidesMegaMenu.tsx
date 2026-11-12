@@ -5,6 +5,12 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ChevronDown } from 'lucide-react';
 import { LEGAL_PAGES } from '@/lib/legal/shared';
+import {
+  MEGA_MENU_HEADING_CLASS,
+  MEGA_MENU_LINK_CLASS,
+  MEGA_MENU_LINK_MUTED_CLASS,
+  MEGA_MENU_LIST_CLASS
+} from '@/lib/mega-menu-styles';
 import { announceMegaMenuOpen, useCloseWhenOtherMegaMenuOpens } from '@/lib/mega-menu-events';
 
 const CLOSE_DELAY_MS = 150;
@@ -186,17 +192,17 @@ export const GuidesMegaMenu: React.FC = () => {
             <section key={column.id}>
               <p
                 id={`guides-menu-${column.id}`}
-                className="font-display text-xs font-semibold uppercase tracking-[0.18em] text-[var(--sukla-charcoal)]"
+                className={MEGA_MENU_HEADING_CLASS}
               >
                 {column.heading}
               </p>
-              <ul aria-labelledby={`guides-menu-${column.id}`} className="mt-5 space-y-3.5">
+              <ul aria-labelledby={`guides-menu-${column.id}`} className={MEGA_MENU_LIST_CLASS}>
                 {column.items.map((entry) => (
                   <li key={entry.href}>
                     <Link
                       href={entry.href}
                       onClick={() => setOpen(false)}
-                      className={`text-base leading-snug text-[var(--sukla-charcoal)]/85 underline-offset-4 decoration-transparent decoration-1 transition-colors motion-reduce:transition-none hover:underline hover:decoration-[var(--sukla-charcoal)] hover:text-[var(--sukla-charcoal)] ${FOCUS_RING}`}
+                      className={`${MEGA_MENU_LINK_CLASS} ${MEGA_MENU_LINK_MUTED_CLASS}`}
                     >
                       {entry.label}
                     </Link>

@@ -160,3 +160,7 @@ When completing a task, update:
 - src/components/navigation/Header.tsx: replaced right-side 'Trade & Designers' link with 'Trade' and 'Designer' bordered links (both /trade, no separate designer route exists) right after Customisation in the desktop nav. Mobile drawer keeps 'Trade & Designers Program' link. Playwright at 1440/1280/1024: Customisation, Trade, Designer sit in sequence, no overlap, no header overflow. shopify-theme/ untouched.
 
 - **Shop filter rail checkbox indicator (Next.js, 2026-10-16):** in `src/components/filters/FilterBar.tsx` the round dot is replaced by a 16px square (rounded-[2px]) with a terracotta fill and white lucide `Check` when selected, and a light-grey empty box otherwise. The radio inputs, single-select logic and focus outline are unchanged. The mobile drawer uses `<select>` elements, so it needed no change. Checks: `tsc --noEmit` and eslint on the file gave no errors. A Playwright run at 1440px confirmed 16x16 boxes, a tick on the selected option, and the tick moving after clicking Modern (URL `?style=modern`). Nothing in `shopify-theme/` was touched.
+
+## Next.js Guides mega menu typography (reference app)
+- Guides panel now matches Shop panel: 11px headings, 14px links, mt-4 space-y-2.5 lists. Shared classes live in `src/lib/mega-menu-styles.ts` and are used by `ShopMegaMenu.tsx` and `GuidesMegaMenu.tsx`.
+- Verified: `tsc --noEmit` and eslint clean; Playwright at 1440px confirmed identical computed sizes (11px/14px) in both panels. No `shopify-theme/` changes.

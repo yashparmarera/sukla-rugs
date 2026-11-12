@@ -5,6 +5,12 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ChevronDown } from 'lucide-react';
 import { SHOP_MENU } from '@/lib/shop-menu';
+import {
+  MEGA_MENU_HEADING_CLASS,
+  MEGA_MENU_LINK_CLASS,
+  MEGA_MENU_LINK_MUTED_CLASS,
+  MEGA_MENU_LIST_CLASS
+} from '@/lib/mega-menu-styles';
 import { announceMegaMenuOpen, useCloseWhenOtherMegaMenuOpens } from '@/lib/mega-menu-events';
 
 const CLOSE_DELAY_MS = 150;
@@ -180,18 +186,18 @@ export const ShopMegaMenu: React.FC = () => {
             <section key={column.id}>
               <p
                 id={`shop-menu-${column.id}`}
-                className="font-display text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--sukla-charcoal)]"
+                className={MEGA_MENU_HEADING_CLASS}
               >
                 {column.heading}
               </p>
-              <ul aria-labelledby={`shop-menu-${column.id}`} className="mt-4 space-y-2.5">
+              <ul aria-labelledby={`shop-menu-${column.id}`} className={MEGA_MENU_LIST_CLASS}>
                 {column.items.map((entry) => (
                   <li key={entry.label}>
                     <Link
                       href={entry.href}
                       onClick={() => setOpen(false)}
-                      className={`text-sm underline-offset-4 decoration-transparent decoration-1 transition-colors motion-reduce:transition-none hover:underline hover:decoration-[var(--sukla-charcoal)] hover:text-[var(--sukla-charcoal)] ${FOCUS_RING} ${
-                        entry.param ? 'text-[var(--sukla-charcoal)]/80' : 'font-semibold text-[var(--sukla-charcoal)]'
+                      className={`${MEGA_MENU_LINK_CLASS} ${
+                        entry.param ? MEGA_MENU_LINK_MUTED_CLASS : 'font-semibold text-[var(--sukla-charcoal)]'
                       }`}
                     >
                       {entry.label}
