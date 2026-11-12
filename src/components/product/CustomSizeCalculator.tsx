@@ -277,26 +277,16 @@ const CalculatorPanel: React.FC<CalculatorPanelProps> = ({ product, fixedCategor
       <div className={large ? undefined : 'space-y-1.5'}>
         {large ? (
           <div className="relative">
-            <button
+            <div
               id={toggleId}
-              type="button"
-              aria-expanded={open}
-              aria-controls={panelId}
-              onClick={() => setOpen((value) => !value)}
-              className="group flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left font-sans text-[var(--sukla-charcoal)] bg-[var(--sukla-charcoal)]/[0.04] backdrop-blur-md border border-[var(--sukla-charcoal)]/15 rounded-sm transition-colors duration-300 hover:bg-[var(--sukla-charcoal)]/[0.08] hover:border-[var(--sukla-charcoal)]/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sukla-terracotta)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--sukla-ivory)] motion-reduce:transition-none"
+              className="flex w-full items-center gap-3 px-4 py-3.5 text-left font-sans text-[var(--sukla-charcoal)] bg-[var(--sukla-charcoal)]/[0.04] backdrop-blur-md border border-[var(--sukla-charcoal)]/15 rounded-sm"
             >
-              <span className="flex items-center gap-3">
-                <SlidersHorizontal className="w-4 h-4 text-[var(--sukla-terracotta-dark)]" aria-hidden="true" />
-                <span className="flex flex-col gap-0.5">
-                  <span className="text-sm font-medium tracking-[0.12em] uppercase leading-none">Customise</span>
-                  <span className="text-xs text-[var(--sukla-charcoal)]/60">Get a quote by size</span>
-                </span>
+              <SlidersHorizontal className="w-4 h-4 text-[var(--sukla-terracotta-dark)]" aria-hidden="true" />
+              <span className="flex flex-col gap-0.5">
+                <span className="text-sm font-medium tracking-[0.12em] uppercase leading-none">Customise</span>
+                <span className="text-xs text-[var(--sukla-charcoal)]/60">Get a quote by size</span>
               </span>
-              <ChevronDown
-                className={`w-4 h-4 text-[var(--sukla-charcoal)]/60 transition-transform motion-reduce:transition-none ${open ? 'rotate-180' : ''}`}
-                aria-hidden="true"
-              />
-            </button>
+            </div>
           </div>
         ) : (
           <>
@@ -329,7 +319,7 @@ const CalculatorPanel: React.FC<CalculatorPanelProps> = ({ product, fixedCategor
         id={panelId}
         role="region"
         aria-labelledby={toggleId}
-        hidden={!open}
+        hidden={!large && !open}
         className={`border border-[var(--sukla-muted-border)] bg-white space-y-4 ${large ? 'p-5 sm:p-8 sm:space-y-6' : 'p-4 sm:p-5'}`}
       >
         <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">

@@ -164,3 +164,9 @@ When completing a task, update:
 ## Next.js Guides mega menu typography (reference app)
 - Guides panel now matches Shop panel: 11px headings, 14px links, mt-4 space-y-2.5 lists. Shared classes live in `src/lib/mega-menu-styles.ts` and are used by `ShopMegaMenu.tsx` and `GuidesMegaMenu.tsx`.
 - Verified: `tsc --noEmit` and eslint clean; Playwright at 1440px confirmed identical computed sizes (11px/14px) in both panels. No `shopify-theme/` changes.
+
+## Next.js: Customise section always open (home page)
+- src/components/product/CustomSizeCalculator.tsx: the home-page (large) Customise header is now a static div (no button, chevron, aria-expanded/controls); its panel is always rendered. The product-page variant (CustomSizeCalculator on PDP) keeps its toggle, unchanged.
+- Validation: 
+px tsc --noEmit and eslint pass; Playwright at 1440px and 390px confirmed the panel is visible without clicking and inputs accept text.
+
