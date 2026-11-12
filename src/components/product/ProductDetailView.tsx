@@ -9,10 +9,6 @@ import {
   Ruler,
   ChevronLeft,
   ChevronRight,
-  ChevronDown,
-  Lock,
-  MessageCircle,
-  Scissors,
   Maximize2,
   Minus,
   Plus,
@@ -40,6 +36,7 @@ import {
 } from '@/lib/product-display';
 import { parseMetafieldValues } from '@/lib/shop-filters';
 import { Button } from '@/components/ui/Button';
+import { Accordion } from '@/components/ui/Accordion';
 import { ProductCard } from '@/components/product/ProductCard';
 import { TalkToExpert } from '@/components/product/TalkToExpert';
 import { CustomSizeCalculator } from '@/components/product/CustomSizeCalculator';
@@ -132,30 +129,6 @@ const RELATED_GRID_CLASSES: Record<number, string> = {
   3: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
   4: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'
 };
-
-interface DetailSectionProps {
-  title: string;
-  defaultOpen?: boolean;
-  children: React.ReactNode;
-}
-
-const DetailSection: React.FC<DetailSectionProps> = ({ title, defaultOpen = false, children }) => (
-  <details open={defaultOpen} className="group border-b border-[var(--sukla-muted-border)]">
-    <summary className="flex cursor-pointer list-none items-center justify-between py-4 [&::-webkit-details-marker]:hidden">
-      <span className="heading text-base text-[var(--sukla-charcoal)]">{title}</span>
-      <ChevronDown className="w-4 h-4 text-[var(--sukla-taupe)] transition-transform group-open:rotate-180" />
-    </summary>
-    <div className="pb-5 text-sm font-sans leading-relaxed text-[var(--sukla-charcoal)]/80">{children}</div>
-  </details>
-);
-
-/** Same look as DetailSection, but always visible with no dropdown toggle. */
-const StaticDetailSection: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
-  <section className="border-b border-[var(--sukla-muted-border)]">
-    <h3 className="heading text-base text-[var(--sukla-charcoal)] py-4">{title}</h3>
-    <div className="pb-5 text-sm font-sans leading-relaxed text-[var(--sukla-charcoal)]/80">{children}</div>
-  </section>
-);
 
 /** Plain text as a single fact value; empty text gives no value. */
 function text(value: string | undefined): FactValue[] {
@@ -341,7 +314,6 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
       ? product.variants[0].title
       : null;
   const optionLabel = product.options.find((o) => o.name.toLowerCase() !== 'title')?.name ?? 'Size';
-  const variantPricesDiffer = new Set(product.variants.map((v) => v.price.amount)).size > 1;
 
   // Only real store values are shown. Missing rows are omitted.
   const m = product.metafields;
@@ -627,8 +599,8 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                   <span className="eyebrow text-xs text-[var(--sukla-charcoal)]">{optionLabel}</span>
                   {sizeGuideButton}
                 </div>
-                <div className="grid grid-cols-2 gap-2" role="group" aria-label={optionLabel}>
-                  {product.variants.map((v) => {
+                <div className="grid grid-cols-4 gap-1.5" role="group" aria-label={optionLabel}>
+                  {product.variants.slice(0, 4).map((v) => {
                     const selected = selectedVariant.id === v.id;
                     return (
                       <button
@@ -636,18 +608,13 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                         type="button"
                         onClick={() => handleSelectVariant(v)}
                         aria-pressed={selected}
-                        className={`px-3 py-2.5 text-xs font-sans text-left border transition-all flex justify-between items-center gap-2 ${
+                        className={`px-1.5 py-1.5 text-xs font-sans text-center border transition-all flex justify-center items-center whitespace-nowrap ${
                           selected
                             ? 'border-[var(--sukla-charcoal)] bg-white ring-1 ring-[var(--sukla-charcoal)] font-semibold'
                             : 'border-[var(--sukla-muted-border)] hover:border-[var(--sukla-taupe)] bg-white'
                         } ${v.availableForSale ? '' : 'text-[var(--sukla-taupe)] line-through'}`}
                       >
                         <span>{v.title}</span>
-                        {variantPricesDiffer && (
-                          <span className="nums text-[11px] text-[var(--sukla-taupe)]">
-                            {format(v.price.amount, v.price.currencyCode).text}
-                          </span>
-                        )}
                       </button>
                     );
                   })}
@@ -771,181 +738,156 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
             {/* Direct contact with a design expert, sitting with the buy controls */}
             <TalkToExpert />
 
-            {/* Service links. Each statement is factual: checkout is Shopify-hosted, and the
-                custom-order and consultation pages exist on this site. */}
-            <ul className="grid gap-3 py-4 border-y border-[var(--sukla-muted-border)] text-xs font-sans text-[var(--sukla-charcoal)]/80">
-              <li className="flex items-center gap-2.5">
-                <Lock className="w-4 h-4 shrink-0 text-[var(--sukla-terracotta)]" aria-hidden="true" />
-                <span>Secure checkout by Shopify</span>
-              </li>
-              <li className="flex items-center gap-2.5">
-                <Scissors className="w-4 h-4 shrink-0 text-[var(--sukla-terracotta)]" aria-hidden="true" />
-                <span>
-                  Need a different size or design?{' '}
-                  <Link href="/custom-rugs" className="text-[var(--sukla-terracotta)] hover:underline">
-                    Explore bespoke orders
-                  </Link>
-                </span>
-              </li>
-              <li className="flex items-center gap-2.5">
-                <MessageCircle className="w-4 h-4 shrink-0 text-[var(--sukla-terracotta)]" aria-hidden="true" />
-                <span>
-                  Questions about this rug?{' '}
-                  <Link href="/design-consultation" className="text-[var(--sukla-terracotta)] hover:underline">
-                    Book a design consultation
-                  </Link>
-                </span>
-              </li>
-            </ul>
-
             {/* Details live in this column, so the pinned gallery stays in view while they
-                scroll past. Every block renders only when real store data exists. */}
-            {(hasAboutContent || detailRows.length > 0 || specRows.length > 0) && (
-          <section
-            aria-label="Product details"
-            className="pt-8 border-t border-[var(--sukla-muted-border)] space-y-8"
-          >
-            <ProductAtAGlance product={product} selectedVariant={selectedVariant} />
-            <div className="space-y-6">
-              <h2 className="display-lg text-2xl text-[var(--sukla-charcoal)]">About this rug</h2>
-
-              {descriptionIntro && (
-                <p className="text-sm font-sans leading-relaxed text-[var(--sukla-charcoal)]/80">
-                  {descriptionIntro}
-                </p>
-              )}
-
-              {features.length > 0 ? (
-                <ul className="divide-y divide-[var(--sukla-muted-border)] border-y border-[var(--sukla-muted-border)]">
-                  {features.map((feature, index) => (
-                    <li key={index} className="py-4 space-y-1">
-                      {feature.heading ? (
-                        <>
-                          <span className="heading text-base text-[var(--sukla-charcoal)] block">{feature.heading}</span>
-                          <span className="text-sm font-sans leading-relaxed text-[var(--sukla-charcoal)]/80 block">
-                            {feature.text}
-                          </span>
-                        </>
-                      ) : (
-                        <span className="text-sm font-sans leading-relaxed text-[var(--sukla-charcoal)]/80 block">
-                          {feature.text}
-                        </span>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                product.description && (
-                  <p className="text-sm font-sans leading-relaxed text-[var(--sukla-charcoal)]/80 whitespace-pre-line">
-                    {product.description}
-                  </p>
-                )
-              )}
-
-              {m.product_story && (
-                <p className="text-sm font-sans leading-relaxed text-[var(--sukla-charcoal)]/80 whitespace-pre-line">
-                  {m.product_story}
-                </p>
-              )}
-
-              <Link
-                href="/process"
-                className="text-[var(--sukla-terracotta)] font-semibold uppercase tracking-[0.1em] text-[10px] hover:underline inline-block"
-              >
-                Our craft process &rarr;
-              </Link>
-            </div>
-
-            <div className="border-t border-[var(--sukla-muted-border)]">
-              {detailRows.length > 0 && (
-                <DetailSection title="Product details" defaultOpen>
-                  <dl className="grid grid-cols-[auto_1fr] gap-x-6 gap-y-2">
-                    {detailRows.map(([label, values]) => (
-                      <React.Fragment key={label}>
-                        <dt className="text-[var(--sukla-taupe)]">{label}</dt>
-                        <dd className="nums min-w-0 break-words text-[var(--sukla-charcoal)]">
-                          <FactValues values={values} />
-                        </dd>
-                      </React.Fragment>
-                    ))}
-                  </dl>
-                  {isShortened && (
-                    <p className="mt-3 text-xs text-[var(--sukla-taupe)]">Full listing title: {product.title}</p>
-                  )}
-                </DetailSection>
-              )}
-
-              {specRows.length > 0 && (
-                <DetailSection title="Specifications" defaultOpen>
-                  <dl className="grid grid-cols-[auto_1fr] gap-x-6 gap-y-2">
-                    {specRows.map(([label, values]) => (
-                      <React.Fragment key={label}>
-                        <dt className="text-[var(--sukla-taupe)]">{label}</dt>
-                        <dd className="nums min-w-0 break-words text-[var(--sukla-charcoal)]">
-                          <FactValues values={values} />
-                        </dd>
-                      </React.Fragment>
-                    ))}
-                  </dl>
-                </DetailSection>
-              )}
-
-              <StaticDetailSection title="Care">
-                <div className="space-y-3">
-                  <CareGuide guide={careGuide} />
-                  <Link
-                    href="/guides/rug-care"
-                    className="text-[var(--sukla-terracotta)] font-semibold uppercase tracking-[0.1em] text-[10px] hover:underline block"
-                  >
-                    Read the rug care guide &rarr;
-                  </Link>
-                </div>
-              </StaticDetailSection>
-
-              {policies.length > 0 && (
-                <DetailSection title="Shipping & returns">
-                  <ul className="space-y-2">
-                    {policies.map((policy) => (
-                      <li key={policy.url}>
-                        <a
-                          href={policy.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-[var(--sukla-terracotta)] font-semibold uppercase tracking-[0.1em] text-[10px] hover:underline"
+            {/* Details live in this column, so the pinned gallery stays in view while they
+                scroll past. Every row renders only when real store data exists. */}
+            <section aria-label="Product information">
+              <Accordion
+                items={[
+                  ...(detailRows.length > 0 || specRows.length > 0
+                    ? [
+                        {
+                          id: 'product-details',
+                          title: 'Product details',
+                          content: (
+                            <div className="space-y-6">
+                              <ProductAtAGlance product={product} selectedVariant={selectedVariant} />
+                              {[detailRows, specRows].map(
+                                (rows, index) =>
+                                  rows.length > 0 && (
+                                    <dl key={index} className="grid grid-cols-[auto_1fr] gap-x-6 gap-y-2">
+                                      {rows.map(([label, values]) => (
+                                        <React.Fragment key={label}>
+                                          <dt className="text-[var(--sukla-taupe)]">{label}</dt>
+                                          <dd className="nums min-w-0 break-words text-[var(--sukla-charcoal)]">
+                                            <FactValues values={values} />
+                                          </dd>
+                                        </React.Fragment>
+                                      ))}
+                                    </dl>
+                                  )
+                              )}
+                              {isShortened && (
+                                <p className="text-xs text-[var(--sukla-taupe)]">Full listing title: {product.title}</p>
+                              )}
+                            </div>
+                          )
+                        }
+                      ]
+                    : []),
+                  {
+                    id: 'washing-care',
+                    title: 'Washing & care',
+                    content: (
+                      <div className="space-y-3">
+                        <CareGuide guide={careGuide} />
+                        <Link
+                          href="/guides/rug-care"
+                          className="text-[var(--sukla-terracotta)] font-semibold uppercase tracking-[0.1em] text-[10px] hover:underline block"
                         >
-                          {policy.title} &rarr;
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </DetailSection>
-              )}
+                          Read the rug care guide &rarr;
+                        </Link>
+                      </div>
+                    )
+                  },
+                  {
+                    id: 'shipping-returns',
+                    title: 'Shipping & returns',
+                    content:
+                      policies.length > 0 ? (
+                        <ul className="space-y-2">
+                          {policies.map((policy) => (
+                            <li key={policy.url}>
+                              <a
+                                href={policy.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-[var(--sukla-terracotta)] font-semibold uppercase tracking-[0.1em] text-[10px] hover:underline"
+                              >
+                                {policy.title} &rarr;
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <ul className="space-y-2.5">
+                          {SHIPPING_RETURNS_HIGHLIGHTS.map((item) => (
+                            <li key={item.href + item.linkLabel} className="flex items-start gap-2.5">
+                              <Check className="w-4 h-4 mt-0.5 shrink-0 text-[var(--sukla-terracotta)]" aria-hidden="true" />
+                              <span>
+                                {item.text}{' '}
+                                <Link
+                                  href={item.href}
+                                  className="text-[var(--sukla-terracotta)] hover:underline focus-visible:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--sukla-terracotta)]"
+                                >
+                                  {item.linkLabel}
+                                </Link>
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      )
+                  },
+                  ...(hasAboutContent
+                    ? [
+                        {
+                          id: 'about-this-design',
+                          title: 'About this design',
+                          content: (
+                            <div className="space-y-6">
+                              {descriptionIntro && (
+                                <p className="text-sm font-sans leading-relaxed text-[var(--sukla-charcoal)]/80">
+                                  {descriptionIntro}
+                                </p>
+                              )}
 
-              {/* Fallback when Shopify has no shipping/refund policy configured (or the lookup failed):
-                  short summaries of the site's own policy pages. Never shown alongside the Shopify links. */}
-              {policies.length === 0 && (
-                <DetailSection title="Shipping & returns" defaultOpen>
-                  <ul className="space-y-2.5">
-                    {SHIPPING_RETURNS_HIGHLIGHTS.map((item) => (
-                      <li key={item.href + item.linkLabel} className="flex items-start gap-2.5">
-                        <Check className="w-4 h-4 mt-0.5 shrink-0 text-[var(--sukla-terracotta)]" aria-hidden="true" />
-                        <span>
-                          {item.text}{' '}
-                          <Link
-                            href={item.href}
-                            className="text-[var(--sukla-terracotta)] hover:underline focus-visible:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--sukla-terracotta)]"
-                          >
-                            {item.linkLabel}
-                          </Link>
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </DetailSection>
-              )}
-            </div>
-          </section>
-            )}
+                              {features.length > 0 ? (
+                                <ul className="divide-y divide-[var(--sukla-muted-border)] border-y border-[var(--sukla-muted-border)]">
+                                  {features.map((feature, index) => (
+                                    <li key={index} className="py-4 space-y-1">
+                                      {feature.heading ? (
+                                        <>
+                                          <span className="heading text-base text-[var(--sukla-charcoal)] block">{feature.heading}</span>
+                                          <span className="text-sm font-sans leading-relaxed text-[var(--sukla-charcoal)]/80 block">
+                                            {feature.text}
+                                          </span>
+                                        </>
+                                      ) : (
+                                        <span className="text-sm font-sans leading-relaxed text-[var(--sukla-charcoal)]/80 block">
+                                          {feature.text}
+                                        </span>
+                                      )}
+                                    </li>
+                                  ))}
+                                </ul>
+                              ) : (
+                                product.description && (
+                                  <p className="text-sm font-sans leading-relaxed text-[var(--sukla-charcoal)]/80 whitespace-pre-line">
+                                    {product.description}
+                                  </p>
+                                )
+                              )}
+
+                              {m.product_story && (
+                                <p className="text-sm font-sans leading-relaxed text-[var(--sukla-charcoal)]/80 whitespace-pre-line">
+                                  {m.product_story}
+                                </p>
+                              )}
+
+                              <Link
+                                href="/process"
+                                className="text-[var(--sukla-terracotta)] font-semibold uppercase tracking-[0.1em] text-[10px] hover:underline inline-block"
+                              >
+                                Our craft process &rarr;
+                              </Link>
+                            </div>
+                          )
+                        }
+                      ]
+                    : [])
+                ]}
+              />
+            </section>
           </div>
         </div>
 
