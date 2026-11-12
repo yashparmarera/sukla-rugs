@@ -7,24 +7,25 @@ import { KnotGlyph } from '@/components/ui/KnotGlyph';
 
 export const ReviewsSection: React.FC = () => {
   return (
-    <section className="py-12 md:py-36 bg-[var(--sukla-cream)] border-b border-[var(--sukla-muted-border)]">
+    <section className="py-8 md:py-14 bg-[var(--sukla-cream)] border-b border-[var(--sukla-muted-border)]">
       <div className="editorial-container">
-        
-        <div className="text-center max-w-2xl mx-auto mb-10 md:mb-24 space-y-3">
-          <KnotGlyph size="sm" className="text-[var(--sukla-terracotta)]" />
-          <span className="block text-xs uppercase tracking-[0.25em] text-[var(--sukla-taupe)] font-sans">
-            Client Testimonials & Patrons
+
+        <div className="mx-auto mb-6 md:mb-8 flex flex-col items-center justify-center gap-2 text-center md:flex-row md:gap-5">
+          <KnotGlyph size="lg" className="!h-14 !w-14 shrink-0 text-[var(--sukla-terracotta)]" />
+          <span className="block text-xs uppercase tracking-[0.25em] text-[var(--sukla-taupe)] font-sans md:whitespace-nowrap">
+            Client Testimonials &amp; Patrons
           </span>
-          <h2 className="display-lg text-2xl md:text-5xl text-[var(--sukla-charcoal)]">
+          <span aria-hidden="true" className="hidden h-6 w-px bg-[var(--sukla-muted-border)] md:block" />
+          <h2 className="display-lg text-2xl md:text-3xl text-[var(--sukla-charcoal)] md:whitespace-nowrap">
             Acclaimed by Designers &amp; Homeowners
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 lg:gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-6">
           {MOCK_REVIEWS.map((review) => (
             <div
               key={review.id}
-              className="p-0 text-center md:text-left md:p-8 lg:p-10 md:bg-[var(--sukla-ivory)] md:border md:border-[var(--sukla-muted-border)] flex flex-col justify-between space-y-6 md:shadow-subtle md:hover:border-[var(--sukla-taupe)] transition-colors"
+              className="p-0 text-center md:text-left md:p-6 md:bg-[var(--sukla-ivory)] md:border md:border-[var(--sukla-muted-border)] flex flex-col justify-between space-y-4 md:shadow-subtle md:hover:border-[var(--sukla-taupe)] transition-colors"
             >
               {(review.rating || review.verifiedPurchase || review.title || review.content) && (
                 <div className="space-y-4">
