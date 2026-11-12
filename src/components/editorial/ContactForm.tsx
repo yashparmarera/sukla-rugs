@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
+import Image from 'next/image';
 import { Check } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { trackEvent } from '@/lib/analytics';
@@ -24,48 +25,24 @@ function validate(f: Fields): Errors {
 }
 
 const FORMSPREE_URL = process.env.NEXT_PUBLIC_FORMSPREE_CONTACT_URL || 'https://formspree.io/f/mzeevkwq';
-const MAX_FILES = 5;
-const MAX_FILE_BYTES = 25 * 1024 * 1024;
-const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
 const ENQUIRY_TYPES = ['General enquiry', 'Trade & Designer', 'Custom rug', 'Order support'];
 
 const FIELD_KEYS: Record<string, keyof Fields> = { name: 'name', email: 'email', _replyto: 'email', phone: 'phone', message: 'message' };
 type FormspreeError = { field?: string; code?: string; message?: string };
 const inputClass =
-  'w-full bg-[var(--sukla-ivory)] border border-[var(--sukla-muted-border)] p-3 text-sm font-sans text-[var(--sukla-charcoal)] focus:outline-none focus:border-[var(--sukla-charcoal)]';
+  'w-full bg-[var(--sukla-ivory)] border border-[var(--sukla-muted-border)] p-2.5 text-sm font-sans text-[var(--sukla-charcoal)] focus:outline-none focus:border-[var(--sukla-charcoal)]';
 const errorClass = 'mt-1 text-xs font-sans text-red-700';
 
-export function ContactForm() {
+export function ContactForm({ children }: { children?: React.ReactNode }) {
   const [fields, setFields] = useState<Fields>({ name: '', email: '', phone: '', message: '' });
   const [enquiryType, setEnquiryType] = useState(ENQUIRY_TYPES[0]);
-  const [files, setFiles] = useState<File[]>([]);
-  const [fileError, setFileError] = useState('');
   const [errors, setErrors] = useState<Errors>({});
   const [formError, setFormError] = useState<{ text: string; fallback: boolean } | null>(null);
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
-  const fileInput = useRef<HTMLInputElement>(null);
 
   const update = (key: keyof Fields) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setFields((prev) => ({ ...prev, [key]: e.target.value }));
-
-  const handleFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const picked = Array.from(e.target.files ?? []);
-    e.target.value = '';
-    if (picked.length === 0) return;
-    const bad = picked.find((f) => !ALLOWED_TYPES.includes(f.type));
-    if (bad) return setFileError(`"${bad.name}" is not supported. Please choose JPG, PNG or WebP images.`);
-    const big = picked.find((f) => f.size > MAX_FILE_BYTES);
-    if (big) return setFileError(`"${big.name}" is larger than 25 MB. Please choose a smaller image.`);
-    if (files.length + picked.length > MAX_FILES) return setFileError(`You can add up to ${MAX_FILES} photos.`);
-    setFileError('');
-    setFiles((prev) => [...prev, ...picked]);
-  };
-
-  const removeFile = (index: number) => {
-    setFiles((prev) => prev.filter((_, i) => i !== index));
-    setFileError('');
-  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -87,11 +64,10 @@ export function ContactForm() {
     data.append('Phone', phone || 'Not provided');
     data.append('Message', fields.message.trim());
     data.append('Submitted from page', window.location.origin + window.location.pathname);
-    data.append('Photos attached', files.length > 0 ? `Yes (${files.length} ${files.length === 1 ? 'file' : 'files'})` : 'No');
     data.append('_replyto', email);
     const subject = `New ${enquiryType} enquiry from ${name} | SUKLA RUGS`;
     data.append('_subject', subject.length > 100 ? subject.slice(0, 97).trimEnd() + '...' : subject);
-    data.append('_gotcha', (e.currentTarget.elements.namedItem('_gotcha') as HTMLInputElement | null)?.value ?? '');    files.forEach((f) => data.append('attachments', f));
+    data.append('_gotcha', (e.currentTarget.elements.namedItem('_gotcha') as HTMLInputElement | null)?.value ?? '');
 
     setSending(true);
     try {
@@ -101,8 +77,6 @@ export function ContactForm() {
         setSent(true);
         setFields({ name: '', email: '', phone: '', message: '' });
         setEnquiryType(ENQUIRY_TYPES[0]);
-        setFiles([]);
-        setFileError('');
         setErrors({});
         return;
       }
@@ -115,21 +89,13 @@ export function ContactForm() {
       }
       const fieldErrors: Errors = {};
       const general: string[] = [];
-      let uploadProblem = false;
       for (const err of list) {
-        const text = `${err.code ?? ''} ${err.message ?? ''}`.toLowerCase();
-        if (/file|upload|attachment/.test(text)) uploadProblem = true;
         const key = FIELD_KEYS[(err.field ?? '').toLowerCase()];
         if (key) fieldErrors[key] = err.message || 'Please check this field.';
         else if (err.message) general.push(err.message);
       }
       setErrors(fieldErrors);
-      if (uploadProblem || (files.length > 0 && res.status === 400)) {
-        setFormError({
-          text: 'Photo uploads are not available right now. Please remove the photos and send again, or send them to us on WhatsApp.',
-          fallback: true
-        });
-      } else if (Object.keys(fieldErrors).length > 0 && general.length === 0) {
+      if (Object.keys(fieldErrors).length > 0 && general.length === 0) {
         setFormError({ text: 'Please correct the highlighted fields and try again.', fallback: false });
       } else {
         setFormError({ text: general.join(' ') || 'Sorry, we could not send your message. Please try again.', fallback: true });
@@ -172,7 +138,8 @@ export function ContactForm() {
         </a>
       </div>
 
-      <div className="bg-[var(--sukla-cream)] border border-[var(--sukla-muted-border)] p-8 sm:p-12 shadow-subtle">
+      <div className="grid grid-cols-1 md:grid-cols-2 overflow-hidden bg-[var(--sukla-cream)] border border-[var(--sukla-muted-border)] shadow-subtle">
+        <div className="min-w-0 p-6 sm:p-8">
         <div aria-live="polite" role="status">
           {sent && (
             <div className="mb-6 p-4 bg-emerald-50 border border-emerald-300 text-emerald-900 text-xs font-sans flex items-start gap-3">
@@ -201,7 +168,7 @@ export function ContactForm() {
             </div>
           )}
         </div>
-        <form onSubmit={handleSubmit} noValidate className="space-y-5">
+        <form onSubmit={handleSubmit} noValidate className="space-y-3.5">
           <div>
             <label htmlFor="contact-name" className="block mb-1 text-xs uppercase tracking-[0.15em] font-sans">Name *</label>
             <input
@@ -252,7 +219,7 @@ export function ContactForm() {
             <textarea
               id="contact-message"
               name="message"
-              rows={5}
+              rows={3}
               value={fields.message}
               onChange={update('message')}
               aria-invalid={!!errors.message}
@@ -275,46 +242,30 @@ export function ContactForm() {
               ))}
             </select>
           </div>
-          <div>
-            <label htmlFor="contact-attachments" className="block mb-1 text-xs uppercase tracking-[0.15em] font-sans">
-              Add photos of your room or inspiration (optional)
-            </label>
-            <input
-              ref={fileInput}
-              id="contact-attachments"
-              type="file"
-              name="attachments"
-              accept="image/jpeg,image/png,image/webp"
-              multiple
-              onChange={handleFiles}
-              aria-describedby={fileError ? 'contact-attachments-error' : 'contact-attachments-hint'}
-              className={inputClass}
-            />
-            <p id="contact-attachments-hint" className="mt-1 text-xs font-sans text-[var(--sukla-charcoal)]/60">
-              Up to 5 images (JPG, PNG or WebP), 25 MB each.
-            </p>
-            {fileError && <p id="contact-attachments-error" className={errorClass}>{fileError}</p>}
-            {files.length > 0 && (
-              <ul className="mt-2 space-y-1 text-xs font-sans">
-                {files.map((f, i) => (
-                  <li key={`${f.name}-${i}`} className="flex items-center justify-between gap-3">
-                    <span className="truncate">{f.name}</span>
-                    <button type="button" onClick={() => removeFile(i)} className="underline shrink-0" aria-label={`Remove ${f.name}`}>
-                      Remove
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
           <div aria-hidden="true" style={{ position: 'absolute', left: '-10000px', width: 1, height: 1, overflow: 'hidden' }}>
             <label htmlFor="contact-gotcha">Leave this field empty</label>
             <input id="contact-gotcha" type="text" name="_gotcha" tabIndex={-1} autoComplete="off" defaultValue="" />
           </div>
-          <Button type="submit" variant="primary" fullWidth size="lg" disabled={sending}>
+          <Button type="submit" variant="primary" fullWidth size="md" disabled={sending}>
             {sending ? 'Sending...' : 'Send Message'}
-          </Button>        </form>
+          </Button>
+        </form>
+        </div>
+
+        <div className="relative hidden md:block min-h-[20rem] bg-[#F6F4EE]">
+          <Image
+            src="/images/custom-page/grid2.jpg"
+            alt="Illustration of designers gathered around a table reviewing rug sketches and swatches"
+            fill
+            unoptimized
+            loading="eager"
+            sizes="50vw"
+            className="object-contain object-center"
+          />
+        </div>
       </div>
+
+      {children && <div className="space-y-8 pt-8">{children}</div>}
     </section>
   );
 }

@@ -3,6 +3,8 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import { Header } from '@/components/navigation/Header';
 import { Footer } from '@/components/layout/Footer';
+import { ContactForm } from '@/components/editorial/ContactForm';
+import { TradeDesignerContent } from '@/components/editorial/TradeDesignerContent';
 
 export const metadata: Metadata = {
   title: 'Custom Rugs: Made Just for You | SUKLA RUGS',
@@ -118,7 +120,15 @@ export default function CustomisationPage() {
               ))}
             </ol>
           </div>
-        </section>      </main>
+        </section>
+
+        {/* Contact: same enquiry form (Formspree) and Trade Program content as /contact. */}
+        <div className="editorial-container max-w-4xl mx-auto py-10 md:py-14">
+          <ContactForm>
+            <TradeDesignerContent headingAs="h2" showApplication={false} />
+          </ContactForm>
+        </div>
+      </main>
 
       <Footer />
     </div>

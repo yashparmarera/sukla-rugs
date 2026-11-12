@@ -19,8 +19,9 @@ export default function ContactPage() {
       <main className="flex-1 py-16 md:py-24">
         <h1 className="sr-only">Contact Us</h1>
         <div className="editorial-container max-w-4xl mx-auto space-y-16">
-          <TradeDesignerContent headingAs="h2" showApplication={false} />
-          <ContactForm />
+          <ContactForm>
+            <TradeDesignerContent headingAs="h2" showApplication={false} />
+          </ContactForm>
         </div>
       </main>
 

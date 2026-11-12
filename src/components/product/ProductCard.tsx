@@ -49,11 +49,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
     '';
 
   return (
-    <div className="group relative flex flex-col md:bg-white md:border md:border-[var(--sukla-muted-border)]/70 md:hover:border-[var(--sukla-taupe)] transition-all duration-300">
+    <div className="group relative flex flex-col md:bg-white transition-all duration-300">
       {/* Image Container with Hover Swap */}
       <Link
         href={`/products/${product.handle}`}
-        className="relative aspect-[3/4] md:aspect-square w-full overflow-hidden bg-[var(--sukla-sand)] md:bg-white md:border-b md:border-[var(--sukla-muted-border)]/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[var(--sukla-charcoal)]"
+        className="relative aspect-[3/4] md:aspect-square w-full overflow-hidden bg-[var(--sukla-sand)] md:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[var(--sukla-charcoal)]"
       >
 
         {/* Primary Image — matted frame: whole rug shown on an ivory tile,
