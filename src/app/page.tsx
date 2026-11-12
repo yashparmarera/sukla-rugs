@@ -18,7 +18,6 @@ import { getProducts } from '@/lib/shopify/client';
 import { getSelectedCountry } from '@/lib/localization.server';
 import { Button } from '@/components/ui/Button';
 import { KnotGlyph } from '@/components/ui/KnotGlyph';
-import { BrandEntrance } from '@/components/entry/BrandEntrance';
 
 export const metadata = {
   title: 'SUKLA RUGS | Ultra-Premium Handcrafted Indian Rugs | Bhadohi',
@@ -39,7 +38,7 @@ export default async function HomePage() {
   ]);
 
   return (
-    <BrandEntrance>
+    <>
       <div className="flex flex-col min-h-screen bg-[var(--sukla-ivory)]">
       <Header />
 
@@ -121,6 +120,6 @@ export default async function HomePage() {
 
       <Footer />
       </div>
-    </BrandEntrance>
+    </>
   );
 }
