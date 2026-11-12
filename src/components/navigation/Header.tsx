@@ -113,18 +113,8 @@ export const Header: React.FC = () => {
               Customisation
             </Link>
 
-            {/* TRADE & DESIGNER: sit right beside Customisation */}
-            <Link
-              href="/trade"
-              className="rounded-sm border border-[var(--sukla-charcoal)] px-3 py-1 text-[12px] xl:text-[13px] hover:border-[var(--sukla-terracotta)] hover:text-[var(--sukla-terracotta)] transition-colors"
-            >
-              Trade
-            </Link>
-            <Link
-              href="/trade"
-              className="-ml-1 xl:-ml-4 rounded-sm border border-[var(--sukla-charcoal)] px-3 py-1 text-[12px] xl:text-[13px] hover:border-[var(--sukla-terracotta)] hover:text-[var(--sukla-terracotta)] transition-colors"
-            >
-              Designer
+            <Link href="/contact" className="hover-underline-animation font-medium">
+              Contact Us
             </Link>
           </nav>
           </div>
@@ -240,6 +230,9 @@ export const Header: React.FC = () => {
               </Link>
               <Link href="/trade" onClick={() => setMobileMenuOpen(false)} className="block text-xs">
                 Trade & Designers Program
+              </Link>
+              <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="block text-xs">
+                Contact Us
               </Link>
               <Link href="/journal" onClick={() => setMobileMenuOpen(false)} className="block text-xs">
                 Blogs

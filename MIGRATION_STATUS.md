@@ -183,3 +183,7 @@ px tsc --noEmit and eslint pass; Playwright at 1440px and 390px confirmed the pa
 - File uploads need a paid Formspree plan; upload-related errors show a remove-photos/WhatsApp message.
 - Verified: tsc and eslint clean; Playwright at 1440 and 390 with mocked Formspree (200, 422 field error, 422 upload error, network abort) and multipart field names. No live submission was sent. Not verified: real delivery and uploads on the live endpoint.
 
+
+## Contact form email readability (Next.js, src/)
+- src/components/editorial/ContactForm.tsx: Formspree fields now sent as labelled, ordered keys (Enquiry type, Name, Email, Phone, Message, Submitted from page, Photos attached); _replyto carries reply-to; dynamic _subject; blank phone -> 'Not provided'; 422 field mapping handles new names.
+- Validated: tsc and eslint clean; Playwright with mocked Formspree route confirmed names, order and subject. Live email rendering not checked.

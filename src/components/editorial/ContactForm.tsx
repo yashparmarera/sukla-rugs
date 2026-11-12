@@ -29,6 +29,7 @@ const MAX_FILE_BYTES = 25 * 1024 * 1024;
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
 const ENQUIRY_TYPES = ['General enquiry', 'Trade & Designer', 'Custom rug', 'Order support'];
 
+const FIELD_KEYS: Record<string, keyof Fields> = { name: 'name', email: 'email', _replyto: 'email', phone: 'phone', message: 'message' };
 type FormspreeError = { field?: string; code?: string; message?: string };
 const inputClass =
   'w-full bg-[var(--sukla-ivory)] border border-[var(--sukla-muted-border)] p-3 text-sm font-sans text-[var(--sukla-charcoal)] focus:outline-none focus:border-[var(--sukla-charcoal)]';
@@ -76,15 +77,21 @@ export function ContactForm() {
     if (Object.keys(found).length > 0) return;
 
     const data = new FormData();
-    data.append('name', fields.name.trim());
-    data.append('email', fields.email.trim());
-    data.append('phone', fields.phone.trim());
-    data.append('message', fields.message.trim());
-    data.append('enquiry_type', enquiryType);
-    data.append('_subject', 'New SUKLA RUGS website enquiry');
-    data.append('page', window.location.pathname);
-    data.append('_gotcha', (e.currentTarget.elements.namedItem('_gotcha') as HTMLInputElement | null)?.value ?? '');
-    files.forEach((f) => data.append('attachments', f));
+    const clean = (v: string) => v.replace(/\s+/g, ' ').trim();
+    const name = clean(fields.name);
+    const email = fields.email.trim();
+    const phone = clean(fields.phone);
+    data.append('Enquiry type', enquiryType);
+    data.append('Name', name);
+    data.append('Email', email);
+    data.append('Phone', phone || 'Not provided');
+    data.append('Message', fields.message.trim());
+    data.append('Submitted from page', window.location.origin + window.location.pathname);
+    data.append('Photos attached', files.length > 0 ? `Yes (${files.length} ${files.length === 1 ? 'file' : 'files'})` : 'No');
+    data.append('_replyto', email);
+    const subject = `New ${enquiryType} enquiry from ${name} | SUKLA RUGS`;
+    data.append('_subject', subject.length > 100 ? subject.slice(0, 97).trimEnd() + '...' : subject);
+    data.append('_gotcha', (e.currentTarget.elements.namedItem('_gotcha') as HTMLInputElement | null)?.value ?? '');    files.forEach((f) => data.append('attachments', f));
 
     setSending(true);
     try {
@@ -112,7 +119,8 @@ export function ContactForm() {
       for (const err of list) {
         const text = `${err.code ?? ''} ${err.message ?? ''}`.toLowerCase();
         if (/file|upload|attachment/.test(text)) uploadProblem = true;
-        if (err.field && err.field in fields) fieldErrors[err.field as keyof Fields] = err.message || 'Please check this field.';
+        const key = FIELD_KEYS[(err.field ?? '').toLowerCase()];
+        if (key) fieldErrors[key] = err.message || 'Please check this field.';
         else if (err.message) general.push(err.message);
       }
       setErrors(fieldErrors);

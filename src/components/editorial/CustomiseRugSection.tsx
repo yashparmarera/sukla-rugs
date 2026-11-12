@@ -1,25 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { HomeCustomSizeCalculator } from '@/components/product/CustomSizeCalculator';
-import { CUSTOM_RUG_PRICING, MAX_SIDE_FT, MIN_SIDE_FT } from '@/lib/custom-rug-pricing';
 import { whatsappUrl } from '@/lib/contact';
-
-const CONSTRUCTION_LABELS = Object.values(CUSTOM_RUG_PRICING).map((pricing) => pricing.label);
-
-const STEPS = [
-  {
-    title: 'Choose construction',
-    body: `Pick ${CONSTRUCTION_LABELS.slice(0, -1).join(', ')} or ${CONSTRUCTION_LABELS.at(-1)}. Each has its own rate per sq ft.`
-  },
-  {
-    title: 'Enter your size',
-    body: `Add the width and length in feet or centimetres, from ${MIN_SIDE_FT} to ${MAX_SIDE_FT} ft a side. Standard sizes use our size chart; other sizes are priced by area.`
-  },
-  {
-    title: 'See your quote',
-    body: 'You get an estimated price and lead time. Send it to our team on WhatsApp and they confirm the final price.'
-  }
-] as const;
 
 /**
  * Home page "Customise your rug" section. Server component: static copy around
@@ -68,23 +50,6 @@ export const CustomiseRugSection: React.FC = () => {
             Need a size that is not on the product page? Choose a construction, enter the width and length you need,
             and get an instant estimated price for a custom-size rug.
           </p>
-
-          <ol className="mt-6 space-y-4">
-            {STEPS.map((step, index) => (
-              <li
-                key={step.title}
-                className="grid grid-cols-[2rem_1fr] gap-x-3 border-t border-[var(--sukla-muted-border)] pt-4"
-              >
-                <span className="nums text-xs tracking-[0.25em] text-[var(--sukla-terracotta)] font-sans pt-1">
-                  {String(index + 1).padStart(2, '0')}
-                </span>
-                <div>
-                  <h3 className="heading text-base text-[var(--sukla-charcoal)]">{step.title}</h3>
-                  <p className="mt-1 font-sans text-sm text-[var(--sukla-charcoal)]/70 leading-relaxed">{step.body}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
 
           <p className="mt-6 font-sans text-sm text-[var(--sukla-charcoal)]/70 text-center md:text-left">
             Prefer to talk it through?{' '}

@@ -17,7 +17,6 @@ import { JournalPreview } from '@/components/journal/JournalPreview';
 import { getProducts } from '@/lib/shopify/client';
 import { getSelectedCountry } from '@/lib/localization.server';
 import { Button } from '@/components/ui/Button';
-import { KnotGlyph } from '@/components/ui/KnotGlyph';
 
 export const metadata = {
   title: 'SUKLA RUGS | Ultra-Premium Handcrafted Indian Rugs | Bhadohi',
@@ -98,24 +97,6 @@ export default async function HomePage() {
 
         {/* Journal Preview */}
         <JournalPreview />
-
-        {/* Final Brand Banner CTA */}
-        <section className="py-14 md:py-24 bg-[var(--sukla-cream)] border-t border-[var(--sukla-muted-border)] text-center">
-          <div className="editorial-container max-w-3xl mx-auto space-y-6">
-            <KnotGlyph size="md" className="text-[var(--sukla-terracotta)]" />
-            <h2 className="display-lg text-2xl md:text-5xl text-[var(--sukla-charcoal)]">
-              Transform Your Architecture
-            </h2>
-            <p className="font-sans text-base md:text-lg text-[var(--sukla-charcoal)]/75 leading-relaxed">
-              Discover why top interior architects specify SUKLA RUGS for luxury residences worldwide.
-            </p>
-            <div className="pt-4 flex justify-center gap-4">
-              <Button href="/shop" variant="primary" size="lg">
-                Shop All Rugs
-              </Button>
-            </div>
-          </div>
-        </section>
       </main>
 
       <Footer />

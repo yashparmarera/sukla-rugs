@@ -12,6 +12,7 @@ export type AnalyticsEvent =
   | 'wishlist'
   | 'consultation_submit'
   | 'trade_enquiry'
+  | 'contact_handoff'
   | 'custom_quote_request';
 
 export function trackEvent(event: AnalyticsEvent, payload?: Record<string, unknown>): void {
