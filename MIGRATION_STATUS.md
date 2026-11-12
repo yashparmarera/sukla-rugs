@@ -170,3 +170,16 @@ When completing a task, update:
 - Validation: 
 px tsc --noEmit and eslint pass; Playwright at 1440px and 390px confirmed the panel is visible without clicking and inputs accept text.
 
+
+## Next.js /contact page (Next.js only; shopify-theme/ untouched)
+- Added src/app/contact/page.tsx, src/components/editorial/ContactForm.tsx, src/components/editorial/TradeDesignerContent.tsx (shared with /trade, which is visually unchanged; /trade gained metadata). Header 'Contact Us' now links to /contact; mobile menu has a Contact Us link and keeps the Trade link. Added 'contact_handoff' analytics event.
+- No backend endpoint exists, so the form validates on the client and opens a prefilled WhatsApp message (whatsappUrl()) with a mailto fallback. Nothing is stored server-side.
+- Verified: tsc clean; Playwright at 1440/390 for /contact and /trade, validation errors and handoff state. Header.tsx has a pre-existing eslint react-hooks/set-state-in-effect error (cart effect), not from this change.
+
+## Contact form -> Formspree (Next.js, src/)
+
+- src/components/editorial/ContactForm.tsx now POSTs multipart FormData (Accept: application/json) to Formspree instead of the WhatsApp/mailto handoff. Fields: name, email, phone, message, enquiry_type, _subject, page, _gotcha (honeypot), optional attachments (max 5 JPG/PNG/WebP, 25 MB each).
+- Endpoint is read from NEXT_PUBLIC_FORMSPREE_CONTACT_URL (default https://formspree.io/f/mzeevkwq); documented in .env.example.
+- File uploads need a paid Formspree plan; upload-related errors show a remove-photos/WhatsApp message.
+- Verified: tsc and eslint clean; Playwright at 1440 and 390 with mocked Formspree (200, 422 field error, 422 upload error, network abort) and multipart field names. No live submission was sent. Not verified: real delivery and uploads on the live endpoint.
+
