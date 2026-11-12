@@ -1,190 +1,162 @@
-'use client';
-
-import React, { useState } from 'react';
+import React from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, Check } from 'lucide-react';
-import { KnotGlyph } from '@/components/ui/KnotGlyph';
-import { Button } from '@/components/ui/Button';
-import { EMAIL, EMAIL_HREF, PHONE_DISPLAY, PHONE_TEL } from '@/lib/contact';
-import { LEGAL_PAGES } from '@/lib/legal/shared';
+import { SocialLinks } from '@/components/ui/SocialLinks';
+import { PaymentLogos } from '@/components/ui/PaymentLogos';
 import { ConsentButton } from '@/components/consent/ConsentButton';
+import { EMAIL, EMAIL_HREF, MAILING_ADDRESS, PHONE_DISPLAY, PHONE_TEL } from '@/lib/contact';
+import { LEGAL_PAGES } from '@/lib/legal/shared';
+import { shopHref } from '@/lib/shop-menu';
+
+type FooterLink = { label: string; href: string };
+
+const EXPLORE_LINKS: FooterLink[] = [
+  { label: 'Shop All Rugs', href: '/shop' },
+  { label: 'Custom Rugs', href: '/custom-rugs' },
+  { label: 'Customisation', href: '/customisation' },
+  { label: 'Design Consultation', href: '/design-consultation' },
+  { label: 'Trade & Designers', href: '/trade' },
+  { label: 'Journal', href: '/journal' }
+];
+
+const SUPPORT_LINKS: FooterLink[] = [
+  { label: 'Our Story', href: '/story' },
+  { label: 'Our Process', href: '/process' },
+  { label: 'Artisans', href: '/artisans' },
+  { label: 'Sustainability', href: '/sustainability' },
+  { label: 'Rug Size Guide', href: '/guides/rug-size' },
+  { label: 'Rug Care Guide', href: '/guides/rug-care' },
+  { label: 'Contact', href: '/contact' }
+];
+
+const POPULAR_SEARCHES: FooterLink[] = [
+  { label: 'Wool Rugs', href: shopHref('material', 'wool') },
+  { label: 'Custom Rugs', href: '/custom-rugs' },
+  { label: 'Hand Knotted Rugs', href: shopHref('construction', 'hand-knotted') },
+  { label: 'Hand Tufted Rugs', href: shopHref('construction', 'hand-tufted') },
+  { label: 'Runners', href: shopHref('collection', 'runners') },
+  { label: 'Round Rugs', href: shopHref('collection', 'round-rugs') },
+  { label: 'Rugs for Living Room', href: shopHref('room', 'living-room') },
+  { label: 'Rugs for Bedroom', href: shopHref('room', 'bedroom') }
+];
+
+const FOCUS =
+  'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--sukla-terracotta)]';
+const LINK = `transition-colors hover:text-[var(--sukla-terracotta)] ${FOCUS}`;
+
+function LinkColumn({ heading, links, label }: { heading: string; links: FooterLink[]; label: string }) {
+  return (
+    <nav aria-label={label}>
+      <h2 className="eyebrow mb-3 text-[11px] font-bold text-[var(--sukla-charcoal)]">{heading}</h2>
+      <ul className="space-y-2 text-sm text-[var(--sukla-charcoal)]/75">
+        {links.map((link) => (
+          <li key={link.href}>
+            <Link href={link.href} className={LINK}>
+              {link.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+}
 
 export const Footer: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
-
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email.trim()) {
-      setSubscribed(true);
-      setEmail('');
-    }
-  };
-
   return (
-    <footer className="bg-[var(--sukla-charcoal)] text-[var(--sukla-ivory)] pt-20 pb-12 border-t border-white/10">
-      <div className="editorial-container">
-        
-        {/* Top Newsletter & Brand Statement */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-16 border-b border-white/10">
-          <div className="lg:col-span-6 space-y-6">
-            <div className="flex items-center gap-3">
-              <KnotGlyph size="md" className="text-[var(--sukla-terracotta)]" />
-              <span className="font-display text-2xl tracking-[0.22em] uppercase font-medium">
-                SUKLA RUGS
+    <footer className="border-t border-[var(--sukla-muted-border)] bg-[var(--sukla-cream)] font-sans text-[var(--sukla-charcoal)]">
+      <div className="editorial-container pt-10 pb-6 md:pt-12">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
+          <div className="space-y-4">
+            <Link href="/" aria-label="Sukla Rugs home" className={`inline-flex items-center gap-3 ${FOCUS}`}>
+              <Image
+                src="/images/visual-mark/visualmark.png"
+                alt=""
+                width={2000}
+                height={2000}
+                className="h-11 w-11 object-contain"
+              />
+              <span className="flex flex-col leading-none">
+                <span className="font-display text-lg font-medium uppercase tracking-[0.22em]">SUKLA RUGS</span>
+                <span className="mt-1 text-[9px] uppercase tracking-[0.3em] text-[var(--sukla-taupe)]">
+                  Bhadohi • India
+                </span>
               </span>
-            </div>
-            <p className="font-serif italic text-lg text-[var(--sukla-taupe-light)] max-w-md">
-              &quot;Every rug tells a story. Handcrafted in Bhadohi, Uttar Pradesh — designed for living spaces around the world.&quot;
+            </Link>
+            <p className="max-w-xs text-sm leading-relaxed text-[var(--sukla-charcoal)]/75">
+              Handcrafted rugs made by artisans in Bhadohi, Uttar Pradesh, for homes around the world.
             </p>
-            <div className="text-xs font-sans text-white/60 space-y-1">
-              <p>Craft Workshop: Bhadohi Carpet Belt, Uttar Pradesh 221401, India</p>
+            <SocialLinks />
+          </div>
+
+          <LinkColumn heading="Explore" label="Footer explore" links={EXPLORE_LINKS} />
+          <LinkColumn heading="About & Support" label="Footer about and support" links={SUPPORT_LINKS} />
+
+          <div>
+            <h2 className="eyebrow mb-3 text-[11px] font-bold text-[var(--sukla-charcoal)]">Contact Us</h2>
+            <address className="space-y-2 text-sm not-italic text-[var(--sukla-charcoal)]/75">
+              <p>{MAILING_ADDRESS}</p>
               <p>
-                Client Concierge:{' '}
-                <a
-                  href={EMAIL_HREF}
-                  className="hover:text-white transition-colors"
-                >
+                <a href={EMAIL_HREF} className={LINK}>
                   {EMAIL}
-                </a>{' '}
-                |{' '}
-                <a href={PHONE_TEL} className="nums hover:text-white transition-colors">
+                </a>
+              </p>
+              <p>
+                <a href={PHONE_TEL} className={`nums ${LINK}`}>
                   {PHONE_DISPLAY}
                 </a>
               </p>
-            </div>
-          </div>
-
-          <div className="lg:col-span-6 space-y-4 lg:pl-12">
-            <h4 className="eyebrow text-xs text-[var(--sukla-terracotta)]">
-              The Sukla Journal &amp; Private Inquiries
-            </h4>
-            <p className="text-xs font-sans text-[var(--sukla-ivory)]/70 leading-relaxed">
-              Subscribe to receive private previews of new loom releases, artisan narratives, and bespoke design guides.
-            </p>
-            
-            {subscribed ? (
-              <div className="p-4 bg-white/5 border border-[var(--sukla-terracotta)] text-xs font-sans text-white flex items-center gap-3">
-                <Check className="w-4 h-4 text-[var(--sukla-terracotta)]" />
-                <span>Thank you. You have been added to the SUKLA RUGS private registry.</span>
-              </div>
-            ) : (
-              <form onSubmit={handleSubscribe} className="flex gap-2 max-w-md">
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email address..."
-                  className="flex-1 bg-white/5 border border-white/20 px-4 py-3 text-xs font-sans text-white placeholder:text-white/40 focus:outline-none focus:border-[var(--sukla-terracotta)] transition-colors"
-                />
-                <Button type="submit" variant="terracotta" size="sm">
-                  <span>Join</span>
-                  <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
-                </Button>
-              </form>
-            )}
+            </address>
+            <PaymentLogos className="mt-5 border-t border-[var(--sukla-muted-border)] pt-4 md:justify-end" />
           </div>
         </div>
 
-        {/* Multi-column Navigation Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 py-16 border-b border-white/10 text-xs font-sans">
-          
-          {/* Col 1: Shop */}
-          <div className="space-y-4">
-            <h5 className="eyebrow text-[var(--sukla-terracotta)] text-[11px]">
-              Shop Collections
-            </h5>
-            <ul className="space-y-2.5 text-white/70">
-              <li><Link href="/shop" className="hover:text-white transition-colors">All Handcrafted Rugs</Link></li>
-              <li><Link href="/collections/hand-knotted-oushak" className="hover:text-white transition-colors">Hand-Knotted Oushak</Link></li>
-              <li><Link href="/collections/persian-hand-tufted" className="hover:text-white transition-colors">Persian Hand-Tufted</Link></li>
-              <li><Link href="/collections/modern-hand-tufted" className="hover:text-white transition-colors">Modern Hand-Tufted</Link></li>
-              <li><Link href="/collections/hand-woven-rugs" className="hover:text-white transition-colors">Hand-Woven Rugs</Link></li>
-              <li><Link href="/collections/the-artisan-loop-collection" className="hover:text-white transition-colors">The Artisan Loop</Link></li>
-              <li><Link href="/collections/hand-woven-jute" className="hover:text-white transition-colors">Hand-Woven Jute</Link></li>
-            </ul>
-          </div>
+        <nav
+          aria-label="Popular searches"
+          className="mt-8 border-t border-[var(--sukla-muted-border)] pt-5 text-xs leading-7 text-[var(--sukla-charcoal)]/75"
+        >
+          <h2 className="eyebrow mr-2 inline text-[11px] font-bold text-[var(--sukla-charcoal)]">Popular Searches</h2>
+          <ul className="inline">
+            {POPULAR_SEARCHES.map((link, index) => (
+              <li key={link.label} className="inline">
+                {index > 0 && (
+                  <span aria-hidden="true" className="mx-2 text-[var(--sukla-taupe)]">
+                    |
+                  </span>
+                )}
+                <Link href={link.href} className={`underline underline-offset-2 ${LINK}`}>
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
-          {/* Col 2: Discover */}
-          <div className="space-y-4">
-            <h5 className="eyebrow text-[var(--sukla-terracotta)] text-[11px]">
-              Discover &amp; Heritage
-            </h5>
-            <ul className="space-y-2.5 text-white/70">
-              <li><Link href="/story" className="hover:text-white transition-colors">Our Story</Link></li>
-              <li><Link href="/process" className="hover:text-white transition-colors">7 Craft Stages</Link></li>
-              <li><Link href="/artisans" className="hover:text-white transition-colors">Artisans of Bhadohi</Link></li>
-              <li><Link href="/sustainability" className="hover:text-white transition-colors">Sustainability & Ethics</Link></li>
-              <li><Link href="/journal" className="hover:text-white transition-colors">The Journal</Link></li>
-            </ul>
-          </div>
-
-          {/* Col 3: Services & Guides */}
-          <div className="space-y-4">
-            <h5 className="eyebrow text-[var(--sukla-terracotta)] text-[11px]">
-              Services &amp; Guides
-            </h5>
-            <ul className="space-y-2.5 text-white/70">
-              <li><Link href="/design-consultation" className="hover:text-white transition-colors">Design Consultation</Link></li>
-              <li><Link href="/guides/rug-size" className="hover:text-white transition-colors">Rug Size Placement Guide</Link></li>
-              <li><Link href="/guides/rug-care" className="hover:text-white transition-colors">Rug Care & Stain Removal</Link></li>
-              <li><Link href="/custom-rugs" className="hover:text-white transition-colors">Bespoke Rug Projects</Link></li>
-              <li><Link href="/trade" className="hover:text-white transition-colors">Trade & Designer Program</Link></li>
-            </ul>
-          </div>
-
-          {/* Col 4: International Markets & Guarantees */}
-          <div className="space-y-4">
-            <h5 className="eyebrow text-[var(--sukla-terracotta)] text-[11px]">
-              Global Markets
-            </h5>
-            <p className="text-white/70 leading-relaxed">
-              Servicing interior designers, private residences, and architecture firms across United States, Canada, United Kingdom, European Union, Australia, and UAE.
-            </p>
-          </div>
-
-          {/* Col 5: Help & Policies */}
-          <div className="space-y-4">
-            <h5 className="eyebrow text-[var(--sukla-terracotta)] text-[11px]">
-              Help &amp; Policies
-            </h5>
-            <ul className="space-y-2.5 text-white/70">
+        <div className="mt-4 flex flex-col gap-3 border-t border-[var(--sukla-muted-border)] pt-4 text-[11px] text-[var(--sukla-charcoal)]/65 md:flex-row md:items-center md:justify-between">
+          <p>
+            <span className="nums">&copy; {new Date().getFullYear()}</span> SUKLA RUGS. All rights reserved.
+          </p>
+          <nav aria-label="Legal">
+            <ul className="flex flex-wrap gap-x-4 gap-y-1">
               {LEGAL_PAGES.map((page) => (
-                <li key={page.href}><Link href={page.href} className="hover:text-white transition-colors">{page.label}</Link></li>
+                <li key={page.href}>
+                  <Link href={page.href} className={LINK}>
+                    {page.label}
+                  </Link>
+                </li>
               ))}
               <li>
-                <ConsentButton
-                  mode="preferences"
-                  className="text-left hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--sukla-terracotta)]"
-                >
+                <ConsentButton mode="preferences" className={`text-left ${LINK}`}>
                   Cookie preferences
                 </ConsentButton>
               </li>
               <li>
-                <ConsentButton
-                  mode="do-not-sell"
-                  className="text-left hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--sukla-terracotta)]"
-                >
+                <ConsentButton mode="do-not-sell" className={`text-left ${LINK}`}>
                   Do Not Sell or Share My Personal Information
                 </ConsentButton>
               </li>
             </ul>
-          </div>
-
+          </nav>
         </div>
-
-        {/* Bottom Bar & Legal */}
-        <div className="pt-8 flex flex-col md:flex-row justify-between items-center text-[11px] font-sans text-white/50 space-y-4 md:space-y-0">
-          <p><span className="nums">Â© {new Date().getFullYear()}</span> SUKLA RUGS. All rights reserved. Handcrafted in Bhadohi, India.</p>
-          <div className="flex space-x-6">
-            <span>Shopify Headless Commerce</span>
-            <span>WCAG 2.1 AA Accessible</span>
-            <span>Privacy Policy</span>
-            <span>Terms of Service</span>
-          </div>
-        </div>
-
       </div>
     </footer>
   );
