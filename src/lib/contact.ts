@@ -7,16 +7,16 @@
  */
 
 /** E.164 formatted phone number. */
-export const PHONE_E164 = '+919625530731';
+export const PHONE_E164 = '+917533031703';
 
 /** Human-readable display form of the business phone number. */
-export const PHONE_DISPLAY = '+91 96255 30731';
+export const PHONE_DISPLAY = '+91 75330 31703';
 
 /** `tel:` link target for the business phone number. */
-export const PHONE_TEL = 'tel:+919625530731';
+export const PHONE_TEL = 'tel:+917533031703';
 
 /** Phone number in the digits-only form expected by wa.me links. */
-export const WHATSAPP_NUMBER = '919625530731';
+export const WHATSAPP_NUMBER = '917533031703';
 
 /** Default prewritten message used for WhatsApp deep links. */
 export const WHATSAPP_MESSAGE = "Hi Sukla Rugs, I'd like to know more about your rugs.";

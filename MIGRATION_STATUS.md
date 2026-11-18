@@ -201,3 +201,6 @@ px tsc --noEmit and eslint pass; Playwright at 1440px and 390px confirmed the pa
 - 'More' dropdown removed; Design Consultation and Trade & Designers Program kept as small rows under Contact Us. No search icon (no search route exists). Social row shows Instagram, Facebook, Pinterest from src/lib/social.ts; YouTube omitted, URL needed.
 - Validation: tsc clean; eslint only the pre-existing set-state-in-effect error at Header.tsx:35; Playwright 390px (dropdown rework): chevrons not arrows, each dropdown toggles aria-expanded false->true, opening one closes the others, nested Shop group opens, link click navigates and closes drawer; drill-down panels/back buttons removed; 1440px header unchanged. Not verified: screen readers, keyboard Enter/Space beyond native button behaviour.
 
+
+## Home Bhadohi section copy (Next.js)
+- src/components/craft/BhadohiStorySection.tsx: copy now sourced from /story (1977, Carpet City, second-generation, 'born on the loom' line) and /process (7 real stage names, up to 1,200,000 knots). Removed unsourced '16 weeks' (process page says 12 to 16 weeks, metadata says 14), 'Centuries', 'hand-spun wool and pure silk' claims. tsc and eslint clean; Playwright 1440/390 no horizontal overflow.

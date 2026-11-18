@@ -4,14 +4,22 @@ import Link from 'next/link';
 import { KnotGlyph } from '@/components/ui/KnotGlyph';
 import { Button } from '@/components/ui/Button';
 
-/** Figures and steps below come from the existing Bhadohi / 7-stage copy; nothing new is claimed. */
+/** Copy: /story (1977, Carpet City, second-generation) and /process (7 stage names, 12 to 16 weeks of hand-knotting in stage 05). */
 const STATS = [
-  { value: '1,200,000', label: 'Hand-tied knots, up to, in a single rug' },
-  { value: '16', label: 'Weeks of dedicated hand weaving' },
-  { value: '7', label: 'Craft stages from raw fibre to finished rug' }
+  { value: '1977', label: 'Family foundation laid in Bhadohi' },
+  { value: '7', label: 'Craft stages, from fibre sourcing to final quality check' },
+  { value: '12–16', label: 'Weeks of hand-knotting and weaving per rug' }
 ] as const;
 
-const PROCESS_STEPS = ['Hand-carding', 'Natural vat-dyeing', 'Precision warping', 'Meticulous knotting', 'Sun washing'] as const;
+const PROCESS_STEPS = [
+  'Fiber Sourcing & Hand-Carding',
+  'Hand-Spinning Raw Yarn',
+  'Eco-Friendly Vat Dyeing',
+  'Loom Warping & Pattern Drafting',
+  'Hand-Knotting & Weaving',
+  'Washing & Natural Sun Drying',
+  'Hand Shearing & Final Quality Check'
+] as const;
 
 export const BhadohiStorySection: React.FC = () => {
   return (
@@ -51,27 +59,27 @@ export const BhadohiStorySection: React.FC = () => {
           <div className="space-y-7 text-center lg:text-left lg:order-1 lg:col-span-7 lg:pr-6">
             <p className="inline-flex items-center justify-center gap-2 lg:justify-start font-sans text-[11px] uppercase tracking-[0.25em] text-[var(--sukla-terracotta-dark)]">
               <KnotGlyph size="sm" />
-              <span>Artisan Heritage &bull; Uttar Pradesh, India</span>
+              <span>Since 1977 &bull; Bhadohi, Uttar Pradesh, India</span>
             </p>
 
             <h2
               id="bhadohi-heading"
               className="display-lg text-2xl leading-[1.1] text-[var(--sukla-charcoal)] sm:text-4xl md:text-5xl"
             >
-              Bhadohi: The Heart of
-              <br className="hidden sm:block" /> Indian Rug Weaving
+              Our Story Begins
+              <br className="hidden sm:block" /> in the Carpet City
             </h2>
 
             <div aria-hidden="true" className="mx-auto lg:mx-0 h-px w-16 bg-[var(--sukla-terracotta)]" />
 
             <p className="font-serif text-xl italic leading-relaxed text-[var(--sukla-charcoal)]/85 md:text-2xl">
-              Centuries of craftsmanship flow through Bhadohi, where master weavers transform hand-spun wool and pure
-              silk into enduring pieces of art.
+              Our rugs are not just manufactured. They are born on the loom, woven with patience, precision, and a deep
+              respect for the raw materials.
             </p>
 
             <p className="mx-auto lg:mx-0 max-w-xl font-sans text-sm leading-relaxed text-[var(--sukla-charcoal)]/75 md:text-base">
-              Every SUKLA RUG begins with natural raw materials: high-grade New Zealand wool, Bikaner long-staple
-              fibres, and organic jute. Our 7-stage craft process takes those fibres through each step below.
+              In 1977, our family laid the foundation in Bhadohi, India's legendary Carpet City. Today, as a
+              second-generation family business, we carry that vision forward through seven craft stages.
             </p>
 
             <ul className="flex flex-wrap justify-center lg:justify-start gap-2" aria-label="Craft process steps">
