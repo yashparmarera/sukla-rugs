@@ -92,7 +92,7 @@ export const WishlistView: React.FC = () => {
   if (hasError) {
     return (
       <div role="alert" className={PANEL_CLASSES}>
-        <KnotGlyph size="md" className="text-[var(--sukla-taupe)]" />
+        <KnotGlyph size="md" className="text-[var(--sukla-taupe-text)]" />
         <h2 className="heading text-xl text-[var(--sukla-charcoal)]">We couldn&apos;t load your wishlist</h2>
         <p className="font-sans text-sm text-[var(--sukla-charcoal)]/70 max-w-md mx-auto leading-relaxed">
           Your saved rugs are still stored on this device. Please try again.
@@ -107,7 +107,7 @@ export const WishlistView: React.FC = () => {
   if (items.length === 0) {
     return (
       <div className={PANEL_CLASSES}>
-        <KnotGlyph size="md" className="text-[var(--sukla-taupe)]" />
+        <KnotGlyph size="md" className="text-[var(--sukla-taupe-text)]" />
         <h2 className="heading text-xl text-[var(--sukla-charcoal)]">Your wishlist is empty</h2>
         <p className="font-sans text-sm text-[var(--sukla-charcoal)]/70 max-w-md mx-auto leading-relaxed">
           Tap the heart on any rug to save it here and come back to it later.

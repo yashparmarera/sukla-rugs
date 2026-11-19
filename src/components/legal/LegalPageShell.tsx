@@ -31,14 +31,14 @@ export const LegalPageShell: React.FC<LegalPageShellProps> = ({
       <div className="editorial-container space-y-12 md:space-y-16">
         <header className="text-center space-y-4 max-w-3xl mx-auto">
           <KnotGlyph size="md" className="text-[var(--sukla-terracotta)]" />
-          <span className="text-xs uppercase tracking-[0.25em] text-[var(--sukla-taupe)] font-sans block">
+          <span className="text-xs uppercase tracking-[0.25em] text-[var(--sukla-taupe-text)] font-sans block">
             {kicker}
           </span>
           <h1 data-legal-text className="display-lg text-3xl sm:text-4xl md:text-5xl text-[var(--sukla-charcoal)] break-words">
             {title}
           </h1>
           {showEffectiveDate && (
-            <p data-legal-text className="nums text-sm font-sans text-[var(--sukla-taupe)]">
+            <p data-legal-text className="nums text-sm font-sans text-[var(--sukla-taupe-text)]">
               Effective Date: <time dateTime={LEGAL_EFFECTIVE_DATE.iso}>{LEGAL_EFFECTIVE_DATE.display}</time>
             </p>
           )}
@@ -49,7 +49,7 @@ export const LegalPageShell: React.FC<LegalPageShellProps> = ({
             aria-label="On this page"
             className="self-start bg-[var(--sukla-cream)] border border-[var(--sukla-muted-border)] p-5 lg:bg-transparent lg:border-0 lg:p-0 lg:sticky lg:top-28"
           >
-            <p className="eyebrow text-[11px] text-[var(--sukla-taupe)] mb-3">On this page</p>
+            <p className="eyebrow text-[11px] text-[var(--sukla-taupe-text)] mb-3">On this page</p>
             <ol className="space-y-2 text-sm font-sans text-[var(--sukla-charcoal)]/80">
               {toc.map((entry) => (
                 <li key={entry.id}>
@@ -68,7 +68,7 @@ export const LegalPageShell: React.FC<LegalPageShellProps> = ({
               aria-label="Related policies"
               className="mt-14 pt-8 border-t border-[var(--sukla-muted-border)]"
             >
-              <p className="eyebrow text-[11px] text-[var(--sukla-taupe)] mb-3">Related policies</p>
+              <p className="eyebrow text-[11px] text-[var(--sukla-taupe-text)] mb-3">Related policies</p>
               <ul className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
                 {related.map((page) => (
                   <li key={page.href}>

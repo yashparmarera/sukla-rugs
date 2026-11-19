@@ -76,7 +76,7 @@ export const FindYourRug: React.FC<FindYourRugProps> = ({ groups }) => {
                   className={`border-b pb-1 font-sans text-xs uppercase tracking-[0.2em] transition-colors duration-300 focus:outline-none focus-visible:ring-1 focus-visible:ring-[var(--sukla-charcoal)] ${
                     selected
                       ? 'border-[var(--sukla-charcoal)] text-[var(--sukla-charcoal)]'
-                      : 'border-transparent text-[var(--sukla-charcoal)]/60 hover:text-[var(--sukla-charcoal)]'
+                      : 'border-transparent text-[var(--sukla-charcoal)]/75 hover:text-[var(--sukla-charcoal)]'
                   }`}
                 >
                   {group.heading}

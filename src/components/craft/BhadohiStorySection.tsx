@@ -25,10 +25,10 @@ export const BhadohiStorySection: React.FC = () => {
   return (
     <section
       aria-labelledby="bhadohi-heading"
-      className="relative overflow-hidden border-y border-[var(--sukla-muted-border)] bg-white py-12 md:py-28"
+      className="relative overflow-hidden border-y border-[var(--sukla-muted-border)] bg-white py-8 md:py-28"
     >
       <div className="editorial-container">
-        <div className="grid grid-cols-1 items-center gap-10 md:gap-14 lg:grid-cols-12 lg:gap-16">
+        <div className="grid grid-cols-1 items-center gap-6 md:gap-14 lg:grid-cols-12 lg:gap-16">
           {/* Image */}
           <div className="relative lg:order-2 lg:col-span-5">
             {/* Offset outline behind the photo */}
@@ -36,7 +36,7 @@ export const BhadohiStorySection: React.FC = () => {
               aria-hidden="true"
               className="absolute -bottom-4 -right-4 hidden h-full w-full border border-[var(--sukla-terracotta)]/60 md:block"
             />
-            <div className="relative aspect-[3/4] md:aspect-[4/5] w-full overflow-hidden bg-[var(--sukla-sand)]">
+            <div className="relative aspect-[16/10] md:aspect-[4/5] w-full overflow-hidden bg-[var(--sukla-sand)]">
               <Image
                 src="/images/Hero%20Images%20Without%20text/3.jpg"
                 alt="Master weaver at a vertical loom in a Bhadohi loom house"
@@ -56,7 +56,7 @@ export const BhadohiStorySection: React.FC = () => {
           </div>
 
           {/* Story */}
-          <div className="space-y-7 text-center lg:text-left lg:order-1 lg:col-span-7 lg:pr-6">
+          <div className="space-y-4 md:space-y-7 text-center lg:text-left lg:order-1 lg:col-span-7 lg:pr-6">
             <p className="inline-flex items-center justify-center gap-2 lg:justify-start font-sans text-[11px] uppercase tracking-[0.25em] text-[var(--sukla-terracotta-dark)]">
               <KnotGlyph size="sm" />
               <span>Since 1977 &bull; Bhadohi, Uttar Pradesh, India</span>
@@ -64,7 +64,7 @@ export const BhadohiStorySection: React.FC = () => {
 
             <h2
               id="bhadohi-heading"
-              className="display-lg text-2xl leading-[1.1] text-[var(--sukla-charcoal)] sm:text-4xl md:text-5xl"
+              className="display-lg text-xl leading-[1.1] text-[var(--sukla-charcoal)] sm:text-4xl md:text-5xl"
             >
               Our Story Begins
               <br className="hidden sm:block" /> in the Carpet City
@@ -72,7 +72,7 @@ export const BhadohiStorySection: React.FC = () => {
 
             <div aria-hidden="true" className="mx-auto lg:mx-0 h-px w-16 bg-[var(--sukla-terracotta)]" />
 
-            <p className="font-serif text-xl italic leading-relaxed text-[var(--sukla-charcoal)]/85 md:text-2xl">
+            <p className="font-serif text-base italic leading-relaxed text-[var(--sukla-charcoal)]/85 md:text-2xl">
               Our rugs are not just manufactured. They are born on the loom, woven with patience, precision, and a deep
               respect for the raw materials.
             </p>
@@ -82,7 +82,7 @@ export const BhadohiStorySection: React.FC = () => {
               second-generation family business, we carry that vision forward through seven craft stages.
             </p>
 
-            <ul className="flex flex-wrap justify-center lg:justify-start gap-2" aria-label="Craft process steps">
+            <ul className="hidden sm:flex flex-wrap justify-center lg:justify-start gap-2" aria-label="Craft process steps">
               {PROCESS_STEPS.map((step) => (
                 <li
                   key={step}
@@ -93,11 +93,11 @@ export const BhadohiStorySection: React.FC = () => {
               ))}
             </ul>
 
-            <dl className="grid grid-cols-1 border-y border-[var(--sukla-muted-border)] sm:grid-cols-3 sm:divide-x sm:divide-[var(--sukla-muted-border)]">
+            <dl className="grid grid-cols-3 divide-x divide-[var(--sukla-muted-border)] border-y border-[var(--sukla-muted-border)]">
               {STATS.map((stat) => (
-                <div key={stat.label} className="py-5 sm:px-5 sm:first:pl-0">
-                  <dt className="nums display-lg text-3xl text-[var(--sukla-charcoal)]">{stat.value}</dt>
-                  <dd className="mt-1 font-sans text-xs leading-relaxed text-[var(--sukla-charcoal)]/70">{stat.label}</dd>
+                <div key={stat.label} className="px-2 py-3 sm:px-5 sm:py-5 sm:first:pl-0">
+                  <dt className="nums display-lg text-xl sm:text-3xl text-[var(--sukla-charcoal)]">{stat.value}</dt>
+                  <dd className="mt-1 font-sans text-[10px] sm:text-xs leading-snug sm:leading-relaxed text-[var(--sukla-charcoal)]/70">{stat.label}</dd>
                 </div>
               ))}
             </dl>

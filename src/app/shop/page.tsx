@@ -95,7 +95,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
           
           {/* Header Banner */}
           <div className="text-center max-w-3xl mx-auto space-y-4 mb-8">
-            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[var(--sukla-terracotta)] font-sans">
+            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[var(--sukla-terracotta-text)] font-sans">
               <KnotGlyph size="sm" />
               <span>Master Catalogue</span>
             </div>
@@ -124,7 +124,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
               {/* Product Grid or Empty State */}
               {products.length === 0 && activeLabels.length > 0 ? (
                 <div className="py-24 text-center space-y-4 border border-[var(--sukla-muted-border)] bg-[var(--sukla-cream)]">
-                  <KnotGlyph size="md" className="text-[var(--sukla-taupe)]" />
+                  <KnotGlyph size="md" className="text-[var(--sukla-taupe-text)]" />
                   <h2 className="heading text-xl text-[var(--sukla-charcoal)]">{emptyHeading}</h2>
                   <p className="font-sans text-sm text-[var(--sukla-charcoal)]/70 max-w-md mx-auto leading-relaxed">
                     We only list rugs that exist in our catalogue. As new pieces are added, they will appear here.
@@ -138,7 +138,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
                 </div>
               ) : products.length === 0 ? (
                 <div className="py-24 text-center space-y-4 border border-[var(--sukla-muted-border)] bg-[var(--sukla-cream)]">
-                  <KnotGlyph size="md" className="text-[var(--sukla-taupe)]" />
+                  <KnotGlyph size="md" className="text-[var(--sukla-taupe-text)]" />
                   <h2 className="heading text-xl text-[var(--sukla-charcoal)]">
                     No Rugs Match Your Filter Criteria
                   </h2>

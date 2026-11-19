@@ -602,5 +602,35 @@ export const MOCK_REVIEWS: Review[] = [
     content: 'The Anatolian Heritage rug has transformed our dining room. The indigo dye changes softly from daylight to evening illumination.',
     verifiedPurchase: true,
     avatar: '/images/review/review-3.jpg'
+  },
+  {
+    id: 'rev-4',
+    author: 'Olivia Bennett',
+    location: 'Dubai, UAE',
+    rating: 5,
+    date: 'October 6, 2026',
+    title: 'A beautiful balance of warmth and character',
+    content: 'The rug brings a calm, understated elegance to our living space. Its subtle texture and soft neutral tones complement the furniture beautifully. It has become one of our favourite details in the room.',
+    verifiedPurchase: true
+  },
+  {
+    id: 'rev-5',
+    author: 'Ethan Williams',
+    location: 'Portland, OR, USA',
+    rating: 5,
+    date: 'October 19, 2026',
+    title: 'A statement piece without overpowering the room',
+    content: 'We wanted something distinctive yet easy to style, and this rug was exactly what we had in mind. The pattern adds character to the room while keeping the overall look balanced and inviting.',
+    verifiedPurchase: true
+  },
+  {
+    id: 'rev-6',
+    author: 'Charlotte Miller',
+    location: 'Abu Dhabi, UAE',
+    rating: 5,
+    date: 'November 2, 2026',
+    title: 'The perfect finishing touch for our home',
+    content: "The rug adds beautiful depth and character to our dining space. Its colours look different throughout the day, creating a warm and welcoming atmosphere. We're very happy with how it completes the room.",
+    verifiedPurchase: true
   }
 ];

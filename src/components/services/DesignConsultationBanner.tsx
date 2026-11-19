@@ -9,7 +9,7 @@ export const DesignConsultationBanner: React.FC = () => {
         <div className="text-center lg:text-left md:bg-[var(--sukla-ivory)] md:border md:border-[var(--sukla-muted-border)] p-0 md:p-16 md:shadow-subtle grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           
           <div className="lg:col-span-8 space-y-4">
-            <div className="inline-flex items-center justify-center lg:justify-start gap-2 text-xs uppercase tracking-[0.25em] text-[var(--sukla-terracotta)] font-sans">
+            <div className="inline-flex items-center justify-center lg:justify-start gap-2 text-xs uppercase tracking-[0.25em] text-[var(--sukla-terracotta-text)] font-sans">
               <Compass className="w-4 h-4" />
               <span>Custom Rugs &amp; Design Guidance</span>
             </div>

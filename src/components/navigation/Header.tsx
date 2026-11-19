@@ -4,13 +4,17 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ShoppingBag, User, Heart, Menu, X } from 'lucide-react';
 import Image from 'next/image';
-import { CartDrawer } from '@/components/cart/CartDrawer';
+import dynamic from 'next/dynamic';
 import { CountrySelector } from '@/components/navigation/CountrySelector';
 import { AboutMegaMenu } from '@/components/navigation/AboutMegaMenu';
 import { ShopMegaMenu } from '@/components/navigation/ShopMegaMenu';
 import { GuidesMegaMenu } from '@/components/navigation/GuidesMegaMenu';
-import { MobileMenu } from '@/components/navigation/MobileMenu';
+
 import { getLocalCart } from '@/lib/shopify/local-cart';
+
+// Interaction-only UI: loaded the first time the shopper opens it.
+const CartDrawer = dynamic(() => import('@/components/cart/CartDrawer').then((m) => m.CartDrawer));
+const MobileMenu = dynamic(() => import('@/components/navigation/MobileMenu').then((m) => m.MobileMenu));
 import { useWishlist } from '@/components/providers/WishlistProvider';
 
 export const Header: React.FC = () => {
@@ -50,9 +54,9 @@ export const Header: React.FC = () => {
       {/* Top Announcement Bar */}
       <div className="hidden md:block bg-[var(--sukla-charcoal)] text-[var(--sukla-ivory)] py-2 px-4 text-center text-[11px] font-sans uppercase tracking-[0.1em] border-b border-white/10 relative z-40">
         <div className="editorial-container flex justify-between items-center">
-          <span className="hidden md:inline text-[var(--sukla-taupe)]"><span className="nums">10%</span> cashback on first purchase</span>
+          <span className="hidden md:inline text-[var(--sukla-taupe-text)]"><span className="nums">10%</span> cashback on first purchase</span>
           <span>Complimentary Global White-Glove Delivery on orders over <span className="nums">$2,500</span></span>
-          <span className="hidden md:inline text-[var(--sukla-taupe)]">AUTHENTIC HANDCRAFTED LUXURY</span>
+          <span className="hidden md:inline text-[var(--sukla-taupe-text)]">AUTHENTIC HANDCRAFTED LUXURY</span>
         </div>
       </div>
 
@@ -76,12 +80,13 @@ export const Header: React.FC = () => {
           </button>
 
           {/* Brand Logo - Left */}
-          <Link href="/" aria-label="Sukla Rugs home" className="flex shrink-0 items-center gap-2 md:gap-3">
+          <Link href="/" className="flex shrink-0 items-center gap-2 md:gap-3">
             <Image
               src="/images/visual-mark/visualmark.png"
               alt=""
               width={2000}
               height={2000}
+              sizes="48px"
               priority
               className="h-11 w-11 md:h-12 md:w-12 object-contain"
             />
@@ -89,7 +94,7 @@ export const Header: React.FC = () => {
               <span className="whitespace-nowrap font-display text-sm min-[400px]:text-base md:text-xl tracking-[0.16em] md:tracking-[0.22em] font-medium text-[var(--sukla-charcoal)] uppercase">
                 SUKLA RUGS
               </span>
-              <span className="mt-1 hidden sm:block text-[9px] uppercase tracking-[0.3em] text-[var(--sukla-taupe)] font-sans">
+              <span className="mt-1 hidden sm:block text-[9px] uppercase tracking-[0.3em] text-[var(--sukla-taupe-text)] font-sans">
                 Bhadohi • India
               </span>
             </span>
@@ -152,7 +157,7 @@ export const Header: React.FC = () => {
             <button
               onClick={() => setCartOpen(true)}
               className="p-1.5 hover:text-[var(--sukla-terracotta)] transition-colors relative"
-              aria-label="Open shopping cart"
+              aria-label={cartCount > 0 ? `Open shopping cart, ${cartCount} ${cartCount === 1 ? 'item' : 'items'}` : 'Open shopping cart'}
             >
               <ShoppingBag className="w-5 h-5 stroke-[1.5]" />
               {cartCount > 0 && (
@@ -171,7 +176,7 @@ export const Header: React.FC = () => {
       )}
 
       {/* Global Drawers & Modals */}
-      <CartDrawer isOpen={cartOpen} onClose={() => setCartOpen(false)} />
+      {cartOpen && <CartDrawer isOpen={cartOpen} onClose={() => setCartOpen(false)} />}
     </>
   );
 };

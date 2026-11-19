@@ -47,7 +47,7 @@ export const CraftStory: React.FC = () => (
 
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-14 md:items-stretch">
       <div className="max-w-xl space-y-5">
-        <span className="eyebrow text-xs text-[var(--sukla-taupe)] block">Our craft</span>
+        <span className="eyebrow text-xs text-[var(--sukla-taupe-text)] block">Our craft</span>
         <h2
           id="craft-story-heading"
           className="display-lg text-2xl sm:text-3xl text-[var(--sukla-charcoal)]"
@@ -98,7 +98,7 @@ export const CraftStory: React.FC = () => (
         />
       </div>
       <div className="max-w-xl space-y-5 order-1 md:order-2">
-        <span className="eyebrow text-xs text-[var(--sukla-taupe)] block">How it works</span>
+        <span className="eyebrow text-xs text-[var(--sukla-taupe-text)] block">How it works</span>
         <h2 className="display-lg text-2xl sm:text-3xl text-[var(--sukla-charcoal)]">
           From Loom to Your Home
         </h2>

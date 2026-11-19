@@ -9,7 +9,7 @@ export const BrandStatement: React.FC = () => {
         
         <KnotGlyph size="md" className="text-[var(--sukla-terracotta)]" />
 
-        <h2 className="eyebrow text-xs text-[var(--sukla-taupe)]">
+        <h2 className="eyebrow text-xs text-[var(--sukla-taupe-text)]">
           The Sukla Rugs Ethos
         </h2>
 

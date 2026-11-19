@@ -284,7 +284,7 @@ const CalculatorPanel: React.FC<CalculatorPanelProps> = ({ product, fixedCategor
               <SlidersHorizontal className="w-4 h-4 text-[var(--sukla-terracotta-dark)]" aria-hidden="true" />
               <span className="flex flex-col gap-0.5">
                 <span className="text-sm font-medium tracking-[0.12em] uppercase leading-none">Customise</span>
-                <span className="text-xs text-[var(--sukla-charcoal)]/60">Get a quote by size</span>
+                <span className="text-xs text-[var(--sukla-charcoal)]/75">Get a quote by size</span>
               </span>
             </div>
           </div>

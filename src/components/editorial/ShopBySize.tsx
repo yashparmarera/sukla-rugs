@@ -135,7 +135,6 @@ export const ShopBySize: React.FC = () => {
               <Link
                 href="/shop"
                 className="group block text-center focus:outline-none focus-visible:ring-1 focus-visible:ring-[var(--sukla-charcoal)]"
-                aria-label={`Shop ${tile.label} rugs, ${tile.sizes}`}
               >
                 <div className="overflow-hidden" style={{ backgroundColor: TILE_BG }}>
                   <svg

@@ -83,7 +83,7 @@ export default function ProcessPage() {
           
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto space-y-4 mb-20">
-            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[var(--sukla-terracotta)] font-sans">
+            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[var(--sukla-terracotta-text)] font-sans">
               <KnotGlyph size="sm" />
               <span>Artisanal Alchemy</span>
             </div>
@@ -128,7 +128,7 @@ export default function ProcessPage() {
                   <h2 className="display-lg text-2xl md:text-3xl text-[var(--sukla-charcoal)]">
                     {stage.title}
                   </h2>
-                  <h3 className="font-sans text-base text-[var(--sukla-taupe)]">
+                  <h3 className="font-sans text-base text-[var(--sukla-taupe-text)]">
                     {stage.subtitle}
                   </h3>
                   <p className="text-xs font-sans text-[var(--sukla-charcoal)]/85 leading-relaxed">

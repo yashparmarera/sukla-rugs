@@ -15,8 +15,10 @@ const CHIP =
 
 function Chip({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <li role="img" aria-label={label} className={CHIP}>
-      {children}
+    <li>
+      <span role="img" aria-label={label} className={CHIP}>
+        {children}
+      </span>
     </li>
   );
 }

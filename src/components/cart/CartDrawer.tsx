@@ -115,7 +115,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
           {/* Drawer Header */}
           <div className="p-6 border-b border-[var(--sukla-muted-border)] flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <ShoppingBag className="w-5 h-5 text-[var(--sukla-taupe)]" />
+              <ShoppingBag className="w-5 h-5 text-[var(--sukla-taupe-text)]" />
               <h2 className="heading text-lg">Your Selection</h2>
               <span className="nums text-xs bg-[var(--sukla-sand)] px-2 py-0.5 rounded-full font-medium">
                 {cart?.totalQuantity || 0}
@@ -159,11 +159,11 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
           <div className="flex-1 overflow-y-auto p-6 space-y-6">
             {!cart || cart.lines.length === 0 ? (
               <div className="text-center py-16 space-y-4">
-                <ShoppingBag className="w-12 h-12 stroke-1 text-[var(--sukla-taupe)] mx-auto" />
+                <ShoppingBag className="w-12 h-12 stroke-1 text-[var(--sukla-taupe-text)] mx-auto" />
                 <p className="font-sans text-base text-[var(--sukla-charcoal)]/80">
                   Your cart is currently empty.
                 </p>
-                <p className="text-xs text-[var(--sukla-taupe)] font-sans max-w-xs mx-auto">
+                <p className="text-xs text-[var(--sukla-taupe-text)] font-sans max-w-xs mx-auto">
                   Explore our handcrafted collections from Bhadohi, UP.
                 </p>
                 <Button variant="outline" size="sm" onClick={onClose} href="/shop">
@@ -193,7 +193,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                     <div>
                       <div className="flex justify-between items-start">
                         <div>
-                          <span className="block text-[10px] uppercase tracking-widest text-[var(--sukla-taupe)]">
+                          <span className="block text-[10px] uppercase tracking-widest text-[var(--sukla-taupe-text)]">
                             {line.merchandise.product.collection?.title}
                           </span>
                           <Link
@@ -206,7 +206,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                         </div>
                         <button
                           onClick={() => handleRemoveLine(line.id)}
-                          className="text-[var(--sukla-taupe)] hover:text-red-700 transition-colors p-1"
+                          className="text-[var(--sukla-taupe-text)] hover:text-red-700 transition-colors p-1"
                           title="Remove item"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -256,13 +256,13 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
           {cart && cart.lines.length > 0 && (
             <div className="p-6 border-t border-[var(--sukla-muted-border)] bg-[var(--sukla-cream)]/80 space-y-4">
               <div className="space-y-1.5">
-                <div className="flex justify-between text-xs font-sans text-[var(--sukla-taupe)]">
+                <div className="flex justify-between text-xs font-sans text-[var(--sukla-taupe-text)]">
                   <span>Subtotal</span>
                   <span className="nums text-[var(--sukla-charcoal)] font-medium">
                     {subtotalDisplay.text}
                   </span>
                 </div>
-                <div className="flex justify-between text-xs font-sans text-[var(--sukla-taupe)]">
+                <div className="flex justify-between text-xs font-sans text-[var(--sukla-taupe-text)]">
                   <span>{CART_DUTIES_ROW.label}</span>
                   <Link
                     href={CART_DUTIES_ROW.href}
@@ -277,7 +277,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                   <span className="nums text-base">{subtotalDisplay.text}</span>
                 </div>
                 {subtotalDisplay.approximate && (
-                  <p className="text-[11px] font-sans text-[var(--sukla-taupe)] text-right">
+                  <p className="text-[11px] font-sans text-[var(--sukla-taupe-text)] text-right">
                     Approximate. You are charged <span className="nums">{formatMoney(subtotal, currencyCode)}</span>{' '}
                     {currencyCode} at checkout.
                   </p>
@@ -289,7 +289,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
 
-              <p className="text-center text-[11px] font-sans text-[var(--sukla-taupe)]">
+              <p className="text-center text-[11px] font-sans text-[var(--sukla-taupe-text)]">
                 {CART_DUTIES_NOTE.text}{' '}
                 <Link
                   href={CART_DUTIES_NOTE.href}
@@ -300,7 +300,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                 </Link>
               </p>
 
-              <div className="flex items-center justify-center gap-2 text-[10px] text-[var(--sukla-taupe)] font-sans">
+              <div className="flex items-center justify-center gap-2 text-[10px] text-[var(--sukla-taupe-text)] font-sans">
                 <ShieldCheck className="w-3.5 h-3.5" />
                 <span>Shopify Encrypted & Guaranteed Authenticity</span>
               </div>

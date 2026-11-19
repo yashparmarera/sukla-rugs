@@ -82,7 +82,7 @@ export default function RugSizeGuidePage() {
           
           <div className="text-center space-y-4">
             <KnotGlyph size="md" className="text-[var(--sukla-terracotta)]" />
-            <span className="text-xs uppercase tracking-[0.25em] text-[var(--sukla-taupe)] font-sans block">
+            <span className="text-xs uppercase tracking-[0.25em] text-[var(--sukla-taupe-text)] font-sans block">
               Architectural Dimensioning
             </span>
             <h1 className="display-lg text-3xl sm:text-4xl md:text-5xl text-[var(--sukla-charcoal)]">
@@ -100,7 +100,7 @@ export default function RugSizeGuidePage() {
               className={`pb-4 px-6 font-semibold border-b-2 transition-all ${
                 activeTab === 'living'
                   ? 'border-[var(--sukla-charcoal)] text-[var(--sukla-charcoal)]'
-                  : 'border-transparent text-[var(--sukla-taupe)] hover:text-[var(--sukla-charcoal)]'
+                  : 'border-transparent text-[var(--sukla-taupe-text)] hover:text-[var(--sukla-charcoal)]'
               }`}
             >
               Living Room
@@ -110,7 +110,7 @@ export default function RugSizeGuidePage() {
               className={`pb-4 px-6 font-semibold border-b-2 transition-all ${
                 activeTab === 'bedroom'
                   ? 'border-[var(--sukla-charcoal)] text-[var(--sukla-charcoal)]'
-                  : 'border-transparent text-[var(--sukla-taupe)] hover:text-[var(--sukla-charcoal)]'
+                  : 'border-transparent text-[var(--sukla-taupe-text)] hover:text-[var(--sukla-charcoal)]'
               }`}
             >
               Bedroom
@@ -120,7 +120,7 @@ export default function RugSizeGuidePage() {
               className={`pb-4 px-6 font-semibold border-b-2 transition-all ${
                 activeTab === 'dining'
                   ? 'border-[var(--sukla-charcoal)] text-[var(--sukla-charcoal)]'
-                  : 'border-transparent text-[var(--sukla-taupe)] hover:text-[var(--sukla-charcoal)]'
+                  : 'border-transparent text-[var(--sukla-taupe-text)] hover:text-[var(--sukla-charcoal)]'
               }`}
             >
               Dining Room

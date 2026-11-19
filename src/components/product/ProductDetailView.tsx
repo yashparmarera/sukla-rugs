@@ -402,7 +402,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
         {/* Breadcrumb Navigation */}
         <nav
           aria-label="Breadcrumb"
-          className="flex items-center gap-2 text-xs font-sans text-[var(--sukla-taupe)] mb-8 uppercase tracking-wider"
+          className="flex items-center gap-2 text-xs font-sans text-[var(--sukla-taupe-text)] mb-8 uppercase tracking-wider"
         >
           <Link href="/" className="hover:text-[var(--sukla-charcoal)]">Home</Link>
           <ChevronRight className="w-3 h-3" />
@@ -545,7 +545,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
 
             <div className="space-y-3 pb-5 border-b border-[var(--sukla-muted-border)]">
               {eyebrow && (
-                <span className="eyebrow text-xs text-[var(--sukla-taupe)] block">{eyebrow}</span>
+                <span className="eyebrow text-xs text-[var(--sukla-taupe-text)] block">{eyebrow}</span>
               )}
 
               <h1
@@ -567,7 +567,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                     {formattedPrice}
                   </span>
                   {hasCompareAt && compareAt && (
-                    <span className="nums text-base text-[var(--sukla-taupe)] line-through">
+                    <span className="nums text-base text-[var(--sukla-taupe-text)] line-through">
                       {format(compareAt.amount, compareAt.currencyCode).text}
                     </span>
                   )}
@@ -586,7 +586,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
               </div>
 
               {priceDisplay.approximate && (
-                <p className="text-xs font-sans text-[var(--sukla-taupe)]">
+                <p className="text-xs font-sans text-[var(--sukla-taupe-text)]">
                   Approximate price. You are charged <span className="nums">{exactPrice}</span>{' '}
                   {selectedVariant.price.currencyCode} at checkout.
                 </p>
@@ -613,7 +613,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                           selected
                             ? 'border-[var(--sukla-charcoal)] bg-white ring-1 ring-[var(--sukla-charcoal)] font-semibold'
                             : 'border-[var(--sukla-muted-border)] hover:border-[var(--sukla-taupe)] bg-white'
-                        } ${v.availableForSale ? '' : 'text-[var(--sukla-taupe)] line-through'}`}
+                        } ${v.availableForSale ? '' : 'text-[var(--sukla-taupe-text)] line-through'}`}
                       >
                         <span>{v.title}</span>
                       </button>
@@ -626,7 +626,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
             {!hasMultipleVariants && (singleVariantLabel || listedSize) && (
               <div className="flex items-center justify-between gap-4 text-sm font-sans text-[var(--sukla-charcoal)]/80">
                 <p>
-                  <span className="eyebrow text-xs text-[var(--sukla-taupe)] mr-2">
+                  <span className="eyebrow text-xs text-[var(--sukla-taupe-text)] mr-2">
                     {singleVariantLabel ? optionLabel : 'Size'}
                   </span>
                   <span className="nums">{singleVariantLabel ?? listedSize}</span>
@@ -759,7 +759,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                                     <dl key={index} className="grid grid-cols-[auto_1fr] gap-x-6 gap-y-2">
                                       {rows.map(([label, values]) => (
                                         <React.Fragment key={label}>
-                                          <dt className="text-[var(--sukla-taupe)]">{label}</dt>
+                                          <dt className="text-[var(--sukla-taupe-text)]">{label}</dt>
                                           <dd className="nums min-w-0 break-words text-[var(--sukla-charcoal)]">
                                             <FactValues values={values} />
                                           </dd>
@@ -769,7 +769,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                                   )
                               )}
                               {isShortened && (
-                                <p className="text-xs text-[var(--sukla-taupe)]">Full listing title: {product.title}</p>
+                                <p className="text-xs text-[var(--sukla-taupe-text)]">Full listing title: {product.title}</p>
                               )}
                             </div>
                           )

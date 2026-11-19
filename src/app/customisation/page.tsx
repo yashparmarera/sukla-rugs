@@ -58,7 +58,7 @@ export default function CustomisationPage() {
               <h1 className="display-lg text-3xl sm:text-4xl md:text-5xl text-[var(--sukla-charcoal)]">
                 Custom Rugs, Made Just for You
               </h1>
-              <h2 className="font-sans text-sm md:text-base text-[var(--sukla-taupe)]">
+              <h2 className="font-sans text-sm md:text-base text-[var(--sukla-taupe-text)]">
                 Create Your Dream Rug with Sukla Rugs
               </h2>
               <p className="font-sans text-sm md:text-base text-[var(--sukla-charcoal)]/75 leading-relaxed max-w-prose">

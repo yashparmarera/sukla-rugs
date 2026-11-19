@@ -14,7 +14,7 @@ export const SectionRule: React.FC<SectionRuleProps> = ({
     <div className={`w-full flex items-center justify-center my-12 md:my-20 ${className}`}>
       <div className="h-[1px] bg-[var(--sukla-muted-border)] flex-grow" />
       {withGlyph && (
-        <div className="px-6 text-[var(--sukla-taupe)]">
+        <div className="px-6 text-[var(--sukla-taupe-text)]">
           <KnotGlyph size="sm" />
         </div>
       )}

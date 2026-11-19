@@ -33,7 +33,7 @@ export const FaqDocument: React.FC<{ doc: FaqDocumentData }> = ({ doc }) => (
                   </span>
                   <ChevronDown
                     aria-hidden="true"
-                    className="w-4 h-4 shrink-0 text-[var(--sukla-taupe)] transition-transform group-open:rotate-180"
+                    className="w-4 h-4 shrink-0 text-[var(--sukla-taupe-text)] transition-transform group-open:rotate-180"
                   />
                 </summary>
                 <p data-legal-text className="pb-5">

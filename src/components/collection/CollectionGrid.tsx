@@ -14,7 +14,7 @@ export const CollectionGrid: React.FC<CollectionGridProps> = ({ collections }) =
       <div className="editorial-container">
         
         <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-          <span className="text-xs uppercase tracking-[0.25em] text-[var(--sukla-terracotta)] font-sans">
+          <span className="text-xs uppercase tracking-[0.25em] text-[var(--sukla-terracotta-text)] font-sans">
             Taxonomy & Construction
           </span>
           <h2 className="display-lg text-3xl md:text-4xl text-[var(--sukla-charcoal)]">
@@ -70,7 +70,7 @@ export const CollectionGrid: React.FC<CollectionGridProps> = ({ collections }) =
 
                 {col.heroTagline && (
                   <div className="pt-4 border-t border-[var(--sukla-muted-border)]">
-                    <span className="font-serif italic text-xs text-[var(--sukla-taupe)]">
+                    <span className="font-serif italic text-xs text-[var(--sukla-taupe-text)]">
                       &quot;{col.heroTagline}&quot;
                     </span>
                   </div>

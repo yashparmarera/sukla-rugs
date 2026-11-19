@@ -11,6 +11,9 @@
   --sukla-taupe-light: #C9BAAB;
   --sukla-terracotta: #BC8A5A;
   --sukla-terracotta-dark: #96673A;
+  /* Text-safe variants (>= 4.5:1 on white, cream and ivory) */
+  --sukla-taupe-text: #75614F;
+  --sukla-terracotta-text: #7F5528;
   --sukla-muted-border: rgba(33, 29, 27, 0.12);
   --sukla-subtle-bg: rgba(33, 29, 27, 0.03);
   --sukla-whatsapp: #25D366;

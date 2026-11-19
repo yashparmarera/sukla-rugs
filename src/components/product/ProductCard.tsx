@@ -115,7 +115,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
       <div className="min-w-0 p-0 pt-2.5 text-left md:pt-0 md:p-4 flex-1 flex flex-col justify-between gap-1 md:gap-2 md:bg-white">
         <div>
           {attributeLine && (
-            <span className="hidden md:block text-[10px] uppercase tracking-[0.2em] text-[var(--sukla-taupe)] font-sans">
+            <span className="hidden md:block text-[10px] uppercase tracking-[0.2em] text-[var(--sukla-taupe-text)] font-sans">
               {attributeLine}
             </span>
           )}

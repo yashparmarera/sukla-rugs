@@ -67,7 +67,7 @@ export const Footer: React.FC = () => {
       <div className="editorial-container pt-10 pb-6 md:pt-12">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
           <div className="space-y-4">
-            <Link href="/" aria-label="Sukla Rugs home" className={`inline-flex items-center gap-3 ${FOCUS}`}>
+            <Link href="/" className={`inline-flex items-center gap-3 ${FOCUS}`}>
               <Image
                 src="/images/visual-mark/visualmark.png"
                 alt=""
@@ -77,7 +77,7 @@ export const Footer: React.FC = () => {
               />
               <span className="flex flex-col leading-none">
                 <span className="font-display text-lg font-medium uppercase tracking-[0.22em]">SUKLA RUGS</span>
-                <span className="mt-1 text-[9px] uppercase tracking-[0.3em] text-[var(--sukla-taupe)]">
+                <span className="mt-1 text-[9px] uppercase tracking-[0.3em] text-[var(--sukla-taupe-text)]">
                   Bhadohi • India
                 </span>
               </span>
@@ -119,7 +119,7 @@ export const Footer: React.FC = () => {
             {POPULAR_SEARCHES.map((link, index) => (
               <li key={link.label} className="inline">
                 {index > 0 && (
-                  <span aria-hidden="true" className="mx-2 text-[var(--sukla-taupe)]">
+                  <span aria-hidden="true" className="mx-2 text-[var(--sukla-taupe-text)]">
                     |
                   </span>
                 )}

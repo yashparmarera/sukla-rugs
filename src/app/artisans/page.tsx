@@ -18,7 +18,7 @@ export default function ArtisansPage() {
         <div className="editorial-container max-w-4xl mx-auto space-y-16">
           <div className="text-center space-y-4">
             <KnotGlyph size="md" className="text-[var(--sukla-terracotta)]" />
-            <span className="text-xs uppercase tracking-[0.25em] text-[var(--sukla-taupe)] font-sans block">
+            <span className="text-xs uppercase tracking-[0.25em] text-[var(--sukla-taupe-text)] font-sans block">
               The Hands Behind The Loom
             </span>
             <h1 className="display-lg text-3xl sm:text-4xl md:text-5xl text-[var(--sukla-charcoal)]">

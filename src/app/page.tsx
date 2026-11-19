@@ -62,7 +62,7 @@ export default async function HomePage() {
           <div className="editorial-container">
             <div className="flex flex-col md:flex-row justify-between items-center text-center md:items-end md:text-left mb-10 md:mb-12 space-y-4 md:space-y-0">
               <div>
-                <span className="block text-xs uppercase tracking-[0.25em] text-[var(--sukla-terracotta)] font-sans mb-2">
+                <span className="block text-xs uppercase tracking-[0.25em] text-[var(--sukla-terracotta-text)] font-sans mb-2">
                   Signature Curations
                 </span>
                 <h2 className="display-lg text-2xl md:text-3xl lg:text-4xl text-[var(--sukla-charcoal)]">

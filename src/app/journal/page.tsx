@@ -22,7 +22,7 @@ export default function JournalPage() {
           
           <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
             <KnotGlyph size="md" className="text-[var(--sukla-terracotta)]" />
-            <span className="text-xs uppercase tracking-[0.25em] text-[var(--sukla-taupe)] font-sans block">
+            <span className="text-xs uppercase tracking-[0.25em] text-[var(--sukla-taupe-text)] font-sans block">
               Editorial Publications
             </span>
             <h1 className="display-xl text-4xl sm:text-5xl md:text-6xl text-[var(--sukla-charcoal)]">
@@ -55,7 +55,7 @@ export default function JournalPage() {
 
                 <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
                   <div>
-                    <div className="flex items-center gap-2 text-[10px] uppercase font-sans text-[var(--sukla-taupe)] mb-2">
+                    <div className="flex items-center gap-2 text-[10px] uppercase font-sans text-[var(--sukla-taupe-text)] mb-2">
                       <span>{article.publishedAt}</span>
                       <span>•</span>
                       <span>{article.readTime}</span>

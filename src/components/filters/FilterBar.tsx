@@ -120,7 +120,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({ totalCount }) => {
                 key={group.id}
                 className="min-w-0 border-0 border-t border-[var(--sukla-muted-border)] py-3 m-0 px-0"
               >
-                <legend className="float-left w-full text-[10px] uppercase tracking-widest text-[var(--sukla-taupe)] mb-1.5 p-0">
+                <legend className="float-left w-full text-[10px] uppercase tracking-widest text-[var(--sukla-taupe-text)] mb-1.5 p-0">
                   {group.heading}
                 </legend>
                 <div className="clear-both flex flex-col">
@@ -221,7 +221,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({ totalCount }) => {
                   <div key={group.id}>
                     <label
                       htmlFor={selectId}
-                      className="block text-[10px] uppercase tracking-widest text-[var(--sukla-taupe)] mb-1"
+                      className="block text-[10px] uppercase tracking-widest text-[var(--sukla-taupe-text)] mb-1"
                     >
                       {group.heading}
                     </label>

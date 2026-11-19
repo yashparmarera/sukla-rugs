@@ -36,7 +36,7 @@ export default function DesignConsultationPage() {
           
           <div className="text-center space-y-4">
             <Compass className="w-8 h-8 text-[var(--sukla-terracotta)] mx-auto" />
-            <span className="text-xs uppercase tracking-[0.25em] text-[var(--sukla-taupe)] font-sans block">
+            <span className="text-xs uppercase tracking-[0.25em] text-[var(--sukla-taupe-text)] font-sans block">
               Complimentary Concierge
             </span>
             <h1 className="display-lg text-3xl sm:text-4xl text-[var(--sukla-charcoal)]">
@@ -64,7 +64,7 @@ export default function DesignConsultationPage() {
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-xs uppercase tracking-widest text-[var(--sukla-taupe)] font-sans mb-2">
+                  <label className="block text-xs uppercase tracking-widest text-[var(--sukla-taupe-text)] font-sans mb-2">
                     Full Name *
                   </label>
                   <input
@@ -77,7 +77,7 @@ export default function DesignConsultationPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs uppercase tracking-widest text-[var(--sukla-taupe)] font-sans mb-2">
+                  <label className="block text-xs uppercase tracking-widest text-[var(--sukla-taupe-text)] font-sans mb-2">
                     Email Address *
                   </label>
                   <input
@@ -92,7 +92,7 @@ export default function DesignConsultationPage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-xs uppercase tracking-widest text-[var(--sukla-taupe)] font-sans mb-2">
+                  <label className="block text-xs uppercase tracking-widest text-[var(--sukla-taupe-text)] font-sans mb-2">
                     Room Type
                   </label>
                   <select
@@ -109,7 +109,7 @@ export default function DesignConsultationPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs uppercase tracking-widest text-[var(--sukla-taupe)] font-sans mb-2">
+                  <label className="block text-xs uppercase tracking-widest text-[var(--sukla-taupe-text)] font-sans mb-2">
                     Target Budget Range
                   </label>
                   <select
@@ -126,7 +126,7 @@ export default function DesignConsultationPage() {
               </div>
 
               <div>
-                <label className="block text-xs uppercase tracking-widest text-[var(--sukla-taupe)] font-sans mb-2">
+                <label className="block text-xs uppercase tracking-widest text-[var(--sukla-taupe-text)] font-sans mb-2">
                   Project Notes / Space Details
                 </label>
                 <textarea

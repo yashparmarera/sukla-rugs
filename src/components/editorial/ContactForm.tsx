@@ -119,11 +119,11 @@ export function ContactForm({ children }: { children?: React.ReactNode }) {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center font-sans text-sm">
         <a href={PHONE_TEL} className="p-4 bg-[var(--sukla-cream)] border border-[var(--sukla-muted-border)] hover:border-[var(--sukla-charcoal)]">
-          <span className="block text-xs uppercase tracking-[0.2em] text-[var(--sukla-taupe)]">Phone</span>
+          <span className="block text-xs uppercase tracking-[0.2em] text-[var(--sukla-taupe-text)]">Phone</span>
           <span className="nums">{PHONE_DISPLAY}</span>
         </a>
         <a href={EMAIL_HREF} className="p-4 bg-[var(--sukla-cream)] border border-[var(--sukla-muted-border)] hover:border-[var(--sukla-charcoal)]">
-          <span className="block text-xs uppercase tracking-[0.2em] text-[var(--sukla-taupe)]">Email</span>
+          <span className="block text-xs uppercase tracking-[0.2em] text-[var(--sukla-taupe-text)]">Email</span>
           {EMAIL}
         </a>
         <a
@@ -132,7 +132,7 @@ export function ContactForm({ children }: { children?: React.ReactNode }) {
           rel="noopener noreferrer"
           className="p-4 bg-[var(--sukla-cream)] border border-[var(--sukla-muted-border)] hover:border-[var(--sukla-charcoal)]"
         >
-          <span className="block text-xs uppercase tracking-[0.2em] text-[var(--sukla-taupe)]">WhatsApp</span>
+          <span className="block text-xs uppercase tracking-[0.2em] text-[var(--sukla-taupe-text)]">WhatsApp</span>
           Chat with us
           <span className="sr-only"> (opens in a new tab)</span>
         </a>

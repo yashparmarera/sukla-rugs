@@ -187,10 +187,10 @@ export const BehindTheScenes: React.FC = () => {
                       className={`group relative flex items-center gap-3 rounded-full border px-5 py-3 text-left transition-all duration-[1200ms] ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sukla-terracotta)] ${
                         isActive
                           ? 'z-10 border-[var(--sukla-cream)] bg-[var(--sukla-cream)] text-[var(--sukla-charcoal)]'
-                          : 'border-white/20 bg-transparent text-white/60 hover:border-white/40 hover:text-white'
+                          : 'border-white/20 bg-transparent text-white/90 hover:border-white/40 hover:text-white'
                       }`}
                     >
-                      <Icon aria-hidden="true" className={`h-[18px] w-[18px] shrink-0 ${isActive ? 'text-[var(--sukla-terracotta-dark)]' : 'text-white/40'}`} strokeWidth={1.6} />
+                      <Icon aria-hidden="true" className={`h-[18px] w-[18px] shrink-0 ${isActive ? 'text-[var(--sukla-terracotta-dark)]' : 'text-white/80'}`} strokeWidth={1.6} />
                       <span className="font-sans text-xs uppercase tracking-[0.1em] sm:text-[13px] whitespace-nowrap">
                         {item.label}
                       </span>

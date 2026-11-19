@@ -195,7 +195,7 @@ export const CountrySelector: React.FC<CountrySelectorProps> = ({ variant = 'hea
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-controls={listId}
-        aria-label={`Country and currency: ${current.name}, ${currentDisplayCurrency}. Change country`}
+        aria-label={`${variant === 'menu' ? current.name : current.isoCode} ${variant === 'menu' ? '|' : '·'} ${currentDisplayCurrency}. Country and currency: ${current.name}. Change country`}
         className={`inline-flex items-center gap-1.5 font-sans text-xs text-[var(--sukla-charcoal)] hover:text-[var(--sukla-terracotta)] transition-colors ${
           variant === 'menu'
             ? 'w-full justify-between px-0 py-2 text-base font-light'
@@ -211,7 +211,7 @@ export const CountrySelector: React.FC<CountrySelectorProps> = ({ variant = 'hea
           </span>
         </span>
         <ChevronDown
-          className={`w-3 h-3 text-[var(--sukla-taupe)] transition-transform ${open ? 'rotate-180' : ''}`}
+          className={`w-3 h-3 text-[var(--sukla-taupe-text)] transition-transform ${open ? 'rotate-180' : ''}`}
           aria-hidden="true"
         />
       </button>
@@ -223,7 +223,7 @@ export const CountrySelector: React.FC<CountrySelectorProps> = ({ variant = 'hea
           }`}
         >
           <div className="px-4 py-3 border-b border-[var(--sukla-muted-border)]">
-            <span className="eyebrow text-[10px] text-[var(--sukla-taupe)] block">Shipping country</span>
+            <span className="eyebrow text-[10px] text-[var(--sukla-taupe-text)] block">Shipping country</span>
             {isEstimate(current) && (
               <p className="mt-1 text-[11px] font-sans leading-relaxed text-[var(--sukla-charcoal)]/70">
                 Prices in {currentDisplayCurrency} are approximate. Your order is charged in{' '}
@@ -238,7 +238,7 @@ export const CountrySelector: React.FC<CountrySelectorProps> = ({ variant = 'hea
             </label>
             <div className="relative">
               <Search
-                className="pointer-events-none absolute left-2.5 top-1/2 w-3.5 h-3.5 -translate-y-1/2 text-[var(--sukla-taupe)]"
+                className="pointer-events-none absolute left-2.5 top-1/2 w-3.5 h-3.5 -translate-y-1/2 text-[var(--sukla-taupe-text)]"
                 aria-hidden="true"
               />
               <input
@@ -258,7 +258,7 @@ export const CountrySelector: React.FC<CountrySelectorProps> = ({ variant = 'hea
                 autoComplete="off"
                 spellCheck={false}
                 aria-controls={listId}
-                className="w-full border border-[var(--sukla-muted-border)] bg-white py-2 pl-8 pr-3 text-xs font-sans text-[var(--sukla-charcoal)] placeholder:text-[var(--sukla-taupe)] focus:border-[var(--sukla-charcoal)] focus:outline-none focus-visible:ring-1 focus-visible:ring-[var(--sukla-charcoal)]"
+                className="w-full border border-[var(--sukla-muted-border)] bg-white py-2 pl-8 pr-3 text-xs font-sans text-[var(--sukla-charcoal)] placeholder:text-[var(--sukla-taupe-text)] focus:border-[var(--sukla-charcoal)] focus:outline-none focus-visible:ring-1 focus-visible:ring-[var(--sukla-charcoal)]"
               />
             </div>
             <p className="sr-only" role="status" aria-live="polite">
@@ -268,7 +268,7 @@ export const CountrySelector: React.FC<CountrySelectorProps> = ({ variant = 'hea
 
           <ul id={listId} role="listbox" aria-label="Country" className="max-h-72 overflow-y-auto py-1">
             {results.length === 0 && (
-              <li role="presentation" className="px-4 py-3 text-xs font-sans text-[var(--sukla-taupe)]">
+              <li role="presentation" className="px-4 py-3 text-xs font-sans text-[var(--sukla-taupe-text)]">
                 No country or currency matches &ldquo;{query.trim()}&rdquo;.
               </li>
             )}
@@ -287,7 +287,7 @@ export const CountrySelector: React.FC<CountrySelectorProps> = ({ variant = 'hea
                     }`}
                   >
                     <span className="truncate">{country.name}</span>
-                    <span className="nums inline-flex items-center gap-2 text-[var(--sukla-taupe)] shrink-0">
+                    <span className="nums inline-flex items-center gap-2 text-[var(--sukla-taupe-text)] shrink-0">
                       {displayCurrencyOf(country)}
                       {isSelected && <Check className="w-3.5 h-3.5 text-[var(--sukla-terracotta)]" aria-hidden="true" />}
                     </span>

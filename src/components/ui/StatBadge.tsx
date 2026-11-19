@@ -15,7 +15,7 @@ export const StatBadge: React.FC<StatBadgeProps> = ({
 }) => {
   return (
     <div className={`p-6 border border-[var(--sukla-muted-border)] text-center bg-[var(--sukla-cream)]/50 backdrop-blur-xs transition-all duration-300 hover:border-[var(--sukla-taupe)] ${className}`}>
-      <span className="block text-xs uppercase tracking-widest text-[var(--sukla-taupe)] font-sans mb-2">
+      <span className="block text-xs uppercase tracking-widest text-[var(--sukla-taupe-text)] font-sans mb-2">
         {label}
       </span>
       <span className="nums block text-2xl md:text-3xl font-light text-[var(--sukla-charcoal)] mb-1 tracking-tight">

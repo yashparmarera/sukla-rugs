@@ -17,7 +17,7 @@ export const SortControl: React.FC<SortControlProps> = ({ totalCount }) => {
 
   return (
     <div className="flex items-center justify-between gap-6 text-xs font-sans mb-6">
-      <span className="text-[var(--sukla-taupe)] uppercase tracking-[0.1em] text-[11px]">
+      <span className="text-[var(--sukla-taupe-text)] uppercase tracking-[0.1em] text-[11px]">
         Showing <strong className="nums text-[var(--sukla-charcoal)]">{totalCount}</strong> Rugs
       </span>
       <p className="sr-only" role="status" aria-live="polite">
@@ -27,7 +27,7 @@ export const SortControl: React.FC<SortControlProps> = ({ totalCount }) => {
       <div className="flex items-center gap-2">
         <span
           aria-hidden="true"
-          className="hidden sm:inline uppercase tracking-widest text-[var(--sukla-taupe)] text-[11px]"
+          className="hidden sm:inline uppercase tracking-widest text-[var(--sukla-taupe-text)] text-[11px]"
         >
           Sort:
         </span>

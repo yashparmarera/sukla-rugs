@@ -28,7 +28,7 @@ export function TradeDesignerContent({ headingAs = 'h1', showApplication = true 
     <>
       <div className="text-center space-y-4 max-w-2xl mx-auto">
         <KnotGlyph size="md" className="text-[var(--sukla-terracotta)]" />
-        <span className="text-xs uppercase tracking-[0.25em] text-[var(--sukla-taupe)] font-sans block">
+        <span className="text-xs uppercase tracking-[0.25em] text-[var(--sukla-taupe-text)] font-sans block">
           Architects & Interior Designers
         </span>
         <Heading className="display-lg text-3xl sm:text-4xl md:text-5xl text-[var(--sukla-charcoal)]">

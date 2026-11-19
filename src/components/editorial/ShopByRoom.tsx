@@ -48,7 +48,7 @@ export const ShopByRoom: React.FC = () => {
                   src={room.image}
                   alt={room.title}
                   fill
-                  sizes="(max-width: 768px) 100vw, 25vw"
+                  sizes="(max-width: 1023px) 50vw, 25vw"
                   className="object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
                 />
                 <div className="absolute inset-0 hidden md:block bg-gradient-to-t from-[var(--sukla-charcoal)]/80 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />

@@ -33,7 +33,7 @@ export const CustomiseRugSection: React.FC = () => {
 
         <div className="min-w-0">
           <div className="mb-10 md:mb-6 text-center md:text-left">
-            <span className="block text-xs uppercase tracking-[0.25em] text-[var(--sukla-terracotta)] font-sans mb-2">
+            <span className="block text-xs uppercase tracking-[0.25em] text-[var(--sukla-terracotta-text)] font-sans mb-2">
               Made to your measure
             </span>
             <h2

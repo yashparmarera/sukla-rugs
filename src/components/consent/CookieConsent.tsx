@@ -168,7 +168,7 @@ export const CookieConsent: React.FC = () => {
           <p className="mt-3 text-xs">
             <Link
               href="/cookie-policy"
-              className={`text-[var(--sukla-terracotta)] underline underline-offset-4 hover:text-[var(--sukla-terracotta-dark)] ${FOCUS_RING}`}
+              className={`text-[var(--sukla-terracotta-text)] underline underline-offset-4 hover:text-[var(--sukla-terracotta-dark)] ${FOCUS_RING}`}
             >
               Cookie Policy
             </Link>
@@ -227,7 +227,7 @@ export const CookieConsent: React.FC = () => {
           <p className="mt-3 text-xs">
             <Link
               href="/cookie-policy"
-              className={`text-[var(--sukla-terracotta)] underline underline-offset-4 hover:text-[var(--sukla-terracotta-dark)] ${FOCUS_RING}`}
+              className={`text-[var(--sukla-terracotta-text)] underline underline-offset-4 hover:text-[var(--sukla-terracotta-dark)] ${FOCUS_RING}`}
             >
               Cookie Policy
             </Link>

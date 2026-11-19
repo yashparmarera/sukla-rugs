@@ -20,7 +20,7 @@ export default function WishlistPage() {
       <main className="flex-1 py-12">
         <div className="editorial-container">
           <div className="text-center max-w-3xl mx-auto space-y-4 mb-10">
-            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[var(--sukla-terracotta)] font-sans">
+            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[var(--sukla-terracotta-text)] font-sans">
               <KnotGlyph size="sm" />
               <span>Saved Pieces</span>
             </div>
