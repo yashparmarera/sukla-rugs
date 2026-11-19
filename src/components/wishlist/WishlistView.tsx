@@ -7,7 +7,7 @@ import { ProductCard } from '@/components/product/ProductCard';
 import { KnotGlyph } from '@/components/ui/KnotGlyph';
 import { useWishlist } from '@/components/providers/WishlistProvider';
 
-const GRID_CLASSES = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-6';
+const GRID_CLASSES = 'grid grid-cols-2 lg:grid-cols-4 gap-x-3 sm:gap-x-4 gap-y-6';
 const PANEL_CLASSES = 'py-24 px-6 text-center space-y-4 border border-[var(--sukla-muted-border)] bg-[var(--sukla-cream)]';
 const BUTTON_CLASSES =
   'inline-block bg-[var(--sukla-charcoal)] px-6 py-3 font-sans text-xs font-semibold uppercase tracking-[0.1em] text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--sukla-charcoal)]';

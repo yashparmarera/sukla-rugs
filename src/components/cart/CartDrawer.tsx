@@ -9,6 +9,7 @@ import { getLocalCart, updateLocalCartLine, removeFromLocalCartLine } from '@/li
 import { Button } from '@/components/ui/Button';
 import { trackEvent } from '@/lib/analytics';
 import { formatMoney } from '@/lib/format-money';
+import { getDisplayTitle, isPlaceholderVariantTitle } from '@/lib/product-display';
 import { useCurrency } from '@/components/providers/CurrencyProvider';
 import { CART_DUTIES_NOTE, CART_DUTIES_ROW } from '@/lib/legal/policy-highlights';
 
@@ -178,7 +179,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                     {line.merchandise.product.featuredImage ? (
                       <Image
                         src={line.merchandise.product.featuredImage.url}
-                        alt={line.merchandise.product.title}
+                        alt={getDisplayTitle(line.merchandise.product.title).display}
                         fill
                         className="object-cover"
                         sizes="80px"
@@ -193,28 +194,34 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                     <div>
                       <div className="flex justify-between items-start">
                         <div>
-                          <span className="block text-[10px] uppercase tracking-widest text-[var(--sukla-taupe-text)]">
-                            {line.merchandise.product.collection?.title}
-                          </span>
+                          {line.merchandise.product.collection?.title && (
+                            <span className="block text-[10px] uppercase tracking-widest text-[var(--sukla-taupe-text)]">
+                              {line.merchandise.product.collection.title}
+                            </span>
+                          )}
                           <Link
                             href={`/products/${line.merchandise.product.handle}`}
                             onClick={onClose}
-                            className="heading text-sm hover:text-[var(--sukla-terracotta)] transition-colors"
+                            title={line.merchandise.product.title}
+                            className="heading text-sm hover:text-[var(--sukla-terracotta)] transition-colors line-clamp-2"
                           >
-                            {line.merchandise.product.title}
+                            {getDisplayTitle(line.merchandise.product.title).display}
                           </Link>
                         </div>
                         <button
                           onClick={() => handleRemoveLine(line.id)}
-                          className="text-[var(--sukla-taupe-text)] hover:text-red-700 transition-colors p-1"
+                          className="shrink-0 -m-2 p-3 text-[var(--sukla-taupe-text)] hover:text-red-700 transition-colors"
                           title="Remove item"
+                          aria-label={`Remove ${getDisplayTitle(line.merchandise.product.title).display} from cart`}
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
                       </div>
-                      <span className="text-xs text-[var(--sukla-charcoal)]/70 font-sans mt-0.5 block">
-                        {line.merchandise.title}
-                      </span>
+                      {!isPlaceholderVariantTitle(line.merchandise.title) && (
+                        <span className="text-xs text-[var(--sukla-charcoal)]/70 font-sans mt-0.5 block">
+                          {line.merchandise.title}
+                        </span>
+                      )}
                     </div>
 
                     <div className="flex justify-between items-center mt-3">
@@ -222,15 +229,15 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                       <div className="flex items-center border border-[var(--sukla-muted-border)] bg-[var(--sukla-cream)]">
                         <button
                           onClick={() => handleUpdateQty(line.id, line.quantity, -1)}
-                          className="px-2.5 py-1 text-[var(--sukla-charcoal)] hover:bg-[var(--sukla-sand)] transition-colors"
+                          className="px-3 py-2.5 text-[var(--sukla-charcoal)] hover:bg-[var(--sukla-sand)] transition-colors"
                           aria-label="Decrease quantity"
                         >
                           <Minus className="w-3 h-3" />
                         </button>
-                        <span className="nums px-3 text-xs font-medium">{line.quantity}</span>
+                        <span className="nums px-3 text-xs font-medium" aria-live="polite">{line.quantity}</span>
                         <button
                           onClick={() => handleUpdateQty(line.id, line.quantity, 1)}
-                          className="px-2.5 py-1 text-[var(--sukla-charcoal)] hover:bg-[var(--sukla-sand)] transition-colors"
+                          className="px-3 py-2.5 text-[var(--sukla-charcoal)] hover:bg-[var(--sukla-sand)] transition-colors"
                           aria-label="Increase quantity"
                         >
                           <Plus className="w-3 h-3" />
