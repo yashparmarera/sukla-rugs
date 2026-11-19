@@ -18,7 +18,7 @@ export const WhatsAppFloat: React.FC = () => {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with us on WhatsApp"
-      className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[var(--sukla-whatsapp)] text-white shadow-[var(--shadow-hover)] transition-colors hover:bg-[var(--sukla-whatsapp-dark)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sukla-whatsapp-dark)] focus-visible:ring-offset-2"
+      className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 max-lg:[html[data-sticky-cart]_&]:bottom-[6.5rem] z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[var(--sukla-whatsapp)] text-white shadow-[var(--shadow-hover)] transition-colors hover:bg-[var(--sukla-whatsapp-dark)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sukla-whatsapp-dark)] focus-visible:ring-offset-2"
     >
       <svg
         viewBox="0 0 24 24"

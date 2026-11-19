@@ -267,6 +267,15 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
     return () => observer.disconnect();
   }, []);
 
+  // Tell the floating WhatsApp button to sit above the mobile sticky bar
+  // so the two never overlap (see WhatsAppFloat).
+  useEffect(() => {
+    const root = document.documentElement;
+    if (showStickyBar) root.setAttribute('data-sticky-cart', 'true');
+    else root.removeAttribute('data-sticky-cart');
+    return () => root.removeAttribute('data-sticky-cart');
+  }, [showStickyBar]);
+
   useEffect(() => {
     if (!isFullscreenZoom && !sizeModalOpen) return;
 
@@ -639,10 +648,10 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
             <CustomSizeCalculator key={product.id} product={product} />
 
             {highlightHeadings.length > 0 && (
-              <ul className="space-y-1.5 text-sm font-sans text-[var(--sukla-charcoal)]/80" aria-label="Highlights">
+              <ul className="flex flex-wrap items-center gap-x-5 gap-y-1.5 text-sm font-sans text-[var(--sukla-charcoal)]/80" aria-label="Highlights">
                 {highlightHeadings.map((heading) => (
-                  <li key={heading} className="flex items-start gap-2.5">
-                    <Check className="w-4 h-4 mt-0.5 shrink-0 text-[var(--sukla-terracotta)]" aria-hidden="true" />
+                  <li key={heading} className="flex items-center gap-1.5">
+                    <Check className="w-4 h-4 shrink-0 text-[var(--sukla-terracotta)]" aria-hidden="true" />
                     <span>{heading}</span>
                   </li>
                 ))}
@@ -651,9 +660,9 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
 
             {/* Purchase controls, grouped in one row */}
             <div className="space-y-3">
-              <div className="flex gap-3" ref={purchaseRowRef}>
+              <div className="flex gap-2 sm:gap-3" ref={purchaseRowRef}>
                 <div
-                  className="flex items-center border border-[var(--sukla-muted-border)] bg-white min-h-[3rem]"
+                  className="flex items-center border border-[var(--sukla-muted-border)] bg-white min-h-[2.5rem] sm:min-h-[3rem]"
                   role="group"
                   aria-label="Quantity"
                 >
@@ -661,19 +670,19 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                     type="button"
                     onClick={() => setQuantity((q) => Math.max(1, q - 1))}
                     disabled={quantity <= 1}
-                    className="px-3 h-full text-[var(--sukla-charcoal)] hover:bg-[var(--sukla-sand)] transition-colors disabled:opacity-40"
+                    className="px-2 sm:px-3 h-full text-[var(--sukla-charcoal)] hover:bg-[var(--sukla-sand)] transition-colors disabled:opacity-40"
                     aria-label="Decrease quantity"
                   >
                     <Minus className="w-3.5 h-3.5" />
                   </button>
-                  <span className="nums w-8 text-center text-sm font-medium" aria-live="polite">
+                  <span className="nums w-6 sm:w-8 text-center text-sm font-medium" aria-live="polite">
                     {quantity}
                   </span>
                   <button
                     type="button"
                     onClick={() => setQuantity((q) => Math.min(MAX_QUANTITY, q + 1))}
                     disabled={quantity >= MAX_QUANTITY}
-                    className="px-3 h-full text-[var(--sukla-charcoal)] hover:bg-[var(--sukla-sand)] transition-colors disabled:opacity-40"
+                    className="px-2 sm:px-3 h-full text-[var(--sukla-charcoal)] hover:bg-[var(--sukla-sand)] transition-colors disabled:opacity-40"
                     aria-label="Increase quantity"
                   >
                     <Plus className="w-3.5 h-3.5" />
@@ -686,9 +695,9 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                   fullWidth
                   onClick={handleAddToCart}
                   disabled={!isAvailable}
-                  className="min-h-[3rem]"
+                  className="min-h-[2.5rem] sm:min-h-[3rem] whitespace-nowrap !px-3 sm:!px-7 !py-2 sm:!py-3.5 !text-[11px] sm:!text-xs"
                 >
-                  <ShoppingBag className="w-4 h-4 mr-2" />
+                  <ShoppingBag className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1.5 sm:mr-2 shrink-0" />
                   {addedNotice
                     ? 'Added to cart'
                     : isAvailable
@@ -712,13 +721,13 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                   }}
                   aria-label={isWishlisted ? 'Remove from wishlist' : 'Save to wishlist'}
                   aria-pressed={isWishlisted}
-                  className={`px-4 min-h-[3rem] border border-[var(--sukla-muted-border)] transition-all ${
+                  className={`px-3 sm:px-4 min-h-[2.5rem] sm:min-h-[3rem] border border-[var(--sukla-muted-border)] transition-all ${
                     isWishlisted
                       ? 'bg-rose-50 border-rose-300 text-rose-700'
                       : 'hover:border-[var(--sukla-charcoal)] text-[var(--sukla-charcoal)]'
                   }`}
                 >
-                  <Heart className={`w-5 h-5 ${isWishlisted ? 'fill-rose-700 text-rose-700' : ''}`} />
+                  <Heart className={`w-4 h-4 sm:w-5 sm:h-5 ${isWishlisted ? 'fill-rose-700 text-rose-700' : ''}`} />
                 </button>
               </div>
 
