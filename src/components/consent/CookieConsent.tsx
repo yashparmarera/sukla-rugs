@@ -2,7 +2,6 @@
 
 import React, { useEffect, useId, useRef, useState, useSyncExternalStore } from 'react';
 import Link from 'next/link';
-import { Button } from '@/components/ui/Button';
 import {
   isGpcEnabled,
   onOpenCookiePreferences,
@@ -21,6 +20,9 @@ import {
  * It closes only through a choice button (no close icon, Escape does nothing),
  * so a visit never ends without a recorded decision once the banner is used.
  *
+ * "Accept all" and "Reject non-essential" are the same size and sit side by
+ * side, so declining is as easy as accepting.
+ *
  * The cookie is read through useSyncExternalStore with a 'server' snapshot, so
  * the server HTML and the hydration render contain nothing (no mismatch).
  */
@@ -30,6 +32,11 @@ const getServerSnapshot = () => SERVER;
 
 const FOCUS_RING =
   'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--sukla-terracotta)]';
+
+const BUTTON_BASE = `inline-flex min-h-11 items-center justify-center px-4 font-sans text-[11px] font-medium uppercase tracking-[0.14em] transition-colors duration-300 focus:outline-none ${FOCUS_RING}`;
+const BUTTON_SOLID = `${BUTTON_BASE} border border-[var(--sukla-charcoal)] bg-[var(--sukla-charcoal)] text-[var(--sukla-ivory)] hover:bg-[var(--sukla-terracotta-dark)] hover:border-[var(--sukla-terracotta-dark)]`;
+const BUTTON_OUTLINE = `${BUTTON_BASE} border border-[var(--sukla-charcoal)] bg-transparent text-[var(--sukla-charcoal)] hover:bg-[var(--sukla-charcoal)] hover:text-[var(--sukla-ivory)]`;
+const TEXT_LINK = `font-sans text-xs text-[var(--sukla-charcoal)]/80 underline underline-offset-4 decoration-[var(--sukla-charcoal)]/30 transition-colors hover:text-[var(--sukla-terracotta-dark)] hover:decoration-[var(--sukla-terracotta-dark)] ${FOCUS_RING}`;
 
 interface SwitchRowProps {
   id: string;
@@ -42,15 +49,15 @@ interface SwitchRowProps {
 }
 
 const SwitchRow: React.FC<SwitchRowProps> = ({ id, label, description, checked, disabled, note, onChange }) => (
-  <div className="flex items-start justify-between gap-4 py-3 border-b border-[var(--sukla-muted-border)] last:border-b-0">
+  <div className="flex items-start justify-between gap-5 border-b border-[var(--sukla-muted-border)] py-4 last:border-b-0">
     <div className="min-w-0">
       <label htmlFor={id} className="block text-sm font-medium text-[var(--sukla-charcoal)]">
         {label}
       </label>
-      <p id={`${id}-desc`} className="text-xs text-[var(--sukla-charcoal)]/70 leading-relaxed">
+      <p id={`${id}-desc`} className="mt-1 text-xs leading-relaxed text-[var(--sukla-charcoal)]/70">
         {description}
       </p>
-      {note && <p className="mt-1 text-xs text-[var(--sukla-terracotta-dark)] leading-relaxed">{note}</p>}
+      {note && <p className="mt-1 text-xs leading-relaxed text-[var(--sukla-terracotta-dark)]">{note}</p>}
     </div>
     <input
       id={id}
@@ -60,7 +67,7 @@ const SwitchRow: React.FC<SwitchRowProps> = ({ id, label, description, checked, 
       disabled={disabled}
       aria-describedby={`${id}-desc`}
       onChange={(event) => onChange?.(event.target.checked)}
-      className={`mt-1 h-4 w-4 shrink-0 accent-[var(--sukla-terracotta)] disabled:opacity-60 ${FOCUS_RING}`}
+      className={`relative mt-0.5 h-6 w-11 shrink-0 cursor-pointer appearance-none rounded-full bg-[var(--sukla-charcoal)]/25 transition-colors duration-300 before:absolute before:left-0.5 before:top-0.5 before:h-5 before:w-5 before:rounded-full before:bg-white before:shadow-sm before:transition-transform before:duration-300 before:content-[''] checked:bg-[var(--sukla-terracotta-dark)] checked:before:translate-x-5 disabled:cursor-not-allowed disabled:opacity-60 ${FOCUS_RING}`}
     />
   </div>
 );
@@ -142,41 +149,49 @@ export const CookieConsent: React.FC = () => {
       aria-modal="false"
       aria-labelledby={headingId}
       aria-describedby={descId}
-      className="fixed z-[45] bottom-3 inset-x-3 sm:inset-x-auto sm:left-6 sm:bottom-6 sm:max-w-sm max-h-[calc(100svh-1.5rem)] overflow-y-auto bg-[var(--sukla-ivory)] border border-[var(--sukla-muted-border)] shadow-xl p-5 font-sans text-[var(--sukla-charcoal)]"
+      className="cookie-consent fixed inset-x-0 bottom-0 z-[45] max-h-[calc(100svh-1rem)] overflow-y-auto border-t border-[var(--sukla-muted-border)] bg-[var(--sukla-ivory)] px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-6 font-sans text-[var(--sukla-charcoal)] shadow-[0_-12px_40px_-12px_rgba(33,29,27,0.25)] sm:inset-x-auto sm:bottom-6 sm:left-6 sm:w-[26rem] sm:border sm:px-7 sm:pb-7 sm:pt-7 sm:shadow-[0_24px_60px_-20px_rgba(33,29,27,0.35)]"
     >
-      <h2 id={headingId} ref={headingRef} tabIndex={-1} className="heading text-base outline-none">
+      <span aria-hidden="true" className="absolute inset-x-0 top-0 h-0.5 bg-[var(--sukla-terracotta)]" />
+
+      <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-[var(--sukla-terracotta-dark)]">
+        Your privacy
+      </p>
+      <h2
+        id={headingId}
+        ref={headingRef}
+        tabIndex={-1}
+        className="mt-2 font-serif text-2xl font-normal leading-tight outline-none"
+        style={{ fontFamily: 'var(--font-serif)' }}
+      >
         Cookie preferences
       </h2>
 
       {view === 'banner' ? (
         <>
-          <p id={descId} className="mt-2 text-sm leading-relaxed text-[var(--sukla-charcoal)]/80">
+          <p id={descId} className="mt-3 text-sm leading-relaxed text-[var(--sukla-charcoal)]/75">
             We use strictly necessary cookies to run our shop. With your permission, we also use analytics and
             marketing cookies.
           </p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            <Button variant="primary" size="sm" onClick={acceptAll} className={FOCUS_RING}>
+          <div className="mt-5 grid grid-cols-2 gap-3">
+            <button type="button" onClick={rejectNonEssential} className={BUTTON_OUTLINE}>
+              Reject
+            </button>
+            <button type="button" onClick={acceptAll} className={BUTTON_SOLID}>
               Accept all
-            </Button>
-            <Button variant="outline" size="sm" onClick={rejectNonEssential} className={FOCUS_RING}>
-              Reject non-essential
-            </Button>
-            <Button variant="outline" size="sm" onClick={openPreferences} className={FOCUS_RING}>
-              Manage preferences
-            </Button>
+            </button>
           </div>
-          <p className="mt-3 text-xs">
-            <Link
-              href="/cookie-policy"
-              className={`text-[var(--sukla-terracotta-text)] underline underline-offset-4 hover:text-[var(--sukla-terracotta-dark)] ${FOCUS_RING}`}
-            >
+          <div className="mt-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+            <button type="button" onClick={openPreferences} className={TEXT_LINK}>
+              Manage preferences
+            </button>
+            <Link href="/cookie-policy" className={TEXT_LINK}>
               Cookie Policy
             </Link>
-          </p>
+          </div>
         </>
       ) : (
         <>
-          <p id={descId} className="mt-2 text-sm leading-relaxed text-[var(--sukla-charcoal)]/80">
+          <p id={descId} className="mt-3 text-sm leading-relaxed text-[var(--sukla-charcoal)]/75">
             Choose which optional cookies we may use. You can change this at any time from the footer.
           </p>
           {optOutSaved && (
@@ -184,7 +199,7 @@ export const CookieConsent: React.FC = () => {
               Your opt-out of data sharing for targeted advertising is saved.
             </p>
           )}
-          <div className="mt-3">
+          <div className="mt-3 border-t border-[var(--sukla-muted-border)]">
             <SwitchRow
               id={`${baseId}-necessary`}
               label="Strictly necessary"
@@ -213,22 +228,19 @@ export const CookieConsent: React.FC = () => {
               onChange={setMarketing}
             />
           </div>
-          <div className="mt-4 flex flex-wrap gap-2">
-            <Button variant="primary" size="sm" onClick={savePreferences} className={FOCUS_RING}>
-              Save preferences
-            </Button>
-            <Button variant="outline" size="sm" onClick={acceptAll} className={FOCUS_RING}>
+          <div className="mt-5 grid grid-cols-2 gap-3">
+            <button type="button" onClick={rejectNonEssential} className={BUTTON_OUTLINE}>
+              Reject
+            </button>
+            <button type="button" onClick={acceptAll} className={BUTTON_OUTLINE}>
               Accept all
-            </Button>
-            <Button variant="outline" size="sm" onClick={rejectNonEssential} className={FOCUS_RING}>
-              Reject non-essential
-            </Button>
+            </button>
+            <button type="button" onClick={savePreferences} className={`${BUTTON_SOLID} col-span-2`}>
+              Save preferences
+            </button>
           </div>
-          <p className="mt-3 text-xs">
-            <Link
-              href="/cookie-policy"
-              className={`text-[var(--sukla-terracotta-text)] underline underline-offset-4 hover:text-[var(--sukla-terracotta-dark)] ${FOCUS_RING}`}
-            >
+          <p className="mt-4 text-center">
+            <Link href="/cookie-policy" className={TEXT_LINK}>
               Cookie Policy
             </Link>
           </p>

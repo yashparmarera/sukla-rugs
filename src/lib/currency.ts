@@ -51,6 +51,11 @@ const COUNTRY_CURRENCY: Record<string, string> = {
 
 export const STORE_CURRENCY = 'USD';
 
+/** True when the store offers this country (used to validate auto-detected countries). */
+export function isSupportedCountry(countryCode: string): boolean {
+  return Object.prototype.hasOwnProperty.call(COUNTRY_CURRENCY, countryCode.toUpperCase());
+}
+
 /** Currency a shopper in this country expects to see. Unknown countries fall back to the store currency. */
 export function getCurrencyForCountry(countryCode: string): string {
   return COUNTRY_CURRENCY[countryCode.toUpperCase()] ?? STORE_CURRENCY;
