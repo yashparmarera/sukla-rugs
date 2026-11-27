@@ -206,3 +206,11 @@ px tsc --noEmit and eslint pass; Playwright at 1440px and 390px confirmed the pa
 - src/components/craft/BhadohiStorySection.tsx: copy now sourced from /story (1977, Carpet City, second-generation, 'born on the loom' line) and /process (7 real stage names, up to 1,200,000 knots). Removed unsourced '16 weeks' (process page says 12 to 16 weeks, metadata says 14), 'Centuries', 'hand-spun wool and pure silk' claims. tsc and eslint clean; Playwright 1440/390 no horizontal overflow.
 
 - Geo currency auto-detection (Next.js only, uncommitted; `shopify-theme/` untouched): new `src/proxy.ts` (Next 16 proxy) sets the existing `sukla_country` cookie on first visit from `x-vercel-ip-country`, else Accept-Language region, else US; unsupported codes fall back to US; an existing cookie is never touched, so manual selector choice wins. Request cookie is overridden so the first render is already localized. `src/lib/currency.ts` gained `isSupportedCountry`. Validation: tsc and eslint clean; GB/IN/ZZ/manual/no-header cases pass (`.agents/tasks/geo-currency/verification.md`). Not verified: real Vercel header in production. Next: owner to confirm on the Vercel deploy.
+
+
+## Next.js image-transformation optimization (Next.js side only; shopify-theme/ untouched)
+- Files: next.config.ts, src/components/layout/Footer.tsx, src/app/page.tsx. Not committed.
+- Validation: tsc clean; eslint 0 errors; next build OK. Local dev measurement: 136 -> 134 distinct (url,w,q), 269 -> 257 requests, 0 broken images. Report: .agents/tasks/image-optimization/report.md.
+- Next task: deploy, then compare Vercel Image Transformations dashboard and check Nov 22-24 logs for bots.
+
+- PDP main gallery image broken (Next.js only): production cause is Vercel image optimizer 402 (allowance exhausted) on uncached widths. Added src/lib/shopify-image-loader.ts (Shopify CDN ?width=) and used it for the main and fullscreen images in ProductDetailView.tsx. Validation: tsc, eslint, next build clean; Playwright 7 products at 1280/390 had no non-200 or zero-width gallery images. Blocker: needs Vercel redeploy to confirm; other images still depend on the quota. Next: post-deploy checks in .agents/tasks/pdp-main-image-broken/report.md.

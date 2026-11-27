@@ -35,6 +35,7 @@ import {
   type FactValue
 } from '@/lib/product-display';
 import { parseMetafieldValues } from '@/lib/shop-filters';
+import { shopifyCdnLoader } from '@/lib/shopify-image-loader';
 import { Button } from '@/components/ui/Button';
 import { Accordion } from '@/components/ui/Accordion';
 import { ProductCard } from '@/components/product/ProductCard';
@@ -454,6 +455,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
             >
               <Image
                 src={currentImage.url}
+                loader={shopifyCdnLoader}
                 alt={currentImage.altText || product.title}
                 fill
                 priority
@@ -956,6 +958,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
           <div className="relative w-full max-w-5xl h-[85vh]">
             <Image
               src={currentImage.url}
+              loader={shopifyCdnLoader}
               alt={currentImage.altText || product.title}
               fill
               className="object-contain"

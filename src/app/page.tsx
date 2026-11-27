@@ -75,7 +75,7 @@ export default async function HomePage() {
             </div>
 
             <div className="grid grid-cols-2 gap-x-6 gap-y-10 md:gap-x-5 md:gap-y-8 lg:grid-cols-4">
-              {signatureProducts.map((product, idx) => (<ProductCard key={product.id} product={product} priority={idx < 4} />))}
+              {signatureProducts.map((product) => (<ProductCard key={product.id} product={product} />))}
             </div>
             <div className="mt-10 flex justify-center md:hidden">
               <Button href="/shop" variant="outline" size="sm">View All Handcrafted Rugs</Button>
