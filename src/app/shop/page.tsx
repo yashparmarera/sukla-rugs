@@ -94,17 +94,10 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
         <div className="editorial-container">
           
           {/* Header Banner */}
-          <div className="text-center max-w-3xl mx-auto space-y-4 mb-8">
-            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[var(--sukla-terracotta-text)] font-sans">
-              <KnotGlyph size="sm" />
-              <span>Master Catalogue</span>
-            </div>
+          <div className="text-center max-w-3xl mx-auto mb-8">
             <h1 className="display-lg text-3xl sm:text-4xl md:text-5xl text-[var(--sukla-charcoal)]">
               All Handcrafted Rugs
             </h1>
-            <p className="font-sans text-base md:text-lg text-[var(--sukla-charcoal)]/75 leading-relaxed">
-              Each piece is individually woven in Bhadohi, India using natural long-staple wool, organic jute, and silk.
-            </p>
           </div>
 
           {/* Two-column shell: left filter rail (desktop) + right content column */}
