@@ -1,6 +1,6 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
-import Image from 'next/image';
+import { ShopifyImage } from '@/components/ui/ShopifyImage';
 import { Header } from '@/components/navigation/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ProductCard } from '@/components/product/ProductCard';
@@ -46,7 +46,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
         <section className="relative py-20 md:py-28 bg-[var(--sukla-charcoal)] text-white overflow-hidden">
           {collection.image && (
             <div className="absolute inset-0 z-0">
-              <Image
+              <ShopifyImage
                 src={collection.image.url}
                 alt={collection.title}
                 fill

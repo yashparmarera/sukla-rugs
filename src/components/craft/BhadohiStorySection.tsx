@@ -38,9 +38,10 @@ export const BhadohiStorySection: React.FC = () => {
             />
             <div className="relative aspect-[16/10] md:aspect-[4/5] w-full overflow-hidden bg-[var(--sukla-sand)]">
               <Image
-                src="/images/Hero%20Images%20Without%20text/3.jpg"
+                src="/images/Hero%20Images%20Without%20text/3-w1900.webp"
                 alt="Master weaver at a vertical loom in a Bhadohi loom house"
                 fill
+                unoptimized
                 sizes="(max-width: 1024px) 100vw, 42vw"
                 className="object-cover object-[68%_center]"
               />

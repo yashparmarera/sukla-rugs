@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { shopifyCdnLoader } from '@/lib/shopify-image-loader';
 import Link from 'next/link';
 import { X, ShoppingBag, Plus, Minus, Trash2, ArrowRight, ShieldCheck, Truck } from 'lucide-react';
 import { Cart } from '@/types';
@@ -181,6 +182,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                         src={line.merchandise.product.featuredImage.url}
                         alt={getDisplayTitle(line.merchandise.product.title).display}
                         fill
+                        loader={shopifyCdnLoader}
                         className="object-cover"
                         sizes="80px"
                       />

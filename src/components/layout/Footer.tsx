@@ -73,6 +73,7 @@ export const Footer: React.FC = () => {
                 alt=""
                 width={2000}
                 height={2000}
+                unoptimized
                 sizes="44px"
                 className="h-11 w-11 object-contain"
               />

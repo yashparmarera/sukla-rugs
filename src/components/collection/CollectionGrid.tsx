@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from 'next/image';
+import { ShopifyImage } from '@/components/ui/ShopifyImage';
 import Link from 'next/link';
 import { Collection } from '@/types';
 import { ArrowUpRight } from 'lucide-react';
@@ -35,7 +35,7 @@ export const CollectionGrid: React.FC<CollectionGridProps> = ({ collections }) =
               {/* Collection Image */}
               <div className="relative aspect-[16/10] w-full overflow-hidden bg-[var(--sukla-sand)]">
                 {col.image && (
-                  <Image
+                  <ShopifyImage
                     src={col.image.url}
                     alt={col.image.altText || col.title}
                     fill

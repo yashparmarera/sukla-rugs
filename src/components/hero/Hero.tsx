@@ -18,7 +18,7 @@ import { Button } from '@/components/ui/Button';
  */
 const HERO_SLIDES = [
   {
-    src: '/images/Hero%20Images%20Without%20text/1.jpg',
+    src: '/images/Hero%20Images%20Without%20text/1-w1900.webp',
     alt: 'Handcrafted Sukla Rugs styled in a slate-walled interior',
     focus: 'object-[52%_center] md:object-center',
     eyebrow: 'Get 15% off your first rug',
@@ -29,7 +29,7 @@ const HERO_SLIDES = [
     headingBearing: 0.047 // S
   },
   {
-    src: '/images/Hero%20Images%20Without%20text/2.jpg',
+    src: '/images/Hero%20Images%20Without%20text/2-w1900.webp',
     alt: 'An artisan\u2019s hand guiding cotton yarn beside weaving tools',
     focus: 'object-[58%_center] md:object-center',
     eyebrow: 'Bhadohi Weaves',
@@ -39,7 +39,7 @@ const HERO_SLIDES = [
     headingBearing: 0.109 // R
   },
   {
-    src: '/images/Hero%20Images%20Without%20text/3.jpg',
+    src: '/images/Hero%20Images%20Without%20text/3-w1900.webp',
     alt: 'A Sukla Rugs weaver working at a vertical loom',
     focus: 'object-[70%_center] md:object-center',
     eyebrow: 'Custom Rugs',
@@ -97,6 +97,7 @@ export const Hero: React.FC = () => {
               src={slide.src}
               alt={isActive ? slide.alt : ''}
               fill
+              unoptimized
               priority={index === 0}
               fetchPriority={index === 0 ? 'high' : undefined}
               sizes="100vw"

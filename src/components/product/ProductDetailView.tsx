@@ -543,7 +543,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                         : 'border-[var(--sukla-muted-border)] opacity-70 hover:opacity-100'
                     }`}
                   >
-                    <Image src={img.url} alt="" fill className="object-contain" sizes="80px" />
+                    <Image src={img.url} alt="" fill loader={shopifyCdnLoader} className="object-contain" sizes="80px" />
                   </button>
                 ))}
               </div>

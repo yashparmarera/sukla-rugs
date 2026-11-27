@@ -3,6 +3,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { shopifyCdnLoader } from '@/lib/shopify-image-loader';
 import { ArrowRight, ChevronLeft, ChevronRight, Plus } from 'lucide-react';
 import type { Product } from '@/types';
 import { useCurrency } from '@/components/providers/CurrencyProvider';
@@ -39,6 +40,7 @@ function CarouselCard({ product, priority }: { product: Product; priority: boole
           src={product.featuredImage.url}
           alt={product.featuredImage.altText || product.title}
           fill
+          loader={shopifyCdnLoader}
           priority={priority}
           sizes="(max-width: 640px) 72vw, (max-width: 1024px) 44vw, 23vw"
           className="object-cover transition-opacity duration-700 ease-in-out group-hover:opacity-0"
@@ -47,6 +49,7 @@ function CarouselCard({ product, priority }: { product: Product; priority: boole
           src={hoverImage.url}
           alt={hoverImage.altText || `${product.title} alternate view`}
           fill
+          loader={shopifyCdnLoader}
           sizes="(max-width: 640px) 72vw, (max-width: 1024px) 44vw, 23vw"
           className="object-cover opacity-0 transition-opacity duration-700 ease-in-out group-hover:opacity-100"
         />

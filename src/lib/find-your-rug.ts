@@ -61,14 +61,14 @@ function menuItems(columnId: string) {
  * first matching real Shopify product image.
  */
 const COVER_IMAGES: Readonly<Record<string, string>> = {
-  'style:traditional': '/images/find/traditional.jpg',
-  'style:modern': '/images/find/modern.jpg',
-  'style:abstract': '/images/find/abstract.jpg',
-  'style:minimalist': '/images/find/solid.jpg',
-  'construction:hand-knotted': '/constructioncover/handknotted.jpg',
-  'construction:hand-tufted': '/constructioncover/handtufted.jpg',
-  'construction:hand-woven': '/constructioncover/handwoven.jpg',
-  'construction:flatweave': '/constructioncover/flatweaven.jpg'
+  'style:traditional': '/images/find/traditional-w1200.webp',
+  'style:modern': '/images/find/modern-w1200.webp',
+  'style:abstract': '/images/find/abstract-w1200.webp',
+  'style:minimalist': '/images/find/solid-w1200.webp',
+  'construction:hand-knotted': '/constructioncover/handknotted-w1200.webp',
+  'construction:hand-tufted': '/constructioncover/handtufted-w1200.webp',
+  'construction:hand-woven': '/constructioncover/handwoven-w1200.webp',
+  'construction:flatweave': '/constructioncover/flatweaven-w1200.webp'
 };
 
 /** Pure helper: pick each tile's image from an already loaded product list. */

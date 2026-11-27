@@ -98,6 +98,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ onClose, onOpenCart, car
             aria-hidden="true"
             width={64}
             height={64}
+            unoptimized
             className="h-8 w-8 object-contain"
           />
           <span className="whitespace-nowrap font-display text-sm font-medium uppercase tracking-[0.2em]">

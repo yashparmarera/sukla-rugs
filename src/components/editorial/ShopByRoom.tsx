@@ -5,19 +5,19 @@ import Link from 'next/link';
 const ROOMS = [
   {
     title: 'Living Room',
-    image: '/images/shopbyroom/living%20room.webp'
+    image: '/images/shopbyroom/living%20room-w1000.webp'
   },
   {
     title: 'Bedroom',
-    image: '/images/shopbyroom/bedroom.webp'
+    image: '/images/shopbyroom/bedroom-w1000.webp'
   },
   {
     title: 'Dining Room',
-    image: '/images/shopbyroom/dining.webp'
+    image: '/images/shopbyroom/dining-w1000.webp'
   },
   {
     title: 'Entryway & Hallways',
-    image: '/images/shopbyroom/hallway.webp'
+    image: '/images/shopbyroom/hallway-w1000.webp'
   }
 ];
 
@@ -48,6 +48,7 @@ export const ShopByRoom: React.FC = () => {
                   src={room.image}
                   alt={room.title}
                   fill
+                  unoptimized
                   sizes="(max-width: 1023px) 50vw, 25vw"
                   className="object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
                 />

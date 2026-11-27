@@ -28,6 +28,7 @@ export const KnotGlyph: React.FC<KnotGlyphProps> = ({ className = '', size = 'md
       aria-hidden="true"
       width={64}
       height={64}
+      unoptimized
       className={`inline-block object-contain ${sizeMap[size]} ${onDark ? 'invert' : ''} ${className}`}
     />
   );

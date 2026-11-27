@@ -16,6 +16,7 @@ export const BrandMark: React.FC<BrandMarkProps> = ({ className = '' }) => (
     alt=""
     width={448}
     height={132}
+    unoptimized
     aria-hidden="true"
     className={`inline-block w-auto shrink-0 ${className}`}
   />

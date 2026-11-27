@@ -2,6 +2,8 @@
 
 import React, { useRef, useState } from 'react';
 import Image from 'next/image';
+import { shopifyCdnLoader } from '@/lib/shopify-image-loader';
+import { isShopifyImage } from '@/lib/style-tiles';
 import Link from 'next/link';
 import type { FindYourRugGroup } from '@/lib/find-your-rug';
 
@@ -108,6 +110,8 @@ export const FindYourRug: React.FC<FindYourRugProps> = ({ groups }) => {
                           src={tile.image.url}
                           alt={`${tile.label} rug`}
                           fill
+                          loader={isShopifyImage(tile.image.url) ? shopifyCdnLoader : undefined}
+                          unoptimized={!isShopifyImage(tile.image.url)}
                           sizes="(max-width: 767px) 50vw, (max-width: 1023px) 33vw, 18vw"
                           className="object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
                         />

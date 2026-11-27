@@ -86,6 +86,7 @@ export const Header: React.FC = () => {
               alt=""
               width={2000}
               height={2000}
+              unoptimized
               sizes="48px"
               priority
               className="h-11 w-11 md:h-12 md:w-12 object-contain"

@@ -214,3 +214,8 @@ px tsc --noEmit and eslint pass; Playwright at 1440px and 390px confirmed the pa
 - Next task: deploy, then compare Vercel Image Transformations dashboard and check Nov 22-24 logs for bots.
 
 - PDP main gallery image broken (Next.js only): production cause is Vercel image optimizer 402 (allowance exhausted) on uncached widths. Added src/lib/shopify-image-loader.ts (Shopify CDN ?width=) and used it for the main and fullscreen images in ProductDetailView.tsx. Validation: tsc, eslint, next build clean; Playwright 7 products at 1280/390 had no non-200 or zero-width gallery images. Blocker: needs Vercel redeploy to confirm; other images still depend on the quota. Next: post-deploy checks in .agents/tasks/pdp-main-image-broken/report.md.
+
+## Next.js reference: shop card images 402 fix (uncommitted)
+- Shopify-hosted images (cards, carousel, PDP thumbs, cart, collections, FindYourRug) now use shopifyCdnLoader / ShopifyImage (src/components/ui/ShopifyImage.tsx) so they skip /_next/image. Hero, FindYourRug tiles, ShopByRoom use new static *-w1900/w1200/w1000.webp copies with unoptimized; logo marks unoptimized.
+- Validation: tsc 0, next build 0, Playwright 1280/390 no broken imgs, all image responses 200. Pre-existing lint errors untouched. Report: .agents/tasks/shop-card-images-402/report.md.
+- Next: review, commit, push, redeploy, then check production /shop and Vercel image usage. BTS/review/customise still use the optimizer.

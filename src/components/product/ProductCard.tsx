@@ -3,6 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { shopifyCdnLoader } from '@/lib/shopify-image-loader';
 import { Heart } from 'lucide-react';
 import { Product } from '@/types';
 import { trackEvent } from '@/lib/analytics';
@@ -63,6 +64,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
           src={product.featuredImage.url}
           alt={product.featuredImage.altText || product.title}
           fill
+          loader={shopifyCdnLoader}
           priority={priority}
           sizes="(max-width: 1024px) 50vw, 25vw"
           className="object-cover md:object-contain p-0 md:p-2 group-hover:opacity-0 transition-opacity duration-700 ease-in-out"
@@ -73,6 +75,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
           src={secondaryImage.url}
           alt={secondaryImage.altText || `${product.title} secondary view`}
           fill
+          loader={shopifyCdnLoader}
           sizes="(max-width: 1024px) 50vw, 25vw"
           className="object-cover md:object-contain p-0 md:p-2 opacity-0 max-md:hidden group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-in-out"
         />
